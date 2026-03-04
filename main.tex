@@ -2,7 +2,7 @@
 % This is unofficial so you should always double check against the
 % Registrar's office rules
 % See http://library.stanford.edu/research/bibliography-management/latex-and-bibtex
-% 
+%
 % Example of use below
 % See the suthesis-2e.sty file for documentation
 %
@@ -11,17 +11,21 @@
 
 % useful packages
 \usepackage{graphicx}  % figures
-\usepackage{gensymb}  % \degree
-\usepackage{siunitx}  % SI units
 \usepackage{tabularx}  % nice single page tables
 \usepackage{longtable}  % tables spanning multiple pages
-\usepackage{hyperref}  % URLs
-\usepackage[autostyle, english = american]{csquotes}  % quote orientation
-\MakeOuterQuote{"}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}  % URLs
+
+% thesis-specific macros (AG commands, theorem environments, etc.)
+\usepackage{macros}
+\usepackage{comment}  % for \begin{comment}...\end{comment} blocks
 
 % use png first, otherwise pdf
 % (useful for faster compile times, for final submission switch order)
 \DeclareGraphicsExtensions{.png,.pdf}
+
+% Disable list of tables and list of figures (not needed for math thesis)
+\tablespagefalse
+\figurespagefalse
 
 \begin{document}
 \title{Obstructions to Unirationality\\
@@ -33,7 +37,7 @@
 \secondreader{Richard Taylor}
 % \thirdreader{Jane Supernumerary}  % uncomment if needed
 % \fourthreader{Severus Snape}  % uncomment if needed
- 
+
 % no signature or copyright pages in online submission
 % (they are added by the library)
 
@@ -43,15 +47,23 @@
 \include{preface_acknowledgements}
 \afterpreface
 \include{ch_intro}
-\include{ch_paper1}
+\include{ch_hyperbolicity}
+\include{ch_bogomolov}
+\include{ch_fermat}
+\include{ch_pcurvature}
+\include{ch_obstructions}
+\include{ch_hurwitz}
+\include{ch_descent}
+\include{ch_hilbert}
+\include{ch_jets}
 \include{ch_conclusion}
 
 % uncomment below if you have an appendix
 % \appendix
 % \chapter{A Long Proof}
 
-\bibliographystyle{unsrt}  % can change to fit your field e.g. pnas2009
-\bibliography{mybib}  % no .bib extension necessary
+\bibliographystyle{alpha}
+\bibliography{refs}
 
 % adds a non-numbered signature page at end (for printing on ACID-FREE paper)
 % (remember to comment out when submitting final version)

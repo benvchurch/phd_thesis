@@ -1,0 +1,258 @@
+\chapter{Bogomolov's Theorem on Curves of Bounded Genus}
+
+%% All commands are in macros.sty
+
+\section{The Boundedness Theorem of Bogomolov}
+
+References:
+
+\begin{itemize}
+\item [1] Bogomolov's original article ``Families of curves on a surface of general type'' (1977) which is scanned on \chref{https://mathoverflow.net/questions/52419/rational-curves-on-varieties-of-general-type}{mathoverflow}.
+\item [2] The S\'{e}minaire N. Bourbaki article ``Courbes de genre g\'{e}om\'{e}trique born\'{e} sur une surface de type g\'{e}n\'{e}ral'' (1979) by Mireille Martin-Deschamps. The article is hosted \chref{https://www.numdam.org/book-part/SB_1977-1978__20__233_0/}{here} by Numdam. Warning, there are some errors in this text.
+\item [3] Miles Reid's article ``Bogomolov's theorem $c_1^2 \le 4 c_2$'' (1977) found \chref{https://mreid.warwick.ac.uk/Reprint/Bogomolov.pdf}{here} which proves that $c_1(X)^2 \le 4 c_2(X)$ for a smooth projective general type surface. Note many of the statements in this talk do not appear in this article but the proofs are all essentially there.
+\end{itemize}
+
+\begin{theorem}[Bogomolov]
+Let $X$ be a smooth projective surface of general type with $c_1^2 > c_2$. Then curves of fixed genus on $X$ form a bounded family.
+\end{theorem}
+
+\begin{rmk}
+Note if $f_t : C_t \to X$ is a family of curves whose image has nontrivial deformation then the family covers $X$. Hence its normal bundle has nonegative degree. Therefore,
+\[ 2g(C_t) - 2 = (K_X + C_t) \cdot C_t \ge K_X \cdot C_t \]
+which means if we fix the degree then the degree of the image curves on the canonical model of $X$ is bounded. This implies that the covering families of fixed genus are bounded. Hence the content of Bogomolov's theorem is abount rigid curves.
+\end{rmk}
+
+\begin{cor}
+Since $X$ cannot have a covering family of genus $0$ or $1$ curves there can be at most finitely many such curves on $X$.
+\end{cor}
+
+\begin{defn}
+we say that a vector bundle $E$ is \textit{big} if $\struct{}(1)$ on $\P(E)$ is big. Equivalently
+\[ h^0(X, S^m E) \in O(m^{\dim{X} + \rank{E} - 1}) \]
+\end{defn}
+
+Really the theorem has two parts:
+\begin{enumerate}
+\item if $\Omega_X$ is big then curves of fixed genus are bounded
+\item if $K_X$ is big and $c_1^2 > c_2$ then $\Omega_X$ is big.
+\end{enumerate}
+
+\begin{rmk}
+If fact, to conclude $X$ has only finitely many genus $0$ or $1$ curves we only require $H^0(X, S^m \Omega_X) \neq 0$ for some $m > 0$.
+\end{rmk}
+
+The first step follows the same strategy as the other hyperbolicity results: we know curves on $X$ lift to $\P(\Omega_X)$ -- the first step in the jet tower -- and they come in two types, regular curves -- those not landing in a base locus $Z \subset \P(\Omega_X)$ -- and irregular curves -- those landing in $Z$. The former are bounded by looking at their degree againt $\struct{\P(E)}(1)$. The later because they are leaves of a certain foliation.
+\par
+We explain bigness of $\Omega_X$ first. A Riemann-Roch calculation gives
+\[ \chi(X, S^m \Omega_X) = \tfrac{1}{3!} (c_1^2 - c_2) m^3 + O(m^2) \]
+so if $c_1^2 > c_2$ this grows maximall so we win if $h^2(X, S^m \Omega_X)$ has groth bounded by $O(m^2)$. In fact, it is zero for $m \ge 3$ by Bogomolov's vanishing theorem.
+
+\begin{theorem}[Bogomolov]
+Let $X$ be a smooth projective surface of general type. Then $H^0(X, S^m \Omega_X \ot \omega_X^{-q}) = 0$ whenever $2q > m$.
+\end{theorem}
+
+\begin{rmk}
+Hence $H^2(X, S^m \Omega_X \ot \omega_X^r) = H^0(X, S^m \Omega_X \ot \omega_X^{1 - m - r})^{\vee}$ vanishes for $2(r + m - 1) > m$. In particular for $r = 0$ and $m \ge 3$.
+\end{rmk}
+
+Bogomolov's vanshing theorem follows from analysis of the stability of the cotangent bundle.
+
+\subsection{Notions of Stability}
+
+Say that a class $D \in \NS(X)$ is \textit{positive} if $D^2 > 0$ and $D \cdot H > 0$ for all ample $H$. Say that a line bundle $A$ is $\Q$-\textit{effective} if $A^{\ot m}$ has a section for some $m > 0$.
+
+\begin{defn}
+Let $E$ be a rank $2$ vector bundle on a surface $X$. Suppose there is a sequence
+\[ 0 \to A \to E \to B \ot I_Z \to 0 \]
+with $A,B$ line bundles and $Z$ a finite subscheme. Setting $\Delta = A \ot B^{-1}$
+\begin{enumerate}
+\item if $c_1(\Delta) \in N(X)^+$ is a positive class we say $E$ is \textit{Bogomolov-unstable}
+\item if $\Delta$ is $\Q$-effective and either $\Delta$ is nontorsion or $Z \neq \empty$ then we say $E$ is \textit{weakly Bogomolov unstable}
+\end{enumerate}
+\end{defn}
+
+\begin{defn}
+We say that a rank $2$ vector bundle $E$ on a surface $X$ is \textit{Mumford unstable} if there exists a nonzero section of $(S^{2m} E) \ot (\det{E})^{-m}$ which attains a zero somewhere.
+\end{defn}
+
+\begin{theorem}[Bogomolov-Reid]
+The following implications hold for a rank $2$ vector bundle on a smooth projective surface $X$,
+\begin{center}
+\begin{tikzcd}
+c_1(E)^2 > 4 c_2(E) \arrow[r, equals] & \text{Bogomolov unstable} \arrow[d]  \arrow[r] & \text{weakly Bogomolov unstable} \arrow[d,equals]
+\\
+& \mu_H\text{-unstable for all } H \arrow[d] & \text{M-unstable}
+\\
+& \mu_H\text{-unstable for some } H
+\end{tikzcd}
+\end{center}
+\end{theorem}
+
+\begin{example}
+$\mu_H$-unstable for all $H$ does not imply weakly Bogomolov unstable. Consider $X = \Bl_p \P^2$ and $E$ be the exceptional divisor. Then let
+\[ \E = \struct{X}(E) \oplus \struct{X} \]
+Clearly, $X$ is $\mu_H$-unstable for all $H$ since $H \cdot E > 0$. However, I claim that $X$ is not weakly Bogomolov unstable. Otherwise we would have $A + B = E$ and $P = A - B$ positive or zero. Thus $A = \tfrac{1}{2}(P + E)$ so $H \cdot A > 0$ for all $H$. Also at least one of $E - A$ or $-A$ is effective by the sequence. Since $A \cdot H > 0$ the second cannot hold but $\struct{}(A) \to E$ is a saturated subsheaf so $A = E$ so $B = 0$ but $A - B$ is neither positive nor zero giving a contradiction.
+\bigskip\\
+In fact, $\mu_H$-stable for all $H$ does not imply Mumford unstable. Indeed, we need to find $X$ with a divisor $D$ such that $D \cdot H > 0$ for all $H$ but $D$ is not $\Q$-effective. In this case
+\[ \E = \struct{X}(D) \oplus \struct{} \]
+gives an example. Indeed, we can just take $D$ on $\P^1 \times E$ where $E$ is an elliptic curve to be $\pi_1^* ([0]) + \pi_2^* ([p] - [o])$ where $p \in E$ is a nontorsion-point. If we want $D$ to not even be numerically equivalent to a $\Q$-effective divisor we can do this on a more complicated ruled surface, see Lazarsfeld positivity I example 1.5.1 for a pseudoeffective but not $\R$-effective class.
+\end{example}
+
+
+The relevance of these properties is the following lemma.
+
+\begin{lemma}
+Let $E$ be an M-stable rank $2$ vector bundle with $\Q$-effective and nontorsion determinant. Then $H^0(X, S^m E \ot (\det{E})^{-q}) = 0$ for $2 q > m$.
+\end{lemma}
+
+\begin{proof}
+Let $L = \det{E}$ and suppose there is a section
+\[ s \in H^0(X, S^m E \ot L^{-q}) \]
+choose a positive integer $k$ large enough that there is a nonzero section
+\[ w \in H^0(X, L^{k(2q - m)}) \]
+possible because $2q > m$ and $L$ is $\Q$-effective. Then using the symmetric algebra structure
+\[ s^{2k} \cdot w \in H^0(X, S^{2km} E \ot L^{-km}) \]
+is a nonzero section. Since $L$ is nontorsion $w$ has a zero somewhere. This shows that $E$ is M-unstable.
+\end{proof}
+
+Therefore, to prove Bogomolov's vanishing result, we just need to show that $\Omega_X$ is M-stable. To do this, we will show $\Omega_X$ is not weakly Bogomolov unstable.
+
+
+\subsection{Stability of the Cotangent Bundle}
+
+\begin{theorem}
+Let $X$ be a smooth projective general type surface. Then $\Omega_X$ is not weakly Bogomolov unstable.
+\end{theorem}
+
+\begin{example}
+It is possible for $\Omega_X$ to be $\mu_H$-unstable for all ample $H$ even if $X$ is general type.  Consider $X = \Bl (C_1 \times C_2)$. Then
+\[ K_X = K_{C_1} + K_{C_2} - E \]
+and if $C_1, C_2$ are two general curves every ample is of the form
+\[ H = H_1 + H_2 - c E \]
+where $H_i$ are the pullbacks of ample classes on $C_i$. Then,
+\[ \mu_H(\Omega_X) = \tfrac{1}{2} ((2g_2 - 2) \deg{H_1} + (2g_1 - 2) \deg{H_2} - c) \]
+but we have subsheaves $\pi^* \Omega_{C_i}$ with slope
+\[ \mu_H(\pi^* \Omega_{C_i}) = (2g_i - 2) \deg{H_i'} \]
+where $i'$ is the opposite of $i$.
+The larger of these two numbers destabilizes $\Omega_X$. However, we do see that $\Omega_X$ is not Bogmolov unstable.
+\end{example}
+
+The proof of the stability theorem follows immediately from the following two results.
+
+\begin{lemma}
+Let $E$ weakly Bogomolov unstable. If $\det{E}$ is big then $E$ contains a big line bundle.
+\end{lemma}
+
+\begin{proof}
+Consider the sequence
+\[ 0 \to A \to E \to B \ot I_Z \to 0 \]
+where by assumption $A \ot B^{-1}$ is $\Q$-effective. Therefore, for some $m > 0$ we have $B^m \embed A^m$. However, $A \ot B \cong \det{E}$ is big. The injection
+\[ A^m \ot B^m \embed A^{2m} \]
+then proves that $A$ is also big.
+\end{proof}
+
+\begin{theorem}[Bogomolov]
+If $X$ is a smooth projective general type surface and $\L \embed \Omega_X$ is a line bundle subsheaf then $h^0(X, \L^m) \in O(m)$.
+\end{theorem}
+
+This will follow immediately from a lemma of Castelnuovo and de Franchis:
+
+\begin{lemma}
+Let $X$ be a smooth projective surface. Suppose $\L \subset \Omega_X^1$ is a line bundle with $h^0(X, \L) \ge 2$ then there exists a fiber space $f : X \to C$ over a curve so that
+\[ f^* \Omega_C \subset \L \subset f^* \Omega_C(D) \]
+where $D \subset C$ is an effective divisor supported on the locus where $f$ has a nonreduced fiber. Moreover $\Omega_C \subset f_* \L$ is an isomorphism so $g(C) \ge 2$.
+\end{lemma}
+
+\begin{proof}[Proof of Theorem]
+We suppose that $\L \embed \Omega_X^1$ is a invertible subsheaf. If $h^0(X, \L^{\ot n}) \le 1$ for all $n$ then we are done. Otherwise, there is some $n > 0$ such that $h^0(X, \L^{\ot n}) \ge 2$. In this case, by passing to a cyclic cover we may assume that $h^0(X, \L) \ge 2$. Then the lemma implies $h^0(X, L^{\ot m}) \in O(m)$.
+\end{proof}
+
+\begin{proof}[Proof of Lemma]
+Therefore, there are two independent $1$-forms $\omega_1, \omega_2 \in H^0(X, \L) \subset H^0(X, \Omega^1_X)$ such that $\omega_1 \wedge \omega_2 = 0$ because they lie in the same $1$-dimensional subspace at the generic point $\L_{\eta} \subset \Omega_{X, \eta}^1$. Therefore, there is a rational function $f : X \rat \P^1$ so that $\omega_1 = f \omega_2$. Resolving the map $\pi : X' \to X$ we have $f' : X' \to \P^1$. The Stein factorization produces $g : X' \to C \to \P^1$. Since $\omega_i$ are global $1$-forms
+\[ 0 = \d{\omega_1} = \d{f} \wedge \omega_2 \]
+and therefore $\d{f}$ as a rational $1$-form lives inside $\L_{\eta}$ because it is parallel to $\omega_2$. If $t$ is the coordinate on $\P^1$ then $\d{f} = f^* \d{t}$ so we see the inclusions
+\[ f^* \Omega_{\P^1} \subset g^* \Omega_{C} \subset \pi^* \L \subset \Omega_{X'} \]
+by checking at the generic point as submodules of $\Omega_{X',\eta}$. This works because at the generic point $f^* \Omega_{\P^1}$ and $g^* \Omega_C$ are equal because $C \to \P^1$ is generically \etale. Now it suffices to check that
+\begin{enumerate}
+\item $\Omega_C = g_* \L$
+\item $\L \subset g^* \Omega_C(D)$
+\end{enumerate}
+For the first, the inclusion $\Omega_C \subset g_* \L$ alows us to view a section of $g_* \L$ as a meromorphic $1$-form on $C$. However, because of the maps
+\[ g^* \Omega_C \to g^* g_* \L \to \L \subset \Omega_{X'} \]
+this meromorphic $1$-form becomes regular after pulling back to $X'$. Now we use the following somewhat surprising lemma.
+\end{proof}
+
+\begin{lemma}
+Let $f : X \to Y$ be a dominant map of smooth proper varieties. Suppose $\omega \in \Omega_{Y,\eta}^k$ is a meromorphic $k$-form such that $f^* \omega$ extends to a global regular $k$-form $f^* \omega \in H^0(X, \Omega_X^k)$ on $X$. Then $\omega \in H^0(Y, \Omega_Y^k)$ is regular.
+\end{lemma}
+
+\begin{rmk}
+This is false in positive characteristic even for separable maps! The issue is failure of tameness. It also fails for symmetric forms $S^m \Omega_X$ for $m > 1$. Indeed, $z \mapsto z^2$ can regularize $z^{-1} (\d{z})^2$.
+\end{rmk}
+
+To complete the proof we need to show that $\L \subset g^* \Omega_C(D)$ for $D$ the divisor of points over which $f$ has a multiple fiber (counted each with muliplicity $1$). At the generic point of a component of a multiple fiber, the map $X \to C$ is formally equivalent to
+\[ \CC\dbrac{t} \to \CC \dbrac{x,y} \quad t \mapsto x^n \]
+where $n$ is the multiplicity of the component. Then
+\[ \d{t} \mapsto n x^{n-1} \d{x} \]
+meaning that
+\[ \L \subset (g^* \Omega_C)(D(g)) \subset \Omega_X \]
+where $D(g)$ is the \textit{ramification divisor}
+\[ D(g) = \sum_{C \subset X_t} (n_C - 1) [C] \]
+where $n_C$ is the multiplicity of a component of the fiber $X_t$. In fact, $(g^* \Omega_C)(D(g))$ is exactly the saturation of $g^* \Omega_C$ inside $\Omega_X$. But by definition,
+\[ g^* \struct{C}(D) = \struct{X}(\sum_{C \subset X_t} n_C [C]) \supset \struct{X}(D(g)) \]
+so
+\[ \L \subset g^* (\Omega_C(D)) \]
+and we win.
+
+\subsection{Boundedness}
+
+Proof of boundedness: given a nonconstant map $f : C \to X$ there is a lift $\wt{f} : C \to \P(\Omega_X)$ defined at the generic point by
+\[ \d{f} : f^* \Omega_X \to \Omega_C \]
+and then extending using properness. The image of $\d{f}$ is a line subbundle identified with $\Omega_C(-D)$ where $D$ is the ramification of $f$. By definition the universal quotient
+\[ \pi^* \Omega_X \onto \struct{\P}(1) \]
+pulls back to
+\[ \wt{f}^* \pi^* \Omega_X \to \wt{f}^* \struct{\P}(1) \]
+equals
+\[ f^* \Omega_X \to \Omega_C(-D) \subset \Omega_C \]
+
+Since $\struct{\P}(1)$ is big, the locus $Z \subset \P$ where $\struct{\P}(m)$ does not separate points or tangent vectors for all $m$ is a proper subset. What I mean is that $\struct{\P}(m)$ for $m \gg 0$ defines a rational map
+\[ t_m : \P(\Omega_X) \rat \P^N  \]
+which is an embedding away from $Z$. Now we split the curves on $X$ into two types
+\begin{enumerate}
+\item regular curves: those such that $\wt{f} : C \to \P$ meets $Z$ properly
+\item irregular curves: those such that $\wt{f} : C \to \P$ lands inside $Z$.
+\end{enumerate}
+
+For regular curves, the composition
+\[ \wt{f} : C \to \P(\Omega_X) \to \P^N \]
+is nonconstant. This structure gives maps
+\[ \wt{f}^* t_m^* \struct{\P^N}(1) \embed \wt{f}^* \struct{\P}(m) \embed (\Omega_C)^{\ot m} \]
+Hence
+\[ \deg{(t_m \circ f)} \le m (2g - 2) \]
+Since $m$ can be chosen once and for all, we see that the regular curves of fixed genus map to $\P^N$ with bounded degree and hence are bounded.
+\par
+For the irregular curves, they must lift into some irreducible component $Z_i \subset Z \subset \P(\Omega_X)$. Let $g : Y \to Z_i$ be a resolution. Either $Y \to X$ has only a single curve in its image in which case we are done or $Y \to X$ is surjective. Pulling back the sequence
+\[ 0 \to K \to \pi^* \Omega_X \to \struct{\P}(1) \to 0 \]
+to $Y$ gives
+\[ g^* Q \to g^* \pi^* \Omega_X \to g^* \Omega_{\P} \to \Omega_Y \]
+Since $Y \to X$ is dominant and generically finite $g^* Q \to \Omega_Y$. The kernel of its dual defines a foliation $\F \subset \T_Y$ which is integrable because it has rank $1$. Furthermore, any curve $f : C \to X$ lifting in the canonical way to $Y$ must satisfy
+\begin{center}
+\begin{tikzcd}
+0 \arrow[d]
+\\
+\wt{f}^* Q \arrow[d]
+\\
+f^* \Omega_X \arrow[r] \arrow[d] & \wt{f}^* \Omega_{\P} \arrow[r] & \wt{f}^* \Omega_Y \arrow[d]
+\\
+\wt{f}^* \struct{\P}(1) \arrow[d] \arrow[rr] & & \Omega_C
+\\
+0
+\end{tikzcd}
+\end{center}
+so $\wt{f}^* Q \to \Omega_C$ is zero menaing $C$ is tangent to the foliation $\F$ on $Y$. We finish by applying the following theorem of Jouanolou
+
+\begin{theorem}
+Let $\F \subset \Omega_X^1$ be an algebraic foliation on a smooth projective variety over $\CC$. Either there are only finitely many algebraic hypersurfaces tangent to $\F$ or $\F$ is induced by the fibers of an algebraic contraction $X \to Y$.
+\end{theorem}
+
+either way, we get boundedness for the curves on $Y$ tangent to the foliation. Since every irregular curve lifts to a curve tangent to a foliation on one of the finitely many choices for $Y$, this completes the proof.

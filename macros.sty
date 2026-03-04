@@ -1,0 +1,360 @@
+\ProvidesPackage{macros}[2024/04/27 v1.0 Primary Package]
+
+% Useful packages
+\usepackage{amsmath,amsfonts,amsthm,amssymb,mathrsfs}
+\usepackage{mathtools}
+\usepackage{calligra}
+\usepackage{tikz-cd,adjustbox}
+\usepackage{spverbatim,comment}
+\usepackage{colonequals}
+
+% From General_Includes.tex -- used in Hyperbolicity and Bogomolov chapters
+\newcommand{\chref}[2]{\href{#1}{\color{blue}{\underline{#2}}}}
+
+\makeatletter
+\newcommand{\chapterauthor}[1]{%
+  {
+    \parindent0pt\vspace*{-10pt}%
+    \linespread{1}\scshape by #1%
+  }
+}
+\makeatother
+
+% Number everything consistently
+\newtheorem{Lthm}{Theorem}
+\renewcommand*{\theLthm}{\Alph{Lthm}}
+\newtheorem{Lcor}[Lthm]{Corollary}
+\newtheorem{Lconj}[Lthm]{Conjecture}
+\newtheorem{Lprop}[Lthm]{Proposition}
+
+\newtheorem{theorem}{Theorem}
+\numberwithin{theorem}{section}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{cor}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{prop}[theorem]{Proposition}
+\newtheorem{thm}[theorem]{Theorem}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{conj}[theorem]{Conjecture}
+
+
+\theoremstyle{definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{rmk}[theorem]{Remark}
+\newtheorem{question}[theorem]{Question}
+\newtheorem{problem}[theorem]{Problem}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{defn}[theorem]{Definition}
+\newtheorem{construction}[theorem]{Construction}
+\newtheorem{setup}[theorem]{Set-up}
+
+% AG Commands
+
+\DeclareMathOperator{\coker}{\mathrm{coker}}
+\DeclareMathOperator{\im}{\mathrm{im}}
+\renewcommand{\d}{\mathrm{d}}
+\DeclareMathOperator{\rank}{\mathrm{rank}}
+\DeclareMathOperator{\lcm}{\mathrm{lcm}}
+
+\usepackage{bbm}
+\newcommand{\acts}{\; \rotatebox[origin=c]{-90}{$\circlearrowright$} \;}
+\newcommand{\ol}[1]{\overline{#1}}
+\newcommand{\pt}{\mathrm{pt}}
+\newcommand{\can}{\mathrm{can}}
+\newcommand{\ul}[1]{\underline{#1}}
+
+
+\newcommand{\inner}[2]{\left< #1, #2 \right>}
+\newcommand{\sm}{\setminus}
+\newcommand{\smooth}{\mathrm{sm}}
+
+\DeclareMathOperator{\Tr}{\mathrm{Tr}}
+\DeclareMathOperator{\tr}{\mathrm{tr}}
+
+\newcommand{\Bs}{\mathrm{Bs}}
+\newcommand{\rad}{\mathrm{rad}}
+
+\DeclareMathOperator{\Hom}{\mathrm{Hom}}
+\DeclareMathOperator{\Gal}{\mathrm{Gal}}
+\DeclareMathOperator{\Mor}{\mathrm{Mor}}
+\DeclareMathOperator{\ord}{\mathrm{ord}}
+\DeclareMathOperator{\CH}{\mathrm{CH}}
+
+\newcommand{\Ab}{\mathrm{Ab}}
+\newcommand{\T}{\mathcal{T}}
+\newcommand{\F}{\mathcal{F}}
+\DeclareMathOperator{\Frob}{\mathrm{Frob}}
+
+\newcommand{\m}{\mathfrak{m}}
+\newcommand{\p}{\mathfrak{p}}
+
+% Fields and bold letters
+
+\newcommand{\KK}{\mathbb{K}}
+\newcommand{\FF}{\mathbb{F}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\NN}{\mathbb{N}}
+
+\newcommand{\BB}{\mathbb{B}}
+\newcommand{\LL}{\mathbb{L}}
+\newcommand{\TT}{\mathbb{T}}
+\renewcommand{\SS}{\mathbb{S}}
+\newcommand{\HH}{\mathbb{H}}
+
+\renewcommand{\L}{\mathcal{L}}
+\newcommand{\cQ}{\mathcal{Q}}
+
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+
+\newcommand{\G}{\mathcal{G}}
+\newcommand{\cS}{\mathcal{S}}
+\renewcommand{\O}{\mathcal{O}}
+\renewcommand{\P}{\mathbb{P}}
+\newcommand{\calC}{\mathcal{C}}
+\newcommand{\A}{\mathbb{A}}
+\newcommand{\U}{\mathcal{U}}
+\newcommand{\V}{\mathcal{V}}
+\newcommand{\D}{\mathcal{D}}
+\newcommand{\proj}{\mathbb{P}}
+\newcommand{\id}{\mathrm{id}}
+\renewcommand{\H}{\mathscr{H}}
+\newcommand{\E}{\mathcal{E}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\cH}{\mathcal{H}}
+\newcommand{\cP}{\mathcal{P}}
+\newcommand{\cM}{\mathcal{M}}
+\newcommand{\cN}{\mathcal{N}}
+\newcommand{\cB}{\mathcal{B}}
+\newcommand{\cO}{\mathcal{O}}
+\newcommand{\cA}{\mathcal{A}}
+
+\newcommand{\Rbf}{\mathbf{R}}
+\newcommand{\Lbf}{\mathbf{L}}
+
+\newcommand{\Alb}{\mathrm{Alb}}
+\newcommand{\Gm}{\mathbb{G}_m}
+\newcommand{\Ga}{\mathbb{G}_a}
+\newcommand{\GL}{\mathrm{GL}}
+\newcommand{\SL}{\mathrm{SL}}
+\newcommand{\PSL}{\mathrm{PSL}}
+\newcommand{\PGL}{\mathrm{PGL}}
+
+\DeclareMathOperator{\codim}{\mathrm{codim}}
+\DeclareMathOperator{\Sym}{\mathrm{Sym}}
+\DeclareMathOperator{\Supp}{\mathrm{Supp}}
+\DeclareMathOperator{\gr}{\mathrm{gr}}
+\DeclareMathOperator{\Spec}{\mathrm{Spec}}
+\DeclareMathOperator{\Proj}{\mathrm{Proj}}
+\DeclareMathOperator{\Exc}{\mathrm{Exc}}
+\DeclareMathOperator{\Res}{\mathrm{Res}}
+\DeclareMathOperator{\Fix}{\mathrm{Fix}}
+
+\DeclareMathOperator{\ev}{\mathrm{ev}}
+
+\DeclareMathOperator{\Dom}{\mathrm{Dom}}
+\newcommand{\sing}{\mathrm{sing}}
+
+\DeclareMathOperator{\NS}{\mathrm{NS}}
+\DeclareMathOperator{\Pic}{\mathrm{Pic}}
+\DeclareMathOperator{\Aut}{\mathrm{Aut}}
+\DeclareMathOperator{\Out}{\mathrm{Out}}
+\DeclareMathOperator{\alb}{\mathrm{alb}}
+\DeclareMathOperator{\Hilb}{\mathrm{Hilb}}
+
+% Operators used across chapters (moved from chapter files)
+\DeclareMathOperator{\Jac}{\mathrm{Jac}}
+\DeclareMathOperator{\Nm}{\mathrm{Nm}}
+\DeclareMathOperator{\Cl}{\mathrm{Cl}}
+\DeclareMathOperator{\Ann}{\mathrm{Ann}}
+\DeclareMathOperator{\Cone}{\mathrm{Cone}}
+\DeclareMathOperator{\Tors}{\mathrm{Tors}}
+\DeclareMathOperator{\Prym}{\mathrm{Prym}}
+\DeclareMathOperator{\ad}{\mathrm{ad}}
+\DeclareMathOperator{\Ad}{\mathrm{Ad}}
+\DeclareMathOperator{\rk}{\mathrm{rk}}
+\DeclareMathOperator{\lct}{\mathrm{lct}}
+\DeclareMathOperator{\mult}{\mathrm{mult}}
+\DeclareMathOperator{\Div}{\mathrm{Div}}
+\DeclareMathOperator{\End}{\mathrm{End}}
+
+% Sheaf of meromorphic functions and related
+\newcommand{\K}{\mathcal{K}}
+\newcommand{\q}{\mathfrak{q}}
+\newcommand{\GSp}{\mathrm{GSp}}
+
+% AG operations
+\newcommand{\nSym}[2]{\mathrm{Sym}^{#1}\! \left( #2 \right)}
+\newcommand{\Frac}[1]{\mathrm{Frac}\left(#1\right)}
+\newcommand{\rSpec}[2]{\mathbf{Spec}_{#1}\left( #2 \right)}
+\newcommand{\Bl}{\mathrm{Bl}}
+\newcommand{\I}{\mathscr{I}}
+\newcommand{\M}{\mathcal{M}}
+\newcommand{\op}{\mathrm{op}}
+\newcommand{\Der}[3][]{\mathrm{Der}_{#1} \left( #2, #3 \right)}
+\newcommand{\rProj}[2]{\mathbf{Proj}_{#1}\left( #2 \right)}
+\newcommand{\eprint}[1]{\href{http://www.arxiv.org/abs/#1}{\texttt{#1}}}
+
+% Commands shared across multiple chapters
+\newcommand{\frH}{\mathfrak{H}}
+\newcommand{\frJ}{\mathfrak{J}}
+\newcommand{\frD}{\mathfrak{D}}
+\newcommand{\cC}{\mathcal{C}}
+\newcommand{\frP}{\mathfrak{P}}
+\newcommand{\X}{\mathcal{X}}
+\newcommand{\TODO}{{\color{red} TODO}}
+\newcommand{\todo}[1]{\textcolor{red}{Todo: #1}}
+\newcommand{\Ben}[1]{\textcolor{red}{Ben: #1}}
+\newcommand{\legendre}[2]{\left(\frac{#1}{#2}\right)}
+
+% From ch_bogomolov
+\newcommand{\VV}{\mathbb{V}}
+\newcommand{\WW}{\mathbb{W}}
+\newcommand{\Zar}{\mathrm{Zar}}
+\newcommand{\MT}{\mathrm{MT}}
+\newcommand{\dbar}{\bar{\partial}}
+
+% From ch_hyperbolicity
+\newcommand{\kk}{\mathbf{k}}
+\newcommand{\GG}{\mathrm{GG}}
+
+% From ch_pcurvature
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\jetamp}{\mathrm{jetamp}}
+\newcommand{\Lie}{\mathrm{Lie}}
+\newcommand{\g}{\mathfrak{g}}
+
+% From ch_obstructions
+\newcommand{\Hur}{\mathrm{Hur}}
+\newcommand{\rmP}{\mathrm{P}}
+
+% From ch_jets
+\newcommand{\Loc}[1]{\mathfrak{Loc}\left( #1 \right)}
+\newcommand{\AbGrp}{\mathbf{AbGrp}}
+\newcommand{\ob}{\mathrm{ob}}
+\newcommand{\cT}{\mathcal{T}}
+\newcommand{\vir}{\mathrm{vir}}
+\newcommand{\HSDer}[4]{\mathrm{Der}^{#2}_{#1}\left(#3, #4\right)}
+\newcommand{\HS}{\mathrm{HS}}
+\newcommand{\pr}{\mathrm{pr}}
+\newcommand{\aff}{\mathrm{aff}}
+\newcommand{\Ram}{\mathrm{Ram}}
+
+
+\usepackage{pdflscape}
+
+% Make a not ugly version of widetilde
+
+\DeclareSymbolFont{kplargesymbols}{OMX}{jkp}{m}{n}
+\DeclareMathAccent{\wt}{\mathalpha}{kplargesymbols}{"65}
+\DeclareMathAccent{\wtt}{\mathord}{largesymbols}{"65}
+\newcommand{\wh}[1]{\widehat{#1}}
+
+
+% Formatting words
+
+\usepackage{xspace}
+\newcommand{\et}{\mathrm{\acute{e}t}}
+\newcommand{\etale}{\'{e}tale\xspace}
+\newcommand{\cech}{\v{C}ech\xspace}
+
+\newcommand{\Mustata}{Musta\c{t}\u{a}\xspace}
+\newcommand{\Kahler}{K\"{a}hler\xspace}
+\newcommand{\Poincare}{Poincar\'{e}\xspace}
+\newcommand{\Kollar}{Koll\'ar\xspace}
+\newcommand{\Kovacs}{Kov\'acs\xspace}
+\newcommand{\Belyi}{Bely\u{\i}\xspace}
+
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}
+\DeclarePairedDelimiter\metric{\langle}{\rangle}
+\newcommand{\bracket}[1]{\left(#1\right)}
+\newcommand{\quotes}[1]{``#1"}
+
+
+
+% Formatting maps
+
+\newsavebox{\pullbacksymbol}
+\sbox\pullbacksymbol{%
+\begin{tikzpicture}%
+\draw (0,0) -- (1ex,0ex);%
+\draw (1ex,0ex) -- (1ex,1ex);%
+\end{tikzpicture}}
+
+\newsavebox{\pushoutsymbol}
+\sbox\pushoutsymbol{%
+\begin{tikzpicture}%
+\draw (0,0) -- (-1ex,0ex);%
+\draw (-1ex,0ex) -- (-1ex,-1ex);%
+\end{tikzpicture}}
+
+\newcommand{\pullback}{\arrow[dr, phantom, "\usebox\pullbacksymbol" , very near start, color=black]}
+\newcommand{\cartesian}{\arrow[dr, phantom, "\usebox\pullbacksymbol" , very near start, color=black]}
+\newcommand{\pushout}{\arrow[lu, phantom, "\usebox\pushoutsymbol" , very near start, color=black]}
+
+\newcommand{\connectingmap}[1]{
+\arrow[draw=none]{d}[name=Z, shape=coordinate]{}
+\arrow[#1,
+rounded corners, crossing over,
+to path={ -- ([xshift=2ex]\tikztostart.east)
+|- (Z) [near end]\tikztonodes
+-| ([xshift=-2ex]\tikztotarget.west)
+-- (\tikztotarget)}]}
+
+% Formatting Maps
+
+\newcommand{\reg}{\mathrm{reg}}
+\newcommand{\struct}[1]{\O_{#1}}
+\newcommand{\stalk}[2]{\mathcal{O}_{#1, #2}}
+\newcommand{\ot}{\otimes}
+\newcommand{\Sing}[1]{\mathrm{Sing}(#1)}
+\newcommand{\embed}{\hookrightarrow}
+\newcommand{\onto}{\twoheadrightarrow}
+
+% Formatting brackets correctly
+
+\usepackage{stmaryrd}
+\newcommand{\dbrac}[1]{\llbracket #1 \rrbracket}
+\newcommand{\FEt}{\mathrm{F\acute{E}t}}
+
+
+% formatting rational maps
+\usetikzlibrary{arrows.meta}
+
+\newcommand*{\TikzArrow}[1][]{\mathbin{\tikz [baseline=-0.25ex,-latex,#1] \draw [#1] (0pt,0.5ex) -- (1.3em,0.5ex);}}%
+\newcommand*{\TikzBiArrow}[1][]{\mathbin{\tikz [baseline=-0.25ex,-latex, #1] \draw [#1] (0pt,0.5ex) -- (1.3em,0.5ex) node[midway, above, label={[label distance=-0.4cm]$\sim$}] {} ;}}
+\newcommand{\rat}{\TikzArrow[->, densely dashed]}
+\newcommand{\birat}{\TikzBiArrow[->, densely dashed]}
+\newcommand{\iso}{\TikzBiArrow[->]}
+\newcommand{\bireq}{\simeq_{\textrm{bir.}}}
+
+% Caligraphic Sheaf Operators
+
+\DeclareMathOperator{\calHom}{\mathscr{H}\text{\kern -5pt {\calligra\large om}}}
+\DeclareMathOperator{\calExt}{\mathscr{E}\text{\kern -3pt {\calligra\large xt}}}
+\DeclareMathOperator{\calTor}{\mathscr{T}\text{\kern -5pt {\calligra\large or}}}
+\DeclareMathOperator{\calEnd}{\mathscr{E}\text{\kern -3pt {\calligra\large nd}}}
+\DeclareMathOperator{\calDer}{\mathscr{D}\text{\kern -3pt {\calligra\large er}}}
+\DeclareMathOperator{\calDiff}{\mathscr{D}\text{\kern -3pt {\calligra\large iff}}}
+\DeclareMathOperator{\calAnn}{\mathscr{A}\text{\kern -3pt {\calligra\large nn}}}
+
+\DeclareMathOperator{\shHom}{\calHom}
+\DeclareMathOperator{\shExt}{\calExt}
+\DeclareMathOperator{\shTor}{\calTor}
+\DeclareMathOperator{\shEnd}{\calEnd}
+\DeclareMathOperator{\shDer}{\calDer}
+\DeclareMathOperator{\shDiff}{\calDiff}
+\DeclareMathOperator{\Diff}{\mathrm{Diff}}
+\DeclareMathOperator{\shAnn}{\calAnn}
+\DeclareMathOperator{\RHom}{\mathbf{R}\mathrm{Hom}}
+\DeclareMathOperator{\shRHom}{\mathbf{R}\calHom}
