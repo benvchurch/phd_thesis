@@ -514,11 +514,30 @@ computing absolute \etale cohomology. The 5-term sequence has the form
 \[ 0 \to H^1(G_K, \FF_2) \to H^1_{\et}(C, \FF_2) \to H^1(\ol{C}, \FF_2)^{G_K} \to H^2(G_K, \FF_2) \to H^2_{\et}(C, \FF_2) \]
 and therefore the obstruction to lifting along $H^1_{\et}(C, \FF_2) \to H^1(\ol{C}, \FF_2)^{G_K}$ lies in $H^2(G_K, \FF_2) = \Br(K)[2]$. We can rephrase this in terms of our previous obstructions. View $\alpha : \pi_1(\ol{C}) \to \FF_2$ and let $\Gamma := \ker{\alpha}$. If $\alpha$ is $G_K$-invariant then $\Gamma$ is stable under $G_K$-conjugation and $\Gamma \subset \pi_1(\ol{C})$ is normal so $N_{\pi_1(C)}(\Gamma) = \pi_1(C)$. Thus the primary obstruction vanishes and the secondary obstruction is a class $\ob \in H^2(G_K, Q)$ where $Q = \ker{(N \to G_K)} / \Gamma = \pi_1(\ol{C})/\Gamma = \FF_2$. 
 \par 
-Suppose we have a choose an extension $K_{\alpha} / K$ killing the obstruction $\ob(\alpha) \in \Br(K)[2]$. 
+Suppose we have a choose an extension $K_{\alpha} / K$ killing the obstruction $\ob(\alpha) \in \Br(K)[2]$. Then there exists an \etale double cover $\pi : D \to C$ defined over $K_{\alpha}$ and hence a quadratic decomposition $Q_1 Q_3 - Q_2^2 = \lambda F$ of the quartic polynomial $F$ cutting out $C$. It is computationally very expensive to find quadratic decompositions by exhaustively searching over quadrics with algebraic coefficients until we find a complete set of $2$-torsion points. However, we can exploit the structure of theta characteristics and their relation to bitangent lines of $C$ to reduce the search to finding all bitangents and certain quadrics witnessing so called syzygies of bitangents, a much more computationally feasible task. 
 
-{\color{red} TODO STEINER COMPLEXES}
 
-\todo{computational trick: use bitangents}
+\subsection{Theta characteristics and bitangents}
+
+\begin{defn}
+A \textit{theta characteristic} $\theta$ on a smooth curve $C$ is a line bundle such that $\theta^{\ot 2} \cong \omega_C$.
+\end{defn}
+
+Theta characteristics have a natural notion of parity meaning they come in two types \textit{even} and \textit{odd} determined by the pairity of $h^0(C, \theta)$. We can give a nice interpretation of this pairty in terms of a quadratic form on $J(\ol{K})[2]$ where $J = \Jac(C)$. It is clear that the set of isomorphism classes of (geometric) theta characteristics is a $J(\ol{K})[2]$-torsor.
+For each theta characteristic $\theta$ we can define a quadratic form on the $\FF_2$-vector space $J(\ol{K})[2]$.
+
+\begin{lemma} \cite[Theorem~1.13]{harris:theta_chars}
+The assignment
+\[ q_{\theta} : \L \mapsto h^0(C, \L \ot \theta_0) - h^0(C, \theta) \mod 2 \]
+defines a quadratic form on $J(\ol{K})[2]$ whose associated bilinear form is the Weil pairing composed with the unique isomorphism $\mu_2 \iso \Z / 2 \Z$.
+\end{lemma}
+
+In fact, the association $\theta \mapsto q_{\theta}$ defines an bijection $\Theta(\ol{C}) \iso Q(J(\ol{K})[2], \inner{-}{-})$ where $Q(V, \inner{-}{-})$ is the space of quadratic forms on $V$ whose associated bilinear form is $\inner{-}{-}$. Furthermore, $Q(V) := Q(V, \inner{-}{-})$ naturally decomposes into two subsets $Q(V)^+$ and $Q(V)^{-}$ of quadratic forms of Arf invariant $0$ and $1$ respectively. These are the two orbits of $Q(V)$ under the action of the symplectic group $\Sp(V)$. This decomposition gives the parity of a theta characteristic because
+\[ \Arf(q_{\theta}) = h^0(C, \theta) \mod 2 \]
+by \cite[Theorem~4]{johnson:spin_structures}. Atiyah proved that there are exactly $2^{g-1} (2^g + 1)$ even and $2^{g-1}(2^g - 1)$ odd theta characteristics and that the parity of $\theta$ is a deformation invariant (unlike $h^0(C, \theta) \in \Z_{\ge 0}$) \cite{atiyah:spin_structures}. 
+\par 
+In the particular case of $g = 3$, there are $36$ even and $28$ odd theta characteristics. The $28$ odd theta characteristics correspond exactly to the $28$ bitangents of the canonical embedding $C \embed \P^2$. Indeed, an odd theta characteristic is an effective divisor $D$ of degree $2$ such that $2D \sim K_C$ thus $2D \in |\ell|$ is in the linear series of lines. Since $C$ is irrational, $h^0(C, \cO_C(D)) \le \deg{D} - 1 = 1$ there is a unique representation, $D = P + Q$ for points $P, Q \in C$. Then $2 P + 2 Q = C \cdot \ell$ for some line $\ell \subset \P^2$ meaning exactly that the line through $P, Q$ (resp.\ the tangent line through $P = Q$) is a bitangent (resp.\ hyperflex).
+
 
 \subsection{Symmetric genus $2$ curves}
 
