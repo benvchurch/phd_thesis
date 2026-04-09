@@ -82,6 +82,7 @@
 \DeclareMathOperator{\ord}{\mathrm{ord}}
 \DeclareMathOperator{\CH}{\mathrm{CH}}
 
+\newcommand{\ab}{\mathrm{ab}}
 \newcommand{\Ab}{\mathrm{Ab}}
 \newcommand{\T}{\mathcal{T}}
 \newcommand{\F}{\mathcal{F}}
@@ -158,7 +159,7 @@
 \DeclareMathOperator{\Fix}{\mathrm{Fix}}
 
 \DeclareMathOperator{\ev}{\mathrm{ev}}
-
+\DeclareMathOperator{\Sing}{\mathrm{Sing}}
 \DeclareMathOperator{\Dom}{\mathrm{Dom}}
 \newcommand{\sing}{\mathrm{sing}}
 
@@ -183,7 +184,10 @@
 \DeclareMathOperator{\lct}{\mathrm{lct}}
 \DeclareMathOperator{\mult}{\mathrm{mult}}
 \DeclareMathOperator{\Div}{\mathrm{Div}}
+\let\div\relax
+\DeclareMathOperator{\div}{\mathrm{div}}
 \DeclareMathOperator{\End}{\mathrm{End}}
+
 
 % Sheaf of meromorphic functions and related
 \newcommand{\K}{\mathcal{K}}
@@ -210,7 +214,7 @@
 \newcommand{\frP}{\mathfrak{P}}
 \newcommand{\X}{\mathcal{X}}
 \newcommand{\TODO}{{\color{red} TODO}}
-\newcommand{\todo}[1]{\textcolor{red}{Todo: #1}}
+\providecommand{\todo}[1]{\textcolor{red}{Todo: #1}}
 \newcommand{\Ben}[1]{\textcolor{red}{Ben: #1}}
 \newcommand{\legendre}[2]{\left(\frac{#1}{#2}\right)}
 
@@ -234,6 +238,27 @@
 % From ch_obstructions
 \newcommand{\Hur}{\mathrm{Hur}}
 \newcommand{\rmP}{\mathrm{P}}
+
+% From ch_hilbert -- Hilbert modular varieties and Shimura variety notation
+\newcommand{\Sh}{\mathrm{Sh}}         % Shimura variety
+\renewcommand{\aa}{\mathfrak{a}}      % fractional ideal (fraktur a)
+\newcommand{\cc}{\mathfrak{c}}        % conductor ideal (fraktur c)
+\newcommand{\dd}{\mathfrak{d}}        % different ideal (fraktur d)
+\newcommand{\disc}{\mathrm{disc}}     % discriminant of a number field
+\newcommand{\val}{\mathrm{val}}       % valuation
+\newcommand{\divides}{\mid}           % divisibility relation
+\newcommand{\ndivides}{\nmid}         % non-divisibility relation
+\newcommand{\KS}{\mathrm{KS}}        % Kodaira-Spencer map
+\newcommand{\der}{\mathrm{der}}       % derived (subscript, e.g. derived group)
+\newcommand{\tor}{\mathrm{tor}}       % torsion (subscript, e.g. torsion subgroup)
+\newcommand{\dR}{\mathrm{dR}}         % de Rham (as in de Rham cohomology)
+\newcommand{\bb}{\mathrm{bb}}         % Baily-Borel (compactification)
+\newcommand{\cG}{\mathcal{G}}         % calligraphic G (group scheme)
+\newcommand{\PEL}{\mathrm{PEL}}       % PEL type (Shimura varieties)
+
+% From ch_descent -- cycle decomposition in fibrations
+\newcommand{\Zhor}{Z_{\text{hor}}}    % horizontal component of a cycle
+\newcommand{\Zcont}{Z_{\text{cont}}}  % contracted/vertical component of a cycle
 
 % From ch_jets
 \newcommand{\Loc}[1]{\mathfrak{Loc}\left( #1 \right)}
@@ -317,7 +342,6 @@ to path={ -- ([xshift=2ex]\tikztostart.east)
 \newcommand{\struct}[1]{\O_{#1}}
 \newcommand{\stalk}[2]{\mathcal{O}_{#1, #2}}
 \newcommand{\ot}{\otimes}
-\newcommand{\Sing}[1]{\mathrm{Sing}(#1)}
 \newcommand{\embed}{\hookrightarrow}
 \newcommand{\onto}{\twoheadrightarrow}
 

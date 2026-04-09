@@ -1,3 +1,5 @@
+\documentclass[main.tex]{subfiles}
+\begin{document}
 \chapter{Jet Bundles and Higher-Order Obstructions}
 
 %% All commands are in macros.sty
@@ -10,11 +12,11 @@
 
 
 \begin{defn}
-A \textit{directed variety} $(X, \E)$ is a pair of a variety $X$ with a subbundle $\E \subset \T_X$. A morphism of directed varities $f : (X, \E) \to (Y, \E')$ is a morphism $f : X \to Y$ such that under $f_* \T_X \to \T_Y$ we have $f_* \E \to \E'$.
+A \textit{directed variety} $(X, \E)$ is a pair of a variety $X$ with a subbundle $\E \subset \T_X$. A morphism of directed varieties $f : (X, \E) \to (Y, \E')$ is a morphism $f : X \to Y$ such that under $f_* \T_X \to \T_Y$ we have $f_* \E \to \E'$.
 \end{defn}
 
 \begin{rmk}
-Demailly's philosophy is that it is usefull to study this ``relative notion'' even for the absolute case $\E = \T_X$ since it has better functoriality properties.
+Demailly's philosophy is that it is useful to study this ``relative notion'' even for the absolute case $\E = \T_X$ since it has better functoriality properties.
 \end{rmk}
 
 \begin{rmk}
@@ -46,7 +48,7 @@ Note that the Euler exact sequence takes the form,
 \end{rmk}
 
 \begin{prop}
-Given a morphism of directed varities $f : (X, \E) \to (Y, \F)$ we get a rational map $\wt{f} : (\wt{X}, \wt{\E}) \rat (\wt{Y}, \wt{\F})$ such that the diagram,
+Given a morphism of directed varieties $f : (X, \E) \to (Y, \F)$ we get a rational map $\wt{f} : (\wt{X}, \wt{\E}) \rat (\wt{Y}, \wt{\F})$ such that the diagram,
 \begin{center}
 \begin{tikzcd}
 (\wt{X}, \wt{\E}) \arrow[d,"\pi"] \arrow[r, "\wt{f}", dashed] & (\wt{Y}, \wt{\F}) \arrow[d, "\pi"]
@@ -54,7 +56,7 @@ Given a morphism of directed varities $f : (X, \E) \to (Y, \F)$ we get a rationa
 (X, \E) \arrow[r, "f"] & (Y, \F)
 \end{tikzcd}
 \end{center}
-commutes in the category of directed manifolds (with rational maps). Moreover, if $f$ is ``immersive along $\E$'', meaning $f_{\#} : \E \to f^* \F$ is injective, then $\wt{f}$ is a morphism.
+commutes in the category of directed varieties (with rational maps). Moreover, if $f$ is ``immersive along $\E$'', meaning $f_{\#} : \E \to f^* \F$ is injective, then $\wt{f}$ is a morphism.
 \end{prop}
 
 \begin{defn}
@@ -75,39 +77,41 @@ We can alternatively think of the Semple construction in the dual sense,
 0 \arrow[r] & \struct{\wt{X}}(1) \arrow[r] & \wt{\E}^\vee \arrow[r] & \Omega_{\wt{X}/X} \arrow[r] & 0
 \end{tikzcd}
 \end{center}
-This will be our standard perspective although we retain the dual notation to remain in agreement wit hthe complex geometry literature. Now the Euler sequence
+This will be our standard perspective although we retain the dual notation to remain in agreement with the complex geometry literature. Now the Euler sequence
 \begin{center}
 \begin{tikzcd}
 0 \arrow[r] & \Omega_{\wt{X}/X} \arrow[r] & \pi^* \E^\vee \ot \struct{\wt{X}}(-1) \arrow[r] & \struct{\wt{X}} \arrow[r] & 0
 \end{tikzcd}
 \end{center}
-gives $\pi_* \nSym{d}{\Omega_{\wt{X}/X}} = 0$ and $R^1 \pi_* \Omega_{\wt{X}/X} = \struct{X}$. Furthermore, applying Sym to the botom row gives,
+gives $\pi_* \nSym{d}{\Omega_{\wt{X}/X}} = 0$ and $R^1 \pi_* \Omega_{\wt{X}/X} = \struct{X}$. Furthermore, applying Sym to the bottom row gives,
 \begin{center}
 \begin{tikzcd}
 0 \arrow[r] & \nSym{d-1}{\wt{\E}^\vee} \ot \cO_{\wt{X}}(1) \arrow[r] & \nSym{d}{\wt{\E}^\vee} \arrow[r] & \nSym{d}{\Omega_{\wt{X}/X}} \arrow[r] & 0
 \end{tikzcd}
 \end{center}
 so applying $\pi_*$ gives,
+% REVIEW: should $\nSym{d-1}{\wt{\E}}$ be $\nSym{d-1}{\wt{\E}^\vee}$ here?
 \[ \pi_* \nSym{d}{\wt{\E}^\vee} = \pi_* [ \nSym{d-1}{\wt{\E}} \ot \cO_{\wt{X}}(1)] \]
 \end{rmk}
 
 \begin{example}
-For the directed manifold $(X, \T_X)$ we set $P_k = X_k$ and set $\cP^{k,d} = \pi_{k*} \cO_{P_k}(d)$. Notice that there are exact sequence,
+For the directed manifold $(X, \T_X)$ we set $P_k = X_k$ and set $\cP^{k,d} = \pi_{k*} \cO_{P_k}(d)$. Notice that there are exact sequences,
 
 {\color{red} DO THIS}
 \end{example}
 
-The semple tower is defined so that the following holds. Suppose that $f : C \to X$ is an immersed curve such that $\d{f} : \T_C \to f^* \T_X$ factors through $f^* \E \subset f^* \T_X$. Since $\d{f}$ is a subbundle this gives a subbundle $\T_X \embed \pi^* \E$ and hence a lift $f' : C \to \wt{X}$ such $\d{f} : \T_C \to f^* \E \to f^* \T_X$ is $f'^* [\struct{\wt{X}}(-1) \to \pi^* \E \to \pi^* \T_X]$. Therefore, consider $\d{f'} : \T_C \to f'^* \T_{\wt{X}}$. Since this map lifts $\d{f}$ we see that $\d{f'} : \T_X \to f'^* \wt{\E}$.
+% REVIEW: This paragraph uses "subbundle" loosely --- $\d{f}$ gives a line subbundle of $f^*\E$, not of $\pi^*\E$ directly. Consider clarifying.
+The Semple tower is defined so that the following holds. Suppose that $f : C \to X$ is an immersed curve such that $\d{f} : \T_C \to f^* \T_X$ factors through $f^* \E \subset f^* \T_X$. Since $\d{f}$ is a subbundle this gives a subbundle $\T_C \embed f^* \E$ and hence a lift $f' : C \to \wt{X}$ such that $\d{f} : \T_C \to f^* \E \to f^* \T_X$ is $f'^* [\struct{\wt{X}}(-1) \to \pi^* \E \to \pi^* \T_X]$. Therefore, consider $\d{f'} : \T_C \to f'^* \T_{\wt{X}}$. Since this map lifts $\d{f}$ we see that $\d{f'} : \T_C \to f'^* \wt{\E}$.
 
 Hence, if we start with an immersed curve $f : C \to X$ then there are lifts $f_k : C \to P_k$ for all $k$.
 
 \subsection{Arc Spaces and Hasse-Schmidt Derivations}
 
 \begin{defn}
-Let $X$ be an $S$-scheme. Then $\ell^{\text{th}}$-order \textit{arc} of $X$ is a $S$-morphism $\Delta^\ell_S \to X$ where
+Let $X$ be an $S$-scheme. Then an $\ell^{\text{th}}$-order \textit{arc} of $X$ is an $S$-morphism $\Delta^\ell_S \to X$ where
 \[ \Delta^{\ell}_S = \rSpec{S}{\struct{S}[t]/(t^{\ell+1})} = S \times_{\ZZ} \Spec{\ZZ[t]/(t^{\ell + 1})} \]
-If it exists, the $\ell^{\text{th}}$-order arc space is $J_\ell(X) = \Hom{S}{\Delta^\ell_S}{X}$ which represents the functor,
-\[ T \mapsto \Hom{T}{\Delta_\ell \times_k T}{X_T} \]
+If it exists, the $\ell^{\text{th}}$-order arc space $J_\ell(X) = \Hom{S}{\Delta^\ell_S}{X}$ represents the functor,
+\[ T \mapsto \Hom{T}{\Delta^\ell_S \times_S T}{X_T} \]
 \end{defn}
 
 When $X$ is a $k$-scheme we let $S = \Spec{k}$ and let $\Delta^\ell = \Spec{k[t]/(t^{\ell + 1})}$ without adornment.
@@ -125,21 +129,21 @@ For any $R$-algebra $A$ we have,
 \end{prop}
 
 \begin{proof}
-The correspondence sends $\varphi : A \to R[t]/(t^{m+1})$ writen as,
+The correspondence sends $\varphi : A \to R[t]/(t^{m+1})$ written as,
 \[ \varphi(x) = \sum_{i = 0}^m \varphi_i(x) t^i \]
 to the HS derivation $(\varphi_0, \varphi_1, \dots, \varphi_m)$.
 \end{proof}
 
 \begin{prop}
-Let $A$ be an $R$-algebra. Then there exists an $A$-algebra $\HS_{A/R}^m$ equipped with a universal HS-derivation $D : A \to \HS_{A/R}^m$ representing $\HSDer{R}{m}{A}{-}$ menaing,
+Let $A$ be an $R$-algebra. Then there exists an $A$-algebra $\HS_{A/R}^m$ equipped with a universal HS-derivation $D : A \to \HS_{A/R}^m$ representing $\HSDer{R}{m}{A}{-}$ meaning,
 \[ \Hom{A}{\HS_{A/R}^m}{B} = \HSDer{R}{m}{A}{B} \]
 functorially in $R$-algebras $B$. Furthermore, this has an explicit presentation,
-\[ \HS_{A/R}^m = A [ \d_i{x} ]_{x \in A, 0 \le i \le m} / \left< \d_i(x+y) = \d_i{x} + \d_i{y} \, \d_i{r} = 0 \, \d_i(xy) = \sum_{p + q = i} \d_p(x) \d_q(y) \right>_{r \in R} \]
+\[ \HS_{A/R}^m = A [ \d_i{x} ]_{x \in A, 0 \le i \le m} / \left< \d_i(x+y) = \d_i{x} + \d_i{y}, \, \d_i{r} = 0, \, \d_i(xy) = \sum_{p + q = i} \d_p(x) \d_q(y) \right>_{r \in R} \]
 Clearly, $\HS_{A/R}^m$ is graded by $A$-modules $\HS_{A/R}^{m,d}$ where we put $\d_i{x}$ in degree $i$ and the degree $k$ part consists of sums of monomials of total degree $k$.
 \end{prop}
 
 \begin{rmk}
-The map $D_0 : A \to \HS^m_{A/R}$ makes $\HS^m_{A/R}$ into an $A$-algebra. Furthermore, if $B$ is an $A$-algebra then $\Hom{A}{\HS^m_{A/R}}{B} \subset \Hom{R}{\HS^m_{A/R}}{B}$ is identified with the sub $\HSDer{R}{m}{A}{B}_0 \subset \HSDer{R}{m}{A}{B}$ of HS-derivations $\varphi$ with $\varphi_0 : A \to B$ equal to the structure map. It is clear that representing $\HSDer{R}{m,B}{A}{-}_0$ on the category of $A$-algebras uniquely determines $\HS^m_{A/R}$ with its $A$-algebra structure and universal HS-derivation whose zeroth term agrees with the structure map.
+The map $D_0 : A \to \HS^m_{A/R}$ makes $\HS^m_{A/R}$ into an $A$-algebra. Furthermore, if $B$ is an $A$-algebra then $\Hom{A}{\HS^m_{A/R}}{B} \subset \Hom{R}{\HS^m_{A/R}}{B}$ is identified with the subset $\HSDer{R}{m}{A}{B}_0 \subset \HSDer{R}{m}{A}{B}$ of HS-derivations $\varphi$ with $\varphi_0 : A \to B$ equal to the structure map. It is clear that representing $\HSDer{R}{m}{A}{-}_0$ on the category of $A$-algebras uniquely determines $\HS^m_{A/R}$ with its $A$-algebra structure and universal HS-derivation whose zeroth term agrees with the structure map.
 \end{rmk}
 
 \begin{prop}
@@ -166,33 +170,36 @@ and the kernel is exactly those HS-derivations which vanish on the image of $A$ 
 \end{proof}
 
 \begin{lemma}
-If $A \to B$ is an \etale map of $R$-algebras then $\HS_{A/R} \ot_A B \to \HS_{B/R}$ is an isomorphism.
+If $A \to B$ is an \etale map of $R$-algebras then $\HS_{A/R}^m \ot_A B \to \HS_{B/R}^m$ is an isomorphism.
 \end{lemma}
 
 \begin{proof}
-By localizing we can assume that $A \to B$ is standard \etale meaning $B = A[x]_g/(f(x))$ where $f'(x)$ is a unit. From the exact sequence, it suffices to show injectivity and $\HS_{B/A}^m = 0$. Indeed, $f(x) = 0$ so $\d_i{(f(x))} = 0$ but $\d_1(f(x)) = f'(x) \d{x}$ so $\d_1{x} = 0$ since $f'(x)$ is a unit. Now assume that $\d_i(x) = 0$ for $i < k$ we will show that $\d_{k}(x) = 0$. First compute,
+By localizing we can assume that $A \to B$ is standard \etale meaning $B = A[x]_g/(f(x))$ where $f'(x)$ is a unit. From the exact sequence, it suffices to show injectivity and $\HS_{B/A}^m = 0$. Indeed, $f(x) = 0$ so $\d_i{(f(x))} = 0$ but $\d_1(f(x)) = f'(x) \d_1{x}$ so $\d_1{x} = 0$ since $f'(x)$ is a unit. Now assume that $\d_i(x) = 0$ for $i < k$; we will show that $\d_{k}(x) = 0$. First compute,
 \[ \d_k(x^n) = n x^{n-1} \d_k(x) \]
 because $\d_k(x^m) = \d_k(x^{m-1}) x + x^{m-1} \d_k(x)$ since the intermediate terms are zero so the claim is true by induction. Therefore, we see that $\d_k(f(x)) = f'(x) \d_k(x)$ but $f'(x)$ is a unit and thus $\d_k{x} = 0$ so we win. Now to show injectivity we need to show that if $C$ is a $B$-algebra then the map
 \[ \HSDer{R}{m}{B}{C}_0 \to \HSDer{R}{m}{A}{C}_0 \]
-is surjective. Given $\varphi : A \to C$ it suffices to specify $\varphi'(x)$ such that it becomes a HS-derivation. Because $f'(x) \d_k(x) = p$ for $p$ a polynomial $\d_i(x)$ for $i < k$ and $\d_i(a)$ for $a \in A$ we can specify $\varphi'_k(x) = - \varphi'_{<k}(p) \cdot \varphi_0(f'(x))^{-1}$ where $\varphi_0 : B \to C$ is the struture map and $f'(x)$ is a unit so this makes sense. Then it is elementary to check this defines a HS-derivation.
+is surjective. Given $\varphi : A \to C$ it suffices to specify $\varphi'(x)$ such that it becomes a HS-derivation. Because $f'(x) \d_k(x) = p$ for $p$ a polynomial in $\d_i(x)$ for $i < k$ and $\d_i(a)$ for $a \in A$, we can specify $\varphi'_k(x) = - \varphi'_{<k}(p) \cdot \varphi_0(f'(x))^{-1}$ where $\varphi_0 : B \to C$ is the structure map and $f'(x)$ is a unit so this makes sense. Then it is elementary to check this defines a HS-derivation.
 \end{proof}
 
 \begin{prop}
-If $X/S$ is locally of finite type then $\HS_{X/S}^m$ is graded by coherent $\struct{X}$-algebra. It is graded by vector bundles if $X/S$ is smooth.
+If $X/S$ is locally of finite type then $\HS_{X/S}^m$ is a graded coherent $\struct{X}$-algebra. It is graded by vector bundles if $X/S$ is smooth.
 \end{prop}
 
 \begin{proof}
-This immediately reduces to the corresponding property for $\HS_{A/R}$. If $R[x_1, \dots, x_n] \onto A$ then we claim that the natural map $\HS_{R[x_1, \dots, x_n]/R} \to \HS_{A/R}$ is surjective then the finite generation is obvious from examining the structure of the Hasse-Schmidt algebra of a polynomial ring. For smoothness we use the \etale-local structure to reduce to the polynomial ring. Furthermore,
+This immediately reduces to the corresponding property for $\HS_{A/R}$. If $R[x_1, \dots, x_n] \onto A$ then the natural map $\HS_{R[x_1, \dots, x_n]/R} \to \HS_{A/R}$ is surjective and the finite generation is obvious from examining the structure of the Hasse-Schmidt algebra of a polynomial ring. For smoothness we use the \etale-local structure to reduce to the polynomial ring. Furthermore,
 \[ \HS_{R[x_1, \dots, x_n]/R}^{m,d} = \bigoplus R \, \d_{i_1}(x_{j_1}) \cdots \d_{i_r}(x_{j_r}) \]
+% REVIEW: should the condition be $i_1 + \cdots + i_r = d$ (matching degree $d$) rather than $= k$?
 where we sum over all monomials $\d_{i_1}(x_{j_1}) \cdots \d_{i_r}(x_{j_r})$ such that $i_1 + \cdots + i_r = k$ and $i_{\ell} \le m$.
 \end{proof}
 
 \begin{example}
+% REVIEW: $\HS^1_{A/R}$ should be the algebra of first-order principal parts $P^1_{A/R}$; check if $\Sym{R}{A}$ is what is intended here or if this should be $\Sym{\bullet}{\Omega_{A/R}}$ or similar.
 $\HS^0_{A/R} = A$ and $\HS^1_{A/R} = \Sym{R}{A}$.
 \end{example}
 
 {\color{red} DO I NEED SMOOTHNESS FOR THE FILTRATION??}
 
+% REVIEW: This proposition statement is empty --- the exact sequences are missing.
 \begin{prop}
 There are exact sequences,
 \end{prop}
@@ -210,7 +217,7 @@ is representable by a universal pair,
 \end{theorem}
 
 \begin{rmk}
-In the case $Z = W \times_X Y$ we just get the Hom scheme $\Hom{X}{Y}{W}$. Furthermore, if $q : Z \to Y$ is a bundle then this represents the functor of sections of $q$ because  the functor can be identified with, an $X$-scheme $T \to X$ and a morphism $g : T \times_X Y \to T \times_X Z$ such that,
+In the case $Z = W \times_X Y$ we just get the Hom scheme $\Hom{X}{Y}{W}$. Furthermore, if $q : Z \to Y$ is a bundle then this represents the functor of sections of $q$ because the functor can be identified with an $X$-scheme $T \to X$ and a morphism $g : T \times_X Y \to T \times_X Z$ such that,
 \begin{center}
 \begin{tikzcd}
 & T \times_X Z \arrow[dd, "\id \times q"]
@@ -226,7 +233,7 @@ Let $S$ be a scheme and $f : X \to S$ be a smooth separated morphism and let $\D
 
 \begin{defn}
 Let $\pi : Z \to X$ be finitely presented and quasi-projective then so is the base change,
-\[ B \times_{X, \pr_1} (X \times_X X) \to X \times_S X \]
+\[ B \times_{X, \pr_1} (X \times_S X) \to X \times_S X \]
 thus the pullback $\pi_e : B_e \to X_e$ over $\Delta_e$ is also finitely presented and quasi-projective. Then the ``relative jets'' parameter space is the universal pair,
 \[ (r : \Pi_{B_e / X_e / X} \to X, \, s : \Pi_{B_e/X_e/X} \times_{X, \pr_2} X_e \to B_e) \]
 representing the functor, defined via $\pr_2 : X_e \to X$,
@@ -234,7 +241,7 @@ representing the functor, defined via $\pr_2 : X_e \to X$,
 \end{defn}
 
 \begin{rmk}
-We think of $\pi : B \to X$ as a bundle and $J^e(\pi) := \Pi_{B_e/X_e/X}$ is then the bundle of jets of sections of $\pi$. Note, a map $T \times_{X, \pr_2} X_e \to B_e$ over $X_e$ is the same as a map $T \times_{X, \pr_2} X_e \to B$ over $X$ (where we view the $X$-structure of $T \times_{X, \pr_2} X_e$ through $\pr_1$ on $X_e$) since $B_e = B \times_{X, \pr_1} X_e$. Consider the case, $B = Z \times_S X$ where $Z$ is an $S$-scheme. This case $\Pi_{B_e/X_e/X}$ is the space of jets of morphisms $f : X \to Z$. Indeed, in this case, $B_e = Z \times_S X_e$ and hence a $X_e$-morphism $g : T \times_X X_e \to B_e$ is just as $S$-morphism $T \times_X X_e \to Z$.
+We think of $\pi : B \to X$ as a bundle and $J^e(\pi) := \Pi_{B_e/X_e/X}$ is then the bundle of jets of sections of $\pi$. Note, a map $T \times_{X, \pr_2} X_e \to B_e$ over $X_e$ is the same as a map $T \times_{X, \pr_2} X_e \to B$ over $X$ (where we view the $X$-structure of $T \times_{X, \pr_2} X_e$ through $\pr_1$ on $X_e$) since $B_e = B \times_{X, \pr_1} X_e$. Consider the case, $B = Z \times_S X$ where $Z$ is an $S$-scheme. In this case $\Pi_{B_e/X_e/X}$ is the space of jets of morphisms $f : X \to Z$. Indeed, $B_e = Z \times_S X_e$ and hence an $X_e$-morphism $g : T \times_X X_e \to B_e$ is just an $S$-morphism $T \times_X X_e \to Z$.
 \end{rmk}
 
 \begin{rmk}
@@ -299,7 +306,7 @@ via the $\Gm$-equivariant rational map
 & X
 \end{tikzcd}
 \end{center}
-whose indeterminancy locus is in codimension $\rank{\E}$ and therefore functions extend over all of $\V(\E)$ by Harthogs' theorem (note that the case $\rank{\E} = 1$ is trivial for other reasons). Suppose we have a pair $(X, \E)$ where $\E$ is a vector bundle equipped with a map $\E \to \T_X$ (not assumed to be injective) and we construct the Semple tower $(X_k, \E_k)$. We can interpret this construction in terms of ``physical'' vector bundles as well. On $\V(\E)$ there is a map $\struct{\V(\E)}(-1) \to \pi^* \E$ of $\Gm$-equivariant coherent sheaves on $\V(\E)$ (or equivalently of graded $\cA_\E := \nSym{\bullet}{\E^\vee}$-modules where the $(-1)$ corresponds to the grading) given by the canonical cocontraction map
+whose indeterminacy locus is in codimension $\rank{\E}$ and therefore functions extend over all of $\V(\E)$ by Hartogs' theorem (note that the case $\rank{\E} = 1$ is trivial for other reasons). Suppose we have a pair $(X, \E)$ where $\E$ is a vector bundle equipped with a map $\E \to \T_X$ (not assumed to be injective) and we construct the Semple tower $(X_k, \E_k)$. We can interpret this construction in terms of ``physical'' vector bundles as well. On $\V(\E)$ there is a map $\struct{\V(\E)}(-1) \to \pi^* \E$ of $\Gm$-equivariant coherent sheaves on $\V(\E)$ (or equivalently of graded $\cA_\E := \nSym{\bullet}{\E^\vee}$-modules where the $(-1)$ corresponds to the grading) given by the canonical cocontraction map
 \[ \nSym{n-1}{\E^\vee} \to \nSym{n}{\E^\vee} \ot \E \]
 \[ s_1 \cdots s_{n-1} \mapsto \sum_{i = 1}^r s_1 \cdots s_{n-1} e_i \ot e^i \]
 where $e_i$ is a local basis of $\E^\vee$ and $e^i$ is the dual basis. Therefore, setting $\wt{X}^{\aff} = \V(\E)$ we can create a diagram
@@ -350,11 +357,11 @@ In the case of the Semple tower, $\E_0^{\aff} = \E_0$ with rank $r$ and then $\r
 \[ \cP^{k, \bullet} = \bigoplus_{d \ge 0} \pi_{k*} \struct{X_k}(d)\embed \pi_{k*} \struct{X_k^{\aff}}  \]
 
 \begin{defn}
-Consider the projectivized Semple tower $(X_m, \E_m)$ where $\E_0 = \T_X$ then the \textit{projectivied Semple $m$-jet space} is defined as $P_k \E = X$ and the \textit{projectivied Semple $m$-jet bundle} is defined as $\cP^{m,d}_X = \pi_{m*} \struct{X_m}(d)$. Likewise, consider the affine Semple tower $(X_m^\aff, \E_m^\aff)$ where $\E_0 = \T_X$. Then the \textit{affine Semple $m$-jet space} is defined $J_m X = X_m^{\aff}$ and the \textit{affine Semple $m$-jet bundle} is $\E^{m,d} = [\pi_{m*} \struct{X^\aff_m}]_d$ where we take the degree $d$ part induced by the $\Gm$-action.
+Consider the projectivized Semple tower $(X_m, \E_m)$ where $\E_0 = \T_X$ then the \textit{projectivized Semple $m$-jet space} is defined as $P_k \E = X$ and the \textit{projectivized Semple $m$-jet bundle} is defined as $\cP^{m,d}_X = \pi_{m*} \struct{X_m}(d)$. Likewise, consider the affine Semple tower $(X_m^\aff, \E_m^\aff)$ where $\E_0 = \T_X$. Then the \textit{affine Semple $m$-jet space} is defined $J_m X = X_m^{\aff}$ and the \textit{affine Semple $m$-jet bundle} is $\E^{m,d} = [\pi_{m*} \struct{X^\aff_m}]_d$ where we take the degree $d$ part induced by the $\Gm$-action.
 \end{defn}
 
 \begin{prop}
-Let $\cP^{m,d}_X = \pi_{m*} \struct{X_m}(d)$ where $(X_m, \E_m)$ is the projectivied Semple $m$-jet bundle $P_k \E = X_k$ with $\E_0 = \T_X$. Then there is a canonical doubly graded injection,
+Let $\cP^{m,d}_X = \pi_{m*} \struct{X_m}(d)$ where $(X_m, \E_m)$ is the projectivized Semple $m$-jet bundle $P_k \E = X_k$ with $\E_0 = \T_X$. Then there is a canonical doubly graded injection,
 \[ \cP^{m,d} \embed \HS^{m,d}_{X} \]
 of $\struct{X}$-algebras.
 \end{prop}
@@ -390,7 +397,7 @@ Iterating this process produces a map $\rSpec{X}{\cA} \to X_m^{\aff}$ lifting $\
 \[ \cP^{m, \bullet} \embed \pi_{k*} \struct{X_m^{\aff}} \to \cA \]
 It suffices to prove that the obtained map
 \[ \Hom{\struct{X}}{\HS_{X/S}^m}{\cA} \onto \Hom{\struct{X}}{\cP^{m,\bullet}}{\cA} \]
-is surjective and graded. It is graded because everything so constructed is $\Gm$-equivariant for the obvious $\Gm$-action on $\Delta_{\cA}^m$ which corresponds to the grading on $\HS_{X/S}^m$. To check surjectivity, since $X$ is smooth, using the \etale-local structure, we reduce to cheking this property for $\A^n_S$. In this case we can directly compute. There is a presentation
+is surjective and graded. It is graded because everything so constructed is $\Gm$-equivariant for the obvious $\Gm$-action on $\Delta_{\cA}^m$ which corresponds to the grading on $\HS_{X/S}^m$. To check surjectivity, since $X$ is smooth, using the \etale-local structure, we reduce to checking this property for $\A^n_S$. In this case we can directly compute. There is a presentation
 \[ \HS_{X/S}^m = \struct{S}[\d_i(x_j)]_{\substack{0 \le i \le m \\ 0 \le j \le n}} \]
 We now consider the map $\varphi_{ij} : \HS^m_{X/S} \to \struct{S}$ sending $\d_i(x_j) \mapsto 1$ and all other to zero. This corresponds to the Hasse-Schmidt differential $(D_0, \dots, D_m)$ where $D_j(x_i) = 1$ and $D_{j'}(x_i') = 0$ for all other $i' \neq i$ and $j' \neq j$. Now we consider the lift of the map
 \[ \varphi_{ij} : \Delta^m_{S} \to X \]
@@ -404,7 +411,8 @@ and then $\pi^* \Omega_X \to \struct{\V(\T_X)}(1)$ is given by $\d{x_1} \mapsto$
 \section{Foliation-obstruction setup}
 
 
-Let $X$ be a smooth proper scheme over a noetherian scheme $S$. Let $s : \Spec{k} \embed S$ be a closed point and $C / k$ a smooth proper curve. Consider a separable map $f : C \to X$ (eg an immersion). Consider $P := \P(\Omega_{X/S}^1)$ then by base change $\P(\Omega_{X_s//k}) = P \times_S k$ to which by separability there is a lift $f' : C \to \P(\Omega_{X_s/k})$.
+% REVIEW: The two \begin{proof} blocks below (lines 411--419) appear without a preceding theorem/proposition statement.
+Let $X$ be a smooth proper scheme over a noetherian scheme $S$. Let $s : \Spec{k} \embed S$ be a closed point and $C / k$ a smooth proper curve. Consider a separable map $f : C \to X$ (e.g.\ an immersion). Consider $P := \P(\Omega_{X/S}^1)$; then by base change $\P(\Omega_{X_s/k}) = P \times_S k$, to which by separability there is a lift $f' : C \to \P(\Omega_{X_s/k})$.
 
 \begin{proof}
 Let $L := \struct{P_s}(1)$ be the tautological bundle on $P$, and $\chi_C = 2 - 2 g(C)$ the geometric Euler characteristic of the curve. Then,
@@ -416,7 +424,7 @@ This is immediate by definition: the map $\pi^* \Omega_X \to L$ pulls back to $f
 \[ L \cdot_{f'} C = \deg{\L} = \deg{\Omega_C} - \Ram_f \]
 \end{proof}
 
-Now suppose that $f : C \to X$ is invariant by a foliation $\F$ by curves. Outside of the singular locus $Z$ the foliation defines a section of $\P(\Omega_{X/S}) \to X$ whose closure over $Z$ is a blowup  $\pi : \wt{X} \to X$ with center supported in $Z$. Therefore, there is an exceptional divisor $E$ and $L|_{\wt{X}} = \pi^* K_{\F}(-E)$ and provided that $f$ doesn't factor through $Z$, the intersection $E \cdot_{f'} C$ can be identified with the Segre class $s_Z(f)$ so that,
+Now suppose that $f : C \to X$ is invariant by a foliation $\F$ by curves. Outside of the singular locus $Z$ the foliation defines a section of $\P(\Omega_{X/S}) \to X$ whose closure over $Z$ is a blowup $\pi : \wt{X} \to X$ with center supported in $Z$. Therefore, there is an exceptional divisor $E$ and $L|_{\wt{X}} = \pi^* K_{\F}(-E)$ and provided that $f$ does not factor through $Z$, the intersection $E \cdot_{f'} C$ can be identified with the Segre class $s_Z(f)$ so that,
 \[ K_{\F} \cdot_{f} C = - \chi_C - \Ram_f + s_Z(f) \]
 
 The main result we need is in controlling this Segre class $s_Z(f)$.
@@ -456,7 +464,7 @@ Let $X$ be a surface of general type then $H^2(\X, E^{k,m}_{\X} \ot K_{\X}^{\ot 
 
 \begin{proof}
 We use induction and the fundamental filtration,
-\[ E^{k-1,m} = F^0 E^{k,m} \subsetneq F^1 E^{k,m} \subsetneq \cdots \subsetneq F^{\floor{k/m}} E^{k,m} = E^{k,m} \]
+\[ E^{k-1,m} = F^0 E^{k,m} \subsetneq F^1 E^{k,m} \subsetneq \cdots \subsetneq F^{\floor{m/k}} E^{k,m} = E^{k,m} \]
 where the quotients are given by,
 \[ F^p / F^{p-1} \cong S^p \Omega_X \ot E^{k-1, m-kp} \]
 Therefore, $E^{k,m}$ has a composition series by terms,
@@ -472,7 +480,7 @@ This is the jet version of the extension theorem of Miyaoka.
 
 \subsection{The Proof (PROBLEM)}
 
-Let $g_k(X)$ be the leading term in the asymtotic Riemann-Roch computation of $P^{k, m}_X$. {\color{red} For $k = 2$ IT IS SOMETHING LIKE $g_k(X) = \frac{1}{12}(13 c_1^2 - 9 c_2)$ OR SOMETHING}
+Let $g_k(X)$ be the leading term in the asymptotic Riemann-Roch computation of $P^{k, m}_X$. {\color{red} For $k = 2$ IT IS SOMETHING LIKE $g_k(X) = \frac{1}{12}(13 c_1^2 - 9 c_2)$ OR SOMETHING}
 
 \begin{theorem}
 Suppose that $g_k(Y) + g_k(\X) > 0$ then,
@@ -483,12 +491,12 @@ in particular there are enough $k$-jets.
 \begin{proof}
 Consider the exact sequences,
 \[ 0 \to P^{k,m}_Y \to P^{k,m}_Y(\log{D}) \to Q_m \to 0 \]
-where $Q_m$ is supported on the exceptional divisor $E$. Since the singularities are ADE, the minimal resolution is crepant so there exists a neighborhood $U$ of $E$ such that the canonical bundle is tirival. Therefore, we get the sequence
+where $Q_m$ is supported on the exceptional divisor $E$. Since the singularities are ADE, the minimal resolution is crepant so there exists a neighborhood $U$ of $E$ such that the canonical bundle is trivial. Therefore, we get the sequence
 \[ 0 \to P^{k,m}_Y \ot K_Y^{\ot (1 - m)} \to P^{k,m}_Y(\log{D}) \ot K_Y^{\ot (1 - m)} \to Q_m \to 0 \]
 The proof will distinguish two cases according to the value of $\limsup \frac{h^0(Q_m)}{m^3}$.
 Let us first suppose that,
 \[ \limsup \frac{h^0(Q_m)}{m^3} \le \frac{g_k(\X) - g_k(Y)}{2} \]
-As expalined above, Bogomolov's vanishing theorem implies that,
+As explained above, Bogomolov's vanishing theorem implies that,
 \[ \limsup \frac{1}{m^3} h^0(\X, P^{k,m}_{\X}) \ge g_k(\X) \]
 Then the exact sequence implies that,
 \begin{align*}
@@ -531,15 +539,16 @@ thus from the first exact sequence
 Alternatively, suppose
 \[ \limsup \frac{1}{m^3} h^0(Q_m) > \frac{s_2(\X) - s_2(Y)}{12} \]
 Then consider
-\[ h^0(Y, S^m \Omega_Y(\log{E}) \ot \omega_Y^{\ot (1 - m)}) \embed h^0(Y \sm E, S^m \Omega_Y \ot \omega_Y^{\ot (1 - m)}) \]
+% REVIEW: $\embed$ between $h^0$ values should be $\le$ or the statement should be about $H^0$ spaces.
+\[ h^0(Y, S^m \Omega_Y(\log{E}) \ot \omega_Y^{\ot (1 - m)}) \le h^0(Y \sm E, S^m \Omega_Y \ot \omega_Y^{\ot (1 - m)}) \]
 but $\X \to X$ is an isomorphism over $Y \sm E \iso X^{\text{smooth}}$ and this removes only finitely many points so
 \[ h^0(Y \sm E, S^m \Omega_Y \ot \omega_Y^{\ot (1 - m)}) = h^0(\X, S^m \Omega_{\X} \ot K_{\X}^{\ot (1 - m)}) = h^2(\X, S^m \Omega_{\X}) = 0 \]
-by Bogomlov vanishing. Furthermore,
+by Bogomolov vanishing. Furthermore,
 
 
 
 Therefore, the exact sequence implies
-\[ h^0(Q_m \ot \omega_Y^{\ot (1 - m)} \le h^1(Y, S^m \Omega_Y \ot \omega_Y^{\ot (1 - m)}) \]
+\[ h^0(Q_m \ot \omega_Y^{\ot (1 - m)}) \le h^1(Y, S^m \Omega_Y \ot \omega_Y^{\ot (1 - m)}) \]
 
 $K_Y = K_X + a E$ where for $(1,1)_n$
 \[ a = \frac{2}{n} - 2 \]
@@ -550,7 +559,7 @@ which is effective rel $X$ and therefore is effective in a neighborhood of $E$. 
 {\color{red} FUCK, THIS FAILS SINCE $Q_m$ IS SUPPORTED ON $E$ SO THE MAP BECOMES ZERO}
 so we have
 \[ h^0(Q_m) \le h^0(Q_m \ot \omega_Y^{\ot (1 - m)}) \le h^1(Y, S^m \Omega_Y \ot \omega_Y^{\ot (1 - m)}) = h^1(Y, S^m \Omega_Y) \]
-by Serre duality. Bogomolob vanishing shows that
+by Serre duality. Bogomolov vanishing shows that
 \[ \limsup \frac{1}{m^3} h^0(Y, S^m \Omega_Y) = \limsup \frac{1}{m^3} (\chi(S^m \Omega_Y) + h^1(S^m \Omega_Y)) \ge \frac{s_2(Y)}{6} + \frac{s_2(\X) - s_2(Y)}{12} = \frac{s_2(\X) + s_2(Y)}{12} \]
 Therefore, we win.
 \end{proof}
@@ -592,7 +601,7 @@ Furthermore, $\tau$ has $1$-dimensional fibers only and hence $R^2 \tau_* \cA = 
 0 \arrow[r] & H^1(X, \tau_* \cA) \arrow[r] & H^1(Y, \cA) \arrow[r] & H^0(X, R^1 \tau_* \cA) \arrow[r] & H^2(X, \hat{\cA}) \arrow[r] & H^2(Y, \cA) \arrow[r] & 0
 \end{tikzcd}
 \end{center}
-where we use the fact that $\hat{\cA} / \tau_* \cA$ and $\ker{(\tau_* \cA \to \hat{\cA})}$ are both supported on $S$ which is 0-dimensional so $H^2(X, \tau_* \cA) = H^2(X, \hat{\cA})$. Therefore, via the vanishing result $H^2(X, \hat{\cA}) = 0$ we get.
+where we use the fact that $\hat{\cA} / \tau_* \cA$ and $\ker{(\tau_* \cA \to \hat{\cA})}$ are both supported on $S$ which is 0-dimensional so $H^2(X, \tau_* \cA) = H^2(X, \hat{\cA})$. Therefore, via the vanishing result $H^2(X, \hat{\cA}) = 0$ we get
 \[ h^1(Y, \cA) = h^1(X, \tau_* \cA) + h^0(X, R^1 \tau_* \cA) \]
 
 {\color{red} DOES THE REFLEXIVE VANISHING RESULT HOLD FOR JETS?}
@@ -604,6 +613,7 @@ Note that we use that $\hat{\cA}$ is exactly reflexive symmetric forms on $X$. T
 We present here the proof in HYPERBOLICITY OF NODAL HYPERSURFACES by
 Fedor Bogomolov and Bruno De Oliveira. See Proposition 2.3.
 
+% REVIEW: The hypothesis below says $m > 2$ but the duplicate version in Part II (line ~1615) says $m > 0$. Reconcile these.
 \begin{prop}
 Let $X$ be a surface with nodal singularities whose resolution $Y$ is a surface of general type. Then for $m > 2$,
 \[ H^2(X, \hat{S}^m \Omega_X) = 0 \]
@@ -612,9 +622,9 @@ Let $X$ be a surface with nodal singularities whose resolution $Y$ is a surface 
 \begin{proof}
 From Serre duality for reflexive sheaves on normal surfaces:
 \[ h^0(X, \hat{S}^m \Omega) = h^0(X, ((\hat{S}^m \Omega_X)^\vee \ot \omega_X)^{\vee \vee}) \]
-The normality propery plus the reflexive nature on $X_{\reg}$ give,
+The normality property plus the reflexive nature on $X_{\reg}$ give,
 \[ h^0(X, ((\hat{S}^m \Omega_X)^\vee \ot \omega_X)^{\vee \vee}) = h^0(X_{\reg}, (S^m \Omega_X)^\vee \ot \omega_X) = 0 \]
-But on $X_{\reg}$ we have the quality $\Omega_X^\vee = \Omega_X \ot \omega_X$ and hence,
+But on $X_{\reg}$ we have the equality $\Omega_X^\vee = \Omega_X \ot \omega_X$ and hence,
 \[ h^2(X, \hat{S}^m \Omega_X) = h^0(X_{\reg}, S^m \Omega_X \ot \omega_X^{1-m}) \]
 Suppose there is a $m > 2$ such that this is positive. Let $\ell = qm$ and,
 \[ s \in H^0(X_{\reg}, S^m \Omega_X \ot \omega_X^{(1 - m)}) \]
@@ -685,7 +695,7 @@ Specifically look at Proposition 56.
 \section{Demailly - Goul}
 
 \begin{defn}
-A Riemann surfaces is \textit{parabolic} if it does not admit a positive non constant superharmonic function (equivalently it does not admit a Green function).
+A Riemann surface is \textit{parabolic} if it does not admit a positive nonconstant superharmonic function (equivalently it does not admit a Green function).
 \end{defn}
 
 \begin{rmk}
@@ -732,11 +742,11 @@ induced by the canonical maps $\struct{X_2}(-1) \embed \pi_2^* V_1$ and $V_1 \to
 \subsection{Multifoliations}
 
 \begin{defn}
-An \textit{algebraic multi-foliation} on $X$ is a rank $1$ subsheaf $\F \subset S^m \Omega_X$ locally generated by a jet differentials of order $1$.
+An \textit{algebraic multi-foliation} on $X$ is a rank $1$ subsheaf $\F \subset S^m \Omega_X$ locally generated by jet differentials of order $1$.
 \end{defn}
 
 \begin{theorem}
-Let $X$ be a nonsingular surface of general type and let $\theta_k$ be the $k$-jet threshold. Assume that either $\theta_1 < 0$ or that the following three conditions are satisfies,
+Let $X$ be a nonsingular surface of general type and let $\theta_k$ be the $k$-jet threshold. Assume that either $\theta_1 < 0$ or that the following three conditions are satisfied,
 \begin{enumerate}
 \item $\theta_1 \ge 0$ and $\theta_2 < 0$
 \item $\Pic{X} = \Z$
@@ -752,7 +762,7 @@ Then there is a curve $\Gamma$ in $X$ such that all parabolic leaves of $\F$ are
 \end{prop}
 
 \begin{proof}
-Note that any rank $1$ torsion-free {\color{red} reflexive} sheaf on a surface is locally free. The inclusion $\F \embed S^m \Omega_X$ viewed as a section of $S^m \Omega_X \ot \F^{\vee}$ defines a section of $\struct{X_1}(m) \ot \pi^* \F^{-1}$ whose zero divisor $Z \subset X_1$ is precisely the divisor associated with the foliaiton. Therefore $Z = m u_1 - \pi^* c_1(\F)$ in $\Pic{X_1}$ and our calculuations imply that $\struct{X_1}(1)|_Z$ is big as soon as,
+Note that any rank $1$ torsion-free {\color{red} reflexive} sheaf on a surface is locally free. The inclusion $\F \embed S^m \Omega_X$ viewed as a section of $S^m \Omega_X \ot \F^{\vee}$ defines a section of $\struct{X_1}(m) \ot \pi^* \F^{-1}$ whose zero divisor $Z \subset X_1$ is precisely the divisor associated with the foliation. Therefore $Z = m u_1 - \pi^* c_1(\F)$ in $\Pic{X_1}$ and our calculations imply that $\struct{X_1}(1)|_Z$ is big as soon as,
 \[ (u_1|_Z)^2 = u_1^2 \cdot Z = m (c_1^2 - c_2) + c_1 \cdot c_1(\F) > 0 \quad (u_1|_Z) \cdot (-c_1) = m c_1^2 + c_1 \cdot c_1(\F) > 0 \]
 However, $X$ is minimal so $c_2 \ge 0$ hence the first inequality implies the second proving the claim.
 \end{proof}
@@ -763,7 +773,7 @@ Let $X$ be a surface of general type equipped with a multifoliation $\F \subset 
 all parabolic leaves of $\F$ are algebraically degenerate.
 \end{prop}
 
-{\color{red} why does algebraically degneracy of each leaf imply it for the union?}
+{\color{red} why does algebraic degeneracy of each leaf imply it for the union?}
 
 \section{Proof}
 
@@ -794,8 +804,8 @@ which admits the hyperplane section $D_2 := \P(T_{X_1/X}) \subset X_2 = \P(V_1)$
 \begin{lemma}
 With respect to the projection $\pi_{2,0} : X_2 \to X$ the weighted line bundle $\struct{X_2}(a_1, a_2)$ is
 \begin{enumerate}
-\item relatively effective iff $a_1 + a-2 \ge 0$ and $a_2 \ge 0$
-\item relativiely big iff $a_1 + a_2 > 0$ and $a_2 > 0$
+\item relatively effective iff $a_1 + a_2 \ge 0$ and $a_2 \ge 0$
+\item relatively big iff $a_1 + a_2 > 0$ and $a_2 > 0$
 \item relatively nef iff $a_1 \ge 2 a_2 \ge 0$
 \item relatively ample iff $a_1 > 2 a_2 > 0$.
 \end{enumerate}
@@ -828,7 +838,8 @@ Let $X$ be a minimal surface of general type. If $c_1^2 - 9/7 c_2 > 0$ then the 
 Because $Z$ is effective we can write,
 \[ Z = a_1 u_1 + a_2 u_2 - \pi_{2,0}^* F \quad (a_1, a_2) \in \Z^2 \quad a_1 \ge 2 a_2 > 0 \]
 where $F$ is some divisor in $X$. Our strategy is to show that $\struct{X_2}(2,1)|_Z$ is big. By Lemma 3.3(e) we find,
-\[ (2 u_1 + u_2)^3 \cdot Z = (_1 + z_2) (13 c_!^2 - 9 c_2) + 12 c_1 \cdot F \]
+% REVIEW: check this formula --- the original had garbled notation "(_1 + z_2)" and "c_!^2"; reconstructed as $(z_1 + z_2)$.
+\[ (2 u_1 + u_2)^3 \cdot Z = (z_1 + z_2) (13 c_1^2 - 9 c_2) + 12 c_1 \cdot F \]
 The multiplication morphism by the canonical section of $\struct{}(Z)$ defines a sheaf injection
 \[ \struct{}(\pi_{2,0}^* F) \embed \struct{X_2}(a_1, a_2) \]
 \end{proof}
@@ -853,21 +864,21 @@ and $S$ is an invertible sheaf so there is a dual sequence
 0 \arrow[r] & \struct{X_1}(-m)|_Z \ot \pi^* \F|_Z \arrow[r] & V^*_1 |_Z \arrow[r] & S^*
 \end{tikzcd}
 \end{center}
-We can then lift $Z$ into a surface $\wt{Z} \subset X_2$ in such a way that the projection map $\pi_{2,1} : \wt{Z} \to Z$ is a modification, at a generic point $x \in Z$, the point of $\wt{Z}$ lying above $x$ is taken to be $(x, [S_x]) \in X_2$ (meaning we take the induced morphism from the generic quotient map $V_1^*|_Z \to S^*$ which gives a lift to the projectiviation). We need to compute the cohomology class of this $2$-cycle $\wt{Z}$ in $H^\bullet(X_2)$. One problem is that the cokernel of the map
+We can then lift $Z$ into a surface $\wt{Z} \subset X_2$ in such a way that the projection map $\pi_{2,1} : \wt{Z} \to Z$ is a modification, at a generic point $x \in Z$, the point of $\wt{Z}$ lying above $x$ is taken to be $(x, [S_x]) \in X_2$ (meaning we take the induced morphism from the generic quotient map $V_1^*|_Z \to S^*$ which gives a lift to the projectivization). We need to compute the cohomology class of this $2$-cycle $\wt{Z}$ in $H^\bullet(X_2)$. One problem is that the cokernell of the map
 \[ \d{\sigma}|_{V_1|_Z} : V_1|_Z \to \struct{X_1}(m)|_Z \ot \F^{-1}|_Z \]
-may have torsion along a $1$-cycle $G_1 \subset Z$. If the foliation is generic, however, the cokerne of $\d{\sigma}|_{V_1|_Z}$ will have no torsion in codimension $1$ and $\d{\sigma}$ then induces a section of
+may have torsion along a $1$-cycle $G_1 \subset Z$. If the foliation is generic, however, the cokernel of $\d{\sigma}|_{V_1|_Z}$ will have no torsion in codimension $1$ and $\d{\sigma}$ then induces a section of
 \[ \struct{X_2}(1) \ot \pi_{2,1}^* \struct{X_1}(m) \ot \pi^*_{2,0} \F^{-1} \]
-whose zero locus in $\wt{Z}$. As $Z \sim m u_1 - c_1(\F)$ the cohomology class of $\wt{Z}$ is given by,
+whose zero locus is $\wt{Z}$. As $Z \sim m u_1 - c_1(\F)$ the cohomology class of $\wt{Z}$ is given by,
 \[ [\wt{Z}] = (m u_1 - c_1(\F)) \cdot (u_2 + m u_1 - \F) = m^2 u_1^2 + m u_1 \cdot u_2 - 2 m u_1 \cdot c_1(\F) - u_2 \cdot c_1(\F) + c_1(\F)^2 \]
 A Chern class computation yields
 \[ (2 u_1 + u_2)^2 \cdot \wt{Z} = m^2 (4 c_1^2 - 3 c_2) + m (5 c_1^2 - 3 c_2) + (8 m + 4) c_1 \cdot c_1(\F) + 3 c_1(\F)^2 \]
 If the $1$-cycle $G_1$ is nonzero, the numerical formula becomes,
 \[ [\wt{Z}] = (m u_1 - \F) \cdot (u_2 + m u_1 - c_1(\F)) - \pi_{2,1}^* [G_1] \]
-The generical formula for $(2 u_1 + u_2)^2 \cdot [\wt{Z}]$ is therefore,
-\[ (2 u_1 + u_2)^2 \cdot [\wt{Z}] = m^2 (4 c_1^2 - 3 c_2) + (5 c_1^2 - 3 c_2) + (8m + 4) c_1 \cdot c_1(\F) + 3 c_1(\F)^2 - (3 u_1 - c_1) \cdot [G_1] \]
+The general formula for $(2 u_1 + u_2)^2 \cdot [\wt{Z}]$ is therefore,
+\[ (2 u_1 + u_2)^2 \cdot [\wt{Z}] = m^2 (4 c_1^2 - 3 c_2) + m(5 c_1^2 - 3 c_2) + (8m + 4) c_1 \cdot c_1(\F) + 3 c_1(\F)^2 - (3 u_1 - c_1) \cdot [G_1] \]
 Using the obvious exact sequences $H^2(\wt{Z}, \struct{X_2}(2m, m)|_{\wt{Z}})$ is a quotient of
-\[ H^2( \pi_{2,1}^{1}(Z), \struct{X}(2m,m) |_{\pi_{2,1}^{-1}(Z)}) \]
-which is controlled by $H^2(X_2, \struct{X_2}(2m,m))$ and $H^3(X_2, \struct{X_2}(2m,m) \ot \struct{}(-Z))$ a direct image argument shows that the latter groups are controlled by groups of the form $H^2(X, E_{2,3m} \Omega \ot L)$ for suitable $L$. s in the proof of Theorem 3.4 one can check that the latter $H^2$ groups vanish. The positivity of $(2 u_1 + u_2)^2 \cdot [\wt{Z}]$ therefore implies that $\struct{X_2}(2,1)|_{\wt{Z}}$ is big and therefore all parabolic leave of the multifoliation $\F$ are algebraically degenerate because the parabolic leaves of $\F$ must lie in the base locus of all invariant differentials and this cuts out a $1$-dimensional space on $\wt{Z}$ by the bigness and the fact that $\wt{Z}$ is $2$-dimensional.
+\[ H^2( \pi_{2,1}^{-1}(Z), \struct{X}(2m,m) |_{\pi_{2,1}^{-1}(Z)}) \]
+which is controlled by $H^2(X_2, \struct{X_2}(2m,m))$ and $H^3(X_2, \struct{X_2}(2m,m) \ot \struct{}(-Z))$ a direct image argument shows that the latter groups are controlled by groups of the form $H^2(X, E_{2,3m} \Omega \ot L)$ for suitable $L$. As in the proof of Theorem 3.4 one can check that the latter $H^2$ groups vanish. The positivity of $(2 u_1 + u_2)^2 \cdot [\wt{Z}]$ therefore implies that $\struct{X_2}(2,1)|_{\wt{Z}}$ is big and therefore all parabolic leaves of the multifoliation $\F$ are algebraically degenerate because the parabolic leaves of $\F$ must lie in the base locus of all invariant differentials and this cuts out a $1$-dimensional space on $\wt{Z}$ by the bigness and the fact that $\wt{Z}$ is $2$-dimensional.
 
 
 
@@ -885,7 +896,7 @@ L \arrow[r] & \pushout Q
 \end{center}
 Let $L = p^* \struct{X}(1)$.
 Since $f^* \Omega_X \to L$ is surjective, it is immediate that $Q = \coker{(\ker{(f^* \Omega_X \to L)} \to \Omega_Y)}$.
-Then we can take the torsion-free quotient of $Q$ which is rank $1$ and hence is $\I_Z \cdot \M$ for some $Z \subset Y$ closed subscheme of codimenson $2$.
+Then we can take the torsion-free quotient of $Q$ which is rank $1$ and hence is $\I_Z \cdot \M$ for some $Z \subset Y$ closed subscheme of codimension $2$.
 
 \begin{lemma}
 Let $X$ be a smooth variety and $\F$ a torsion-free coherent sheaf of rank $1$. Then there is a unique decomposition $\F \cong \I_Z \cdot \L$ where $\L$ is a line bundle and $\I_Z$ is the ideal sheaf of a codimension $2$ subscheme.
@@ -903,12 +914,12 @@ WEIRD from McQuillan's paper: if $\Omega_X$ is big then it seems that the foliat
 
 PROBLEM: no reason for $L$ to be BIG, IS EXACTLY,
 \[ 0 \to \Sym{k-m}{\Omega_X} \xrightarrow{\omega} \Sym{k}{\Omega_X} \to f_* L^{\ot m} \to 0 \]
-for $m > k$ and taking cohomology we have to control a connecting map. Therefore, its only clearly big if some asymtotic cohomology statement holds which is possibly stronger than the asymtotic cohomology statement we need for the jet obstruction.
+for $m > k$ and taking cohomology we have to control a connecting map. Therefore, its only clearly big if some asymptotic cohomology statement holds which is possibly stronger than the asymptotic cohomology statement we need for the jet obstruction.
 \bigskip\\
 In fact, if $L^{\ot m}$ has a nonconstant section at all then the base locus does not dominate $X$ so we immediately win by the resultant method. Thus we expect no sections.
 
 
-It looks like if $\F$ is $p$-closed then we ask are there finitely many or infinitely many $C$ such that $K_{\F} \cdot C < 0$. In the former case we win by McQuillan's theorem. In the latter case, we loose by Miyaoka's theorem since then there are infinitely many rational curves of bounded degree by Bend-and-Break hence uniruled.
+It looks like if $\F$ is $p$-closed then we ask are there finitely many or infinitely many $C$ such that $K_{\F} \cdot C < 0$. In the former case we win by McQuillan's theorem. In the latter case, we lose by Miyaoka's theorem since then there are infinitely many rational curves of bounded degree by Bend-and-Break hence uniruled.
 
 \section{Foliation Basics}
 
@@ -921,7 +932,7 @@ Let $f : X \to Y$ be a morphism of $S$-schemes and a morphism $\F \to \T_{Y/S}$ 
 f^* \wedge^2 \F \arrow[r, "f^* \ell"] & f^* \T_{Y/S} / \F
 \end{tikzcd}
 \end{center}
-and if $S$ has characteristc $p$ then the $p$-curvature maps are also compatible,
+and if $S$ has characteristic $p$ then the $p$-curvature maps are also compatible,
 \begin{center}
 \begin{tikzcd}
 \Frob^*_X f^+ \F \arrow[d] \arrow[r, "\psi_p"] & \T_{X/S} / f^+ \F \arrow[d]
@@ -966,12 +977,12 @@ Let $\rho : X \to Y = X / \F$ be the quotient. Then,
 \[ K_X = (p-1) c_1(\F) + \rho^* K_Y \]
 and therefore,
 \[ K_Y \cdot C = K_X \cdot C - (p-1) c_1(\F) \cdot C < 0 \]
-Since the foliation is smooth along $f(C)$, the variety $Y$ is also smoth along the image of $C$. Therefore, by Bend-and-Break [Kollar rational curves, Theorem 5.8] we know that there exists such a family of rational curves $B_x'$ throught each point of the image of $C$ such  that for any nef $\RR$-divisor $M$ of $Y$ we have
+Since the foliation is smooth along $f(C)$, the variety $Y$ is also smooth along the image of $C$. Therefore, by Bend-and-Break [Kollar rational curves, Theorem 5.8] we know that there exists such a family of rational curves $B_x'$ through each point of the image of $C$ such  that for any nef $\RR$-divisor $M$ of $Y$ we have
 \[ M \cdot B_x' \le 2n \frac{M \cdot C}{-K_Y \cdot C} \]
 Let $L'$ be the pullback of $L^{(1)}$ via the canonical map $Y \to X^{(1)}$ then $\rho^* L' = (F_X)^* L = p L$. Since $\rho$ is purely inseparable of degree $p^{\rank{\F}}$ the reduced pre-image $B_x$ of $B_x'$ is also a rational curve. Note that,
 \[ p (L \cdot B_x) = \rho^* L' \cdot B_x \le p L' \cdot B_x' \]
 If the induced morphism $B_x \to B_x'$ is inseparable then we have equality. Otherwise, $\rho^* L' \cdot B_x = L' \cdot B_x'$ and the inequality is obvious. Therefore,
-\[ L \cdot B_x \le L' \cdot B_x' \le 2n \frac{L' \cdot C}{-K_Y \cdot C} \le 2n \frac{p L \cdot C}{(p-1) c_1(\F) - K_X \cdot C} \]
+\[ L \cdot B_x \le L' \cdot B_x' \le 2n \frac{L' \cdot C}{-K_Y \cdot C} \le 2n \frac{p L \cdot C}{(p-1) c_1(\F) \cdot C - K_X \cdot C} \]
 proving the claim.
 \end{proof}
 
@@ -983,13 +994,14 @@ $c_1(\F) = - K_{\F}$ and therefore the theorem applies to curves $C$ with $K_{\F
 \section{Surfaces over $\ZZ$}
 
 \begin{example}
-Consider the deformation $X \to \A^1$ of a smooth quartic surface in $\P^3$ to the singular Kummer quadric. Then $\pi_1(X_0^{\text{sm}}) \neq 1$ even though $\pi_1(X_1 \sm S) = 1$ for any finite set of points $S$. This shows we cannot use deformation theory and Grothendieck's existence theorem to conlude that the fundamental group is zero. However, the resolution of singularities of $X_0$ is indeed simply-connected. This shows we need to carefully analyze the singularities of the special fiber in order to conclude.
+Consider the deformation $X \to \A^1$ of a smooth quartic surface in $\P^3$ to the singular Kummer quadric. Then $\pi_1(X_0^{\text{sm}}) \neq 1$ even though $\pi_1(X_1 \sm S) = 1$ for any finite set of points $S$. This shows we cannot use deformation theory and Grothendieck's existence theorem to conclude that the fundamental group is zero. However, the resolution of singularities of $X_0$ is indeed simply-connected. This shows we need to carefully analyze the singularities of the special fiber in order to conclude.
 \end{example}
 
 \begin{prop}
-Let $X / K$ be a smooth proper suface over a number field. Let $\p \subset K$ be a prime such that $N(\p) = q = p^n$ and $K / \Q$ is unramfied over $p$. Let $\ell \neq p$ be another prime. Suppose,
+Let $X / K$ be a smooth proper surface over a number field. Let $\p \subset K$ be a prime such that $N(\p) = q = p^n$ and $K / \Q$ is unramified over $p$. Let $\ell \neq p$ be another prime. Suppose,
 \begin{enumerate}
 \item $\pi_1^{\et}(X_{\ol{K}}) = 0$
+% REVIEW: Frobenius subscript uses $\q$ ($\mathfrak{q}$) but the prime is $\p$ ($\mathfrak{p}$) --- should this be $\Frob_{\p}$?
 \item $\Frob_{\q}^n \acts H^2_{\et}(X_{\ol{K}}, \Q_{\ell})$ by $q^n \cdot \id$ for some $n > 0$
 \item there is a flat proper model $\X \to \Spec{\stalk{K}{\p}}$ of $X$ such that $\X_\p$ is integral with isolated (GOOD DO THIS!!!) singularities.
 \end{enumerate}
@@ -1040,7 +1052,7 @@ References:
 
 \subsection{Quotient of Products of Curves}
 
-\subsection{Line Arrangement Varities}
+\subsection{Line Arrangement Varieties}
 
 \subsection{Explicit Complete Intersections}
 
@@ -1131,16 +1143,16 @@ Look at Theorem 5.1
 
 Also gives a nice foliation producing rational curves result: Theorem 2.1
 
-\subsection{Foliaitons To Read}
+\subsection{Foliations To Read}
 
 \begin{enumerate}
-\item Myoka
-\item Bogomolov-McQuillen
+\item Miyaoka
+\item Bogomolov-McQuillan
 \end{enumerate}
 
 \section{Product-Quotient Surfaces}
 
-Let $G \acts C_1$ and $G \acts C_2$ be two faithful actions on smooth projective curves. Then we consider $X = (C_1 \times C_2) / G$ with the diagonal action and $\pi : S \to X$ the minimal desingualarizaton. Here we write down some results.
+Let $G \acts C_1$ and $G \acts C_2$ be two faithful actions on smooth projective curves. Then we consider $X = (C_1 \times C_2) / G$ with the diagonal action and $\pi : S \to X$ the minimal desingularization. Here we write down some results.
 
 \begin{prop}
 If $C$ is any curve and $H$ is a finite group acting faithfully on $C$ and $p \in C$ then the fixed point $H_p$ is cyclic.
@@ -1151,11 +1163,11 @@ If $C$ is any curve and $H$ is a finite group acting faithfully on $C$ and $p \i
 \end{proof}
 
 \begin{prop}
-Let $h_1, \dots, h_n$ be holomorphic functions in the neighborhood of $0 \in \CC$ with $h_j(0) = 0$ and suppose these form a group $H$ under composition. Then $H$ is a rotation group, meaning there is an open disc around $0$ on which all $h_i$ are defined and a biolomorphism to $\Delta$ such that the $h_j$ are identidied with rotations.
+Let $h_1, \dots, h_n$ be holomorphic functions in the neighborhood of $0 \in \CC$ with $h_j(0) = 0$ and suppose these form a group $H$ under composition. Then $H$ is a rotation group, meaning there is an open disc around $0$ on which all $h_i$ are defined and a biholomorphism to $\Delta$ such that the $h_j$ are identified with rotations.
 \end{prop}
 
 \begin{cor}
-The singularities of $X$ are cyclic quotient singulairites. If $\ol{(x,y)} \in X$ then analytically locally this point is $\CC^2 / C_n$ where $n = \# G_{(x,y)}$ defined by $\xi \cdot (z_1, z_2) = (\xi z_1, \xi^a z_2)$ for some $a$ coprime to $n$ and $\xi$ a primitive $n^{\text{th}}$-root of unity. This is a \textit{singularity of type} $\frac{1}{n}(1,a)$.
+The singularities of $X$ are cyclic quotient singularities. If $\ol{(x,y)} \in X$ then analytically locally this point is $\CC^2 / C_n$ where $n = \# G_{(x,y)}$ defined by $\xi \cdot (z_1, z_2) = (\xi z_1, \xi^a z_2)$ for some $a$ coprime to $n$ and $\xi$ a primitive $n^{\text{th}}$-root of unity. This is a \textit{singularity of type} $\frac{1}{n}(1,a)$.
 \end{cor}
 
 \begin{rmk}
@@ -1164,12 +1176,12 @@ Note that $(n,a) = 1$ because otherwise some element of $G$ would act trivially 
 
 \subsection{Singularity Types}
 
-Note that $\frac{1}{n}(1,a) = \frac{1}{n}(1,a')$ where $a, a'$ are inverses in $(\Z / n \Z)^\times$. The exceptional fiber of the minimal resolution of a cyclic quotient singularity of type $\frac{1}{n}(1,a)$ are well-known and correspond to Hizerbruch-Jung strings:
+Note that $\frac{1}{n}(1,a) = \frac{1}{n}(1,a')$ where $a, a'$ are inverses in $(\Z / n \Z)^\times$. The exceptional fiber of the minimal resolution of a cyclic quotient singularity of type $\frac{1}{n}(1,a)$ are well-known and correspond to Hirzebruch-Jung strings:
 \[ L = \sum_{i = 0}^\ell Z_i \]
-a connected union of smmoth rational curves $Z_1, \dots, Z_\ell$ with self-intersection numbers at most $-2$ and ordered linearly so that $Z_i \cdot Z_{i+1} = 1$ and all other intersections are zero. Then the exceptional divisor $E$ on $S$ is the disjoint union of these HJ strings.
+a connected union of smooth rational curves $Z_1, \dots, Z_\ell$ with self-intersection numbers at most $-2$ and ordered linearly so that $Z_i \cdot Z_{i+1} = 1$ and all other intersections are zero. Then the exceptional divisor $E$ on $S$ is the disjoint union of these HJ strings.
 \bigskip\\
 The self-intersection numbers $Z_i^2 = -b_i$ are determined by the formula,
-\[ \frac{n}{a} = b_i - \frac{1}{b_2 - \frac{1}{\cdots}} \]
+\[ \frac{n}{a} = b_1 - \frac{1}{b_2 - \frac{1}{\cdots}} \]
 We denote this fraction by the notation $[b_1, \dots, b_{\ell}]$ so we write,
 \[ \frac{n}{a} = [b_1, \dots, b_\ell] \]
 Moreover,
@@ -1190,7 +1202,7 @@ and hence by Noether's formula,
 
 \begin{theorem}[Serrano, Theorem 4.1]
 Let $S$ be as above and $\sigma_1 : S \to C_1 / G$ and $\sigma_2 : S \to C_2 / G$ the associated fibrations. Let $\{ n_i N_i \}_{i \in I}$ and $\{ m_j M_j \}_{j \in J}$ denote the components of all singular fibers of $\sigma_1$ and $\sigma_2$ respectively with the multiplicites attached. Finally, let $\{ Z_t \}_{t \in T}$ be the set of curves contracted to points by $\sigma_1 \times \sigma_2$ (i.e. the exceptional locus of $\pi : S \to X$) then,
-\[ K_S = \sigma_1^* (K_{C_1/G}) + \sigma_2^*(K_{C_2 / G}) + \sum_{i \in I} (n_i - 1)N_i + \sum_{j \in J} (m_i - 1) M_i + \sum_{t \in T} Z_t \]
+\[ K_S = \sigma_1^* (K_{C_1/G}) + \sigma_2^*(K_{C_2 / G}) + \sum_{i \in I} (n_i - 1)N_i + \sum_{j \in J} (m_j - 1) M_j + \sum_{t \in T} Z_t \]
 The fibrations induce foliations $\F_1, \F_2$ on $S$ such that Serrano's formula can be written as,
 \[ K_S = \cN_{\F_1}^\vee \ot \cN_{\F_2}^\vee \ot \struct{S}(E) \]
 \end{theorem}
@@ -1217,7 +1229,7 @@ defined by the equation $uw  =  v^2$. Moreover, if $\mu_1, \mu_2$ are the local 
 \[ \pi(\mu_1, \mu_2) = (\mu_1, \mu_1 \mu_2, \mu_1 \mu_2^2) \]
 given by blowing up $(u,v,w)$. Therefore, we have the following relation between the local coordinates,
 \[ z_1 = \mu_1^{1/2} \quad z_2 = \mu_1^{1/2} \mu_2 \]
-The exceptional fiber is a single $(-2)$-curve. Using the local coordinates $\mu_1, \mu_2$ on $S$ we see that it is given by the set of point $\{ \mu_1 = 0 \}$.
+The exceptional fiber is a single $(-2)$-curve. Using the local coordinates $\mu_1, \mu_2$ on $S$ we see that it is given by the set of points $\{ \mu_1 = 0 \}$.
 
 \subsection{Bigness of the Cotangent Bundle}
 
@@ -1238,7 +1250,7 @@ H^0(S \setminus E, S^{2m} \Omega_S) & H^0(X^{\smooth}, S^{2m} \Omega_X) \arrow[l
 \end{center}
 
 \begin{prop}
-If $\omega \in H^0(S, \struct{S}(m(K_S - E))$ then $\Gamma(\omega)$ naturally extends to a global section $\Gamma(\omega) \in H^0(S, S^{2m} \Omega_S)$.
+If $\omega \in H^0(S, \struct{S}(m(K_S - E)))$ then $\Gamma(\omega)$ naturally extends to a global section $\Gamma(\omega) \in H^0(S, S^{2m} \Omega_S)$.
 \end{prop}
 
 \begin{proof}
@@ -1246,7 +1258,7 @@ We get $\Theta(\omega) \in H^0(X^{\smooth}, S^{2m} \Omega_X)$ which, by definiti
 \[ a(z_1, z_2) \d{z_1}^m \d{z_2}^m \]
 Using the change of coordinates $z_1 = \mu_1^{1/2}$ and $z_2 = \mu_1^{1/2} \mu_2$ given by $\pi$ we get the pullback by $\pi^*$ of $\Theta(\omega)$ which is $\Gamma(\omega)$ can be written locally as,
 \[ \sum_{j = 0}^m {m \choose j} \frac{\mu_2^{m-j} (a \circ \pi)(\mu_1, \mu_2)}{2^{2m - j} \mu_1^{m-j}} \d{\mu_1}^{2m-j} \d{\mu_2}^j \]
-but $a \circ \pi$ canishes along $E$ at multiplicity at least $m$ so this is well-defined on $S$.
+but $a \circ \pi$ vanishes along $E$ at multiplicity at least $m$ so this is well-defined on $S$.
 \end{proof}
 
 \begin{rmk}
@@ -1260,7 +1272,7 @@ The line bundle $\struct{S}(K_S - E)$ is big.
 \end{prop}
 
 \begin{proof}
-Since $S$ is a minimal surface of general type, the canonical divisor $K_S$ is nef. Therefore, by the asymtotic Riemann-Roch theorem,
+Since $S$ is a minimal surface of general type, the canonical divisor $K_S$ is nef. Therefore, by the asymptotic Riemann-Roch theorem,
 \[ h^0(S, K_S^{\ot m}) = \tfrac{1}{2} m^2 c_1(S)^2 + O(m) \]
 but $c_1(S)^2 = 6$ so we have,
 \[ h^0(S, K_S^{\ot m}) = 3 m^2 + O(m) \]
@@ -1272,7 +1284,7 @@ On the other hand, let $\omega$ be a section of $K_S^{\ot m}$. The corresponding
 \[ a(z_1, z_2) (\d{z_1} \wedge \d{z_2})^m \]
 where $a$ is a holomorphic function,
 \[ a(z_1, z_2) = \sum_{i,j} a_{ij} z_1^i z_2^j \]
-Using change of coordinates $z_1 = \mu_1^{1/2}$ and $z_2 = \mu^{1/2} \mu_2$ given by $\pi$ at an $A_1$ singularity. Then $\omega$ vanishes along $E$, at least with multiplicity $m$ if $a_{i,j} = 0$ for all $i,j$ such that $i + j < 2m$. This gives $1 + 2 + \cdots + 2m$ sufficent conditions. However, the section is invariant by the $G$-action, then $a_{i,j} = 0$ for all $i + j$ odd since any function defined on the quotient must be invariant under the stabilizer $C_2$ acting via $(z_1, z_2) \mapsto (-z_1, -z_2)$. Therefore,
+Using change of coordinates $z_1 = \mu_1^{1/2}$ and $z_2 = \mu_1^{1/2} \mu_2$ given by $\pi$ at an $A_1$ singularity. Then $\omega$ vanishes along $E$ at least with multiplicity $m$ if $a_{i,j} = 0$ for all $i,j$ such that $i + j < 2m$. This gives $1 + 2 + \cdots + 2m$ sufficient conditions. However, since the section is invariant by the $G$-action, $a_{i,j} = 0$ for all $i + j$ odd since any function defined on the quotient must be invariant under the stabilizer $C_2$ acting via $(z_1, z_2) \mapsto (-z_1, -z_2)$. Therefore,
 \begin{align*}
 h^0(S, \struct{S}(m(K_S - E))) & \ge h^0(S, K_S^{\ot m}) - \# \{ A_1 \text{ singularities} \} \frac{1 + 2 + \cdots + 2 m}{2}
 \\
@@ -1281,7 +1293,7 @@ h^0(S, \struct{S}(m(K_S - E))) & \ge h^0(S, K_S^{\ot m}) - \# \{ A_1 \text{ sing
 \end{proof}
 
 \begin{rmk}
-In general, this grows like $\tfrac{1}{2} m^2 K_S^2 - a_1 (2m)^2 / 4 + O(m)$ and therefore we need $c_1^2 > 2 a_1$ where $a_1$ os the number of $A_1$-singularities and also we only have $A_1$-singularities.
+In general, this grows like $\tfrac{1}{2} m^2 K_S^2 - a_1 (2m)^2 / 4 + O(m)$ and therefore we need $c_1^2 > 2 a_1$ where $a_1$ is the number of $A_1$-singularities and also we only have $A_1$-singularities.
 \end{rmk}
 
 \begin{rmk}
@@ -1313,7 +1325,7 @@ Where $a_n$ is the number of $A_n$ singularities etc.
 Note these numbers are the orders of the group which acts to form the standard group quotient representation of these singularities.
 \end{rmk}
 
-\begin{theorem}[\chref{https://arxiv.org/pdf/1303.3377.pdf}{RR13}]
+\begin{theorem}[\chref{https://arxiv.org/pdf/1303.3377.pdf}{Roulleau-Rousseau}]
 Suppose that $s_2(Y) + s_2(\X) > 0$ then $\Omega_Y$ is big.
 \end{theorem}
 
@@ -1326,7 +1338,7 @@ If there are only $a_n$ singularities this number is,
 
 Again let $\pi : Y \to X$ be the resolution of a surface. Then we have,
 \[ \chi(Y, S^m \Omega^1_Y) = \frac{1}{12} \left( 2 (K^2 - \chi) m^3 - 6 \chi m^2 - (K^2 + 3 \chi) m + K^2 + \chi \right) \]
-where $K^2 = c_1(Y)$ and $\chi = c_2(Y)$.
+where $K^2 = c_1(Y)^2$ and $\chi = c_2(Y)$.
 
 \begin{theorem}[\chref{https://arxiv.org/pdf/1912.08908.pdf}{Bruin1}]
 Let $X$ be an irreducible complex projective surface whose singular locus $S$ is a finite set of isolated du Val singularities. Let $\tau : Y \to X$ be a minimal resolution. Then for $m \ge 3$ we have,
@@ -1343,8 +1355,10 @@ If $s \in S$ is an $A_1$ singularity then $\chi^0 \sim \frac{11}{108} m^3$ and $
 \subsection{Complete Intersections of Quadrics}
 
 Let $X \subset \P^n$ be the complete intersection of $n - 2$ quadrics. Suppose $X$ has $\ell$ isolated $A_1$ singularities and is otherwise smooth. Let $Y \to X$ be the minimal resolution. In this case we have,
+% REVIEW: check the formula for $c_2(Y)$ --- is $n^{n-3}$ correct or should this be $2^{n-3}$?
 \[ K^2 = c_1(Y)^2 = (n - 5)^2 2^{n-2} \quad \chi = c_2(Y) = (n^2 - 7n + 16)n^{n-3} \]
-which is general type for $n \ge 6$.  Thene we have,
+which is general type for $n \ge 6$.  Then we have,
+% REVIEW: check constant term in the polynomial below --- is "$3n^2 - 27 + 66$" missing an $n$, e.g.\ "$3n^2 - 27n + 66$"?
 \[ \chi(Y, S^m \Omega_Y^1) = \tfrac{1}{3} 2^{n-5} (2 (n^2 - 13 n + 34) m^3 - 6(n^2 - 7n + 16) m^2 - (5 n^2 - 41 n + 98) m + 3 n^2 - 27 + 66) \]
 
 
@@ -1367,7 +1381,7 @@ Defines a new invariant $\gamma$ in terms of the singularities.
 \par
 Notation: let $[b_1, \dots, b_{\ell}]$ be a continued fraction representation of $\frac{n}{q}$ for a rational number $0 < \frac{q}{n} < 1$. Define
 \begin{enumerate}
-\item $\ell(q/n)$ is the length of the coninued fraction
+\item $\ell(q/n)$ is the length of the continued fraction
 \item $\gamma(q/n) := \tfrac{1}{6} \left[ \frac{q + q'}{n} + \sum_{i = 1}^{\ell} (b_i - 3) \right]$
 \item $\mu(q/n) = 1 - \frac{1}{n}$
 \item $I(q/n) = n / \gcd(n, q+1)$
@@ -1375,7 +1389,7 @@ Notation: let $[b_1, \dots, b_{\ell}]$ be a continued fraction representation of
 where $q'$ is the multiplicative inverse of $q$ in $0 < q' < n$. For a surface $X$ with cyclic quotient singularities we define the corresponding invariant of $X$ to the sum of the contributions from the rational number associated to each singular point. Except for $I(X)$ which is the lcm of these $I_x$.
 
 \begin{rmk}
-$I(X)$ is the index of $K_X$ menaing the smallest integer such that $I(X) K_X$ is integral. There are $\ell(X)$ exceptional curves of $S \to X$ and they are independent in $\Pic{S}$
+$I(X)$ is the index of $K_X$ meaning the smallest integer such that $I(X) K_X$ is integral. There are $\ell(X)$ exceptional curves of $S \to X$ and they are independent in $\Pic{S}$
 \end{rmk}
 
 In terms of these new numbers, the previous numbers are
@@ -1497,6 +1511,8 @@ Maybe the following works: for $H^1(\X, S^n \Omega_{\X})$ I can get the usual Eu
 %% PART II: Content from Bigness for Jets
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+% REVIEW: Part II (from here to end of file) appears to be a near-duplicate of sections already appearing in Part I (Strategy of RR14, Vanishing Theorems, Strategy of Bruin, Bogomolov Vanishing, Some Questions, Horikawa Surfaces, Demailly--Goul, Multifoliations, Proof, 2-jets). Consider removing duplicated material.
+
 The issue with $J^k_X$ is that if $X$ has no symmetric forms then it has no $J^k_X$ sections. The same is not true for $E^GG$ or $P$ the Green-Griffiths or Semple jets.
 \bigskip\\
 Desiderata: logarithmic GG or Semple jets and an extension result for them.
@@ -1531,7 +1547,7 @@ Let $X$ be a surface of general type then $H^2(\X, E^{k,m}_{\X} \ot K_{\X}^{\ot 
 
 \begin{proof}
 We use induction and the fundamental filtration,
-\[ E^{k-1,m} = F^0 E^{k,m} \subsetneq F^1 E^{k,m} \subsetneq \cdots \subsetneq F^{\floor{k/m}} E^{k,m} = E^{k,m} \]
+\[ E^{k-1,m} = F^0 E^{k,m} \subsetneq F^1 E^{k,m} \subsetneq \cdots \subsetneq F^{\floor{m/k}} E^{k,m} = E^{k,m} \]
 where the quotients are given by,
 \[ F^p / F^{p-1} \cong S^p \Omega_X \ot E^{k-1, m-kp} \]
 Therefore, $E^{k,m}$ has a composition series by terms,
@@ -1547,7 +1563,7 @@ This is the jet version of the extension theorem of Miyaoka.
 
 \subsection{The Proof (PROBLEM)}
 
-Let $g_k(X)$ be the leading term in the asymtotic Riemann-Roch computation of $P^{k, m}_X$. {\color{red} For $k = 2$ IT IS SOMETHING LIKE $g_k(X) = \frac{1}{12}(13 c_1^2 - 9 c_2)$ OR SOMETHING}
+Let $g_k(X)$ be the leading term in the asymptotic Riemann-Roch computation of $P^{k, m}_X$. {\color{red} For $k = 2$ IT IS SOMETHING LIKE $g_k(X) = \frac{1}{12}(13 c_1^2 - 9 c_2)$ OR SOMETHING}
 
 \begin{theorem}
 Suppose that $g_k(Y) + g_k(\X) > 0$ then,
@@ -1558,16 +1574,16 @@ in particular there are enough $k$-jets.
 \begin{proof}
 Consider the exact sequences,
 \[ 0 \to P^{k,m}_Y \to P^{k,m}_Y(\log{D}) \to Q_m \to 0 \]
-where $Q_m$ is supported on the exceptional divisor $E$. Since the singularities are ADE, the minimal resolution is crepant so there exists a neighborhood $U$ of $E$ such that the canonical bundle is tirival. Therefore, we get the sequence
+where $Q_m$ is supported on the exceptional divisor $E$. Since the singularities are ADE, the minimal resolution is crepant so there exists a neighborhood $U$ of $E$ such that the canonical bundle is trivial. Therefore, we get the sequence
 \[ 0 \to P^{k,m}_Y \ot K_Y^{\ot (1 - m)} \to P^{k,m}_Y(\log{D}) \ot K_Y^{\ot (1 - m)} \to Q_m \to 0 \]
 The proof will distinguish two cases according to the value of $\limsup \frac{h^0(Q_m)}{m^3}$.
 Let us first suppose that,
 \[ \limsup \frac{h^0(Q_m)}{m^3} \le \frac{g_k(\X) - g_k(Y)}{2} \]
-As expalined above, Bogomolov's vanishing theorem implies that,
+As explained above, Bogomolov's vanishing theorem implies that,
 \[ \limsup \frac{1}{m^3} h^0(\X, P^{k,m}_{\X}) \ge g_k(\X) \]
 Then the exact sequence implies that,
 \begin{align*}
-\limsup \frac{1}{m^3} h^0(Y, P^{k,m}_Y) & \ge \limsup \frac{1}{m^3} h^0(Y, P^{k,m}_Y(\log{E}) - \limsup \frac{h^0(Q_m)}{m^3} \ge g_k(\X) - \frac{g_k(\X) - g_k(Y)}{2}
+\limsup \frac{1}{m^3} h^0(Y, P^{k,m}_Y) & \ge \limsup \frac{1}{m^3} h^0(Y, P^{k,m}_Y(\log{E})) - \limsup \frac{h^0(Q_m)}{m^3} \ge g_k(\X) - \frac{g_k(\X) - g_k(Y)}{2}
 \\
 &= \frac{g_k(\X) + g_k(Y)}{2}
 \end{align*}
@@ -1617,9 +1633,9 @@ Let $X$ be a surface with nodal singularities whose resolution $Y$ is a surface 
 \begin{proof}
 From Serre duality for reflexive sheaves on normal surfaces:
 \[ h^0(X, \hat{S}^m \Omega) = h^0(X, ((\hat{S}^m \Omega_X)^\vee \ot \omega_X)^{\vee \vee}) \]
-The normality propery plus the reflexive nature on $X_{\reg}$ give,
+The normality property plus the reflexive nature on $X_{\reg}$ give,
 \[ h^0(X, ((\hat{S}^m \Omega_X)^\vee \ot \omega_X)^{\vee \vee}) = h^0(X_{\reg}, (S^m \Omega_X)^\vee \ot \omega_X) = 0 \]
-But on $X_{\reg}$ we have the quality $\Omega_X^\vee = \Omega_X \ot \omega_X$ and hence,
+But on $X_{\reg}$ we have the equality $\Omega_X^\vee = \Omega_X \ot \omega_X$ and hence,
 \[ h^2(X, \hat{S}^m \Omega_X) = h^0(X_{\reg}, S^m \Omega_X \ot \omega_X^{1-m}) \]
 Suppose there is a $m > 2$ such that this is positive. Let $\ell = qm$ and,
 \[ s \in H^0(X_{\reg}, S^m \Omega_X \ot \omega_X^{(1 - m)}) \]
@@ -1690,7 +1706,7 @@ Specifically look at Proposition 56.
 \section{Demailly - Goul}
 
 \begin{defn}
-A Riemann surfaces is \textit{parabolic} if it does not admit a positive non constant superharmonic function (equivalently it does not admit a Green function).
+A Riemann surface is \textit{parabolic} if it does not admit a positive nonconstant superharmonic function (equivalently it does not admit a Green function).
 \end{defn}
 
 \begin{rmk}
@@ -1737,11 +1753,11 @@ induced by the canonical maps $\struct{X_2}(-1) \embed \pi_2^* V_1$ and $V_1 \to
 \subsection{Multifoliations}
 
 \begin{defn}
-An \textit{algebraic multi-foliation} on $X$ is a rank $1$ subsheaf $\F \subset S^m \Omega_X$ locally generated by a jet differentials of order $1$.
+An \textit{algebraic multi-foliation} on $X$ is a rank $1$ subsheaf $\F \subset S^m \Omega_X$ locally generated by jet differentials of order $1$.
 \end{defn}
 
 \begin{theorem}
-Let $X$ be a nonsingular surface of general type and let $\theta_k$ be the $k$-jet threshold. Assume that either $\theta_1 < 0$ or that the following three conditions are satisfies,
+Let $X$ be a nonsingular surface of general type and let $\theta_k$ be the $k$-jet threshold. Assume that either $\theta_1 < 0$ or that the following three conditions are satisfied,
 \begin{enumerate}
 \item $\theta_1 \ge 0$ and $\theta_2 < 0$
 \item $\Pic{X} = \Z$
@@ -1757,7 +1773,7 @@ Then there is a curve $\Gamma$ in $X$ such that all parabolic leaves of $\F$ are
 \end{prop}
 
 \begin{proof}
-Note that any rank $1$ torsion-free {\color{red} reflexive} sheaf on a surface is locally free. The inclusion $\F \embed S^m \Omega_X$ viewed as a section of $S^m \Omega_X \ot \F^{\vee}$ defines a section of $\struct{X_1}(m) \ot \pi^* \F^{-1}$ whose zero divisor $Z \subset X_1$ is precisely the divisor associated with the foliaiton. Therefore $Z = m u_1 - \pi^* c_1(\F)$ in $\Pic{X_1}$ and our calculuations imply that $\struct{X_1}(1)|_Z$ is big as soon as,
+Note that any rank $1$ torsion-free {\color{red} reflexive} sheaf on a surface is locally free. The inclusion $\F \embed S^m \Omega_X$ viewed as a section of $S^m \Omega_X \ot \F^{\vee}$ defines a section of $\struct{X_1}(m) \ot \pi^* \F^{-1}$ whose zero divisor $Z \subset X_1$ is precisely the divisor associated with the foliation. Therefore $Z = m u_1 - \pi^* c_1(\F)$ in $\Pic{X_1}$ and our calculations imply that $\struct{X_1}(1)|_Z$ is big as soon as,
 \[ (u_1|_Z)^2 = u_1^2 \cdot Z = m (c_1^2 - c_2) + c_1 \cdot c_1(\F) > 0 \quad (u_1|_Z) \cdot (-c_1) = m c_1^2 + c_1 \cdot c_1(\F) > 0 \]
 However, $X$ is minimal so $c_2 \ge 0$ hence the first inequality implies the second proving the claim.
 \end{proof}
@@ -1768,7 +1784,7 @@ Let $X$ be a surface of general type equipped with a multifoliation $\F \subset 
 all parabolic leaves of $\F$ are algebraically degenerate.
 \end{prop}
 
-{\color{red} why does algebraically degneracy of each leaf imply it for the union?}
+{\color{red} why does algebraic degeneracy of each leaf imply it for the union?}
 
 \section{Proof}
 
@@ -1799,8 +1815,8 @@ which admits the hyperplane section $D_2 := \P(T_{X_1/X}) \subset X_2 = \P(V_1)$
 \begin{lemma}
 With respect to the projection $\pi_{2,0} : X_2 \to X$ the weighted line bundle $\struct{X_2}(a_1, a_2)$ is
 \begin{enumerate}
-\item relatively effective iff $a_1 + a-2 \ge 0$ and $a_2 \ge 0$
-\item relativiely big iff $a_1 + a_2 > 0$ and $a_2 > 0$
+\item relatively effective iff $a_1 + a_2 \ge 0$ and $a_2 \ge 0$
+\item relatively big iff $a_1 + a_2 > 0$ and $a_2 > 0$
 \item relatively nef iff $a_1 \ge 2 a_2 \ge 0$
 \item relatively ample iff $a_1 > 2 a_2 > 0$.
 \end{enumerate}
@@ -1833,7 +1849,8 @@ Let $X$ be a minimal surface of general type. If $c_1^2 - 9/7 c_2 > 0$ then the 
 Because $Z$ is effective we can write,
 \[ Z = a_1 u_1 + a_2 u_2 - \pi_{2,0}^* F \quad (a_1, a_2) \in \Z^2 \quad a_1 \ge 2 a_2 > 0 \]
 where $F$ is some divisor in $X$. Our strategy is to show that $\struct{X_2}(2,1)|_Z$ is big. By Lemma 3.3(e) we find,
-\[ (2 u_1 + u_2)^3 \cdot Z = (_1 + z_2) (13 c_!^2 - 9 c_2) + 12 c_1 \cdot F \]
+% REVIEW: check this formula --- the original had garbled notation "(_1 + z_2)" and "c_!^2"; reconstructed as $(z_1 + z_2)$.
+\[ (2 u_1 + u_2)^3 \cdot Z = (z_1 + z_2) (13 c_1^2 - 9 c_2) + 12 c_1 \cdot F \]
 The multiplication morphism by the canonical section of $\struct{}(Z)$ defines a sheaf injection
 \[ \struct{}(\pi_{2,0}^* F) \embed \struct{X_2}(a_1, a_2) \]
 \end{proof}
@@ -1858,18 +1875,25 @@ and $S$ is an invertible sheaf so there is a dual sequence
 0 \arrow[r] & \struct{X_1}(-m)|_Z \ot \pi^* \F|_Z \arrow[r] & V^*_1 |_Z \arrow[r] & S^*
 \end{tikzcd}
 \end{center}
-We can then lift $Z$ into a surface $\wt{Z} \subset X_2$ in such a way that the projection map $\pi_{2,1} : \wt{Z} \to Z$ is a modification, at a generic point $x \in Z$, the point of $\wt{Z}$ lying above $x$ is taken to be $(x, [S_x]) \in X_2$ (meaning we take the induced morphism from the generic quotient map $V_1^*|_Z \to S^*$ which gives a lift to the projectiviation). We need to compute the cohomology class of this $2$-cycle $\wt{Z}$ in $H^\bullet(X_2)$. One problem is that the cokernel of the map
+We can then lift $Z$ into a surface $\wt{Z} \subset X_2$ in such a way that the projection map $\pi_{2,1} : \wt{Z} \to Z$ is a modification, at a generic point $x \in Z$, the point of $\wt{Z}$ lying above $x$ is taken to be $(x, [S_x]) \in X_2$ (meaning we take the induced morphism from the generic quotient map $V_1^*|_Z \to S^*$ which gives a lift to the projectivization). We need to compute the cohomology class of this $2$-cycle $\wt{Z}$ in $H^\bullet(X_2)$. One problem is that the cokernell of the map
 \[ \d{\sigma}|_{V_1|_Z} : V_1|_Z \to \struct{X_1}(m)|_Z \ot \F^{-1}|_Z \]
-may have torsion along a $1$-cycle $G_1 \subset Z$. If the foliation is generic, however, the cokerne of $\d{\sigma}|_{V_1|_Z}$ will have no torsion in codimension $1$ and $\d{\sigma}$ then induces a section of
+may have torsion along a $1$-cycle $G_1 \subset Z$. If the foliation is generic, however, the cokernel of $\d{\sigma}|_{V_1|_Z}$ will have no torsion in codimension $1$ and $\d{\sigma}$ then induces a section of
 \[ \struct{X_2}(1) \ot \pi_{2,1}^* \struct{X_1}(m) \ot \pi^*_{2,0} \F^{-1} \]
-whose zero locus in $\wt{Z}$. As $Z \sim m u_1 - c_1(\F)$ the cohomology class of $\wt{Z}$ is given by,
+whose zero locus is $\wt{Z}$. As $Z \sim m u_1 - c_1(\F)$ the cohomology class of $\wt{Z}$ is given by,
 \[ [\wt{Z}] = (m u_1 - c_1(\F)) \cdot (u_2 + m u_1 - \F) = m^2 u_1^2 + m u_1 \cdot u_2 - 2 m u_1 \cdot c_1(\F) - u_2 \cdot c_1(\F) + c_1(\F)^2 \]
 A Chern class computation yields
 \[ (2 u_1 + u_2)^2 \cdot \wt{Z} = m^2 (4 c_1^2 - 3 c_2) + m (5 c_1^2 - 3 c_2) + (8 m + 4) c_1 \cdot c_1(\F) + 3 c_1(\F)^2 \]
 If the $1$-cycle $G_1$ is nonzero, the numerical formula becomes,
 \[ [\wt{Z}] = (m u_1 - \F) \cdot (u_2 + m u_1 - c_1(\F)) - \pi_{2,1}^* [G_1] \]
-The generical formula for $(2 u_1 + u_2)^2 \cdot [\wt{Z}]$ is therefore,
-\[ (2 u_1 + u_2)^2 \cdot [\wt{Z}] = m^2 (4 c_1^2 - 3 c_2) + (5 c_1^2 - 3 c_2) + (8m + 4) c_1 \cdot c_1(\F) + 3 c_1(\F)^2 - (3 u_1 - c_1) \cdot [G_1] \]
+The general formula for $(2 u_1 + u_2)^2 \cdot [\wt{Z}]$ is therefore,
+\[ (2 u_1 + u_2)^2 \cdot [\wt{Z}] = m^2 (4 c_1^2 - 3 c_2) + m(5 c_1^2 - 3 c_2) + (8m + 4) c_1 \cdot c_1(\F) + 3 c_1(\F)^2 - (3 u_1 - c_1) \cdot [G_1] \]
 Using the obvious exact sequences $H^2(\wt{Z}, \struct{X_2}(2m, m)|_{\wt{Z}})$ is a quotient of
-\[ H^2( \pi_{2,1}^{1}(Z), \struct{X}(2m,m) |_{\pi_{2,1}^{-1}(Z)}) \]
-which is controlled by $H^2(X_2, \struct{X_2}(2m,m))$ and $H^3(X_2, \struct{X_2}(2m,m) \ot \struct{}(-Z))$ a direct image argument shows that the latter groups are controlled by groups of the form $H^2(X, E_{2,3m} \Omega \ot L)$ for suitable $L$. s in the proof of Theorem 3.4 one can check that the latter $H^2$ groups vanish. The positivity of $(2 u_1 + u_2)^2 \cdot [\wt{Z}]$ therefore implies that $\struct{X_2}(2,1)|_{\wt{Z}}$ is big and therefore all parabolic leave of the multifoliation $\F$ are algebraically degenerate because the parabolic leaves of $\F$ must lie in the base locus of all invariant differentials and this cuts out a $1$-dimensional space on $\wt{Z}$ by the bigness and the fact that $\wt{Z}$ is $2$-dimensional.
+\[ H^2( \pi_{2,1}^{-1}(Z), \struct{X}(2m,m) |_{\pi_{2,1}^{-1}(Z)}) \]
+which is controlled by $H^2(X_2, \struct{X_2}(2m,m))$ and $H^3(X_2, \struct{X_2}(2m,m) \ot \struct{}(-Z))$ a direct image argument shows that the latter groups are controlled by groups of the form $H^2(X, E_{2,3m} \Omega \ot L)$ for suitable $L$. As in the proof of Theorem 3.4 one can check that the latter $H^2$ groups vanish. The positivity of $(2 u_1 + u_2)^2 \cdot [\wt{Z}]$ therefore implies that $\struct{X_2}(2,1)|_{\wt{Z}}$ is big and therefore all parabolic leaves of the multifoliation $\F$ are algebraically degenerate because the parabolic leaves of $\F$ must lie in the base locus of all invariant differentials and this cuts out a $1$-dimensional space on $\wt{Z}$ by the bigness and the fact that $\wt{Z}$ is $2$-dimensional.
+
+\ifSubfilesClassLoaded{%
+  \bibliographystyle{alpha}
+  \bibliography{refs}
+}{}
+
+\end{document}

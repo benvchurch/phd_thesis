@@ -1,4 +1,971 @@
-\chapter{Hilbert Modular Varieties in Positive Characteristic}
+\documentclass[main.tex]{subfiles}
+\begin{document}
 
-% TODO: Prove that Hilbert modular varieties mod p are not unirational
-% This chapter goes after the Shioda counterexample (ch_obstructions)
+\chapter{Non-uniruled Hilbert Modular Varieties}
+
+In this chapter we will review the theory of Hilbert modular varieties and their canonical models, investigate their special fiber mod $p$, and use their tautological foliation structure to prove non-uniruledness along the lines of the previous chapter. The advantage of this method over one based on \etale cohomology will be that it applies to those primes living in a constructible subset of $\Spec{\Z}$ (i.e.\ to all but finitely many primes) since the constructions only rely on geometric gadgets as opposed to arithmetic properties of the Hecke action on cohomology. 
+
+\subsection{Hilbert Modular Varieties}
+
+Roughly speaking, Hilbert modular varieties are Shimura varieties parametrizing abelian varieties with the action of an order in a totally real number field $F / \Q$ of maximal degree. The story begins with the Albert classification of endomorphisms of simple abelian varieties.
+
+\begin{theorem}[Albert] {\color{red} FIND CITATION}
+Let $A/\CC$ be a simple abelian variety. Then $\End{A}_{\QQ} := \End{A} \ot_{\ZZ} \QQ$ is a division algebra over $\QQ$. Let $F$ be its center so $F / \Q$ is a number field. Then there are four possible cases:
+\begin{enumerate}
+    \item $D = F$ and $F$ is totally real
+    \item $D$ is a quaternion algebra over a totally real field $F$ which is totally split at infinity
+    \item $D$ is a quaternion algebra over a totally real field $F$ which is totally non-split at infinity
+    \item $D$ is a central division algebra over a CM-field $F$
+\end{enumerate}
+\end{theorem}
+
+We call the first case ``real multiplication'' (RM), the second ``quaternionic multiplication'' (QM), and the fourth ``complex multiplication'' (CM). Hilbert modular varieties parametrize abelian varieties with maximal RM meaning $\dim{A} = [F : \Q] = d$. Let $F$ be a totally real field and $\Sigma$ be the set of embeddings $F \embed \RR$.
+\par 
+Recall that, over $\CC$, an abelian variety is determined by a lattice $\Lambda \subset \CC^d$ of rank $2d$ with a Riemann form giving the polarization. For $\tau \in \HH^{\Sigma}$ we get a lattice $L_{\tau} \subset \CC^d$ defined by 
+\[ \cO_F^{\oplus 2} \embed \CC^d \quad (\alpha, \beta) \mapsto (\sigma(\alpha) \tau_{\sigma} + \sigma(\beta))_{\sigma \in \Sigma} \]
+The action of $\delta \in \cO_F$ via $\delta \cdot (z_{\sigma})_{\sigma \in \Sigma} = (\sigma(\delta) z_{\sigma})_{\sigma \in \Sigma}$ preserves the lattice since $\sigma$ is multiplicative. Therefore, $\cO_F$ acts on the abelian variety $\CC^d / L_{\tau}$ preserving a particular polarization form. 
+
+
+\begin{defn}
+Let $F$ be a totally real field. Let $\Gamma \subset \GL_2^+(\cO_F)$ be a finite index subgroup. Then consider the action of $\Gamma$ on $\HH^{\Sigma}$ via the embeddings 
+\[ \Gamma \embed \GL_2^+(\cO_F) \embed \GL^+_2(\RR)^{\Sigma}. \]
+A \textit{Hilbert modular form} at level $\Gamma$ of weight $[k_\sigma]_{\sigma \in \Sigma}$ is a holomorphic function $f : \HH^{\Sigma} \to \CC$ bounded at the cusps such that
+% REVIEW: Check the sign on the determinant exponent. Some conventions use $(\det \gamma_\sigma)^{-k_\sigma/2}$ rather than $(\det \gamma_\sigma)^{k_\sigma/2}$.
+\[ f(\gamma \cdot \ul{\tau}) = f(\ul{\tau}) \prod_{\sigma \in \Sigma} j(\gamma_{\sigma}, \tau_{\sigma})^{k_{\sigma}} (\det{\gamma_{\sigma}})^{k_\sigma / 2} \]
+for all $\gamma \in \Gamma$,
+where for $\tau \in \HH$ and $\gamma \in \GL_2^+(\RR)$ % REVIEW: The arguments of j appear swapped: the definition uses j(\tau, \gamma) but the transformation law uses j(\gamma_\sigma, \tau_\sigma). Standardize to one convention.
+the \textit{factor of automorphy} $j$ is
+\[ j(\gamma, \tau) = c \tau + d \quad \quad \gamma = \begin{pmatrix}
+a & b 
+\\
+c & d 
+\end{pmatrix} \]
+\end{defn}
+
+
+
+Based on this discussion, the analytic space $\HH^{\Sigma} / \Gamma$ is our first candidate for the Hilbert modular variety.
+
+\subsection{Shimura Varieties}
+
+As in our previous discussion of Shimura curves, we follow the conventions of \cite{milne:shimura_varieties} for Shimura data and axioms. First we recall the definitions of a Shimura datum and a Shimura variety. Let $\SS := \Res^{\CC}_{\RR} \mathbb{G}_{m,\CC}$ be the Deligne torus and let $G^{\ad} := G / Z(G)$ denote the adjoint group associated to a linear algebraic group. 
+
+\begin{defn}
+A \textit{Shimura datum} is a pair $(G, X)$ of a reductive group $G$ over $\Q$ and a $G(\RR)$-conjugacy class $X$ of maps $h : \SS \to G_{\RR}$ satisfying the following conditions:
+\begin{enumerate}
+\item[(SV1)] for all $h \in X$, the Hodge structure on $\Lie(G_{\RR})$ defined by $\Ad \circ h$ is of type
+\[ \{ (-1,1), (0,0), (1,-1) \} \]
+\item[(SV2)] for all $h \in X$, the element $\ad(h(i))$ is a Cartan involution\footnote{An involution $\theta$ of $G$ is \textit{Cartan} if $G^{(\theta)}(\RR) := \{ g \in G(\CC) \mid g = \theta(\bar{g}) \}$ is compact.} of $G_{\RR}^{\ad}$ 
+\item[(SV3)] $G^{\ad}$ has no $\Q$-factor on which the projection of $h$ is trivial.
+\end{enumerate}
+\end{defn}
+
+Let $\A^{\infty}$ denote the finite adeles of $\Q$. Associated to a Shimura datum $(G, X)$ and a compact open subgroup $K \subset G(\A^{\infty})$ defining a \textit{level structure} there is a Shimura variety defined on the following analytic space.
+
+\begin{defn}
+The \textit{Shimura variety} defined by the Shimura datum $(G, X)$ at level $K$ is the double coset space
+\[ \Sh_K(G, X) := G(\Q) \backslash X \times G(\A^{\infty}) / K. \]
+\end{defn}
+
+However, Shimura varieties are often disconnected objects. It will be useful to have a description of their connected components. These are described by \textit{connected Shimura data} as follows. Let $G(\RR)^+$ denote the connected component of the identity in the \textit{real topology} and $G(\QQ)^+ := G(\QQ) \cap G(\RR)^+$.
+
+\begin{defn}
+A \textit{connected Shimura datum} is a pair $(G, X^+)$ consisting of a semisimple algebraic group $G$ over $\Q$ and a $G^{\ad}(\RR)^+$-conjugacy class $X^+$ of homomorphisms $h : \SS \to G_{\RR}^{\ad}$ satisfying the following conditions:
+\begin{enumerate}
+\item[(SV1)] for all $h \in X^+$, only the characters $z/\bar{z},1,\bar{z}/z$ occur in the representation of $\SS$ on $\Lie(G^{\ad})_{\CC}$ defined by $\Ad \circ h$
+\item[(SV2)] for all $h \in X^+$, the element $\ad(h(i))$ is a Cartan involution on $G_{\RR}^{\ad}$
+\item[(SV3)] $G^{\ad}$ has no $\Q$-factor on which the projection of $h$ is trivial.
+\end{enumerate}
+\end{defn}
+
+We refer to any quotient of the form $\Gamma \backslash X^+$ where $\Gamma$ is an arithmetic subgroup of $G(\Q)^+$ containing the image of a congruence subgroup of $G(\Q)$ as a \textit{connected Shimura variety} relative to $(G, X^+)$. {\color{red} DEFINE ARITHMETIC SUBGROUP}
+One shows that $X^+$ is a Hermitian symmetric domain \cite[Proposition~4.8]{milne:shimura_varieties} on which the arithmetic subgroup $\Gamma := G(\QQ)^+ \cap K$ acts so the quotient $\Gamma \backslash D$ has a canonical structure as a quasi-projective variety induced by realizing it as a Zariski open of the Baily-Borel compactification $\ol{\Gamma \backslash X^+}^{BB}$, see \cite[Theorem~3.12]{milne:shimura_varieties}. 
+
+\begin{prop} 
+Let $(G, X)$ be a Shimura datum and $X^+$ be a connected component of $X$ regarded as a $G(\RR)^+$-conjugacy class of homomorphisms $\SS \to G^{\ad}_{\RR}$. Then $(G^{\der}, X^+)$  is a connected Shimura datum and there is a homeomorphism
+\[ \Sh_K(G, X) := G(\Q) \backslash X \times G(\A^{\infty}) / K \iso \bigsqcup_{g \in G(\Q)^+ \backslash G(\A^{\infty}) / K} \Gamma_g \backslash X^+ \]
+where $\Gamma_g := g K g^{-1} \cap G(\QQ)^+$.
+\end{prop}
+
+\begin{proof}
+\cite[Corollary~5.8]{milne:shimura_varieties} and \cite[Lemma~5.13]{milne:shimura_varieties}.
+\end{proof}
+
+In particular, this shows that Shimura varieties are quasi-projective. 
+
+
+{\color{red} MODULAR VARIETIES!! DO SIEGAL ETC}
+
+\subsection{Hilbert Modular Varieties as Shimura Varieties}
+
+The most fundamental way Hilbert modular varieties appear as Shimura varieties is through the Weil restriction for the group $\GL_2$ from a totally real field $F / \Q$.
+
+\begin{defn}
+Let $G^{\Hilb} := \Res^F_{\Q} \GL_{2,F}$ and consider the homomorphism
+\[ h_0 : \SS \to G^{\Hilb}_{\RR} = \prod_{\sigma \in \Sigma} \GL_{2, \RR} \]
+given by 
+\[ x + i y \mapsto \left( 
+\begin{pmatrix}
+x & -y
+\\
+y & x
+\end{pmatrix},
+\dots,
+\begin{pmatrix}
+x & -y
+\\
+y & x
+\end{pmatrix} \right) \in \prod_{\sigma \in \Sigma} \GL_{2, \RR} \]
+and let $X^{\Hilb}$ be the $G^{\Hilb}_{\RR}$-conjugacy class generated by $h_0$. Then $(G^{\Hilb}, X^{\Hilb})$ is a Shimura datum and the associated Shimura varieties $\Sh_K(G^{\Hilb}, X^{\Hilb})$ are called the \textit{Hilbert modular varieties} associated to $F$.
+\end{defn}
+
+Note that we may identify $X^{\Hilb} \cong (\HH^{\pm})^{\Sigma}$ with the action by fractional linear transformations of $G^{\Hilb}_{\RR} = \prod_{\sigma \in \Sigma} \GL_{2, \RR}$. \todo{justify}
+
+\begin{example}
+Suppose we take the level subgroup $K = \GL_2(\widehat{\cO}_F) \subset G^{\Hilb}(\A^{\infty}) = \GL_2(\A^{\infty}_F)$ consisting of matrices whose entries have no denominators at any place of $F$. We would like to compute the associated Hilbert modular variety,
+\[ \Sh_K(G^{\Hilb}, X^{\Hilb}) := \GL_2(F) \backslash X \times \GL_2(\A^{\infty}_F) / \GL_2(\widehat{\cO}_F) \iso \bigsqcup_{g \in \GL_2(F)^+ \backslash \GL_2(\A^{\infty}_F) / \GL_2(\widehat{\cO}_F)} \Gamma_g \backslash X^+ \] 
+Here, $X^+ = \HH^{\Sigma}$ is a choice of connected component of $X^{\Hilb}$ in the real topology, which is itself a $\GL_2(F \ot \RR)^+$-conjugacy class. First we compute the index set,
+\[ \GL_2(F)^+ \backslash \GL_2(\A^{\infty}_F) / \GL_2(\widehat{\cO}_F). \]
+The valuations of the determinant at each finite place of $F$ defines a map
+\[ \GL_2(F)^+ \backslash \GL_2(\A^{\infty}_F) / \GL_2(\widehat{\cO}_F) \xrightarrow{\det} \Cl^+(F) \]
+which is clearly surjective via building diagonal matrices whose entries are $1, \varpi_v^{a_v}$ where $a_v$ are the valuations so that $\prod \p_v^{a_v}$ is a specified generator of $\Cl^+(F)$. The map is well-defined because we only quotient by elements $\GL_2(F)^+ \subset \GL_2(F)$ which, in particular, have totally positive determinants. Furthermore, this map is injective by the strong approximation theorem \todo{justify}. 
+\par 
+We may choose double coset representatives:
+\[ g_{\aa} = \begin{pmatrix}
+\pi_v^{\val_v(\aa)} & 0
+\\
+0 & 1
+\end{pmatrix} \]
+where $\aa \subset \cO_F$ runs over a set of representatives for $\Cl^+(F)$. Then
+\[ \Gamma_g := \GL_2(F)^+ \cap g \GL_2(\widehat{\cO}_F) g^{-1} \]
+so we first compute,
+\[ g \GL_2(\widehat{\cO}_F) g^{-1}
+= \left \{ 
+\begin{pmatrix}
+a_v & \pi_v^{-\val_v(\aa)} b_v 
+\\
+\pi_v^{\val_v(\aa)} c_v & d_v 
+\end{pmatrix} \: \middle| a_v, b_v, c_v, d_v \in \cO_{F_v} \right\} \]
+and therefore
+\[ \Gamma_{g_{\aa}} = \Gamma(\cO_F \oplus \aa) := \GL(\cO \oplus \aa)^+. \]
+\end{example}
+
+% REVIEW: "A discontent with" is awkward phrasing. Consider: "A shortcoming of the Hilbert modular varieties of the above generality is that they are often not actual moduli spaces" or similar.
+A discontent with the Hilbert modular varieties of the above generality is that they are often not actual moduli spaces for abelian varieties with real multiplication. At its source, this defect is witnessed by the failure of axiom (SV5) for the pair $(G^{\Hilb}, X^{\Hilb})$. 
+
+\begin{defn}
+We say that a Shimura datum $(G, X)$ satisfies the additional axiom
+\begin{enumerate}
+\item[(SV5)] if $Z(\Q)$ is discrete in $Z(\A^{\infty})$ where $Z := Z(G)$ is the scheme theoretic center.
+\end{enumerate}
+\end{defn}
+
+
+\begin{example}
+In the case $(G^{\Hilb}, X^{\Hilb})$, we have $Z = \Res^F_{\Q} \Gm$ and must consider $Z(\Q) = F^{\times}$ lying inside $Z(\A^{\infty}) = \A^{\times}_{F,f}$ via the natural embedding. However, the image is not discrete whenever $F \neq \Q$ due to the presence of infinitely many units. Indeed, the Dirichlet unit theorem implies that the units of $\cO_F$ have rank $[F : \Q]-1$. Furthermore, any open neighborhood of $1 \in \A^{\times,\infty}_F$ (in the idele topoology) contains all sufficiently divisible elements of the unit group $\cO_F^{\times}$ meaning it cannot be discrete.   
+\end{example}
+
+
+\todo{importance of SV5}
+
+\subsection{PEL Hilbert modular varieties}
+
+However, we will find a variant of the Hilbert modular varieties defined above are fine (at sufficiently large level) moduli spaces for certain abelian varieties with Polarization, Endomorphism (real multiplication), and Level (PEL) structures. To build this alternative Hilbert modular Shimura datum we need to review the theory of PEL Shimura data. 
+
+\subsubsection{PEL Shimura varieties}
+
+Let $(B, \ast)$ be a semisimple $k$-algebra with an involution.
+
+\begin{defn}
+A \textit{symplectic} $(B, \ast)$-\textit{module} is a $B$-module $V$ equipped with a skew-symmetric $k$-bilinear form $\psi : V \times V \to k$ such that
+\[ \psi(b^* u, v) = \psi(u, bv) \text{ for all } b \in B \text{, and } u,v \in V. \]
+\end{defn}
+In what follows, let $k = \Q$. Given $(B, \ast)$ a semisimple $\Q$-algebra with involution and $(V, \psi)$ a faithful $(B, \ast)$-symplectic module, define the $\Q$-algebraic subgroup of $\GL_B(V)$
+\[ G_{B,V}(\Q) = \{ g \in \GL_B(V) \mid \psi(gx, gy) = \mu(g) \cdot \psi(x,y) \text{ for some } \mu(g) \in \Q^\times \}. \]
+We think of this group as a variant of $\GSp$ with the base ring $B$. However, notice that we require $\mu(g) \in \Q^\times$ and $\psi$ is not $B$-linear. The identity component of $G_{B,V}$ is reductive but $G_{B,V}$ is not necessarily connected. 
+\par 
+Write $G$ for $G_{B,V}$.
+If there exists a homomorphism $h : \SS \to G_{\RR}$ such that $(V,h)$ has type $\{ (-1,0), (0,-1) \}$ as a rational Hodge structure and the form $\psi(u, h(i) v)$ is symmetric and positive-definite then let $X$ denote the $G(\RR)$-conjugacy class.
+
+\begin{defn}
+Given it exists and $G$ is connected, the pair $(G, X)$ above is called a \textit{PEL Shimura datum}. 
+\end{defn}
+
+The $\CC$-points of $\Sh_K(G,X)$ for $(G,X)$ a PEL Shimura datum and $K \subset G(\A^{\infty})$ a compact open subgroup parametrize certain tuples $(A, s, \iota, \eta)$ where $A$ is a complex abelian variety, $s$ is a polarization compatible with $\psi$ in some way, $\iota$ is an action of $B$ rationally on $A$, and $\eta$ is a level structure associated to the subgroup $K$. For details, see \cite[Chapter 8]{milne:shimura_varieties}.
+\par
+Viewing $\psi$ as a $\Q$-bilinear symplectic form gives a map of Shimura data $(G,X) \to (\GSp(\psi), X(\psi))$ with $X(\psi)$ the space of complex structures on $V(\RR)$ \cite[p.69]{milne:shimura_varieties}. We call the pair $(\GSp(\psi), X(\psi))$ the associated \textit{Siegel Shimura datum} and the map gives an associated map of Shimura varieties realizing the universal family of abelian varieties over the PEL Shimura varieties attached to $(G, X)$.
+
+\subsubsection{PEL Shimura datum for a Hilbert modular variety}
+
+We will use the above strategy to form a variant Shimura datum for certain Hilbert modular varieties. As seen previously, the main obstacle to be overcome is the failure of (SV5) for $\Res^{F}_{\Q} \GL_{2, F}$. The new data we build fixes this in a minimal way by modifying the center of $\Res^{F}_{\Q} \GL_{2, F}$.
+As before, let $F$ be a totally real field of degree $d := [F : \Q]$. We consider $B = F$ as a $\Q$-algebra with the trivial involution $\ast$. We then build a symplectic $(B, \ast)$-module $(V, \psi)$ of rank $2$ in the standard way: let $V = F^{\oplus 2}$ and consider the $F$-linear alterating form $\inner{-}{-}_F$ defined by the matrix
+\[ \begin{pmatrix}
+0 & -1
+\\
+1 & 0
+\end{pmatrix} \]
+and define the $\Q$-bilinear form $\psi : V \times V \to \Q$ via
+\[ \psi(u,v) := \tr_{F/\Q} \inner{u}{v}_F. \]
+Now we form the PEL Shimura datum from this symplectic module. Note that for $g \in \GL_2(F)$ and $u, v \in V$ we compute
+\[ \psi(gu, gv) = \tr_{F/\Q} (\det{g} \cdot \inner{u}{v}_F). \]
+The condition $\psi(g-,g-) = \mu(g) \cdot \psi(-,-)$ for $\mu(g) \in \Q^\times$ then forces $\mu(g) = \det{g} \in \Q^\times$. Hence $G^{\PEL} := G_{B,V}$ is the subgroup of $G^{\Hilb} = \Res^F_{\Q} \GL_2$ consisting of matrices with rational determinant meaning precisely it is formed via the fiber product,
+\begin{center}
+\begin{tikzcd}
+G^{\PEL} \arrow[r] \arrow[d, hook] \pullback & \mathbb{G}_{m,\Q} \arrow[d, hook]
+\\
+\Res^F_{\Q} \GL_{2,F} \arrow[r, "\det"] & \Res^F_{\Q} \mathbb{G}_{m,F}
+\end{tikzcd}
+\end{center}
+The standard homomorphism $h_0 : \SS \to G^{\Hilb}_{\RR}$ given by
+\[ x + i y \mapsto \left( 
+\begin{pmatrix}
+x & -y
+\\
+y & x
+\end{pmatrix},
+\dots,
+\begin{pmatrix}
+x & -y
+\\
+y & x
+\end{pmatrix} \right) \in \prod_{\sigma \in \Sigma} \GL_{2, \RR} \]
+actually lands in $G^{\PEL}_{\RR} \subset G^{\Hilb}_{\RR}$. Indeed, because the natural map $\GL_{2,\Q} \embed \Res^F_{\Q} \GL_{2, F}$ becomes the diagonal embedding
+\[ \GL_{2,\RR} \to \prod_{\sigma \in \Sigma} \GL_{2, \RR} \]
+after base change from $\Q$ to $\RR$ we see that $h_0$ lands inside $(\GL_{2,\Q} \embed G^{\Hilb})_{\RR}$ and, in particular, is contained in $G_{\RR}^{\PEL}$. Let $X^{\PEL}$ be the $G^{\PEL}(\RR)$-orbit of $h_0$ under conjugacy. Since the center acts trivially under the conjugation action, as previously, $X^{\PEL} = (\HH^{\pm})^{\Sigma}$ acted on by fractional linear transformations.
+
+\begin{example}
+Suppose we take the level subgroup $K = G^{\PEL}(\widehat{\Z}) \subset G^{\PEL}(\A^{\infty})$ consisting of matrices in $\GL_2(\A^{\infty}_F)$ whose entries have no denominators at any place of $F$ and whose determinant lies in $\A^{\infty} \subset \A^{\infty}_F$. We would like to compute the associated Hilbert modular variety,
+\[ \Sh_K(G^{\PEL}, X^{\PEL}) := G^{\PEL}(\QQ)^+ \backslash X^{\PEL} \times G^{\PEL}(\A^{\infty}) / G^{\PEL}(\widehat{\Z}) \iso \bigsqcup_{g \in G^{\PEL}(\QQ)^+ \backslash G^{\PEL}(\A^{\infty}) / G^{\PEL}(\widehat{\Z})} \Gamma_g \backslash X^+ \] 
+Here, $X^+ = \HH^{\Sigma}$ is a choice of connected component of $X^{\PEL}$ in the real topology. First we compute the index set,
+\[ g \in G^{\PEL}(\QQ)^+ \backslash G^{\PEL}(\A^{\infty}) / G^{\PEL}(\widehat{\Z}). \]
+As before, we may consider the valuations of the determinant of an element of $G^{\PEL}(\A^{\infty}) \subset \GL_2(\A^{\infty}_F)$. However, by definition, the determinant lives in $\A^{\times,\infty}$ and $\Cl^+(\Q) = 0$ so the natural class-group valued invariants are trivial. In fact, by the strong approximation theorem \todo{justify}, this double coset space is actually trivial \todo{CHECK!} \todo{where do the $\SL_2(\cO_F \oplus \aa)$ enter in this story?} 
+\par 
+Finally we compute
+\[  \Gamma := G^{\PEL}(\QQ)^+ \cap \GL_2(\widehat{\cO}_F) = \SL_2(\cO_F) \]
+because the intersection consists of matrices with rational integral positive determinant but $1$ is the only positive unit in $\Z$. Therefore
+\[\Sh_K(G^{\PEL}, X^{\PEL}) = \SL_2(\cO_F) \backslash \HH^{\Sigma}. \]
+\end{example}
+
+\section{Moduli Problems}
+
+
+In the following sections, we largely follow the notation and exposition of \cite{goren_deshalit:foliations_shimura, diamond:serre_weight, diamond:hilbert_modular}.
+
+As before, fix a totally real field $F$ of degree $d := [F : \Q]$. Let $D = \disc_{F/\Q}$ be the absolute discriminant of $F$. 
+
+\begin{defn}
+Let $\cc$ be a fractional ideal of $F$ and $N \ge 3$ an integer. A \textit{family of $\cc$-polarized Hilbert Blumenthal abelian varieties with full level structure $N$} over a base scheme $S$ is a four-tuple
+\[ \ul{A} = (A, \iota, \lambda, \eta) \]
+where
+\begin{enumerate}
+\item $A \to S$ is an abelian scheme of relative dimension $d = [F : \Q]$
+\item $\iota : \cO_F \embed \End(A/S)$ is an injective ring homomorphism such that $\Lie(A/S)$ is, locally on $S$, a free $\cO_F \ot_{\ZZ} \cO_{S}$-module of rank $1$
+\item $\lambda$ is a $\cc$-polarization in the sense of \cite{katz:p-adic} (1.0.7). Precisely, $\lambda : \cc \ot_{\cO_F} A \iso A^{\vee}$ is an isomorphism\footnote{The scheme $\cc \ot_{\cO_F} A$ is defined by the functor $T \mapsto A(T) \ot_{\cO_F} \cc$ using the structure $\iota$ to make $A(T)$ an $\cO_F$-module. This is easily seen to be represented by an abelian scheme.} compatible with the $\cO_F$-structures (where $a \in \cO_F$ acts on $\cc \ot_{\cO_F} A$ via $a \ot 1$ and on $A^{\vee}$ via $\iota(a)^{\vee}$) and symmetric in the sense that the induced map of \etale sheaves
+\[ \cc \subset \Hom_{S,\cO_F}(A, \cc \ot_{\cO_F} A) \iso \Hom_S(A, A^{\vee}) \]
+lands inside the subsheaf of symmetric elements. Furthermore, we require that the induced map of \etale sheaves
+\[ \lambda_* : \cc \to \Hom^{\text{sym}}_S(A, A^{\vee}) \]   
+is an isomorphism identifying $\cc^+$ with the sheaf of polarizations (symmetric maps $A \to A^{\vee}$ which are locally induced by an ample line bundle)
+\item an $\cO_F$-linear isomorphism 
+\[ \eta : (\cO_F / N)^{\oplus 2} \iso A[N] \]
+of \etale sheaves on $S$. 
+\end{enumerate}
+Let $\cM^{\cc}(N)$ be the moduli functor parametrizing such $\cc$-polarized Hilbert Blumenthal abelian varieties with full level structure $N$. 
+\end{defn}
+
+The moduli functor $\cM^{\cc}(N)$ is represented by a smooth (see \cite[Theorem~1.20 and Theorem~1.22]{rapoport:compactifications} and \cite[Theorem~2.2]{deligne:pappas_singularities}\footnote{Note in this later reference, smoothness is only established for primes away from $D$. Indeed, when $D$ is not invertible on $S$ moduli problem lacks the ``Rapoport condition'' that $\Lie(A/S)$ is a locally free $\cO_F \ot \cO_S$-module of rank $1$ (see \cite[Corollary~2.9]{deligne:pappas_singularities}) and hence defines a larger moduli functor.} quasi-projective (see \cite[Theorem~1.4]{chai:compactifications}) $\Spec{(\Z[N^{-1}])}$-scheme of relative dimension $d$ which we shall denote by $Y^{\cc}(N)$ and call a \textit{Hilbert modular scheme}.
+
+\begin{rmk}
+Since the structure of the $\cO_F$-action $\iota$ forces $A$ to have many automorphisms which are, by definition, \textit{compatible} with the polarization and level structures (and commute with $\iota$ since $\cO_F$ is commutative), we should ask how it can be possible that this moduli problem is represented by a scheme since it appears to have nontrivial stabilizers. The resolution is located in precisely understanding the sense in which the polarization is equivariant for the $\cO_F$-module structure and how this differs from saying that certain automorphisms of $A$ are automorphisms of the polarized pair $(A, \lambda)$. Recall that, as in the Siegel moduli problem,, a morphism $f : (A, \lambda_A) \to (B, \lambda_B)$ of polarized abelian varieties is a commutative diagram
+\begin{center}
+\begin{tikzcd}
+A \arrow[r, "f"] \arrow[d, "\lambda_A"'] & B \arrow[d, "\lambda_B"]
+\\
+A^{\vee} \arrow[from=r, "f^{\vee}"] & B^{\vee}
+\end{tikzcd}
+\end{center}
+where the direction of the map $f^{\vee} : B^{\vee} \to A^{\vee}$ is forced upon us when we do not identify $A$ with $B$. However, in the case that $A = B$ and we are investigating the automorphisms of the pair $(A, \lambda_A)$ one might ask about the commutativity of the same diagram with the direction of the dual arrow flipped. Precisely, this is the sense in which we say that an endomorphism $f : A \to A$ is \textit{compatible} with the polarization or that the polarization is \textit{equivariant} or \textit{compatible} with a set of automorphisms. Explicitly, $f$ is compatible with $\lambda_A$ if the diagram, 
+\begin{center}
+\begin{tikzcd}
+A \arrow[r, "f"] \arrow[d, "\lambda_A"'] & A \arrow[d, "\lambda_A"]
+\\
+A^{\vee} \arrow[r, "f^{\vee}"] & A^{\vee}
+\end{tikzcd}
+\end{center}
+commutes. In the particular case of $\cc$-polarizations of HBAVs, we ask that the polarization is equivariant for the $\cO_F$-structures in this second sense expressed by commutativity of the following diagrams,
+\begin{center}
+\begin{tikzcd}
+\cc \ot_{\cO_F} A \arrow[d, "\lambda"'] \arrow[r, "\id \ot \iota(\nu)"] & \cc \ot_{\cO_F} A \arrow[d, "\lambda"]
+\\
+A^{\vee} \arrow[r, "\iota(\nu)^{\vee}"'] & A^{\vee} 
+\end{tikzcd}
+\end{center}
+for $\nu \in \cO_F$. However, we can also ask if $\nu \in \cO_F$ defines an endomorphism of the polarized pair $(A, \lambda)$ in the primary Siegel moduli sense. This requires that the reversed dual arrow diagram 
+\begin{center}
+\begin{tikzcd}
+\cc \ot_{\cO_F} A \arrow[d, "\lambda"'] \arrow[r, "\id \ot \iota(\nu)"] & \cc \ot_{\cO_F} A \arrow[d, "\lambda"]
+\\
+A^{\vee} \arrow[from=r, "\iota(\nu)^{\vee}"'] & A^{\vee} 
+\end{tikzcd}
+\end{center}
+commutes. Combining these diagrams and noting that $\lambda$ is an isomorphism gives $\iota(\nu)^{\vee} \circ \iota(\nu)^{\vee} = \id_{A^{\vee}}$ and hence $\nu = \pm 1$ in $\cO_F$ since $\iota$ is injective. Therefore, if $N \ge 3$, the combination of the polarization and level structures rigidify away all automorphisms. 
+\end{rmk}
+
+\subsection{Unit action on polarizations}
+
+The group $(\cO_F^\times)^+$ of totally positive units acts on $Y^{\cc}(N)$ by modifying the polarization as follows:
+\[ \nu \cdot (A, \iota, \lambda, \eta) = (A, \iota, \nu \cdot \lambda, \eta) \]
+where $\nu \cdot \lambda : \cc \ot_{\cO_F} A \to A^{\vee}$ is the isomorphism given by $a \ot x \mapsto \iota(\nu)^{\vee} \cdot \lambda(a \ot x)$. Likewise, there is an obvious $\GL_2(\cO_F/N)$-action on the level structure:
+\[ u \cdot (A, \iota, \lambda, \eta) = (A, \iota, \lambda, \eta \circ u^{-1}) \]
+for $u \in \GL_2(\cO_F/N)$ viewed as an automorphism of $(\cO_F/N)^{\oplus 2}$. These two actions are compatible in the following sense: for all $\mu \in \cO_F^{\times}$ the action of $\mu^2 \in (\cO_F^\times)^+$ agrees with the action of $\mu^{-1} \cdot \id \in \GL_2(\cO_F/N)$ via the natural isomorphism:
+\begin{equation} \label{eq:isom_trivial_action_subgroup}
+(A, \iota, \lambda, \eta \circ \mu \cdot \id) \iso (A, \iota, \mu^2 \cdot \lambda, \eta)
+\end{equation}
+induced by $\iota(\mu) : A \to A$. Since $\cO_F$ is commutative, this defines an isomorphism of HBAVs which are $\cc$-polarized via polarizations determined by the commutativity of the following diagram
+\begin{center}
+\begin{tikzcd}
+\cc \ot_{\cO_F} A \arrow[r, "\id \ot \iota(\mu)"] \arrow[d, "\mu^2 \cdot \lambda"'] & \cc \ot_{\cO_F} A \arrow[d, "\lambda"]
+\\
+A^{\vee} \arrow[from=r, "\iota(\mu)^{\vee}"] & A^{\vee}
+\end{tikzcd}
+\end{center}
+since compatibility says $\iota(\mu)^{\vee} \circ \lambda \circ (\id \ot \iota(\mu)) = \iota(\mu^2)^{\vee} \circ \lambda$ which is $\mu^2 \cdot \lambda$ by definition.
+
+\subsection{Hilbert modular varieties of level $U$}
+
+The action of $\GL_2(\cO_F/N)$ on $Y^{\cc}(N)$ induces an action of $(\Res_{\cO_F/\Z} \GL_{2,\Z})(\widehat{\Z}) = \GL_2(\widehat{\cO_F})$ via the quotient $\GL_2(\cO_F) \onto \GL_2(\cO_F/N)$. Since the unit action on polarizations commutes with reparametrization of the level structure, we get an action
+\[ (\cO_F^\times)^+ \times \GL_2(\widehat{\cO_F}) \acts Y^{\cc}(N) \]
+which is trivial on the subgroup 
+\[ \{ (\mu^2, u) \in (\cO_F^\times)^+ \times \GL_2(\cO_F) \mid \mu \in \cO_F^\times : u \equiv \mu \cdot \id \mod N \}. \]
+% REVIEW: The sentence "Since $N \ge 3$," is incomplete. It seems like a conclusion about the trivial action subgroup was intended here but not finished.
+Now choose a compact open subgroup $U \subset \GL_2(\widehat{\cO_F})$ such that $U(N) \subset U$ where
+\[ U(N) := \ker{(\GL_2(\widehat{\cO_F}) \to \GL_2(\cO_F/N))}. \]
+Then we form the subquotient,
+\[ G_{U,N} := ((\cO_F^\times)^+ \times U) / \{ (\mu^2, u) \mid \mu \in \cO_F^\times, u \in U : u \equiv \mu \cdot \id \mod N \}. \]
+Since $Y^{\cc}(N) \to \Spec{(\Z[N^{-1}])}$ is quasi-projective, the quotient $Y^{\cc}(N) / G_{U,N}$ by the finite group $G_{U,N}$ is representable by a quasi-projective scheme over $\Spec{(\Z[N^{-1}])}$ (by \cite[Prop.V.1.8]{SGA1}) which is smooth and $Y^{\cc}(N) \to Y^{\cc}(N) / G_{U,N}$ is \etale when $G_{U,N}$ acts without fixed points. A sufficient condition for $G_{U,N}$ to act freely is given in \cite[Lemma~2.4.1]{diamond:serre_weight} which requires $U$ to be sufficiently small (in a way that depends only on $F$). 
+
+\begin{comment}
+\par 
+Fix a set $T$ of representative finite ideles generating representatives for the narrow class group $\Cl^+(F)$. Precisely, the elements $t \in T$ are finite ideles $t \in \A^{\infty}_F^\times$ that form a system of representatives for the quotient
+\[ \A^{\infty}_F^\times / (F^\times)^+ \cdot \widehat{\cO}^\times \iso \Cl^+(F). \]
+Let $\cc_t$ denote the image of $t \in \A^{\infty}_F$ under this map 
+\[ t \mapsto \prod_{v \ndivides \infty} \p_v^{\val_v(t)}. \]
+\end{comment}
+
+\begin{defn}
+For a compact open subgroup $U \subset \GL_2(\widehat{\cO}_F)$ such that $U(N) \subset U$, the \textit{Hilbert modular variety} $Y_U$ is defined as the disjoint union of quotients
+\[ Y_U := \coprod_{\cc \in \Cl^+(F)} Y^{\cc}(N) / G_{U,N}. \]
+\end{defn}
+
+First, we note that the isomorphism class of $Y^{\cc}(N)$ is well-defined for an ideal class $\cc \in \Cl^+(F)$. Indeed, if $\cc = \gamma \cc'$ where $\gamma \gg 0$, i.e.\ $\gamma \in F$ is totally positive, then $\lambda \circ (\gamma \ot 1) : \cc' \ot_{\cO_F} A \iso A^{\vee}$ is a $\cc'$-polarization of $A$. Thus there is an isomorphism $\gamma : Y^{\cc}(N) \iso Y^{\cc'}(N)$ of moduli schemes depending on the choice of $\gamma$ sending,
+\[ (A, \iota, \lambda, \eta) \mapsto (A, \iota, \lambda \circ (\gamma \ot 1), \eta). \]
+The definition of $Y_U$ is independent of $N$ for all $N$ large enough that $U(N) \subset U$ 
+(see \cite[\S~2.5.]{diamond:serre_weight}). This is sometimes referred to as the ``Pappas–Rapoport integral model'' over $\Spec{(\Z[N^{-1}])}$ although this carries additional meaning when we consider ramified primes or primes dividing the level which we will not consider in this text. \todo{check this makes sense, how is it related to the canonical model?} \todo{I find the fact that these components are defined over $\Q$ to be strange? what is going on?} \todo{perhaps try to understand the quotient action by looking at p.119 of Milne}
+
+\begin{theorem} \todo{find citation}
+$Y_U(\CC) \cong \Sh_U(G^{\Hilb}, X^{\Hilb})$ canonically. 
+\end{theorem}
+
+\subsection{Connected components}
+
+Denote by $\dd = \dd_{F/\Q}$ the absolute different ideal of $F$. This ideal is relevant to the duality of locally free $\cO_F$-modules because of the isomorphism of $\cO_F$-modules,
+\[ \dd^{-1} \iso \Hom_{\ZZ}(\cO_F, \ZZ) \]
+via the trace pairing. Furthermore, for any $\cO_F$-module $M$ (or sheaf of $\cO_F \ot \cO_S$-modules) we have a natural isomorphism of $\cO_F$-modules,
+\[ M^{\ot -1} := \Hom_{\cO_F}(M, \cO_F) \cong \Hom_{\ZZ}(M, \ZZ) \ot_{\cO_F} \dd^{-1} \]
+defined by the following map induced from the trace pairing,
+\[ \varphi \mapsto (m \ot a \mapsto \tr_{F/\Q}{(a \varphi(m))}). \]
+
+\begin{defn}
+Let $Z^{\cc}(N)$ denote the $\Z[N^{-1}]$-scheme representing $\cO_F$-linear isomorphisms
+\[ \cc \ot (\Z / N \Z) \iso \dd^{-1} \ot \mu_N. \] 
+\end{defn}
+If $\ul{A} = (A, \iota, \lambda, \eta)$ is a $\cc$-polarized HBAV with full level structure $N$ over $S$, then $\lambda \ot \wedge^2 \eta$ defines an isomorphism
+\[ \cc \ot (\Z / N \Z) = \cc \ot_{\cO_F} \wedge^2_{\cO_F} (\cO_F / N)^2 \iso \Hom_{S}^{\text{sym}}(A, A^{\vee}) \ot_{\cO_F} \wedge_{\cO_F}^2 A[N] \]
+But the Weil pairing
+\[ \inner{-}{-}_{\lambda} : A[N] \ot A[N] \to \mu_{N} \]
+for $\lambda \in \Hom_{S}^{\text{sym}}(A, A^{\vee})$ defines an isomorphism
+\[ \Hom_{S}^{\text{sym}}(A, A^{\vee}) \ot_{\cO_F} \wedge_{\cO_F}^2 A[N] \iso \Hom_{\cO_F}(\cO_F, \mu_N) = \dd^{-1} \ot \mu_N \]
+and hence an element of $Z^{\cc}(N)(S)$. This produces a map
+\[ Y^{\cc}(N) \to Z^{\cc}(N) \]
+
+\begin{prop} \todo{find reference!}
+The fibers of $Y^{\cc}(N) \to Z^{\cc}(N)$ are geometrically integral. 
+\end{prop}
+
+It will be convenient to introduce a second standard level structure studied by Katz in \cite{katz:p-adic} which has the advantage of defining a single connected component integrally. This is also the level structure used in \cite{goren_deshalit:foliations_shimura} from which we will take many of the subsequent results. 
+
+\begin{defn}
+Let $\cc$ be a fractional ideal of $F$ and $N \ge 3$ an integer. A \textit{family of $\cc$-polarized Hilbert Blumenthal abelian varieties with $\Gamma_{00}(N)$-level structure} over a base scheme $S$ is a four-tuple
+\[ \ul{A} = (A, \iota, \lambda, \eta) \]
+where $(A, \iota, \lambda)$ is a $\cc$-polarized HBAV and $\eta$ is a $\Gamma_{00}(N)$-level structure on $A$ in the sense of \cite{katz:p-adic} (1.0.8), i.e.\ a closed embedding $\eta : \dd^{-1} \ot \mu_N \embed A[N]$ of $S$-group schemes compatible with $\iota$. 
+Let $\cM^{\cc}_{00}(N)$ be the moduli functor parametrizing such $\cc$-polarized Hilbert Blumenthal abelian varieties with $\Gamma_{00}(N)$-level structure. 
+\end{defn}
+
+As before, the moduli functor $\cM^{\cc}_{00}(N)$ is represented by a smooth quasi-projective $\Spec{(\Z[N^{-1}])}$-scheme of relative dimension $d$ which we shall denote by $Y^{\cc}_{00}(N)$ (see \cite{rapoport:compactifications, katz:p-adic} for more discussion). 
+
+\todo{is $Y^{\cc}_{00}(N)$ geometrically integral fibers?}
+
+\todo{when should I swap to $\cO$ do I want to use $W(\kappa)$ like de Shalit?}
+
+Because of the map $Y^{\cc}_{00}(N) \to Z^{\cc}(N)$, given an inclusion $\ell : \cc \ot (\Z/ N \Z) \embed (\cO/N)^{\oplus 2}$ of $\cO_F$-modules, we obtain a forgetful map
+\[ Y^{\cc}(N) \xrightarrow{j} Y^{\cc}_{00}(N) \]
+sending $\ul{A} = (A, \iota, \lambda, \eta) \mapsto (A, \iota, \lambda, \eta \circ \ell)$ where $\eta \circ \ell$ is the $\Gamma_{00}(N)$-level structure:
+\[ \dd^{-1} \ot \mu_N \xrightarrow{\lambda \ot \wedge^2 \eta} \cc \ot (\Z / N \Z) \xrightarrow{\ell} (\cO_F / N)^{\oplus 2} \xrightarrow{\eta} A[N]. \]
+These maps are finite \etale \todo{justify} and the various choices of a map $\ell$ are permuted by the action of $\GL_2(\cO_F/N)$ on $Y^{\cc}(N)$ on the level structure \todo{justify}. 
+
+\subsection{Tautological bundles and linearizations}
+
+Let $\cM$ denote a Hilbert modular scheme developed in the previous sections carrying a universal family $\pi : \cA \to \cM$ (meaning either $Y^{\cc}(N)$ or $Y^{\cc}_{00}(N)$ but not $Y_U$ in general) of $\cc$-polarized HBAVs. Write 
+\[ \ul{\omega} = \pi_* \Omega^1_{\cA/\cM} \]
+for the \textit{Hodge bundle} of $\cM$. 
+Let $\ul{\Lie} := \Lie(\cA/\cM)$ denote the Lie algebra sheaf of the universal abelian scheme over $\cM$ which is a locally free $\cO_F \ot \cO_{\cM}$-module of rank $1$ identified with $\ul{\omega}^{\vee} := \Hom_{\cO_{\cM}}(\ul{\omega}, \cO_{\cM})$ as a sheaf of $\cO_F \ot \cO_{\cM}$-modules. Hence, they are related by a $\cO_F$-pairing
+\[ \ul{\Lie} \ot_{\cO_F \ot \cO_{\cM}} \ul{\omega} \iso \dd^{-1} \ot \cO_{\cM} \]
+whose composition with the trace map
+\[ \dd^{-1} \ot \cO_{\cM} \xrightarrow{\tr_{F/\Q}} \ZZ \ot \cO_{\cM} = \cO_{\cM} \]
+yields the standard duality $\cO_{\cM}$-pairing
+\[ \ul{\Lie} \ot_{\cO_{\cM}} \ul{\omega} \onto \ul{\Lie} \ot_{\cO_F \ot \cO_{\cM}} \ul{\omega} \iso \dd^{-1} \ot \cO_{\cM} \xrightarrow{\tr_{F/\Q}}  \cO_{\cM}. \]
+
+
+Now focus on the case $\cM = Y^{\cc}(N)$. This modular scheme carries an action $(\cO_F^\times)^+ \times \GL_2(\widehat{\cO_F}) \acts Y^{\cc}(N)$ extending to an equivariant action on the universal abelian scheme $\pi : \cA \to \cM$. Indeed, $g = (\nu, u) \in G := (\cO_F^\times)^+ \times \GL_2(\widehat{\cO_F})$ acts via the map of moduli functors
+\[ g : (A, \iota, \lambda, \eta) \mapsto (A, \iota, \nu \lambda, \eta \circ u^{-1}) \]
+meaning that $g : \cM \to \cM$ is equipped with a unique isomorphism $\alpha_g :  \cA \to g^* \cA$ sending $g^* \lambda$ to $\nu \lambda$ and $g^* \eta$ to $\eta \circ u^{-1}$. These isomorphisms $\alpha_g$ give $\pi : \cA \to \cM$ the structure of an equivariant family inducing $G$-equivariant structures on the sheaves
+\[ \ul{\omega}, \ul{\Lie}, R^1 \pi_* \cO_{\cA} \]
+commuting with the $\cO_F$-module structures. In particular, the pairing
+% REVIEW: Should $\dd^{-1} \ot \cO_F$ be $\dd^{-1} \ot \cO_{\cM}$ here? Compare with the identical pairing a few lines earlier.
+\[ \ul{\Lie} \ot_{\cO_F \ot \cO_{\cM}} \ul{\omega} \iso \dd^{-1} \ot \cO_F \]
+is equivariant. However, more care must be taken with another isomorphism between these sheaves. Since $\cA$ is $\cc$-polarized, there is an isomorphism
+\begin{equation} \label{eq:c-polarized_sheaf_identity}
+R^1 \pi_* \cO_{\cA} = \Lie(\cA^{\vee} / \cM) \xrightarrow{\lambda^{-1}} \Lie(\cc \ot_{\cO_F} \cA / \cM) = \cc \ot_{\cO_F} \ul{\Lie}
+\end{equation}  
+However, this isomorphism does not respect the equivariant structures on $\ul{\Lie}$ and $R^1 \pi_* \cO_{\cA}$ because $\lambda$ is not preserved by $\alpha_g$. Rather, the following compatibility diagram
+\begin{center}
+\begin{tikzcd}
+g^* \ul{\Lie} \ot_{\cO_F} \cc \arrow[r, "g^* \lambda"] & g^* R^1 \pi_* \cO_{\cA} \arrow[d, "\alpha_g^*"] 
+\\
+\ul{\Lie} \ot_{\cO_F} \cc \arrow[u, "(\alpha_{g})_*"] \arrow[r, "\nu \lambda"] & R^1 \pi_* \cO_{\cA}
+\end{tikzcd}
+\end{center}
+commutes. Since $R^1 \pi_* \cO_{\cA}$ is given an equivariant structure via the isomorphisms $\alpha_g^*$, in order to make a consistent choice of the directions of the maps in the conventions for an equivariant sheaf $\ul{\Lie}$ should be given an equivariant structure via the maps $(\alpha_g)_*^{-1} : g^* \ul{\Lie} \to \ul{\Lie}$. Therefore, absorbing the scaling factor $\nu$ into the equivariant structure, we obtain a commutative diagram
+\begin{center}
+\begin{tikzcd}
+g^* \ul{\Lie} \arrow[r, "g^* \lambda"] \arrow[d, "(\alpha_{g})_*^{-1} \ot \nu"'] & g^* R^1 \pi_* \cO_{\cA} \arrow[d, "\alpha_g^*"] 
+\\
+\ul{\Lie} \ot_{\cO_F} \cc \arrow[r, "\lambda"] & R^1 \pi_* \cO_{\cA}
+\end{tikzcd}
+\end{center} 
+which has the pleasing consequence that, if we equip $\cc \ot \cO_{\cM}$ with the equivariant structure given by multiplication by $\nu$ to give an equivariant sheaf of $\cO_{\cM}$-modules denoted by $\ul{\cc}$, then we obtain an equivariant isomorphism of $\cO_F$-modules with $G$-actions
+\begin{equation} \label{eq:equivariant_c-polarized_sheaf_identity}
+\ul{\Lie} \ot_{\cO_F \ot \cO_S} \ul{\cc} \iso R^1 \pi_* \cO_{\cA}.
+\end{equation}
+
+\subsection{The Kodaira-Spencer isomorphism}
+
+The Hodge-theoretic Kodaira-Spencer map for the universal family,
+\[ \delta : \pi_* \Omega_{\cA/\cM} \to \Omega_{\cM / \ZZ} \ot_{\cM} R^1 \pi_* \cO_{\cA} \]
+which arises as the connecting map for $R^1 \pi_*$ applied to the pullback exact sequence
+\[ 0 \to \pi^* \Omega_{\cM / \ZZ} \to \Omega_{\cA / \ZZ} \to \Omega_{\cA / \cM} \to 0 \]
+is actually $\cO_F$-equivariant with respect to the $\cO_F$-module structures on $\pi_* \Omega_{\cA/\cM} = \ul{\omega}$ and $R^1 \pi_* \cO_{\cA}$ and is equivariant for the $(\cO_F^\times)^+ \times \GL_2(\widehat{\cO_F})$-action in the case $\cM = Y^{\cc}(N)$ since the pullback exact sequence is equivariant. Since $\ul{\omega}$ and $R^1 \pi_* \cO_{\cA}$ are invertible $\cO_F \ot \cO_{\cM}$-modules, by dualizing, we obtain a morphism
+\[ \KS : \T_{\cM / \ZZ} \ot \cO_F \to \ul{\omega}^{\ot -1} \ot R^1 \pi_* \cO_{\cA} \]
+called the Kodaira-Spencer map. Note that the tensor operations on the right are as $\cO_F \ot \cO_{\cM}$-modules. Using the isomorphism~(\ref{eq:equivariant_c-polarized_sheaf_identity}) produces
+\begin{equation} \label{eq:kodaira-spencer_isomorphism}
+\KS : \cT_{\cM / \ZZ} \to \ul{\omega}^{\ot -1} \ot \ul{\Lie} \ot \ul{\cc} = \ul{\Lie}^{\ot 2} \ot \ul{\dd \cc}
+\end{equation}
+where $\ul{\Lie}^{\ot 2}$ is the tensor square as an invertible $\cO_F \ot \cO_{\cM}$-module as are the other unmarked tensor operations. This map $\KS$ is an equivariant isomorphism; see \cite{katz:p-adic} formulas (1.0.19)-(1.0.21).
+
+\subsection{Descent to $Y_U$} \label{section:descent_to_YU}
+
+Recall that the action 
+\[ (\cO_F^\times)^+ \times \GL_2(\widehat{\cO_F}) \acts Y^{\cc}(N) \]
+factors through a finite quotient. In particular, $G_{U,N} \acts Y^{\cc}(N)$ is well-defined. However, not all subgroups acting trivially on $Y^{\cc}(N)$ act trivially on the universal abelian scheme and hence the tautological bundles are not actually $G_{U,N}$-equivariant. Indeed, the subgroup 
+\[  T_{U,N} := \{ (\mu^2, u) \mid \mu \in \cO_F^\times, u \in U : u \equiv \mu \cdot \id \mod N \} \]
+acts trivially on $Y^{\cc}(N)$ but for $g = (\mu^2, u) \in T_{U,N}$ the map $\alpha_g : \cA \to g^* \cA$ may be identified with $\iota(\mu) : \cA \to \cA$, the isomorphism  (\ref{eq:isom_trivial_action_subgroup}). Hence $g$ acts on $\ul{\omega}$ and $R^1 \pi_* \cO_{\cA}$ as multiplication by $\mu$ through the $\cO_F$-structure and on $\ul{\Lie}$ as multiplication by $\mu^{-1}$. Note this respects the isomorphism~(\ref{eq:equivariant_c-polarized_sheaf_identity}) $R^1 \pi_* \cO_{\cA} \iso \ul{\Lie} \ot \ul{\cc}$ since $\ul{\cc}$ is acted as multiplication by $\nu = \mu^2$. In particular, if we consider the invertible $\cO_F \ot \cO_{\cM}$-module 
+\[ \ul{\omega}^{\ot k} \ot \ul{\aa}^{\ot l} \]
+for $\aa$ a fractional ideal of $\cO_F$ then $T_{U,N}$ acts trivially if and only if the condition:
+\begin{center} \label{condition_descent_star}
+($\ast$) \quad for all $\mu \in \cO_F^\times \cap U$ we have $\mu^{k + 2 l} = 1$
+\end{center}
+is satisfied. When this is the case, $\ul{\omega}^{\ot k} \ot \ul{\aa}^{\ot l}$ is a $G_{U,N}$-equivariant bundle giving a descent datum and thus a canonical choice of bundle on $Y_U$ pulling back to $\ul{\omega}^{\ot k} \ot \ul{\aa}^{\ot l}$. 
+
+In particular, the target $\ul{\Lie}^{\ot 2} \ot \ul{\dd \cc}$ of the Kodaira-Spencer isomorphism (\ref{eq:kodaira-spencer_isomorphism}) has $k + 2l = 0$ and hence descends to $Y_U$ along with its isomorphism to the tangent bundle of $Y_U$. This was, of course, guaranteed by $\KS$ being $G$-equivariant for the usual equivariant structure on $\T_{\cM / \ZZ}$ since $\T_{\cM / \ZZ}$ is always equivariant for any group action and thus $T_{U,N}$ must act trivially.
+
+\section{Tautological Foliations}
+
+Hilbert modular varieties are equipped with $d$ tautological rank $1$ foliations. Thinking analytically about the quotient $\HH^{\Sigma} / \Gamma$, these foliations are given by the directions $\partial_{z_i}$ which are preserved by the $\Gamma$-quotient since $\Gamma \acts \HH^{\Sigma}$ through $\GL_2^+(F) \to \GL_2^+(\RR)^{\Sigma}$ which is ``diagonal'' in the sense that it does not mix the factors indexed by $\Sigma$. These analytic foliations define algebraic foliations on the underlying Shimura variety. To access these foliations in mixed characteristic, we employ a moduli interpretation. Let $\pi : A^{\mathrm{univ}} \to Y^{\cc}(N)$ be the universal abelian scheme. The moduli interpretation of these foliations arises from decomposing the Hodge bundle $\ul{\omega} := \pi_* \Omega_{A^{\mathrm{univ}}/Y^{\cc}(N)}$ according to the action of $\cO_F$ by various characters. In order for this decomposition to exist, we require an assumption about the base scheme $S$, namely that $\cO_F \ot_{\Z} \cO_S$ decomposes as the direct sum of $d$ copies of $\cO_S$. This occurs, for example, when $\cO_S$ contains the images of all embeddings $\sigma : F \embed \RR$. Since we are moving towards understanding the foliations in positive or mixed characteristic, we now fix a prime and work over a fixed extension of $\Z_p$ needed to ensure this splitting result holds. 
+\par 
+Fix a prime number $p$ which is unramified in $F$ and coprime to $N$ so $p \in \Spec{(\Z[(ND)^{-1}])}$. By changing the representative of $\cc$ we may also assume $p$ is relatively prime to $\cc$. Write,
+\[ p \cO_F = \p_1 \dots \p_r \quad \quad f_i := f(\p_i / p) \]
+where $f(\p_i / p)$ is the inertia degree of $\p_i$. Let $\kappa$ be the finite field $\FF_{p^f}$ where $f = \lcm\{ f_1, \dots, f_r \}$ so that $\kappa(\p_i) \embed \kappa$ for each $i$. Let $W(\kappa)$ be the Witt ring of $\kappa$ which we may identify with the ring of integers of the compositum of the completions of all embeddings of $F$ into $\ol{\Q}_p$.  There is a decomposition,
+\[ \BB = \Hom(F, W(\kappa)[1/p]) = \bigsqcup_{\p \mid p} \BB_{\p} \]
+indexed by the $r$ primes of $\cO_F$ over $p$, where $\sigma : F \embed W(\kappa)[1/p]$ lies in $\BB_{\p}$ if $\sigma^{-1}(p W(\kappa)) \cap \cO_F = \p$. The Frobenius $\phi$ of $W(\kappa)$ acts on $\BB$ via $\sigma \mapsto \phi \circ \sigma$ permuting each $\BB_{\p}$ cyclically. 
+\par 
+This set $\BB$ plays the $p$-adic role of $\Sigma$ in indexing the foliations but, unlike $\Sigma$, it carries a canonical action of $\Frob_p$. 
+\par 
+Let $\cM$ \todo{CHANGE NOTATION?} denote the base change of a Hilbert modular scheme of the previous section (one carrying a universal family: either $Y^{\cc}(N)$ or $Y^{\cc}_{00}(N)$ but not $Y_U$ in general) from $\Spec{(\Z[N^{-1}])}$ to $W(\kappa)$. We denote by $G$ the group canonically acting on $\cM$. As previous, we let $\pi : \cA \to \cM$ denote the universal abelian scheme over $\cM$ and
+\[ \ul{\omega} = \pi_* \Omega^1_{\cA/\cM} \]
+the \textit{Hodge bundle}. Because $p \ndivides \disc_{F/\Q}$ and $W(\kappa)$ contains all embeddings of $F$, there is a decomposition
+\[ \cO_F \ot \cO_{\cM} = \bigoplus_{\sigma \in \BB} \cO_{\cM} \]
+as a coherent sheaf of $\cO_{\cM}$-algebras. Recall the ``Rapoport condition'' that $\Lie(A/S)$ is, locally on $S$, a free $\cO_F \ot \cO_S$-module of rank $1$ hence its dual $\pi_* \Omega^1_{\cA/\cM} = e^* \Omega^1_{\cA/\cM}$ is also locally free of rank $1$. Hence, it decomposes under the $\cO_F$-action into a sum of $d$ line bundles 
+\[ \ul{\omega} = \bigoplus_{\sigma \in \BB} \omega_{\sigma} \]
+where each $\omega_{\sigma}$ is a line bundle on $\cM$ identified with the subsheaf
+\[ \omega_{\sigma} = \{ \alpha \in \ul{\omega} \mid \iota(\nu)^*(\alpha) = \sigma(\nu) \alpha : \forall \nu \in \cO_F \}. \]
+Recall that formula~(\ref{eq:kodaira-spencer_isomorphism}) gives the Kodaira-Spencer isomorphism
+\[ \KS : \cT_{\cM / \ZZ} \iso \ul{\Lie}^{\ot 2} \ot \ul{\dd \cc} \iso \ul{\omega}^{\ot -2} \ot \ul{\cc \dd}^{-1}. \]
+We also write
+\[ \ul{\cc \dd}^{-1} = \bigoplus_{\sigma \in \BB} \delta_{\sigma} \]
+Since $(p, \dd \cc) = 1$, these line bundles $\delta_{\sigma}$ are trivial but do carry a nontrivial $G$-action. Then we have an isomorphism
+\[ \cT_{\cM / \ZZ} \cong \bigoplus_{\sigma \in \BB} \omega_\sigma^{-2} \ot \delta_{\sigma} \]
+of $G$-equivariant $\cO_{\cM}$-modules.
+Denote by $\F_\sigma$ the canonical sub-bundles of $\T_{\cM / \ZZ}$ corresponding to the summand $\omega^{-2}_{\sigma} \ot \delta_{\sigma}$. 
+
+\subsection{$p$-curvature and Hasse invariants}
+
+Let $\Theta \subset \BB$ and consider the sub-bundle
+\[ \F_{\Theta} := \bigoplus_{\sigma \in \Theta} \F_{\sigma} \subset \cT_{\cM / W(\kappa)} \]
+which we now show are foliations. The following is Lemma~3.2.1 of \cite{goren_deshalit:foliations_shimura} which we reproduce for the reader's convenience. 
+
+\begin{lemma}
+The sub-bundle $\F_{\Theta}$ is \textit{involutive} meaning that if $\xi, \eta$ are sections of $\F_{\Theta}$ so is $[\xi, \eta]$.
+\end{lemma}
+
+\begin{proof}
+It suffices to prove that each $\F_{\sigma}$ is involutive.
+Recall that the Hodge-theoretic Kodaira-Spencer map is the associated graded of the Gauss-Manin connection
+\[ \nabla : H^1_{\dR}(\cA/\cM) \to H^1_{\dR}(\cA/\cM) \ot_{\cO_{\cM}} \Omega^1_{\cM / W(\kappa)} \]
+which is a flat connection meaning that for sections $\xi, \eta$ of $\cT_{\cM / W(\kappa)}$
+\[ \nabla_{[\xi, \eta]} = \nabla_{\xi} \circ \nabla_{\eta} - \nabla_{\eta} \circ \nabla_{\xi}. \]
+Furthermore, the Gauss-Manin connection is functorial for actions on $\pi : \cA \to \cM$ relative to $\cM$. In particular, it is $\cO_F$-linear meaning that $\nabla_{\xi}$ commutes with $\iota(a)^*$ for $a \in \cO_F$ and hence preserves the $\sigma$-isotypic component $H^1_{\dR}(\cA/\cM)[\sigma]$ for each $\sigma \in \BB$. By definition, $\xi \in \F_{\sigma}$ if for each $\tau \neq \sigma$ the operator $\nabla_{\xi}$ maps the subspace
+\[ \omega_{\tau} = \ul{\omega}[\tau] \subset H^1_{\dR}(\cA/\cM) \]
+to itself since this means the associated graded is trivial on $\omega_{\tau}$ for $\tau \neq \sigma$. Using the flatness relation, if this holds for $\nabla_{\xi}$ and $\nabla_{\eta}$ it also holds for $\nabla_{[\xi, \eta]}$. 
+\end{proof}
+
+Now we reduce mod $p$ and consider the foliations $\F_{\Theta}$ on the special fiber $M := \cM \times_{W(\kappa)} \kappa$. Since these are now foliations in pure characteristic $p$, there is a $p$-curvature map
+\[ \psi_{\F_{\Theta}, p} : \Frob^*_M \F_{\Theta} \to \cT_{M} / \F_{\Theta} \iso \F_{\Theta^{c}}. \]
+It turns out these obstructions to $p$-closedness are related to the \textit{partial Hasse invariants} of a HBAV viewed as functions on $M$. 
+
+\todo{need to define modular forms? CITE GOREN}
+
+\todo{ordinary locus and hasse invariants}
+
+\todo{define hasse invariants} $h_\sigma$ is a Hilbert modular form of weight $p \left[ \phi^{-1} \circ \sigma \right] - \left[ \sigma \right]$. 
+
+\begin{lemma}
+Let $\sigma \neq \tau$. We have,
+\[ \Gamma(M, \omega_{\sigma}^{2p} \ot \omega_{\tau}^{-2}) = 
+\begin{cases}
+0 & \tau \neq \phi \circ \sigma
+\\
+\kappa \cdot h_{\tau}^2 & \tau = \phi \circ \sigma
+\end{cases} \]
+\end{lemma}
+
+\begin{proof}
+This is \cite[Lemma~3.4.1]{goren_deshalit:foliations_shimura} for $M = Y^{\cc}_{00}(N)_{\kappa}$. For $M = Y^{\cc}(N)_{\kappa}$ we use the forget \todo{OKAY I NEED TO FIX THIS}
+\end{proof}
+
+Consider the $p$-curvature map
+\begin{center}
+\begin{tikzcd}
+\Frob_M^* \F_{\sigma} \arrow[r, "\psi_{\F_{\sigma}, p}"] \arrow[d, equals] & \cT_{M} / \F_{\sigma} \arrow[d, equals]
+\\
+% REVIEW: Should the target have $\delta_{\tau}$ (without the $p$-power) since it is $\cT_M / \F_\sigma$ not $\Frob^* (\cT_M / \F_\sigma)$?
+\omega_{\sigma}^{-2p} \ot \delta_{\sigma}^p \arrow[r] & \bigoplus_{\tau \neq \sigma} \omega_{\tau}^{-2} \ot \delta_{\tau}
+\end{tikzcd}
+\end{center}
+By the lemma, only the projection to the $\tau = \phi \circ \sigma$ factor is nonzero and must be a multiple of the square partial Hasse invariant $h_{\tau}^2$. Abusing notation, we write $\psi_{\F_{\sigma}, p} = u_{\sigma} \cdot h_{\phi \circ \sigma}^2$.
+
+\begin{theorem}[cf.\ {\cite[Theorem~3.2.2]{goren_deshalit:foliations_shimura}}]
+The foliation $\F_{\Theta}$ is $p$-closed if and only if $\Theta$ is $\phi$-stable. In particular $\F_{\sigma}$ is $p$-closed if and only if $\BB_{\p} = \{ \sigma \}$ or equivalently $f(\p_{\sigma}/p) = 1$. Otherwise, $u_{\sigma}$ is a unit so $\psi_{\F_{\sigma}, p}$ vanishes exactly on the locus where $h_{\phi \circ \sigma}$ does. 
+\end{theorem}
+
+\subsection{Quotients and Iwahori level structure}
+
+Let $I \subset \Spec{(\cO_F  / p)}$ be a subset of the primes of $\cO_F$ over $p$. We introduce the notation $\p_I$ for the product of the primes in $I$ i.e.\
+\[ \p_I := \prod_{\p \in I} \p. \]
+We also write $\BB_I$ for the union of $\BB_{\p}$ as $\p$ ranges over the primes in $I$,
+\[ \BB_I := \bigcup_{\p \in I} \BB_{\p}. \]
+Notice that any $\phi$-stable subset $\Theta \subset \BB$ is of the form $\BB_I$ for some $I$ since the collection of $\BB_{\p} \subset \BB$ is exactly the $\phi$-orbit decomposition of $\BB$. 
+
+\subsubsection{Hilbert modular schemes with Iwahori level structure at $p$}
+
+\begin{defn}
+Let $\cM^{\cc}$ be a Hilbert modular scheme carrying a universal family of $\cc$-polarized HBAVs. We define the \textit{Iwahori $\Gamma(\p_I)$-level moduli space} $\cM^{\cc}_0(\p_I)$ as the scheme representing the moduli problem parametrizing tuples $(\ul{A}, H)$ over $S$ where $\ul{A} \in \cM^{\cc}$ and $H \subset A[\p_I]$ is a finite $S$-flat $\cO_F$-invariant \textit{isotropic} subgroup scheme of rank $N(\p_I) = p^{\sum_{\p \in I} f(\p / p)}$.  
+\end{defn}
+
+We will now explain the meaning of \textit{isotropic} in this context. Since we can take $\cc$ to be prime-to-$p$, there is a canonical isomorphism $\cc \ot_{\cO_F} A[p] \iso A[p]$ sending $\alpha \ot u \mapsto \iota(\alpha) u$. Thus, the canonical pairing $A[p] \ot A^{\vee}[p] \to \mu_p$ induces, via $\lambda$, a perfect Weil pairing
+\[ \inner{-}{-}_{\lambda} : A[p] \ot A[p] \to \mu_p \]
+restricting to a perfect pairing on $A[\p_I]$ because the Rosati involution corresponds to the trivial involution on $\cO_F$. The subgroups $H \subset A[\p_I]$ considered above are maximal isotropic subgroups for this pairing. 
+\par 
+The scheme $\cM_0^{\cc}(\p_I)$ is not smooth over $\Z[N^{-1}]$ but it is flat and lci hence with normal Cohen-Macaulay total space \cite[Theorem 2.2.2 and Corollary 2.2.3]{pappas:arithmetic}. We will see that its fiber over $p$ is the union of two smooth components. The forgetful map $\pi : \cM_0(\p_I) \to \cM$ is proper. 
+
+\subsubsection{The Atkin-Lehner map}
+
+Let $M^{\cc}$ (resp.\ $M_0^{\cc}(\p_I)$) denote the special fiber of $\cM^{\cc}$ (resp.\ $\cM^{\cc}_0(\p_I)$) over the field $\kappa$ of characteristic $p$. Let $M^{\ord} \subset M^{\cc}$ be the ordinary locus, the open dense subset where the partial Hasse invariants $h_{\sigma}$ are all nonvanishing. A $\bar{\kappa}$-point of $M^{\cc}$ lies in $M^{\ord}$ if and only if the universal abelian variety over that point is ordinary. 
+
+\todo{cite results, these are due to ...  see Goren Shalit p.13 "refs for the results quoted are ..."}
+
+\subsection{Descent to non-PEL Hilbert modular varieties}
+
+As we saw in \S~\ref{section:descent_to_YU}, the foliations $\F_{\Theta}$ descend to $Y_U$. We will abuse notation by denoting the induced foliations on $Y_U$ as $\F_{\Theta}$ as well. 
+
+\begin{theorem} \label{thm:YU_foliations}
+For any subset $\Theta \subset \BB$, the foliation $\F_{\Theta}$ on $M = Y_U \times_{W(\kappa)} \kappa$ satisfies the following:
+\begin{enumerate}
+\item $\F_{\Theta}$ is $p$-closed if and only if $\Theta$ is preserved by $\phi$ in which case $\F$ is of the form $\F_{\BB_I}$ for some index set $I$
+\item the $p$-curvature map of $\F_{\Theta}$ under the identifications
+\begin{center}
+\begin{tikzcd}
+\Frob_{Y_U}^* \F_{\Theta} \arrow[d, equals] \arrow[r, "\psi_{\F_{\Theta}, p}"] & \cT_{M} / \F_{\Theta} \arrow[d, equals]
+\\
+\bigoplus\limits_{\sigma \in \Theta} \F_{\sigma}^{p} \arrow[r] & \bigoplus\limits_{\tau \in \Theta^c} \F_{\tau}
+\end{tikzcd}
+\end{center}
+is given by an off-diagonal matrix whose nonzero terms are maps $\F_{\sigma}^{p} \to \F_{\phi \circ \sigma}$ which are nonzero on the ordinary locus
+\item the quotient by $\F_{\BB_I}$ may be identified with the map
+\[ M \to M \]
+arising from the equivariant maps $s : Y^{\cc}(N)_{\kappa} \to Y^{\cc \p_I}(N)_{\kappa}$ where multiplication by $\p_I$ induces a bijection $\Cl^+(F) \to \Cl^+(F)$. 
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+\todo{}
+\end{proof}
+
+\section{Compactifications}
+
+The basic result behind both the existence of good compactifications of Hilbert modular varieties as well as their algebraic structure is finite generation for a ring of modular forms and that the analytic Hilbert modular varieties are embedded via taking sufficiently many modular forms.
+
+\begin{theorem} \todo{find citation}
+The ring $M_{\bullet}(\Gamma)$ of modular forms at level $\Gamma$ is finitely generated if $\Gamma$ is \textit{congruence} meaning it contains a \textit{congruence subgroup} 
+\[ \Gamma(N) := \ker{(\GL^+_2(\cO_F) \to \GL_2(\cO_F/N))} \]
+Furthermore, these functions separate points and tangent vectors on $\HH^{\Sigma} / \Gamma$.
+\end{theorem}
+
+Therefore, we may define the Baily-Borel compactification:
+\[ \HH^{\Sigma} / \Gamma  \to \ol{\HH^{\Sigma} / \Gamma}^{BB} := \Proj{M_{\bullet}(\Gamma)} \]
+giving $\HH^{\Sigma} / \Gamma$ the structure of a Zariski open inside a \textit{singular} algebraic variety. Furthermore, this Baily-Borel compactification is quite small: the boundary consists of finite many points called \textit{cusps}. These cusps may be resolved by a combinatorial blowup procedure to obtain a toric resolution that looks locally like a toric variety corresponding to a certain polyhedral cone complex that requires choice of additional data \todo{citations}. In the arithmetic setting, we will follow the description of a combinatorially defined arithmetic toric compactification following the exposition of Chai \cite{chai:arithmetic_compactifications}.  The cusps are parametrized by the following data, which, in the arithmetic setting, we take as a definition.
+
+\begin{defn}
+A \textit{cusp} of $Y^{\cc}(N)$ consists of the following data:
+\begin{enumerate}
+\item projective rank-one $\cO_F$-modules $\aa, \bb$
+\item an exact sequence of projective $\cO_F$-modules
+\[ 0 \to \dd^{-1} \aa^{-1} \to H \to \bb \to 0 \]
+\item an isomorphism $\beta : \bb^{-1} \aa \iso \cc$
+\item an $\cO_F$-linear isomorphism
+\[ \gamma : H \ot (\Z / N \Z) \iso \cO_F \ot (\Z / N \Z). \]
+\end{enumerate}
+\end{defn}
+
+The set $C^{\cc}(N)$ of isomorphism classes of cusps of $Y^{\cc}(N)$ is finite. Note when $N = 1$, the set $C^{\cc}(1)$ has cardinality $h = \# \Cl(\cO_F)$ since the exact sequences are split. 
+
+
+\begin{rmk}
+For comparison with Chai's text \cite{chai:arithmetic_compactifications} recall that a projective rank-one module \textit{with positivity} $\cc^{\#} = (\cc, \cc^+)$ is a choice of positive direction in $\cc \ot_{\cO_F, \tau} \RR$ for each $\tau : F \embed \RR$ so that $\cc^+ \subset \cc$ is the subset of elements which are positive for each embedding. Note that every $\cc^{\#}$ is isomorphic to a fractional ideal $\cc' \subset F$ with the notion of positivity inherited from $F$. Indeed, any choice $\gamma \in \cc^+$ of a totally positive element defines an embedding $\cc \embed F$ via $\alpha \mapsto \frac{\alpha}{\gamma}$ compatible with the notions of positivity. 
+\end{rmk}
+
+For each cusp, we define $M := \aa \bb$ and $M^{\vee} := \Hom_{\ZZ}(M, \ZZ) = \Hom_{\cO_F}(M, \dd^{-1}) = \aa^{-1} \bb^{-1} \dd^{-1} \iso \cc \aa^{-2} \dd^{-1}$. Notice that $M^{\vee}$ has a notion of positivity inherited from $\cc$ and $\dd$ as fractional ideals. So we may consider the cone $M_{\RR}^{\vee +} \cup \{ 0 \}$.
+
+\begin{defn}
+A $\Gamma(N)$-\textit{admissible polyhedral cone decomposition} is a collection $\{ \sigma_{\alpha}^c \}_{c \in C^{\cc}(N), \alpha \in I_c}$ of polyhedral cones running over all cusps and for each cusp $c \in C^{\cc}(N)$ an index set $I_c$ satisfying the following conditions:
+\begin{enumerate}
+\item for $c \in C^{\cc}(N)$ the family $\{ \sigma^c_{\alpha} \}_{\alpha \in I_c}$ is a \textit{rational} polyhedral cone decomposition of $M_{\RR}^{\vee +} \cup \{ 0 \}$
+\item the family $\{ \sigma^c_{\alpha} \}_{\alpha \in I_c}$ is invariant under the natural action of $U_N^2$ on $M^{\vee}$ where $U_N = \{ x \in \cO_F^\times \mid u \equiv 1 \mod N \}$ and $\{ \sigma^c_{\alpha} \}_{\alpha \in I_c} / U_N^2$ is a finite conical complex
+\item the assignment $c \mapsto \{ \sigma^c_{\alpha} \}_{\alpha \in I_c}$ is compatible with isomorphisms $c \iso c'$ of cusps of $Y^{\cc}(N)$, where an isomorphism $c \iso c'$ induces an isomorphism $M^{\vee} \iso M'^{\vee}$ in the obvious way.
+\end{enumerate}
+\end{defn}
+
+A $\Gamma(N)$-admissible polyhedral cone decomposition always exists. In fact, we can choose it such that each cone complex $\Sigma^c := \{ \sigma_{\alpha}^c \}_{\alpha \in I_c}$ is $(\cO_F^{\times})^{+} \times \GL_2(\widehat{\cO_F})$-invariant and each cone is \textit{smooth} meaning it is spanned by a subset of a $\Z$-basis of $M^{\vee}$. Such a choice will lead to a smooth compactification so that the natural action on $Y^{\cc}(N)$ extends. \todo{justify existence}
+\par 
+A $\Gamma(N)$-admissible polyhedral cone decomposition will define, at each cusp, a toric variety $S_N(\Sigma_c)$ which is the union of affine toric varieties $\Spec{\Z[\frac{1}{N} M \cap (\sigma_{\alpha}^c)^{\vee}]}$. The toric variety $S_N(\Sigma^c)$ carries a $U_N^2$-action by the invariance of the cone complexes. The main result is that there is a relative toroidal compactification locally modeled on these toric varieties which extends the universal family as a semi-abelian scheme.
+
+\begin{theorem}[{\cite[\S~3.6]{chai:arithmetic_compactifications}}]
+Let $\Sigma = \{ \sigma^c_{\alpha} \}_{c, \alpha}$ be a $\Gamma(N)$-admissible polyhedral cone decomposition. There is an open immersion $j : Y^{\cc}(N) \embed \ol{Y^{\cc}(N)}^{\Sigma}$ of schemes and a semi-abelian scheme $\cG \to \ol{Y^{\cc}(N)}^{\Sigma}$ with an action of $\cO_F$ extending the universal abelian scheme $\cA \to Y^{\cc}(N)$ and an isomorphism of formal schemes
+\[ \varphi : \coprod_{c \in C^{\cc}(N)} S_N(\Sigma^c)^{\wedge} / U_N^2 \times Z^{\cc}(N) \to \left( \ol{Y^{\cc}(N)}^{\Sigma} \right)^{\wedge} \]
+where the left-hand side is formally completed along the toric boundary and the right-hand side is completed along the complement of $j$. Furthermore, the restriction $\cG$ to each formal cusp via $\varphi$ agrees with the Mumford construction \cite{mumford:analytic_degeneration} of a generalized Tate degeneration (see \cite[\S~3]{chai:arithmetic_compactifications} for details).
+\end{theorem}
+
+A choice of a  $(\cO_F^{\times})^{+} \times \GL_2(\widehat{\cO_F})$-invariant $\Gamma(N)$-admissible polyhedral cone decomposition $\Sigma$ then defines a compactification of $Y_U$ via
+\[ j : Y_U = \coprod_{\cc \in \Cl^+(F)} Y^{\cc}(N) / G_{U,N} \embed \coprod_{\cc \in \Cl^+(F)} \ol{Y^{\cc}(N)}^{\Sigma} / G_{U,N} \]
+which we denote by $\ol{Y_U}^{\Sigma}$ or $X_U^{\tor}$ to supress the dependence on $\Sigma$.
+
+
+\section{Existence of Symmetric Forms}
+
+In this section, we consider the existence of symmetric forms inducing the tautological foliations on a Hilbert modular variety. The argument and techniques here largely follow \cite{church:curves_hilbert_modular} with some additional attention paid to the arithmetic situation. We ought first to spell out in detail what we mean by a symmetric form inducing a collection of corank $1$ foliations. Let $X$ be an $n$-dimensional smooth projective variety and $\F_1, \dots, \F_n \subset \cT_X$ be corank one foliations. Recall that $\Sing{(\F_i)} \subset X$ is the subset where $\F_i \subset \cT_X$ fails to be a sub-bundle. We can give $\Sing{(\F_i)}$ a subscheme structure by defining its ideal sheaf via an exact sequence
+\[ 0 \to \F_i \to \cT_X \to N_{\F_i} \ot \I_{\Sing{(\F_i)}} \to 0 \]
+where $N_{\F_i}$, defined as the reflexive hull of the quotient, is a line bundle called the normal bundle of $\F_i$. 
+We say the foliations are \textit{in general position} if wedge dual map,
+\[ N_{\F_1}^{\vee} \ot \cdots \ot N_{\F_n}^{\vee} \to \omega_X \]
+is nonzero. When this holds, we obtain an isomorphism
+\[ N_{\F_1}^{\vee} \ot \cdots \ot N_{\F_n}^{\vee} \iso \omega_X(-H) \]
+where $H \subset X$ is an effective divisor called the \textit{tangential divisor} $H := \tan(\F_1, \dots, \F_n)$ of the foliations $\F_1, \dots, \F_n$. The support of $H$ is the locus where $\F_1, \dots, \F_n$ fail to be in general position. If $\F_i$ is locally cut out as the kernel of a $1$-form $\omega_i$ then $H$ is locally cut out by the vanishing of 
+\[ \omega_1 \wedge \cdots \wedge \omega_n \]
+which defines the map $N_{\F_1}^{\vee} \ot \cdots \ot N_{\F_n}^{\vee} \to \omega_X$. Hence $\Sing{(\F_i)} \subset H$ since locally the singular locus of $\F_i$ is given by $V(\omega_i)$. 
+
+\todo{birational invariance + sections}
+
+\todo{formula for the tangential divisor on toroidal embeddings}
+
+\todo{cusp forms and extension to toroidal compactification}
+
+
+\subsection{On toric compactifications of Hilbert modular varieties}
+
+Let $X_U^{\tor}$ be a toric compactification of the level $U$ Hilbert modular variety $Y_U$ and let $\F_{\Theta}$ denote the extension to $X_U^{\tor}$ of the tautological foliations on $Y_U$. In particular, we consider the corank $1$ foliations $\F^{\sigma} := \F_{\BB \sm \{ \sigma \}}$ for $\sigma \in \BB$. These corank $1$ foliations are particularly important because we can compute the tangency divisor on $X_U^{\tor}$. The following result is called the ``tangency theorem'' in \cite{church:curves_hilbert_modular}. 
+
+\begin{theorem}
+Let $E \subset X_U^{\tor}$ be the (reduced) toroidal boundary divisor. Then $\tan \{ \F^{\sigma} \}_{\sigma \in \BB}  = (d - 1) E$ meaning there is an isomorphism
+\[ \bigotimes_{\sigma \in \BB} N_{\F^{\sigma}}^{\vee} \cong \omega_{X_U^{\tor}}(-(d-1) E) \]
+\end{theorem}
+
+\begin{proof}
+\todo{justify or cite}
+\end{proof}
+
+\begin{rmk}
+If we allow levels $U$ so that $Y_U$ is singular, then the same result is true where $X_U^{\tor}$ is the standard toric resolution of the finite quotient singularities on the toroidal compactification of $Y_U$. Then the above formula is still true when $E$ is the union of the toroidal boundary and the (reduced) exceptional divisor of the resolution.
+\end{rmk}
+
+Therefore, the existence of symmetric differential forms on $X_U^{\tor}$ inducing the tautological foliations is reduced to proving that the divisor $K_{X_U^{\tor}} - (d-1) E$ is $\Q$-effective. This question exactly asks for the existence of certain cusp forms with large vanishing orders at the cusps compared to their level. This question has been substantially studied in the literature; we turn our attention in the next section to surveying the known results.
+
+\subsection{Existence of cusp forms with large vanishing order}
+
+Let $X := (X_U)^{\tor}$ and $E$ be the toroidal boundary and the exceptional divisors of the resolution of any elliptic points. A fundamental question asks for which level subgroups $U$ the Hilbert modular variety $X$ is general type. In dimension $d > 2$, the problem of classifying all such $U$ remains largely open. Hilbert modular forms of weight $k$ and level $U$ naturally define sections of $\cO_X(k(K_X + E))$. Thus, significant effort has been devoted in the literature to studying the $\Q$-effectivity of the divisors $K_X + (1 - \nu) E$ for $\nu \in \Q_{>0}$ with particular interest in reaching $\nu = 1$ where effectivity would show that $X$ is general type. Heuristically, one can think of the linear series $|k(K_X + (1 - \nu) E)|$ as consisting of Hilbert modular forms of weight $k$ and level $U$ ``vanishing to order $k \nu$ at the cusps''. 
+\par 
+Our problem requires going beyond the general type considerations all the way to $\nu = d$. Luckily, in many cases this can be done due to the pioneering work of Tsuyumine \todo{rewrite, do I call Bakker pioneering?} \todo{where to say upper semicontinuity here?}
+
+\todo{existence of cusp forms}
+
+\section{Non-Uniruledness and Descent}
+
+\todo{in the intro mention why this is interesting ``all but finitely many''}
+
+As previously, $F$ is a totally real field of degree $d := [F : \Q]$.
+
+\begin{theorem}
+Let $U \subset \GL_2(\A_F^{\infty})$ be a compact open subgroup and $X_U^{\tor}$ a choice of toroidal compactification of $Y_U$. Suppose that $K_{X_U^{\tor}} - (d-1) E$ is $\Q$-effective (resp.\ big) \footnote{Recall that $X_U^{\tor}$ may be disconnected. We call a divisor on disjoint union of varieties \textit{$\Q$-effective} (resp.\ \textit{big}) if its restriction to each component is effective after taking some multiple (resp.\ is big). Equivalently, since there are finitely many components, we may ask for a uniform multiple so that there is a section which is nonvanishing at the generic point of each component.}. Then for all but finitely many primes $p \in \Spec{\Z}$ each geometric component of the reduction $(X_U^{\tor})_{\FF_p}$ mod $p$ is not uniruled (resp.\ covered by genus $0$ curves). 
+\end{theorem}
+
+\begin{proof}
+First we give an outline of the argument which following the structure of descent developed in the previous chapter. Consider a family of curves dominating a geometric component $X \subset (X_U^{\tor})_{\ol{\FF}_p}$,
+\begin{center}
+\begin{tikzcd}
+\cC \arrow[d, "g"] \arrow[r, "f"] & X
+\\
+T
+\end{tikzcd}
+\end{center}
+which as usual we assume is generically finite. 
+\begin{enumerate}
+\item Replace $f$ by a family of generically immersed curves.
+\item Blow up $X$ to replace $f$ with a quasi-finite covering family.
+\item The existence of a symmetric form inducing the tautological foliations implies that $f$ is tangent to some $\F^{\sigma}$.
+\item Let $\Theta$ be a minimal subset so that $f$ is tangent to $\F_{\Theta}$. By the $p$-curvature identities, $\Theta$ must be $\phi$-stable. Hence $\Theta = \BB_I$ for some subset $I \subset \Spec{(\cO_F / p)}$.
+\item Since $\F_{\Theta} = \F_{\BB_I}$ is $p$-closed, $f$ descends to a quasi-finite generically immersed family $f' : \cC^{(p/T)} \to X / \F_{\Theta}$ along the quotient map $X \to X / \F_{\Theta}$.
+\item We showed that $X' := X / \F_{\Theta}$ is birational to a (possibly different) geometric component of $(X_U^{\tor})_{\ol{\FF}_p}$. Hence, we may repeat the above steps on the smooth locus of the normal variety $X'$. 
+\item At each step, there is a degree inequality $\deg{f_t'^* \omega_{X'}} < \deg{f_t^* \omega_X}$.
+\item Iterating this construction contradicts the finiteness of $\deg{f_t^* \omega_X}$ by infinite descent.
+\end{enumerate}
+% REVIEW: The \end{proof} appears here but the actual proof details follow in subsequent subsections (7.1--7.7). Consider restructuring: either move \end{proof} to after the final subsection, or make this a proof sketch and present the subsections as standalone lemmas/propositions.
+In the subsequent sections, we spell out each step of the argument in more detail.
+\end{proof}
+
+\subsection{Generically immersed replacement}
+
+The argument here is identical to that of \S~\ref{section:formulation_in_families} where we only considered the case of surfaces. Suppose that $f$ is inseparable and consider the cotangent maps
+\[ f^* \Omega_X \to \Omega_{\cC} \to \Omega_{\cC/T} \]
+If this map is identically zero then $\d{f} : \T_{\cC} \to f^* \T_{X}$ kills the foliation $\T_{\cC/T} \subset \T_{\cC}$ induced by $g$ and hence must factor through the relative Frobenius of the map $g$:
+\begin{center}
+\begin{tikzcd}
+\cC \arrow[r, "F_{\cC/T}"'] \arrow[rr, "f", bend left] \arrow[d, "g"] & \cC^{(p/T)} \arrow[d, "g^{(p)}"] \arrow[r, dashed, "f'"'] & X  
+\\
+T \arrow[r, equals] & T
+\end{tikzcd}
+\end{center}
+Now we may repeat this argument to $f'$ giving a diagram,
+\begin{center}
+\begin{tikzcd}
+\cC^{(p/T)} \arrow[r, "f'"] \arrow[d, "F_{\cC/T}"'] & \wt{X}/\wt{\F}_{\Theta} \arrow[d, equals]
+\\
+\vdots \arrow[d] & \vdots \arrow[d, equals]
+\\
+\cC^{(p^{\ell} / T)} \arrow[r, "f^{(\ell)}", dashed] & \wt{X}/\wt{\F}_{\Theta}
+\end{tikzcd}
+\end{center}
+until
+\[ f^{(\ell)*} \Omega_X \to \Omega_{\cC^{(p^{\ell}/T)}} \to \Omega_{\cC^{(p^{\ell} / T)}/T} \]
+is nonzero. This must happen after finitely many steps since $\deg{f'} = \frac{1}{p} \deg{f}$ and $\deg{f}$ is finite. Set $f' := f^{(\ell)}$. After the factorization terminates, the pullback map is nonzero. Therefore, restricting to the general fiber, $f_t'^* \Omega_X \to \Omega_{\cC'_t}$ is nonzero hence surjective at the generic point so $f'_t : \cC'_t \to X$ is generically immersive. 
+Now we replace $f$ by $f'$ and shrink $T$ so that we may assume that $f : \cC \to X$ is generically immersive on each fiber.
+
+\subsection{Quasi-finite replacement}
+
+Using Lemma~\ref{lemma:replace_by_quasi-finite} we get a birational map $j : \wt{X} \to X$ so that after shrinking $T$ further the map $f : \cC \to X$ factors through a quasi-finite map $\wt{f} : \cC \to \wt{X}$. Note, if we want to take $\wt{X}$ to be smooth, we may have to give up properness. However, this is no obstacle because the generic curve $\cC_t$ is mapped to $\wt{X}$ so degrees and intersection numbers still behave well. Now we record the number $A := \deg{\wt{f}^*_t \omega_{\wt{X}}}$. This number may have increased from the analogous quantity computed for the original family mapping to $X$ but we will not further increase it in the argument. Therefore, $A$ is an upper bound (possibly depending on the family of curves as well as on the geometry of $X$) for the number of iterations possible in the subsequent descent steps.
+
+
+\subsection{Tangency to the tautological foliations}
+
+Let $\{ \F^{\sigma} \}_{\sigma \in \BB}$ be the collection of tautological corank $1$ foliations on $X$. By hypothesis $K_X - \tan( \{ \F^{\sigma} \})$ is $\Q$-effective implies that the induced foliations $\wt{\F}^{\sigma}$ on $\wt{X}$ also induce a $\Q$-effective divisor $K_{\wt{X}} - \tan \{ \wt{\F}^{\sigma} \}$. By the isomorphism
+\[ \cO(K_{\wt{X}} - \tan \{ \wt{\F}^{\sigma} \}) = \bigotimes_{\sigma \in \BB} N^{\vee}_{\wt{\F}^{\sigma}} \embed \Sym^{d} \Omega_{\wt{X}} \]
+there exists a symmetric $md$-form $\omega \in H^0(\wt{X}, \Sym^{md} \Omega_{\wt{X}})$ inducing the foliations. This form vanishes along a divisor $D$ in the linear series $| m(K_{\wt{X}} - \tan \{ \wt{\F}^{\sigma} \}) |$ by construction. If $\cC \to T$ is a family of genus $0$ curves then $\wt{f}^* \omega = 0$ in $\Sym^{md} \Omega_{\cC/T}$ and if $K_{\wt{X}} - \tan \{ \wt{\F}^{\sigma} \}$ is big and $\cC \to T$ is a family of genus $1$ curves then likewise $\wt{f}^* \omega = 0$ in $\Sym^{md} \Omega_{\cC/T}$ because $\cC$ is a covering family so the generic member must intersect $D$ positively. The natural pullback map
+\[ \wt{f}^* \left( \bigotimes_{\sigma \in \BB} N^{\vee}_{\wt{\F}^{\sigma}} \right)^{\ot m} \to \wt{f}^* \Sym^{md} \Omega_{\cC} \xrightarrow{\wt{f}^*} \Sym^{md} \Omega_{\cC/T} = \Omega_{\cC/T}^{\ot md} \]
+is the $m$-th tensor power of the product of the pullback maps 
+\[ \varphi_{\sigma} : \wt{f}^* N^{\vee}_{\wt{\F}^{\sigma}} \to \wt{f}^* \Omega_{\cC} \xrightarrow{\wt{f}^*}  \Omega_{\cC/T}. \]
+Since these are maps of line bundles, we conclude that one of the maps $\{ \varphi_{\sigma} \}_{\sigma \in \BB}$ is identically zero. Dualizing, we can rephrase this as saying that for a particular $\sigma_0 \in \BB$ there is a factorization,
+\begin{center}
+\begin{tikzcd}
+& & \wt{f}^* N_{\wt{\F}^{\sigma_0}}
+\\
+\cT_{\cC/T} \arrow[rrd, dashed] \arrow[rru, "0"] \arrow[r, hook] & \cT_{\cC} \arrow[r, "\d{\wt{f}}"] & \wt{f}^* \cT_{\wt{X}} \arrow[u]
+\\
+& & \wt{f}^* \F^{\sigma_0} \arrow[u, hook]
+\end{tikzcd}
+\end{center} 
+To prove the dashed arrow exists, we need to know that the sequence,
+\[ 0 \to \wt{f}^* \F^{\sigma_0} \to \wt{f}^* \cT_{\wt{X}} \to N_{\wt{\F}^{\sigma_0}} \]
+is still right-exact after the application of $\wt{f}^*$. This is true after possibly shrinking $T$ since $\wt{f}$ is quasi-finite so the preimage of the singular locus of $\wt{\F}^{\sigma_0}$ (which is the locus where $\F^{\sigma_0}$ fails to be a sub-bundle and hence the sequence is locally split) lies in codimension $\ge 2$ and hence does not dominate $T$. 
+
+\subsection{Minimal tangent foliations}
+
+We now know that $\wt{f}$ is tangent to some corank $1$ foliation $\wt{\F}^{\sigma_0}$. This is shorthand for the relative tangent bundle factoring through $\wt{\F}^{\sigma_0}$ in the pullback map,
+\[ \cT_{\cC/T} \to \wt{f}^* \wt{\F}^{\sigma_0} \subset \wt{f}^* \cT_{\wt{X}}. \]
+We now consider a minimal subset $\Theta \subset \BB \sm \{ \sigma_0 \}$ so that there is a further factorization
+\[ \cT_{\cC/T} \to \wt{f}^* \wt{\F}_{\Theta} \subset \wt{f}^* \wt{\F}^{\sigma_0} \subset \wt{f}^* \cT_{\wt{X}}. \]
+We claim that, up to possibly further shrinking $T$, this set $\Theta$ consists exactly of those $\sigma \in \BB$ such that the pullback map
+\[ \varphi_{\sigma} : \wt{f}^* N^{\vee}_{\wt{\F}^{\sigma}} \to \wt{f}^* \Omega_{\cC} \xrightarrow{\wt{f}^*}  \Omega_{\cC/T} \]
+is nonzero. Indeed, if $\cT_{\cC/T} \to \wt{f}^* \cT_{\wt{X}}$ factors through $\wt{f}^* \wt{\F}_{\Theta}$ it is clear these pullback maps vanish for each $\sigma \in \Theta^c$ because $\wt{\F}_{\Theta} \subset \wt{\F}^{\sigma}$ for $\sigma \in \Theta^c$. Conversely, by definition
+\[ \wt{\F}_{\Theta} := \left( \bigcap_{\sigma \in \Theta^c} \F^{\sigma} \right)^{\vee \vee} \]
+If $\varphi_{\sigma}$ is zero then, after possibly shrinking $T$, the pullback map $\cT_{\cC/T} \to \wt{f}^* \cT_{\wt{X}}$ factors through each $\wt{f}^* \wt{\F}^{\sigma}$ and hence also the intersection. This description of $\Theta$ as the $\sigma \in \BB$ so that $\varphi_{\sigma}$ is nonzero will be important later. 
+\par 
+Next we claim that $\Theta$ is $\phi$-invariant. This arises from the compatibility of the $p$-curvature maps \todo{CITE}
+\begin{center}
+\begin{tikzcd}[column sep = large]
+\Frob^*_{\cC} \cT_{\cC/T} \arrow[d, "\d{\wt{f}}"] \arrow[r, "\psi_{\cT_{\cC/T}, p}"] & g^* \cT_{T} \arrow[d, "\d{\wt{f}}"]
+\\
+\wt{f}^* \Frob^*_{\wt{X}} \wt{\F}_{\Theta} \arrow[r, "\wt{f}^* \psi_{\wt{\F}_{\Theta},p}"] & \wt{f}^* \cT_{\wt{X}} / \wt{\F}_{\Theta} 
+\end{tikzcd}
+\end{center}
+but the map $\psi_{\cT_{\cC/T}, p}$ vanishes because $\cT_{\cC/T}$ is the relative tangent bundle of an actual morphism. By Theorem~\ref{thm:YU_foliations}, on the open set of $\wt{X}$ isomorphic to a component of the special fiber of $Y_U$ there is an isomorphism
+\begin{center}
+\begin{tikzcd}
+\Frob_{Y_U}^* \F_{\Theta} \arrow[d, equals] \arrow[r, "\psi_{\F_{\Theta}, p}"] & \cT_{M} / \F_{\Theta} \arrow[d, equals]
+\\
+\bigoplus\limits_{\sigma \in \Theta} \F_{\sigma}^{p} \arrow[r] & \bigoplus\limits_{\tau \in \Theta^c} \F_{\tau}
+\end{tikzcd}
+\end{center}
+where the bottom map is zero except for the components $\F_{\sigma}^{p} \to \F_{\phi \circ \sigma}$ which are nonzero on the ordinary locus. Therefore, if $\Theta$ is not $\phi$-stable, there exists $\sigma \in \Theta$ such that $\phi \circ \sigma \in \Theta^c$. Then we can consider the map
+\[ \Frob^* \cT_{\cC/T} |_{\wt{f}^{-1}(Y_U)} \to \wt{f}^* \bigoplus\limits_{\sigma \in \Theta} \F_{\sigma}^{p} \to \wt{f}^* \F_{\sigma}^p \xrightarrow{u_{\sigma} h_{\phi \circ \sigma}^2} \F_{\phi \circ \sigma} \]
+which must be zero by the compatibility of $p$-curvature diagram. Therefore, 
+\[ \cT_{\cC/T}^{\ot p} |_{\wt{f}^{-1}(Y_U)} = \Frob^* \cT_{\cC/T} |_{\wt{f}^{-1}(Y_U)} \to \wt{f}^* \F_{\sigma}^p \] vanishes, but this is the $p$-th tensor power of the map $\cT_{\cC/T} |_{\wt{f}^{-1}(Y_U)} \to \wt{f}^* \F_{\sigma}$ which must vanish as well. The projection to $\F_{\sigma}$ vanishing means exactly that $\wt{f}$ is tangent to $\wt{\F}^{\sigma}$ i.e.\ that $\varphi_{\sigma} = 0$ contradicting $\sigma \in \Theta$. Hence $\Theta$ is $\phi$-closed so we may write $\Theta = \BB_I$ for some $I \subset \Spec{(\cO_F / p)}$.
+
+\subsection{Descent of the morphism along the foliation}
+
+Since $\wt{f}$ is tangent to $\wt{\F}_{\Theta}$ the morphism descends along the quotient $\pi : X \to X / \wt{\F}_{\Theta}$ in the sense that there is a diagram,
+\begin{center}
+\begin{tikzcd}
+\cC \arrow[r, "\wt{f}"] \arrow[d, "F_{\cC/T}"'] & \wt{X} \arrow[d]
+\\
+\cC^{(p/T)} \arrow[r, dashed] \arrow[d, "F_{\cC/T}"'] & \wt{X}/\wt{\F}_{\Theta} \arrow[d, equals]
+\\
+\vdots \arrow[d] & \vdots \arrow[d, equals]
+\\
+\cC^{(p^{\ell} / T)}\arrow[r, "f'", dashed] & \wt{X}/\wt{\F}_{\Theta}
+\end{tikzcd}
+\end{center}
+where we factor out relative Frobenii of $\cC \to T$ until $f' : \cC^{(p^{\ell}/T)} \to \wt{X} / \wt{\F}_{\Theta}$ is generically an immersion on fibers. If $\wt{f}$ is generically an embedding then $\ell = 1$ automatically, I think this may be true more generally but it will not affect the structure of the argument to consider any value of $\ell \ge 1$. Furthermore, notice that $\wt{f}' : \cC^{(p^{\ell}/T)} \to \wt{X} / \wt{\F}_{\Theta}$ is quasi-finite since the other maps in the diagram are all quasi-finite.  
+
+\subsection{Birational identification of the quotient}
+
+By Theorem~\ref{thm:YU_foliations}, $X' := (\wt{X} / \wt{\F}_{\Theta})^{\smooth}$ is birational to an irreducible component of $(Y_U)_{\ol{\FF}_p}$ which has a toroidal compactification isomorphic to an irreducible component of $(X_U^{\tor})_{\ol{\FF}_p}$. We can pull back the tautological foliations from $X_U^{\tor}$ to give foliations on $X'$ which have a $\Q$-effective tensored conormal bundle \todo{cite the birational invariance}. Hence we obtain the structure of corank $1$ foliations $\{ \F'^{\sigma} \}_{\sigma \in \BB}$ indexed by the same set $\BB$ which are induced by the Hilbert modular tautological foliations on some open set of $X'$ isomorphic to an open of $(Y_U)_{\ol{\FF}_p}$. Therefore, we can repeat the above argument for the generically immersed quasi-finite covering family $f' : \cC^{(p^{\ell}/T)} \to X'$. Note, since we shrunk $T$ in previous steps so that $\wt{f} : \cC \to \wt{X}$ does not hit the singular locus of $\wt{\F}_{\Theta}$, this implies that $f'$ maps into the smooth locus of $\wt{X} / \wt{\F}_{\Theta}$. 
+
+\subsection{The degree inequality}
+
+The final step is to prove that the canonical degree decreases after the prior construction, in particular that 
+\[ \deg{f'^*_t \omega_{X'}} < \deg{\wt{f}^* \omega_{\wt{X}}}. \]
+Our main tool is the relationship between the canonical divisors for the quotient by a foliation \todo{(CITE IN THE PAPER!)}
+\[ K_{\wt{X}} = \pi^* K_{\wt{X}/\wt{\F}_{\Theta}} + (p-1) c_1(\wt{\F}_{\Theta}). \]
+Restricting to the smooth locus of $\F_{\Theta}$ and pulling back along $\wt{f}$ we obtain,
+\[ \deg{\wt{f}_t^* \omega_{\wt{X}}} = \deg{\wt{f}_t^* \pi^* \omega_{X'}} + (p-1) \deg{\wt{f}_t^* \wt{\F}_{\Theta}}. \]
+Moreover, $\wt{f}^* \pi^* \omega_{X'} = (F^{\ell}_{\cC/T})^* f'^* \omega_{X'}$ and therefore, 
+\begin{equation} \label{eq:degree_equality_theta}
+\deg{\wt{f}_t^* \omega_{\wt{X}}} = p^{\ell} \deg{f'^* \omega_{X'}} + (p-1) \deg{\wt{f}_t^* \wt{\F}_{\Theta}}.
+\end{equation}
+Let $H  := \tan \{ \wt{\F}^{\sigma} \}$ be the tangential divisor of the induced foliations. This is effective by definition. Let $N_{\wt{\F}_{\Theta}} := \cT_{\wt{X}} / \wt{\F}_{\Theta}$ denote the normal sheaf of $\wt{\F}_{\Theta}$. 
+Since 
+\[ \bigcap_{\sigma \in \Theta^c} \F^{\sigma} \subset \wt{\F}_{\Theta}  = \left( \bigcap_{\sigma \in \Theta^c} \F^{\sigma} \right)^{\vee \vee} \]
+and $N_{\wt{\F}_{\Theta}}$ is torsion-free by definition,
+there is an exact sequence
+\[ 0 \to N_{\wt{\F}_{\Theta}} \to \bigoplus_{\sigma \in \Theta^c} N_{\wt{\F}^{\sigma}} \to \coker \to 0 \]
+of coherent sheaves on $\wt{X}$ where $\coker$ is supported inside $H$. Therefore, 
+\[ c_1(\wt{\F}_{\Theta}) = c_1(\cT_{\wt{X}}) - c_1(N_{\wt{\F}_{\Theta}}) = -K_{\wt{X}} - \sum_{\sigma \in \Theta^c} c_1(N_{\wt{\F}^{\sigma}}) + c_1(\coker). \]
+Here $c_1(\coker)$ is an effective divisor supported in $H$. Recall the defining isomorphism of $H$,
+\[ \cO_{\wt{X}}(K_{\wt{X}} - H) \cong \bigotimes_{\sigma \in \BB} N_{\wt{\F}^{\sigma}}^{\vee} \]
+which we can rearrange to give
+\[ \sum_{\sigma \in \BB} c_1(N_{\wt{\F}^{\sigma}}) - H = -K_{\wt{X}} \]
+and plugging in for $-K_{\wt{X}}$ we obtain
+\begin{equation} \label{eq:chern_foliation}
+c_1(\wt{\F}_{\Theta}) = \sum_{\sigma \in \Theta} c_1(N_{\wt{\F}^{\sigma}}) - H + c_1(\coker).
+\end{equation}
+Now plugging (\ref{eq:chern_foliation}) into the canonical bundle relation
+\[ \pi^* K_{\wt{X} / \wt{\F}_{\Theta}} = K_{\wt{X}} - (p-1) c_1(\wt{\F}_{\Theta}) \]
+gives
+\begin{align} \label{eq:canonical_divisor_relation_theta}
+\pi^* K_{\wt{X} / \wt{\F}_{\Theta}} &= K_{\wt{X}} + (p-1) H - (p-1) \left[ \sum_{\sigma \in \Theta} c_1(N_{\wt{\F}^{\sigma}}) + c_1(\coker) \right]
+\\
+&= p K_{\wt{X}} - (p-1) \left[ K_{\wt{X}} - H + \sum_{\sigma \in \Theta} c_1(N_{\wt{\F}^{\sigma}}) + c_1(\coker) \right]
+\end{align}
+Notice that the symmetric form $\omega$ witnesses that $K_{\wt{X}} - H$ is $\Q$-effective and hence intersects the generic curve in $\cC$ nonnegatively. Combining this with the calculations of (\ref{eq:degree_equality_theta}) we obtain
+\[ \deg{f'^* \omega_{X'}} = \frac{1}{p^{\ell-1}} \deg{\wt{f}^* \omega_{\wt{X}}} - \frac{p-1}{p^{\ell-1}} \deg{\wt{f}_t^* \left[ K_{\wt{X}} - H + \sum_{\sigma \in \Theta} c_1(N_{\wt{\F}^{\sigma}}) + c_1(\coker) \right]} \]
+However, $\deg{f_t^* [K_{\wt{X}} - H]} \ge 0$ because $K_{\wt{X}} - H$ is $\Q$-effective and $\deg{f_t^* c_1(\coker)} \ge 0$ because $c_1(\coker)$ is effective. Moreover, for $\sigma \in \Theta$ we showed that the maps
+\[ \varphi_{\sigma} : \wt{f}^* N^{\vee}_{\wt{\F}^{\sigma}} \to \Omega_{\cC/T} \]
+are each nonzero. Dualizing, the nonzero and hence injective map of line bundles,
+\[ \varepsilon_{\sigma}^{\vee} : \cT_{\cC/T} \to \wt{f}^* N_{\wt{\F}^{\sigma}} \]
+implies that $\deg{\wt{f}^* N_{\wt{\F}^{\sigma}}} \ge 2 - 2g$ where $g$ is the genus of the fiber $\cC_t$. If $g = 0$ then each $\deg{\wt{f}^* N_{\wt{\F}^{\sigma}}} \ge 2$ and hence 
+\[ \deg{f'^* \omega_{X'}} < \frac{1}{p^{\ell-1}} \deg{\wt{f}^* \omega_{\wt{X}}} \le \deg{\wt{f}^* \omega_{\wt{X}}} \]
+If $g = 1$ we only conclude that each $\deg{\wt{f}^* N_{\wt{\F}^{\sigma}}} \ge 0$. However, in this case we also assumed that $K_{\wt{X}} - H$ is big and hence $\deg{\wt{f}_t^* [K_{\wt{X}} - H]} > 0$ is strictly positive. Therefore, we also obtain a strict degree inequality
+\[ \deg{f'^* \omega_{X'}} < \frac{1}{p^{\ell-1}} \deg{\wt{f}^* \omega_{\wt{X}}} \le \deg{\wt{f}^* \omega_{\wt{X}}} \]
+in the $g = 1$ case.
+
+\subsection{Contradiction by infinite descent}
+
+Because $X'$ is birational to a Hilbert modular variety with $\Q$-effective $K - \tan$ we can repeat the argument to obtain a sequence of generically immersed families of curves,
+\begin{center}
+\begin{tikzcd}
+\cC \arrow[r, "\wt{f}"] \arrow[d, "F^{\ell^{(1)}}_{\cC/T}"'] & \wt{X} \arrow[d]
+\\
+\cC^{(p^{\ell^{(1)}}/T)} \arrow[r, "f^{(1)}"'] \arrow[d, "F^{\ell^{(2)} - \ell^{(1)}}_{\cC/T}"'] & X^{(1)} \arrow[d]
+\\
+\cC^{(p^{\ell^{(2)}} / T)}\arrow[r, "f^{(2)}"] \arrow[d] & X^{(2)} \arrow[d]
+\\
+\vdots & \vdots
+\end{tikzcd}
+\end{center}
+The degree inequality implies that 
+\[ \deg{f^{(n)*} \omega_{X^{(n)}}} < \deg{f^{(n-1)*} \omega_{X^{(n-1)}}} < \cdots < \deg{f^{(0)*} \omega_{X^{(0)}}} = \deg{\wt{f}^* \omega_{\wt{X}}} = A. \]
+But these numbers are positive since $K_{X^{(n)}}$ is $\Q$-effective for each $n$ by our assumptions. Therefore, $A$ cannot strictly decrease an infinite number of times which contradicts the existence of the initial covering family of $X$. This completes the proof by infinite descent. 
+
+% \section{TODO}
+%
+% \begin{enumerate}
+% \item modular scheme vs modular variety
+% \item go back to the quaterionic case and make treatment homogonize with the shimura data here
+% \item 3.1. Automorphic line bundles (Deligne-Pappas condition / Rapoport condition equivalence)
+% \item fix notation for discriminant of number field
+% \end{enumerate}
+
+\section{Notation List}
+
+\begin{enumerate}
+\item $F$ a totally real number field of degree $d$
+\item $\Cl^+(F)$ the narrow class group of $F$
+\item $\A^{\infty}_F$ (resp.\ $\A^{\infty}$) the finite adeles of $F$ (resp.\ $\Q$)
+\item $\SS$ the Deligne torus $\Res^{\CC}_{\RR} \mathbb{G}_{m,\CC}$
+\item $G^{\ad} := G / Z(G)$ the adjoint group
+\item $G^{\der} := [G,G]$ the derived group
+\item we will sometimes write $\GL_n^+(F)$ in lieu of $\GL_n(F)^+$.
+\end{enumerate}
+
+\ifSubfilesClassLoaded{%
+  \bibliographystyle{alpha}
+  \bibliography{refs}
+}{}
+
+\end{document}

@@ -1,0 +1,51 @@
+\ProvidesPackage{aaron-style}[2026/04/05 v1.0 Aaron Landesman-style thesis formatting]
+
+% =============================================================================
+% Aaron-style aesthetic overrides for Stanford thesis
+%
+% Usage: add \usepackage{aaron-style} to main.tex (after suthesis-2e, before macros)
+%        Comment out the \usepackage line to revert to default CM / double-spaced look.
+% =============================================================================
+
+% --- 1. Font: Times New Roman (text + math) ---------------------------------
+%     Registrar lists Times New Roman as "preferred"
+%     Must load amsmath/amsthm/amssymb FIRST to avoid \openbox/\Bbbk conflicts
+\usepackage{amsmath,amsfonts,amsthm,amssymb}
+\usepackage[T1]{fontenc}
+\usepackage{newtxtext,newtxmath}
+
+% --- Prevent colonequals from loading (conflicts with newtxmath) -------------
+\@namedef{ver@colonequals.sty}{9999/01/01}
+
+% --- 2. Spacing: 1.5 lines instead of double --------------------------------
+%     Registrar allows "one-and-a-half or double-spaced"
+\usepackage{setspace}
+\onehalfspacing
+
+% --- 3. Margins: use geometry for cleaner specification ----------------------
+%     1" all sides + 0.5" binding offset = 1.5" inner margin
+\usepackage[margin=1in,bindingoffset=0.5in]{geometry}
+
+% --- 4. Epigraphs: chapter-opening quotations --------------------------------
+\usepackage{epigraph}
+
+% --- 5. Hyperlink colors: blue citations (matching Aaron's setup) ------------
+\AtBeginDocument{%
+  \@ifpackageloaded{hyperref}{%
+    \hypersetup{citecolor=blue}%
+  }{}%
+}
+
+% --- 7. Headers: prevent long section titles from overflowing ----------------
+%     Use \small in headers and clip to text width via a box
+\makeatletter
+\AtBeginDocument{%
+  \def\@oddhead{\makebox[\textwidth][l]{\small\slshape\rightmark}\hspace{1em}\thepage}%
+  \def\@evenhead{\thepage\hspace{1em}\makebox[\textwidth][r]{\small\slshape\leftmark}}%
+}
+\makeatother
+
+% --- 6. Todo notes: margin notes instead of inline red text ------------------
+%     Predefine \todo so macros.sty's \newcommand doesn't conflict
+\usepackage[colorinlistoftodos, textsize=tiny]{todonotes}
+\let\todosaved\todo

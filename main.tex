@@ -15,9 +15,14 @@
 \usepackage{longtable}  % tables spanning multiple pages
 \usepackage[colorlinks=true, allcolors=blue]{hyperref}  % URLs
 
+% Aaron-style formatting (Times font, 1.5 spacing, etc.)
+% Comment out the next line to revert to default Computer Modern / double-spaced
+\usepackage{aaron-style}
+
 % thesis-specific macros (AG commands, theorem environments, etc.)
 \usepackage{macros}
 \usepackage{comment}  % for \begin{comment}...\end{comment} blocks
+\usepackage{subfiles}  % compile chapters independently
 
 % use png first, otherwise pdf
 % (useful for faster compile times, for final submission switch order)
@@ -46,17 +51,17 @@
 \include{preface_abstract}
 \include{preface_acknowledgements}
 \afterpreface
-\include{ch_intro}
-\include{ch_hyperbolicity}
-\include{ch_bogomolov}
-\include{ch_fermat}
-\include{ch_pcurvature}
-\include{ch_obstructions}
-\include{ch_hurwitz}
-\include{ch_descent}
-\include{ch_hilbert}
-\include{ch_jets}
-\include{ch_conclusion}
+\subfile{ch_intro}
+\subfile{ch_hyperbolicity}
+\subfile{ch_bogomolov}
+\subfile{ch_fermat}
+\subfile{ch_pcurvature}
+\subfile{ch_obstructions}
+\subfile{ch_hurwitz}
+\subfile{ch_descent}
+\subfile{ch_hilbert}
+\subfile{ch_jets}
+\subfile{ch_conclusion}
 
 % uncomment below if you have an appendix
 % \appendix

@@ -1,10 +1,12 @@
+\documentclass[main.tex]{subfiles}
+\begin{document}
 \chapter{Obstructions to Unirationality for Product-Quotient Surfaces}
 
 %% All commands are in macros.sty
 
 \section{Introduction}
 
-Let $X$ be a smooth projective variety over $\ol{\FF}_p$. In analogy with the case of elliptic curves, we say that $X$ is \textit{supersingular} if the $q$-Frobenius action on $H^i_{\et}(X, \Q_{\ell})$, for some $\ell \neq p$, has all its eigenvalues equal to $q^{i/2}$ times a root of unity for each $i$. The Tate conjecture predicts, when odd cohomology vanishes, supersingularity is equivalent to \textit{Shioda supersingularity}: that $H^{2i}_{\et}(X, \Q_{\ell}(i))$ is spanned by algebraic cycles.
+Let $X$ be a smooth projective variety over $\ol{\FF}_p$. In analogy with the case of elliptic curves, we say that $X$ is \textit{supersingular} if the $q$-Frobenius action on $H^i_{\et}(X, \Q_{\ell})$, for some $\ell \neq p$, has all its eigenvalues equal to $q^{i/2}$ times a root of unity for each $i$. The Tate conjecture predicts that, when odd cohomology vanishes, supersingularity is equivalent to \textit{Shioda supersingularity}: that $H^{2i}_{\et}(X, \Q_{\ell}(i))$ is spanned by algebraic cycles.
 \par
 In 1977, Shioda made the following conjecture predicting when a surface over an algebraically closed field $k$ of characteristic $p > 0$ is unirational \cite{Shioda:unirational}.
 
@@ -13,15 +15,15 @@ In 1977, Shioda made the following conjecture predicting when a surface over an 
 
 In this paper, we construct a counterexample to Shioda's conjecture. The examples, whose invariants are given in \S\ref{section:case_D7}--\ref{section:case_A4}, will be the minimal resolution $X$ of certain diagonal quotients $(C \times C)/G$ where $C$ is a Hurwitz curve of genus $14$ with automorphism group $\PSL_2(\FF_{13})$ and $G$ is any copy of the groups $D_{6}, D_{7}$ or $A_4$ inside $\PSL_2(\FF_{13})$. These surfaces are defined over the number field $K_+ = \Q(\cos{\frac{2 \pi}{7}})$ and their reduction at infinitely many places will violate Shioda's conjecture. The first few such characteristics are $1091, 2339, 6551, 7643, \dots$ (see \S\ref{sec:shimura}).   We will actually conclude the following stronger result about curves covering the reduction of $X$.
 
-\begin{Lthm} \label{intro:thm:example}
+\begin{thm} \label{intro:thm:example}
 Let $X$ be one of the surfaces described above. For each prime $\p \subset K_+$ of good reduction, its reduction $X_{\p}$ is not covered by rational or elliptic curves. However, $X$ is simply-connected and $X_{\p}$ is Shioda supersingular for infinitely many $\p$.
-\end{Lthm}
+\end{thm}
 
-First, we demonstrate new methods to prove that a surface in positive characteristic is not unirational or even covered by elliptic curves. This uses the strategy of Bogomolov's proof \cite{Bog} of finiteness for rational and elliptic curves on a general type surface satisfying $c_1^2 > c_2$ along with an argument by infinite descent. This strategy leads to the following criterion for product-quotient surfaces, those surfaces birational to a diagonal quotient $(C_1 \times C_2) / G$ where $C_i$ are smooth projective curves equipped with faithful $G$-actions.
+First, we demonstrate new methods to prove that a surface in positive characteristic is not unirational or even covered by elliptic curves. This uses the strategy of Bogomolov's proof \cite{bogomolov:families_curves} of finiteness for rational and elliptic curves on a general type surface satisfying $c_1^2 > c_2$ along with an argument by infinite descent. This strategy leads to the following criterion for product-quotient surfaces, those surfaces birational to a diagonal quotient $(C_1 \times C_2) / G$ where $C_i$ are smooth projective curves equipped with faithful $G$-actions.
 
-\begin{Lthm}[Theorem~\ref{thm:obstruction} + Theorem~\ref{thm:obstruction_elliptic}] \label{intro:thm:criterion}
+\begin{thm}[Theorem~\ref{thm:obstruction} + Theorem~\ref{thm:obstruction_elliptic}] \label{intro:thm:criterion}
 Let $\pi : X \to (C_1 \times C_2)/G$ be a product-quotient surface defined over $\FF_p$. If $X$ carries a symmetric $2m$-form $\omega \in H^0(X, \Sym^{2m} \Omega_X)$ that is ``diagonal'', i.e.\ locally $\omega = f(z_1, z_2) \d{z_1}^m \d{z_2}^m$ (see Definition~\ref{def:diagonal}), then $X$ has only finitely many rational curves of fixed degree. If the vanishing locus of $\omega$ contains a big divisor then there are only finitely many elliptic curves on $X$ of fixed degree.
-\end{Lthm}
+\end{thm}
 
 The reason for the assumption that $C_1, C_2$ and the $G$-actions are defined over $\FF_p$ is so that we do not need to worry about ``asymmetric Frobenius twists'' of $X$ (see the discussion before Theorem~\ref{thm:obstruction}). In the main text, we will remove this unnecessary assumption at the cost of additional notation and strengthening the hypothesis by requiring symmetric forms on these related ``asymmetric twists''. This more general statement is necessary in the proof of Theorem~\ref{intro:thm:example}.
 \par 
@@ -72,12 +74,12 @@ If, for all $a,b \ge 0$, the surface $X^{a,b}$ carries a diagonal symmetric form
 In particular, this sequence of diagonal symmetric forms give an obstruction to unirationality of $X$. Any section of a tensor power of $\Omega_X$ (or of any Schur functor) obstructs separable unirationality via pulling back to $\P^2$. The difficulty is in ruling out inseparable maps $\P^2 \rat X$. Instead of worrying about this problem, we study the rational curves individually. This has the advantage that, up to reparameterization, we may assume the curves are generically immersed and hence restriction of forms works as in characteristic zero. 
 
 \begin{example}
-It is important to note that the existence of some (not necessarily diagonal) symmetric form is not sufficient to obstruct unirationality. For example, Mumford  \cite{pathologies} constructed Enriques surfaces $X$ in characteristic $2$ carrying a $1$-form $\omega$. These $X$ are all unirational, in fact an Enriques surface in characteristic $2$ has a $1$-form if and only if it is unirational by \cite[Proposition 1.3.8]{enriques} and \cite{enriques_unirational}. In this case, the foliation $\F$ associated to $\omega$ defines a quotient map $X \to X / \F$ with $X / \F$ either rational or a unirational K3. We learn that all but finitely many rational curves on $X$ descend to $X / \F$, but of course there are many such curves. 
+It is important to note that the existence of some (not necessarily diagonal) symmetric form is not sufficient to obstruct unirationality. For example, Mumford  \cite{mumford:pathologies} constructed Enriques surfaces $X$ in characteristic $2$ carrying a $1$-form $\omega$. These $X$ are all unirational, in fact an Enriques surface in characteristic $2$ has a $1$-form if and only if it is unirational by \cite[Proposition 1.3.8]{cossec:enriques_surfaces} and \cite{liedtke:enriques_unirational}. In this case, the foliation $\F$ associated to $\omega$ defines a quotient map $X \to X / \F$ with $X / \F$ either rational or a unirational K3. We learn that all but finitely many rational curves on $X$ descend to $X / \F$, but of course there are many such curves. 
 \end{example}
 
 \subsection{Ekedahl's theory of positive characteristic foliations} \label{section:Ekedahl}
 
-We first review the theory of foliations, what Ekedahl calls $1$-foliations, in positive characteristic developed by Ekedahl \cite{Ek87}.
+We first review the theory of foliations, what Ekedahl calls $1$-foliations, in positive characteristic developed by Ekedahl \cite{ekedahl:foliations}.
 
 \begin{defn}
 Let $X$ be a smooth variety. A \textit{foliation} $\F$ is a subsheaf $\F \subset \T_X$ of the tangent bundle $\T_X$ of $X$ which is
@@ -88,7 +90,7 @@ Let $X$ be a smooth variety. A \textit{foliation} $\F$ is a subsheaf $\F \subset
 \end{defn}
 
 \begin{defn}
-Let $\F \subset \T_X$ be a foliation on $X$. We say a subvariety $Z \embed X$ is \textit{tangent} to $\F$  if the map $\T_Z \to \T_X |_Z$ factors through $\F_Z \subset \T_X|_Z$: the saturation of $(\F|_Z)^{\vee \vee} \embed \T_X|_Z$. If additionally $\T_Z \to \T_X|_Z$ is identified with $\F_Z$ we say that $Z$ \textit{is a leaf} of $\F$.
+Let $\F \subset \T_X$ be a foliation on $X$. We say a subvariety $Z \embed X$ is \textit{tangent} to $\F$  if the map $\T_Z \to \T_X |_Z$ factors through $\F_Z \subset \T_X|_Z$, the saturation of $(\F|_Z)^{\vee \vee} \embed \T_X|_Z$. If additionally $\T_Z \to \T_X|_Z$ is identified with $\F_Z$ we say that $Z$ \textit{is a leaf} of $\F$.
 \end{defn}
 
 Note that the property of being tangent depends only on behavior along a dense open set (e.g.\ along the smooth locus of $Z$). From now on in this section, let $k$ be a perfect field of characteristic $p$ and all varieties will be varieties over $k$. Here we let $\Frob_X : X \to X$ denote the ($k$-semilinear) absolute Frobenius and $F_{X/k} : X \to X^{(p)}$ denote the ($k$-linear) relative Frobenius.
@@ -99,8 +101,11 @@ The $p$-curvature of a foliation $\F$ on $X$ is the $\struct{X}$-linear map
 where $\partial^{[p]}$ is the derivation obtained by iterating $\partial$ as a differential operator $p$-times. We say that $\F$ is \textit{$p$-closed} if $\psi_p = 0$ or equivalently if $\F^{[p]} \subset \F$. 
 \end{defn}
 
+% REVIEW: For a dominant map $f : X \to Y$, the induced map on function fields goes $k(Y) \embed k(X)$. Calling $k(Y) \to k(X)$ "purely inseparable" means $k(X)/k(Y)$ is purely inseparable, which is correct, but consider clarifying the direction.
 \begin{defn}
-Let $f : X \rat Y$ be a dominant rational map of varieties. We say that $f$ is \textit{purely inseparable} if the map of function fields $k(Y) \to k(X)$ is purely inseparable. If, moreover, $f$ is generically finite, then $k(X)^{p^h} \subset k(X)$ for some $h$. The smallest such $h$ is called the \textit{height} of $f$. Note that if $f$ has height $h$ then by definition there is a factorization $g \circ f : X \rat Y \rat X^{(p^h)}$ of the $h$-iterated relative Frobenius $F_{X/k}^h : X \to X$. 
+Let $f : X \rat Y$ be a dominant rational map of varieties. We say that $f$ is \textit{purely inseparable} if the extension of function fields $k(Y) \subset k(X)$ is purely inseparable. If, moreover, $f$ is generically finite, then % REVIEW: Should this be $k(X)^{p^h} \subset k(Y)$ (the standard definition of height)?
+$k(Y)^{p^h} \subset k(X)$ for some $h$. The smallest such $h$ is called the \textit{height} of $f$. % REVIEW: Check direction of factorization -- should this be $f \circ g^{-1}$ or similar? As written, $g \circ f : X \to X^{(p^h)}$ factors $F_{X/k}^h$ but $g : Y \rat X^{(p^h)}$ while $f : X \rat Y$.
+Note that if $f$ has height $h$ then by definition there is a factorization $g \circ f : X \rat Y \rat X^{(p^h)}$ of the $h$-iterated relative Frobenius $F_{X/k}^h : X \to X^{(p^h)}$. 
 \end{defn}
 
 \begin{theorem}[Ekedahl]
@@ -153,7 +158,7 @@ Since $Z$ is not contained in the singular locus of $\F$, we may shrink to assum
     \begin{tikzcd}
     & & \T_Z \arrow[r, "0"] \arrow[d] \arrow[ld, dashed] & \T_{Z'}|_Z \arrow[d]
     \\
-    0 \arrow[r] & (\F|_Z)^{\vee \vee} \arrow[r] & \arrow[r] \T_X |_Z \arrow[r] & \T_{X / \F}|_Z
+    0 \arrow[r] & (\F|_Z)^{\vee \vee} \arrow[r] & \T_X |_Z \arrow[r] & \T_{X / \F}|_Z
     \end{tikzcd}
 \end{center}
 we see that $\T_Z \to \T_X|_Z$ factors through $(\F|_Z)^{\vee \vee} \to \T_X|_Z$. 
@@ -211,7 +216,7 @@ where $g$ is in the span of $f_i \ot \Lie(b_1, \dots, b_r)_{p-1}$. Therefore,
 \end{proof}
 
 \begin{prop}
-Suppose that $f : C \to X$ is a map from a curve to a foliated variety $(X, \F)$ such that there is a factoriation $\d{f} : \T_C \to f^* \F \to f^* \T_X$. Then $f^* \psi_p = 0$. Hence if $X$ is a surface and $\F$ is a foliation by curves then $\im{f} \subset \Delta_p := V(\psi_p)$.
+Suppose that $f : C \to X$ is a map from a curve to a foliated variety $(X, \F)$ such that there is a factorization $\d{f} : \T_C \to f^* \F \to f^* \T_X$. Then $f^* \psi_p = 0$. Hence if $X$ is a surface and $\F$ is a foliation by curves then $\im{f} \subset \Delta_p := V(\psi_p)$.
 \end{prop}
 
 \begin{proof}
@@ -219,7 +224,7 @@ Indeed, this follows from the following lemma.
 \end{proof}
 
 \begin{prop} \label{lem:naturality_of_p-curvature}
-Let $f : (X, \F_X) \to (Y, \F_Y)$ be a map of foliated varities. Then the diagram
+Let $f : (X, \F_X) \to (Y, \F_Y)$ be a map of foliated varieties. Then the diagram
 \begin{center}
 \begin{tikzcd}
 \Frob^* \F_X \arrow[r, "\psi_p"] \arrow[d] & \T_X / \F_X \arrow[d]
@@ -296,17 +301,6 @@ using that $t_f$ factors through $S$ the following diagram shows that $\wt{f}^* 
 \end{proof}
 
 
-\begin{comment}
-This lemma appears to be false
-\begin{lemma}
-Suppose that $f : C \to X$ is a map from a smooth proper curve $C$ such that $f^* \omega = 0$ and $\wt{f}$ does not land inside the ramification locus of $g : S \to X$. Then $c_1(\F) \cdot C \ge 2(1 - g(C))$. 
-\end{lemma}
-
-\begin{proof}
-Consider $\cQ \onto \cQ_{tf}$ be the torsion-free quotient 
-\end{proof}
-\end{comment}
-
 From here, Bogomolov concludes by showing that each foliation can have at most finitely many rational leaves. This requires analytic input that fails in positive characteristic. In the subsequent section, we will replace this step with a detailed study of the successive Ekedahl quotients by these induced foliations.
 
 
@@ -314,11 +308,12 @@ From here, Bogomolov concludes by showing that each foliation can have at most f
 
 The idea of the proof is as follows. For a rational curve $h : C \to X$ consider its lift $t_h :  C \to \P_X(\Omega_X)$. Because $h^* \omega = 0$, the lift lands inside the vanishing locus $Z$ of $\omega$ viewed as a section of $\cO_{\P}(2m)$. Either $h$ is contained in a component that does not dominate $X$, which comprises a finite number of curves that can be set aside, or it lies tangent to the holonomic foliation. We will identify these holonomic foliations with those induced on $X$ by the projections $\pi_i : C_1 \times C_2 \to C_i$ through the quotient structure. So $h$ must be tangent to, for example, the foliation induced by $\pi_2$. Applying Lemma~\ref{lem:tangent_leaf_pullback}, it arises as the pullback of $h' : C' \to X'$ along the quotient map $X \to X'$. This step is captured in Figure~\ref{fig:descent_step}. It turns out that $X'$ is also a product-quotient surface, birationally equivalent to $X^{1,0}$. We assume that $X^{1,0}$ also carries a diagonal symmetric form so we can run the argument again. Since $\deg{\pi_1 \circ h}$ or $\deg{\pi_2 \circ h}$ drops at each stage, this sets up a contradiction by infinite descent. 
 
-\begin{figure} \label{fig:descent_step}
+% REVIEW: \label inside \begin{figure} before \caption will not resolve correctly; the label is set by \caption. You have a second \label{fig:enter-label} after \caption which should probably be removed or merged with fig:descent_step.
+\begin{figure}
     \centering
     \includegraphics[trim={5cm 0 0 0},clip, angle=90, width=1\linewidth]{Fig1.pdf}
-    \caption{Descent of a rational curve (red) along $X \to X' = X^{1,0}$. Beginning with a rational curve $h : \P^1 \to X$ lifting to a curve on $S$ tangent to the foliation $\F$ -- represented here by the curve being formed from segments tangent to the fibers of $\pi_2$ -- it is the pullback of a rational curve $h'$ on $X'$ with $\deg{\pi_2 \circ h} = p \deg{\pi_2 \circ h'}$.   Exceptional divisors of the resolution (curves of type (1) in yellow) and fibers of either projection that are rational (curves of type (2) in green) are pulled back to themselves. However, rational components of $V(\omega^{1,0})$ (curves of type (3) in blue) have their pullback under partial Frobenius is again rational of $p$-times the degree. Such a pullback is denoted on $X$ (blue, marked as $p$-th order tangent to the fibers of $\pi_2$).}
-    \label{fig:enter-label}
+    \caption{Descent of a rational curve (red) along $X \to X' = X^{1,0}$. Beginning with a rational curve $h : \P^1 \to X$ lifting to a curve on $S$ tangent to the foliation $\F$ -- represented here by the curve being formed from segments tangent to the fibers of $\pi_2$ -- it is the pullback of a rational curve $h'$ on $X'$ with $\deg{\pi_2 \circ h} = p \deg{\pi_2 \circ h'}$.   Exceptional divisors of the resolution (curves of type (1) in yellow) and fibers of either projection that are rational (curves of type (2) in green) are pulled back to themselves. However, rational components of $V(\omega^{1,0})$ (curves of type (3) in blue) have their pullback under partial Frobenius again rational of $p$ times the degree. Such a pullback is denoted on $X$ (blue, marked as $p$-th order tangent to the fibers of $\pi_2$).}
+    \label{fig:descent_step}
 \end{figure}
 
 \begin{proof}[Proof of Theorem]
@@ -367,7 +362,7 @@ X \arrow[r] \arrow[r, bend left, "\pi_2"] & X' \arrow[r, "\pi_2"] & C_2
 C \arrow[u, "h"] \arrow[r, "F"] & C' \arrow[u, "h'"]
 \end{tikzcd}
 \end{center}
-commutes (see also Figure~\ref{fig:descent_step}). Intuitively, this is because, for each point of intersection between $h'$ and a fiber, the corresponding intersection point of $h$ on $X$ has multiplicity $p$ because the curve is made $p$-th order tangent to the fibers. Furthermore, $X' = X^{1,0}$ also carries a diagonal symmetric form by assumption, so we may repeat this process with $h'$. Restoring the symmetry of the situation, at each step either the sum $\deg{\pi_1 \circ h} + \deg{\pi_2 \circ h}$ drops or one of $\deg{\pi_i \circ h} = 0$. meaning $h$ lives inside a fiber of one of the projections. Those rational curves are already accounted for in type (1) or (2). Otherwise, as we iterate this process, the degree against one of the $\pi_i$ must decrease so eventually $h^{(i)} : C^{(i)} \to X^{a,b}$ must terminate at one of the finitely many rational curves already set aside where the process cannot continue. 
+commutes (see also Figure~\ref{fig:descent_step}). Intuitively, this is because, for each point of intersection between $h'$ and a fiber, the corresponding intersection point of $h$ on $X$ has multiplicity $p$ because the curve is made $p$-th order tangent to the fibers. Furthermore, $X' = X^{1,0}$ also carries a diagonal symmetric form by assumption, so we may repeat this process with $h'$. Restoring the symmetry of the situation, at each step either the sum $\deg{\pi_1 \circ h} + \deg{\pi_2 \circ h}$ drops or one of $\deg{\pi_i \circ h} = 0$, meaning $h$ lives inside a fiber of one of the projections. Those rational curves are already accounted for in type (1) or (2). Otherwise, as we iterate this process, the degree against one of the $\pi_i$ must decrease so eventually $h^{(i)} : C^{(i)} \to X^{a,b}$ must terminate at one of the finitely many rational curves already set aside where the process cannot continue. 
 \par 
 Let us take stock of the possibilities for rational curves on $X$ not currently ruled out. There are the curves of type (1) - (3) set aside earlier and all rational curves which can be produced by pulling back these curves a finite number of times along a sequence of partial Frobenii. Notice that only curves of type (3) may proliferate after applying Frobenii since fibers of $\pi_i$ pull back to fibers and exceptional curves pull back to exceptional curves. Since the remaining curves have positive degree against both projections $\pi_1$ and $\pi_2$, the partial Frobenius pullback increases their degree against the ample divisor $F_1 + F_2$. Since there are only finitely many curves of type (1), and at each stage we apply either $F_1^{-1}$ or $F_2^{-1}$, there are only finitely many rational curves of each fixed degree on $X$. 
 \end{proof}
@@ -413,7 +408,7 @@ The assumption means there are no rational (resp.\ elliptic) curves of type (3) 
 
 In Remark~\ref{rmk:counting}, we saw this result is almost sharp. If the vanishing locus of the symmetric form $\omega^{a,b}$ contains a rational (resp.\ elliptic) curve (not of type (1) or (2)) then its partial Frobenius iterates (under whichever of $F_1$ or $F_2$ it is not tangent to) form a sequence of rational (resp.\ elliptic) curves of unbounded degree. 
 \par 
-In characteristic zero, the same methods apply much more directly since curves tangent to the standard foliations must actually be fibers. In that case, we obtain finiteness without disallowing curves of type (3) hence recovering the main results of  \cite{lang_product_quotient} by essentially the same argument.
+In characteristic zero, the same methods apply much more directly since curves tangent to the standard foliations must actually be fibers. In that case, we obtain finiteness without disallowing curves of type (3) hence recovering the main results of  \cite{church:lang_product_quotient} by essentially the same argument.
 
 \section{Invariants of product-quotient surfaces}
 
@@ -549,7 +544,7 @@ $\pi_1(X) = \pi_1(Y) = \pi_1(Y^{\circ}) /\left<\left< \mathrm{tors} \right>\righ
 \end{lemma}
 
 \begin{proof}
-That the map $\pi_1(X) \to \pi_1(Y)$ is an isomorphism is well-known for rational surface singularities. Since $Y$ has klt singularities, it also follows from \cite[Theorem 7.8]{Kol93}. The second statement follows from the main result of \cite{Arm65, Arm68}; see also \cite[Proposition 3.4]{bauer:fundamental_groups} 
+That the map $\pi_1(X) \to \pi_1(Y)$ is an isomorphism is well-known for rational surface singularities. Since $Y$ has klt singularities, it also follows from \cite[Theorem 7.8]{kollar:shafarevich_maps}. The second statement follows from the main result of \cite{armstrong:orbit_space_1965, armstrong:orbit_space_1968}; see also \cite[Proposition 3.4]{bauer:fundamental_groups} 
 \end{proof}
 
 We will need some notions from \cite{bauer:fundamental_groups}. Denote by $\varphi_i : \TT_i \onto G$ the presentations by triangle groups and $R_i = \ker{\varphi_i} \triangleleft \TT_i$ their kernels which are identified with $\pi_1(C_i)$. Let $C_i \subset \TT_i$ denote the set of generators $\{ c_1, \dots, c_r \}$. By \cite[Lemma~4.9]{bauer:fundamental_groups} there are finite sets $\cN_i \subset \TT_i$ so that
@@ -667,18 +662,18 @@ If $C_1$ and $C_2$ have good supersingular reduction at some prime $\p \subset K
 \end{cor}
 
 \begin{proof}
-The Tate conjecture is known for products of curves by \cite[Theorem 4]{Tate66}. Hence, by the K\"{u}nneth formula, $C_1 \times C_2$ is Shioda supersingular if $C_1$ and $C_2$ are each supersingular. Then we conclude by Lemma~\ref{lem:supersingular_domination}. 
+The Tate conjecture is known for products of curves by \cite[Theorem 4]{tate:endomorphisms}. Hence, by the K\"{u}nneth formula, $C_1 \times C_2$ is Shioda supersingular if $C_1$ and $C_2$ are each supersingular. Then we conclude by Lemma~\ref{lem:supersingular_domination}. 
 \end{proof}
 
-In fact, we know the Tate conjecture for $X$ at all primes of good reduction by \cite[Theorem 5.2(b)]{Tate94}. 
+In fact, we know the Tate conjecture for $X$ at all primes of good reduction by \cite[Theorem 5.2(b)]{tate:algebraic_cycles}. 
 
 \section{Existence of symmetric differential forms}
 
-In this section, we largely follow the strategy used in \cite{lang_product_quotient} to construct diagonal symmetric forms which the authors use to prove quasi-hyperbolicity results in characteristic zero. 
+In this section, we largely follow the strategy used in \cite{church:lang_product_quotient} to construct diagonal symmetric forms which the authors use to prove quasi-hyperbolicity results in characteristic zero. 
 \par 
-In a different direction, \cite{RR13} developed a general method based on orbifold techniques for producing symmetric forms. In particular, they proved the following.
+In a different direction, \cite{roulleau:canonical_sheaves} developed a general method based on orbifold techniques for producing symmetric forms. In particular, they proved the following.
 
-\begin{theorem} \cite[Theorem 1]{RR13}
+\begin{theorem} \cite[Theorem 1]{roulleau:canonical_sheaves}
 Let $\pi : X \to Y$ be the minimal resolution of a surface $Y$ with ADE singularities and suppose that
 \[ \tfrac{1}{2} (K_X^2 - c_2(X)) + \sum_{n \ge 1} \left[ (n+1) (a_n + d_n + e_n) - \frac{a_n}{n+1} - \frac{d_n}{4(n-2)} \right] - \frac{e_6}{24} - \frac{e_7}{48} - \frac{e_8}{120} > 0 \]
 where $a_n, d_n$, and $e_n$ are the numbers of $A_n, D_n$, and $E_n$ singularities respectively. Then $\Omega_X$ is big. In particular, $X$ carries a nonzero symmetric form.
@@ -695,15 +690,15 @@ Let $Y$ be a variety with klt singularities and $\pi : X \to Y$ a resolution of 
 \end{lemma}
 
 \begin{proof}
-By \cite[Theorem 3 + Theorem 4]{kovacs_rational}, $Y$ has rational singularities and $\pi_* \omega_X = \omega_Y$ which is a reflexive sheaf. Then we use the defining relation
+By \cite[Theorem 3 + Theorem 4]{kovacs:rational_singularities}, $Y$ has rational singularities and $\pi_* \omega_X = \omega_Y$ which is a reflexive sheaf. Then we use the defining relation
 \[ K_X = \pi^* K_Y + \sum a_i E_i \]
 and the fact that  $\pi^{[*]} \struct{Y}(D) = \struct{X}(\floor{\pi^* D})$ where $\pi^{[*]}$ is the reflexive pullback, $D$ is a Weil $\Q$-Cartier divisor, and $f^* D$ is the pullback as a $\Q$-Cartier divisor. To prove this, let $\ell D$ be Cartier. Then any local section $s$ of $\struct{Y}(D)$ has $s^{[\ell]}$ a local section of $\struct{Y}(\ell D)$ and hence $\pi^* s^{[\ell]} = (\pi^{[*]} s)^\ell$ is a section of $\pi^* \struct{Y}(\ell D)$ so $\ell \div(\pi^{[*]} s) + f^* \ell D \ge 0$. Likewise, if $\ord_E(\pi^{[*]} s) \ge \ord_E(\pi^* D) + 1$ then dividing $s$ by a local parameter for $E$, we can ensure that $\struct{Y}(D)$ has local sections generating $\struct{X}(\floor{\pi^* D})$.
 \end{proof}
 
-In particular, if $\pi : X \to Y$ is the minimal resolution of a surface with klt singularities, then the discrepancies satisfy $-1 < a_i \le 0$ so we conclude that $(\pi^* \pi_* \omega_X)^{\vee \vee} \to \omega_X$ is an isomorphism. We also need Miyaoka's extension theorem \cite{miyaoka}, which, in the modern version due to Greb, Kebekus, and \Kovacs, says that reflexive tensor-forms on $Y$ extend to logarithmic tensor-forms on $X$. We use the notation $(-)^{[n]}$ and $\Sym^{[n]}(-)$ for the reflexive tensor power and reflexive symmetric power, meaning the reflexive hull of the usual tensor power or symmetric power respectively.
+In particular, if $\pi : X \to Y$ is the minimal resolution of a surface with klt singularities, then the discrepancies satisfy $-1 < a_i \le 0$ so we conclude that $(\pi^* \pi_* \omega_X)^{\vee \vee} \to \omega_X$ is an isomorphism. We also need Miyaoka's extension theorem \cite{miyaoka:extension_theorem}, which, in the modern version due to Greb, Kebekus, and \Kovacs, says that reflexive tensor-forms on $Y$ extend to logarithmic tensor-forms on $X$. We use the notation $(-)^{[n]}$ and $\Sym^{[n]}(-)$ for the reflexive tensor power and reflexive symmetric power, meaning the reflexive hull of the usual tensor power or symmetric power respectively.
 
-\begin{theorem} \cite[Corollary 3.2]{GKK10} \label{thm:miyaoka_extension}
-Let $\pi : X \to Y$ is the resolution of a variety with isolated finite quotient singularities and $E$ be the reduced exceptional divisor. Then 
+\begin{theorem} \cite[Corollary 3.2]{greb:extension_theorems} \label{thm:miyaoka_extension}
+Let $\pi : X \to Y$ is a resolution of a variety with isolated finite quotient singularities and $E$ be the reduced exceptional divisor. Then 
 \[ \Sym^{[m]}\Omega_Y = \pi_* \Sym^m\Omega_X(\log{E}). \]
 In particular, $\pi_* \Sym^{m} \Omega_X(\log{E})$ is reflexive and there is a pullback map
 \[ H^0(Y, \Sym^{[m]}\Omega_Y) = H^0(Y^{\circ}, \Sym^m \Omega_{Y^\circ}) \to H^0(X, \Sym^{m} \Omega_X(\log{E})) \]
@@ -715,7 +710,7 @@ where the last equality uses the logarithmic extension theorem~\ref{thm:miyaoka_
 \[ \alpha : \pi^* \pi_* \omega_X \to \Sym^{2} \Omega_X(\log{E}) \]
 but $(\pi^* \pi_* \omega_X)^{\vee \vee} \iso \omega_X$ by the remark after Lemma~\ref{lem:klt_push_pull_canonical} and $\Sym^{2} \Omega_X(\log{E})$ is reflexive, in fact locally free, so $\alpha$ factors through the reflexive hull of the source, giving the desired map
 \[ \alpha' : \omega_X \to \Sym^{2} \Omega_X(\log{E}). \]
-We want to show that $\alpha'$ lands in honest symmetric forms when restricted to $\omega_X(-E)$. This holds immediately when restricting to $\omega_X(-2E)$ but the refined result is necessary for the numerics of our examples. This is achieved via the subsequent lemma that follows the philosophy of a result due to Greb, Kebekus, \Kovacs, and Peternell \cite{GKKP} establishing the existence of pullback maps $\pi^* : H^0(Y, \Omega_Y^{[p]}) \to H^0(X, \Omega_X^p)$ for a resolution of klt singularities $\pi : X \to Y$. In view of the logarithmic extension theorem~\ref{thm:miyaoka_extension}, this result says exactly that the extended logarithmic form always has ``one fewer pole than expected'' along $E$. Likewise, we conclude a similar ``one fewer pole'' statement for symmetric forms.
+We want to show that $\alpha'$ lands in honest symmetric forms when restricted to $\omega_X(-E)$. This holds immediately when restricting to $\omega_X(-2E)$ but the refined result is necessary for the numerics of our examples. This is achieved via the subsequent lemma that follows the philosophy of a result due to Greb, Kebekus, \Kovacs, and Peternell \cite{greb:differential_forms} establishing the existence of pullback maps $\pi^* : H^0(Y, \Omega_Y^{[p]}) \to H^0(X, \Omega_X^p)$ for a resolution of klt singularities $\pi : X \to Y$. In view of the logarithmic extension theorem~\ref{thm:miyaoka_extension}, this result says exactly that the extended logarithmic form always has ``one fewer pole than expected'' along $E$. Likewise, we conclude a similar ``one fewer pole'' statement for symmetric forms.
 
 \begin{lemma} \label{lem:pole_order}
 Let $Y$ be a surface with rational singularities and $\pi : X \to Y$ the minimal resolution with exceptional divisor $E$. Then for any integer $m > 0$,
@@ -737,7 +732,8 @@ This is local on the normal surface $Y$, so we may shrink so that $Y$ is affine 
 \[ H^0(X, \big[\Sym^m \Omega_X(\log{E}) \big](-E)) \to H^0(X, \Sym^m \Omega_X(\log{E})) \]
 is surjective. It would suffice to establish the following vanishing result:
 \[ H^0(E, \Sym^m \Omega_X(\log{E})|_E) = 0. \]
-In degree $m = 1$, this is essentially a consequence of the Hodge index theorem (see \cite[\S5]{local_vanishing}). It can also be seen from results in mixed Hodge theory, specifically Steenbrink vanishing: $R^1 \pi_* \Omega_X(\log{E})(-E) = 0$ \cite[Theorem~14.1]{GKKP}, and local vanishing: $R^1 \pi_* \Omega_X(\log{E}) = 0$ \cite[Theorem~B]{local_vanishing}. Indeed, duality gives
+In degree $m = 1$, this is essentially a consequence of the Hodge index theorem (see \cite[\S5]{mustata:local_vanishing}). It can also be seen from results in mixed Hodge theory, specifically Steenbrink vanishing: $R^1 \pi_* \Omega_X(\log{E})(-E) = 0$ \cite[Theorem~14.1]{greb:differential_forms}, and local vanishing: $R^1 \pi_* \Omega_X(\log{E}) = 0$ \cite[Theorem~B]{mustata:local_vanishing}. Indeed, duality gives
+% REVIEW: Check this duality statement -- should it be $\Rbf \pi_*$ applied to $\RHom$ on $X$, rather than $\RHom$ of $\Rbf \pi_*$?
 \[ \Rbf \pi_* \Omega_X(\log{E})(-E) = \RHom_{\cO_X}(\Rbf \pi_* \Omega_X(\log{E}), \omega_Y). \]
 Hence, $\pi_* \Omega_X(\log{E})(-E)$ is reflexive because $\Rbf \pi_* \Omega_X(\log{E}) = \pi_* \Omega_X(\log{E})$ by local vanishing and $\omega_Y$ is reflexive. Then the long exact sequence
 \[ H^0(X, \Omega_X(\log{E})(-E)) \iso H^0(X, \Omega_X(\log{E})) \to H^0(E, \Omega_X(\log{E})|_E) \to H^1(X, \Omega_X(\log{E})(-E)) \]
@@ -780,7 +776,7 @@ Note also that $\pi_0(\Gamma) = \# Y^{\mathrm{sing}}$ since, by Zariski's main t
 Putting everything together,
 \[ (K_X - E)^2 = K_X^2 + 3 \sum_i (E_i^2 + 2) - 2 \# Y^{\mathrm{sing}}. \]
 Now, using Hirzebruch--Riemann-Roch, 
-\[ h^0(\struct{X}(m(K_X - E)) + h^2(\struct{X}(m(K_X - E))) \ge \frac{1}{2} m^2 (K_X - E)^2 + O(m) \]
+\[ h^0(\struct{X}(m(K_X - E))) + h^2(\struct{X}(m(K_X - E))) \ge \frac{1}{2} m^2 (K_X - E)^2 + O(m) \]
 but $h^2(\struct{X}(m(K_X - E))) = h^0(\struct{X}(m E - (m-1) K_X)) = 0$ for $m > 1$ because if $H$ is an ample divisor on $Y$, then $\pi^* H \cdot (m E - (m-1) K_X) = -(m-1) H \cdot K_Y < 0$ so $m E - (m-1) K_X$ cannot be effective. Thus, $K_X - E$ is big as long as $(K_X - E)^2 > 0$. 
 \end{proof}
 
@@ -802,14 +798,14 @@ If $X$ is of general type and this number is positive, then $\omega_X(-E)$ is bi
 Combine Corollary~\ref{cor:numerics_of_each_sing} with Lemma~\ref{lem:pole_order} and Proposition~\ref{prop:chern_numerics}.
 \end{proof}
 
-When $Y$ has only ADE singularities (meaning it has only $A_n$ singularities since all the singularities of $Y$ are cyclic quotient), it is interesting to compare this estimate to the estimate of \cite{RR13}. Recall that an $A_n$ singularity is type $\frac{1}{n+1}(1, n)$, so in this case,
+When $Y$ has only ADE singularities (meaning it has only $A_n$ singularities since all the singularities of $Y$ are cyclic quotient), it is interesting to compare this estimate to the estimate of \cite{roulleau:canonical_sheaves}. Recall that an $A_n$ singularity is type $\frac{1}{n+1}(1, n)$, so in this case,
 \[ k(\cB) = 0, \quad \quad e(\cB) = \sum_{n \ge 1} \frac{n(n+2)}{n+1} a_n, \quad \quad B(\cB) = 2 e(\cB)  \]
-where $a_n$ is the number of $A_n$ singularities on $Y$. Therefore \cite{RR13} produces symmetric forms when
+where $a_n$ is the number of $A_n$ singularities on $Y$. Therefore \cite{roulleau:canonical_sheaves} produces symmetric forms when
 \[ 2(K_X^2 - c_2) + \sum_{n \ge 1} \frac{n(n+2)}{n+1} a_n = \frac{8(g_1 - 1)(g_2 - 1)}{\# G} - \sum_{n \ge 1} \frac{n(n+2)}{n+1} a_n  \]
 is positive. 
 On the other hand, our method produces diagonal symmetric forms when
 \[ \frac{4(g_1 - 1)(g_2 - 1)}{\# G} - \sum_{n \ge 1} a_n \]
-is positive. A more recent computation in \cite{bruin:an-singularities} improves the result of \cite{RR13} for $A_n$ singularities. They show that $\Omega_X$ is big if 
+is positive. A more recent computation in \cite{bruin:an-singularities} improves the result of \cite{roulleau:canonical_sheaves} for $A_n$ singularities. They show that $\Omega_X$ is big if 
 \[ K_X^2 - c_2(X) + \sum_{n \ge 1} \frac{n(n+2)}{n+1} a_n - (\tfrac{4}{3} \pi^2 - 12) \sum_{n \ge 1} a_n > 0 \]
 which, in our case, is the inequality
 \[ \frac{4(g_1 - 1)(g_2 - 1)}{\# G} - (\tfrac{4}{3} \pi^2 - 12) \sum_{n \ge 1} a_n > 0. \]
@@ -825,7 +821,7 @@ An interesting source of curves from the arithmetic perspective are \Belyi curve
 \begin{theorem}
 Let $C_i \to \P^1$ be $G$-\Belyi maps meaning a Galois cover ramified only over $0,1,\infty$ with monodromy orders $a,b,c$. Assume the covers are \textit{hyperbolic} i.e., $\frac{1}{a} + \frac{1}{b} + \frac{1}{c} < 1$. Such curves are defined over a number field $K$ and $G$ is equipped with a presentation
 \[ \Delta(a,b,c) = \left< x,y,z \mid x^a,y^b,z^c, xyz \right> \onto G. \] 
-Let $X \to (C_1 \times C_2)/G$ be the minimal resolution. For any prime $\p \subset \cO_K$ away from $\# G$ for which both $C_i$ have good reduction, $X$ has good reduction. Assume $a,b,c$ are distinct primes then if $\# G \ge N(a,b,c)$ for any $\p$ of good reduction, $X_{\p}$ is not covered by rational or elliptic curves. We can take,
+Let $X \to (C_1 \times C_2)/G$ be the minimal resolution. For any prime $\p \subset \cO_K$ away from $\# G$ for which both $C_i$ have good reduction, $X$ has good reduction. Assume $a,b,c$ are distinct primes then if $\# G \ge N(a,b,c)$, then for any $\p$ of good reduction, $X_{\p}$ is not covered by rational or elliptic curves. We can take
 \[ N(a,b,c) = e^{O \left( (\log{abc})^4 \cdot (\log\log{abc})^2 \right)} \]
 \end{theorem}
 
@@ -834,7 +830,7 @@ Recall that Corollary~\ref{cor:finite_pi1} shows that if the two presentations $
 \end{rmk}
 
 \begin{rmk}
-The condition that $a,b,c$ are coprime is important. Otherwise, the Fermat curve $C_n := \{ X^n + Y^n + Z^n \} \subset \P^2$ is a $G = \mu_n^2$-\Belyi cover of $\P^1$ with orders $(n,n,n)$. But we can see that the Fermat surface $F_n$ dominates $(C_n \times C_n)/G$ and hence $(C_n \times C_n)/G$ is unirational for a positive density set of primes.
+The condition that $a,b,c$ are pairwise coprime is important. Otherwise, the Fermat curve $C_n := \{ X^n + Y^n + Z^n \} \subset \P^2$ is a $G = \mu_n^2$-\Belyi cover of $\P^1$ with orders $(n,n,n)$. But we can see that the Fermat surface $F_n$ dominates $(C_n \times C_n)/G$ and hence $(C_n \times C_n)/G$ is unirational for a positive density set of primes.
 \end{rmk}
 
 \begin{proof}
@@ -858,7 +854,7 @@ If we consider the usual continued fraction expansion
 \[ \tfrac{a}{n} = \frac{1}{a_1 + \frac{1}{a_2 + \frac{1}{a_3 + \cdots}}} \]
 then there is a bound 
 \[ \tilde{S}(a/n) \le S(a/n) := \sum_i a_i. \]
-Furthermore, Panov \cite{Panlov} and Liehl \cite{Liehl} independently found asymptotics for the expectation of $S(a/n)$,
+Furthermore, Panov \cite{panov:continued_fractions} and Liehl \cite{liehl:dedekind_sums} independently found asymptotics for the expectation of $S(a/n)$,
 \[ \frac{1}{\varphi(n)} \sum_{(a,n) = 1} S(a/n) \sim \frac{6}{\pi^2} (\log{n})^2 \quad \quad n \to \infty \]
 combining with the following lemma produces the desired asymptotics.
 \end{proof}
@@ -869,12 +865,12 @@ Let $\Delta(a,b,c) \onto G$ with $a,b,c$ distinct primes. Then the centralizer o
 \end{lemma}
 
 \begin{proof}
-Without loss of generality, $g = x$. First I claim that $G$ is perfect. Suppose $G$ has an abelian quotient $G^{\mathrm{ab}}$ then $G^{\mathrm{ab}}$ is generated by $\bar{x},\bar{y},\bar{z}$ with $\bar{x}\bar{y}\bar{z} = 1$. But $a,b,c$ are coprime so $\bar{x} = (\bar{y}\bar{z})^{-1}$ has order diving $bc$ (since $\bar{y}$ and $\bar{z}$) and $a$ so is trivial. The same argument shows $G^{\mathrm{ab}}$ is trivial. Hence $G = [G, G]$. 
-Let $H = C_g(g)$ and consider the action $G \acts (G / H)$ giving a map $\rho : G \to S_k$ where $k := [G : H]$. Notice that $N = \ker{\rho}$ is a normal subgroup contained in $H$ of index $\le k!$. Furthermore, consider the conjugation action $G \acts N$. Note that $z = y^{-1} x^{-1}$ and $N \subset H$ and $x^{-1}$ acts trivially on $H$ by definition. Thus $z$ and $y^{-1}$ act the same way on $N$. However, $y^{-1}$ has order $b$ and $z$ has order $c$ which are coprime so $x,y,z$ act trivially on $N$ meaning $N \subset Z(G)$. Now, Wiegold's effective form of Schur's theorem on the derived subgroup \cite[(3.1)]{Wiegold} proves 
+Without loss of generality, $g = x$. First I claim that $G$ is perfect. Suppose $G$ has an abelian quotient $G^{\mathrm{ab}}$ then $G^{\mathrm{ab}}$ is generated by $\bar{x},\bar{y},\bar{z}$ with $\bar{x}\bar{y}\bar{z} = 1$. But $a,b,c$ are coprime so $\bar{x} = (\bar{y}\bar{z})^{-1}$ has order dividing $bc$ (since $\bar{y}$ and $\bar{z}$ have coprime orders) and also divides $a$, so it is trivial. The same argument shows $G^{\mathrm{ab}}$ is trivial. Hence $G = [G, G]$. 
+Let $H = C_G(g)$ and consider the action $G \acts (G / H)$ giving a map $\rho : G \to S_k$ where $k := [G : H]$. Notice that $N = \ker{\rho}$ is a normal subgroup contained in $H$ of index $\le k!$. Furthermore, consider the conjugation action $G \acts N$. Note that $z = y^{-1} x^{-1}$ and $N \subset H$ and $x^{-1}$ acts trivially on $H$ by definition. Thus $z$ and $y^{-1}$ act the same way on $N$. However, $y^{-1}$ has order $b$ and $z$ has order $c$ which are coprime so $x,y,z$ act trivially on $N$ meaning $N \subset Z(G)$. Now, Wiegold's effective form of Schur's theorem on the derived subgroup \cite[(3.1)]{wiegold:multiplicators} proves 
 \[ \log{\# G} = \log{\# [G, G]} \in O((\log{[G : Z(G)]})^2) \]
 Hence,
 \[ k! \ge \# [G : N] \ge \# [G : Z(G)] = e^{\Omega(\sqrt{\log{\#G}})} \]
-If $k! \ge s$ then $k = \Omega(\frac{\log{s}}{\log\log{s}})$ by Sterling's approximation. Therefore,
+If $k! \ge s$ then $k = \Omega(\frac{\log{s}}{\log\log{s}})$ by Stirling's approximation. Therefore,
 \[ k = \Omega \left( \frac{\sqrt{\log{\#G}}}{\log{\log{\#G}}} \right) \]
 \end{proof}
 
@@ -889,7 +885,7 @@ A \textit{Hurwitz curve} is any hyperbolic smooth projective curve $C$ over $\CC
 \[ \# \Aut(C) = 84(g(C) - 1). \]
 Any such curve is a \Belyi curve and hence is defined over $\ol{\Q}$. As a complex curve, $C$ can be realized as a quotient of the upper half-plane $\HH$ by a Fuchsian group of finite index in the von Dyck group $\TT(2,3,7)$. This result arises from $2,3,7$ being the unique (up to reordering) sequence of positive integers $e_1, \dots, e_r$ minimizing the sum 
 \[ \sum_i \left( 1 - \frac{1}{e_i} \right) \]
-over all sequences such that the sum is $ > 2$ and obtaining the minimum value of $2 + \frac{1}{42}$. This means we can always present a Hurwitz curve as a \Belyi map $C \to \P^1$ ramified over $0,1,\infty$ to order $2,3,7$. Because the ramification orders are distinct, given $C$, this map is unique up to isomorphism. Therefore, the data to specify a Hurwitz curve with automorphism group $G$ is a list of spherical generators $g_1, g_2, g_3 \in G$ of orders $2,3,7$ up to simultaneous conjugacy (which allows for isomorphisms not respecting a marked base-point in $X$). A group admitting such generators is called a \textit{Hurwitz group}. Actually, what we have specified is a $G$-\Belyi cover of $\P^1$ meaning along with a particular choice of isomorphism $G \iso \Aut(C)$. To remove this additional choice, we can consider tuples $(g_1, g_2, g_3)$ equivalent up to overall automorphism of $G$ rather than only inner automorphisms.  When $G$ has trivial center, the choice of an isomorphism $\varphi G \to \Aut(C)$ rigidifies the pair $(C, \varphi)$, giving a point on a certain Hurwitz scheme.
+over all sequences such that the sum is $> 2$ and obtaining the minimum value of $2 + \frac{1}{42}$. This means we can always present a Hurwitz curve as a \Belyi map $C \to \P^1$ ramified over $0,1,\infty$ to order $2,3,7$. Because the ramification orders are distinct, given $C$, this map is unique up to isomorphism. Therefore, the data to specify a Hurwitz curve with automorphism group $G$ is a list of spherical generators $g_1, g_2, g_3 \in G$ of orders $2,3,7$ up to simultaneous conjugacy (which allows for isomorphisms not respecting a marked base-point in $X$). A group admitting such generators is called a \textit{Hurwitz group}. Actually, what we have specified is a $G$-\Belyi cover of $\P^1$ meaning along with a particular choice of isomorphism $G \iso \Aut(C)$. To remove this additional choice, we can consider tuples $(g_1, g_2, g_3)$ equivalent up to overall automorphism of $G$ rather than only inner automorphisms.  When $G$ has trivial center, the choice of an isomorphism $\varphi : G \to \Aut(C)$ rigidifies the pair $(C, \varphi)$, giving a point on a certain Hurwitz scheme.
 \par 
 For $g = 14$, there exist exactly three isomorphism classes of Hurwitz curves which are exchanged by $\Gal(\ol{\Q} / \Q)$. In fact, as we will see in \S\ref{sec:shimura}, these three curves arise from a curve $C / K_+$ under the three complex embeddings $K_+ \embed \CC$ of the field $K_+ = \Q(\eta)$ for $\eta = \zeta_7 + \zeta_7^{-1}$. These curves have $\Aut(C) \cong \PSL_2(\FF_{13})$ which is a simple group of order $1092$. However, there are $6$ isomorphism classes of $\PSL_2(\FF_{13})$-\Belyi $(2,3,7)$-ramified covers of $\P^1$ corresponding to the $6$ equivalence classes of $(2,3,7)$-spherical generators up to simultaneous conjugation. Under the unique outer automorphism of $\PSL_2(\FF_{13})$, these $6$ classes form $3$ orbits  corresponding to the three Hurwitz curves of genus $14$, each presented as a $\PSL_2(\FF_{13})$-cover of $\P^1$ in two distinct ways up to $\PSL_2(\FF_{13})$-equivariant isomorphism. In fact, in  \S\ref{sec:shimura}, we show that the stack $\mathcal{H}_{14, \PSL_2(\FF_{13})}$ of pairs $(C, \varphi)$ consisting of a curve $C$ of genus $14$ and an isomorphism $\varphi : \PSL_2(\FF_{13}) \to \Aut(C)$ is, over $\Q$, isomorphic to $\Spec{K}$ where $K = K_+(\sqrt{-3\eta -2})$ is the ray class field of a prime in $\cO_{K_+}$ lying over $13$. This is the degree $6$ number field recorded as \cite[\href{https://www.lmfdb.org/NumberField/6.2.31213.1}{Number field 6.2.31213.1}]{lmfdb} in the LMFDB, and the various embeddings $K \embed \CC$ correspond to the $6$ isomorphism classes of $\PSL_2(\FF_{13})$-\Belyi curves considered above. Note that $K_+ \subset K$ is the subfield consisting of totally real elements, justifying the notation. 
 \par 
@@ -970,7 +966,7 @@ This corresponds to the ``refined passport'' \cite[\href{https://www.lmfdb.org/H
     \label{fig:subgroups}
 \end{figure}
 
-The following computations will be based on the subgroups of $\PSL_2(\FF_{13})$ and the curves appearing as intermediate quotients of $C$. The subgroup lattice of $\PSL_2(\FF_{13})$ is recorded in Figure~\ref{fig:subgroups}. $\mathrm{Out}(\PSL_2(\FF_{13})) \cong C_2$ acts trivially on this diagram except that it exchanges the two copies of $S_3$. For each subgroup $H \subset G := \PSL_2(\FF_{13})$ we can compute the intermediate curve $C \to C / H \to \P^1$ as follows. The curve $C / H \to \P^1$ is a \Belyi curve whose monodromy is given by the action of $g_1, g_2, g_3$ on the fiber $G/H$. The cycle decomposition of this action determines the ramification structure over $0,1,\infty$. Using Riemann--Hurwitz, we get a diagram of quotient curves whose genera are labeled in Figure~\ref{fig:subgroups_genera}. Notice that the genus $1$ quotients are via the two copies of $S_3$ and are hence exchanged under the outer automorphism. This suggests, as we will see is indeed the case in \S\ref{sec:shimura}, that the elliptic curve factor is not defined over $K_+$ but rather over the field of definition $K$ of $\Aut(C)$ whose relative Galois group $\Gal(K / K_+) \cong C_2$ acts on conjugacy classes of subgroups of $\Aut(C)$ by the full group of outer automorphisms. Additionally, as is verified in the \textsc{Magma} script \cite[\texttt{subgroup\_schemes.m}]{github}, $\Aut(C)$, as a form of $\PSL_2(\FF_{13})$ over $K_+$, admits subgroups $H \subset \Aut(C)$ which recover a copy of each of $D_7, D_6, A_4$ geometrically. Hence, the surfaces in Theorem~\ref{intro:thm:example} are defined over $K_+$ (we can also use Proposition~\ref{prop:arithmetic_resolution} to obtain the Hirzebruch--Jung resolution over $K_+$).
+The following computations will be based on the subgroups of $\PSL_2(\FF_{13})$ and the curves appearing as intermediate quotients of $C$. The subgroup lattice of $\PSL_2(\FF_{13})$ is recorded in Figure~\ref{fig:subgroups}. $\mathrm{Out}(\PSL_2(\FF_{13})) \cong C_2$ acts trivially on this diagram except that it exchanges the two copies of $S_3$. For each subgroup $H \subset G := \PSL_2(\FF_{13})$ we can compute the intermediate curve $C \to C / H \to \P^1$ as follows. The curve $C / H \to \P^1$ is a \Belyi curve whose monodromy is given by the action of $g_1, g_2, g_3$ on the fiber $G/H$. The cycle decomposition of this action determines the ramification structure over $0,1,\infty$. Using Riemann--Hurwitz, we get a diagram of quotient curves whose genera are labeled in Figure~\ref{fig:subgroups_genera}. Notice that the genus $1$ quotients are via the two copies of $S_3$ and are hence exchanged under the outer automorphism. This suggests, as we will see is indeed the case in \S\ref{sec:shimura}, that the elliptic curve factor is not defined over $K_+$ but rather over the field of definition $K$ of $\Aut(C)$ whose relative Galois group $\Gal(K / K_+) \cong C_2$ acts on conjugacy classes of subgroups of $\Aut(C)$ by the full group of outer automorphisms. Additionally, as is verified in the \textsc{Magma} script \cite[\texttt{subgroup\_schemes.m}]{church:github}, $\Aut(C)$, as a form of $\PSL_2(\FF_{13})$ over $K_+$, admits subgroups $H \subset \Aut(C)$ which recover a copy of each of $D_7, D_6, A_4$ geometrically. Hence, the surfaces in Theorem~\ref{intro:thm:example} are defined over $K_+$ (we can also use Proposition~\ref{prop:arithmetic_resolution} to obtain the Hirzebruch--Jung resolution over $K_+$).
 
 \begin{figure}
 \makebox[\textwidth]{
@@ -1032,7 +1028,7 @@ In order for the product-quotient surface $X \to (C^{\nu_0} \times C^{\nu_0})/H$
 
 \subsubsection{Supersingularity} 
 
-The Hurwitz curve $C$ of genus $14$ has the amiable property that its Jacobian is isogenous to $14$ copies of some elliptic curve $E$. Moreover, this curve $E$ is defined over the field $K = (K_+)^{(\p_{13} \infty)} = K_+(\sqrt{-3 \eta - 2})$ by Theorem~\ref{app:thm:isogeny_decomp_defined_over_K} in \S\ref{sec:shimura}. Since $K$ has a real place, we may apply Elkies' theorem \cite{Elkies} to conclude that there are infinitely many places of $K$ at which $E$ has supersingular reduction. Since supersingularity is a geometric property, at each prime $\p \subset \cO_{K_+}$ lying under a prime in $\cO_K$ of supersingular reduction for $E$ where $X_{\p}$ has good reduction, we conclude that $X_{\p}$ is supersingular by Corollary~\ref{cor:curves_supersingular}.  
+The Hurwitz curve $C$ of genus $14$ has the amiable property that its Jacobian is isogenous to $14$ copies of some elliptic curve $E$. Moreover, this curve $E$ is defined over the field $K = (K_+)^{(\p_{13} \infty)} = K_+(\sqrt{-3 \eta - 2})$ by Theorem~\ref{app:thm:isogeny_decomp_defined_over_K} in \S\ref{sec:shimura}. Since $K$ has a real place, we may apply Elkies' theorem \cite{elkies:supersingular} to conclude that there are infinitely many places of $K$ at which $E$ has supersingular reduction. Since supersingularity is a geometric property, at each prime $\p \subset \cO_{K_+}$ lying under a prime in $\cO_K$ of supersingular reduction for $E$ where $X_{\p}$ has good reduction, we conclude that $X_{\p}$ is supersingular by Corollary~\ref{cor:curves_supersingular}.  
 
 \subsection{Proof of Theorem~\ref{intro:thm:example}}
 
@@ -1077,7 +1073,7 @@ $16$ &  & $77$ &  & $16$ \\
  &  & $1$ &  &  \\
 \end{tabular}    
 \end{center}
-and is of general type. It is a routine matter to repeat these calculations for $X^{\sigma, \tau}$. The \textsc{Magma} script \texttt{verify\textunderscore examples.m}, available on \texttt{github} at \cite{github}, performs the necessary checks.
+and is of general type. It is a routine matter to repeat these calculations for $X^{\sigma, \tau}$. The \textsc{Magma} script \texttt{verify\textunderscore examples.m}, available on \texttt{church:github} at \cite{church:github}, performs the necessary checks.
 
 \begin{example} \label{example:twists_have_different_numerics}
 A surprising phenomenon appears in this example: $X$ and $X^{\sigma, \tau}$ do not even have the same numerical invariants. For example, among the $X^{\sigma, \tau}$ for $H \cong D_7$ is the product-quotient surface $X'$ whose defining pair of spherical generators for $D_7$ have conjugacy classes,
@@ -1173,7 +1169,7 @@ we will show $\varphi : \wh{\cO}_{C,x} \to \wh{\cO}_{C,x}$ is trivial. The case 
 Now if we iterate the automorphism, $\varphi^k_{n+1} = (\id + \delta)^k = \id + k \delta$ since $\delta^2 = 0$ because it lands in a square zero ideal. But $\varphi$ has finite order $m$, so we must have $m \delta = 0$ and we assumed $m$ is prime to $p$ so $\delta = 0$. Hence $\varphi$ is trivial by induction. 
 \end{proof}
 
-\begin{lemma} \label{lemmma:is_cyclic_quotient}
+\begin{lemma} \label{lemma:is_cyclic_quotient}
 Let $n$ be coprime to the characteristic of $\bar{k}$ and $C_n \acts X$ be the action of a cyclic group on a smooth surface over $\bar{k}$ with isolated fixed points. Then each singularity of $X / C_n$ is a $\frac{1}{n'}(1,a)$ singularity for some $n' \mid n$ and $a$ coprime to $n'$.
 \end{lemma}
 
@@ -1185,7 +1181,7 @@ We need to show this singularity is formally equivalent to
 \\
 0 & \zeta^a
 \end{pmatrix} \right> \]
-for some choice of $n$-th root of unity $\zeta \in \bar{k}$. This follows from the combination of \cite[Proposition~2.4.8]{wild_quotient} and \cite[Proposition~2.3.6]{wild_quotient} to pass to the completion.
+for some choice of $n$-th root of unity $\zeta \in \bar{k}$. This follows from the combination of \cite[Proposition~2.4.8]{obus:wild_quotient} and \cite[Proposition~2.3.6]{obus:wild_quotient} to pass to the completion.
 \end{proof}
 
 \begin{comment}
@@ -1207,7 +1203,7 @@ This is a consequence of the fact that the algorithm to produce Hirzebruch--Jung
 \[ 0 \to \mathcal{I}_Z \to \struct{X} \to \struct{Z} \to 0 \]
 being compatible with base change along $S' \to S$ when $\struct{Z}$ is flat over $\cO_S$.
 \par 
-Over an algebraically closed field $\bar{k}$, the Hirzebruch--Jung resolution of a cyclic $\frac{1}{n}(1, a)$ singularity is obtained by a sequence of weighted blowups constructed from the ideals of the two torus invariant divisors  (see \cite{weighted_blowups}). This sequence of weighted blowups is determined entirely from the Hirzebruch--Jung continued fraction representation $\frac{n}{a} = \dbrac{b_1, \dots, b_{\ell}}$. 
+Over an algebraically closed field $\bar{k}$, the Hirzebruch--Jung resolution of a cyclic $\frac{1}{n}(1, a)$ singularity is obtained by a sequence of weighted blowups constructed from the ideals of the two torus invariant divisors  (see \cite{reid:weighted_blowups}). This sequence of weighted blowups is determined entirely from the Hirzebruch--Jung continued fraction representation $\frac{n}{a} = \dbrac{b_1, \dots, b_{\ell}}$. 
 \par 
 The singular locus of $\mathcal{Y} = (\cC_1 \times_S \cC_2)/G$ consists of a collection of finite \etale multi-sections whose geometric fibers are isolated cyclic quotient singularities. Furthermore, the images in $\mathcal{Y}$ of $\cC_1 \times_S \Fix_g(\cC_2)$ and $\Fix_g(\cC_1) \times_S \cC_2$ as $g$ ranges over nontrivial elements of $G$ produce a collection of Weil divisors flat over $S$ whose complement is a toroidal embedding. In particular, near each singularity on a geometric fiber of $\mathcal{Y}$, there is a pair of such divisors formally equivalent to the torus-invariant coordinate axes in the standard quotient form of the singularity. Hence running the weighted-blowups with the Hirzebruch--Jung weights along these divisors produces a relative flat proper surface $\X \to \mathcal{Y}$ over $S$. Since the blowups commute with base change, on each fiber $\X$ is the Hirzebruch--Jung resolution. In particular, $\X \to S$ is smooth.
 \end{proof}
@@ -1216,5 +1212,12 @@ The singular locus of $\mathcal{Y} = (\cC_1 \times_S \cC_2)/G$ consists of a col
 It is not necessary to use weighted blowups if we only ask that some smooth projective birational model of $X_{\eta}$ has good reduction. Indeed, the previous results show that the singular locus of $(\cC_1 \times_S \cC_2) / G$ is finite \etale over $S$. Blowing up these loci repeatedly does give a simultaneous resolution (this runs Lipman's algorithm fiberwise as no non-normal singularities are introduced as can be seen by considering the subdivision of the fan associated to blowing up a cyclic quotient singularity) but it is not minimal. Since the existence of diagonal symmetric forms is a birational invariant of smooth proper models, this is sufficient for our purposes. We can check existence on the minimal resolution and pull back these forms to any other model before specializing by upper semi-continuity. 
 \end{rmk}
 
-Now we use this to justify the claims made in the main text about the places of good reduction of product quotient surfaces. It follows from the existence of integral canonical models of Shimura varieties of hyperspecial level \cite{carayol, kisin} that Shimura curves have good reduction away from the level and the discriminant of $B$. In particular, $\X^{\Hur}(\p_{13})$ has good reduction away from $\p_{13}$. Therefore, the product quotient surfaces in Theorem~\ref{intro:thm:example} have good reduction away from primes over $13$ and $\# G$, which is divisible only by $2,3,7,13$. In particular, the supersingular primes of $E$, which are all $>1000$, are primes of good supersingular reduction for the surfaces $X$ in Theorem~\ref{intro:thm:example}.
+Now we use this to justify the claims made in the main text about the places of good reduction of product quotient surfaces. It follows from the existence of integral canonical models of Shimura varieties of hyperspecial level \cite{carayol:representations, kisin:integral_models} that Shimura curves have good reduction away from the level and the discriminant of $B$. In particular, $\X^{\Hur}(\p_{13})$ has good reduction away from $\p_{13}$. Therefore, the product quotient surfaces in Theorem~\ref{intro:thm:example} have good reduction away from primes over $13$ and $\# G$, which is divisible only by $2,3,7,13$. In particular, the supersingular primes of $E$, which are all $>1000$, are primes of good supersingular reduction for the surfaces $X$ in Theorem~\ref{intro:thm:example}.
 
+
+\ifSubfilesClassLoaded{%
+  \bibliographystyle{alpha}
+  \bibliography{refs}
+}{}
+
+\end{document}

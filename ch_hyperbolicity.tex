@@ -1,3 +1,5 @@
+\documentclass[main.tex]{subfiles}
+\begin{document}
 \chapter{Hyperbolicity and the Green-Griffiths-Lang Conjecture}
 
 %% All commands are in macros.sty
@@ -5,15 +7,15 @@
 \section{The Kobayashi Pseudodistance}
 
 \begin{defn}
-A \textit{directed pair} $(X, V)$ is a pair of a complex mnifold $X$ and a holomorphic subbundle $V \subset T_X$.
+A \textit{directed pair} $(X, V)$ is a pair of a complex manifold $X$ and a holomorphic subbundle $V \subset T_X$.
 \end{defn}
 
 Here let $\Delta$ be the unit disk in $\CC$ and $\rho$ the Poincare metric on $\Delta$.
 
 \begin{defn}
-Let $X$ be a complex manifold. The \textit{Kobayashi pseudodistance} is the pseduometric defined,
+Let $X$ be a complex manifold. The \textit{Kobayashi pseudodistance} is the pseudometric defined as follows:
 \[ d_X(p,q) = \inf_\alpha \ell(\alpha) \]
-where $\alpha$ is a chain of holomorphic disk $f_i : \Delta \to X$ and points $p = p_0, p_1, \dots, p_k = q$ of $X$ and pairs $a_1, b_1, \dots, a_k, b_k \in \Delta$ such that,
+where $\alpha$ is a chain of holomorphic disks $f_i : \Delta \to X$ and points $p = p_0, p_1, \dots, p_k = q$ of $X$ and pairs $a_1, b_1, \dots, a_k, b_k \in \Delta$ such that,
 \[ f_i(a_i) = p_{i-1} \quad f_i(b_i) = p_i \]
 and the length $\ell(\alpha)$ of the chain is defined as,
 \[ \ell(\alpha) := \rho(a_1, b_1) + \cdots + \rho(a_k, b_k) \]
@@ -21,11 +23,11 @@ where $\rho$ is the Poincare metric on $\Delta$.
 \end{defn}
 
 \begin{example}
-Let $X = \CC$ then $d_X = 0$. Indeed, by choosing larger and larger discs containing $p,q$ their pullback to the unit disk is then closer and closer to the origin and hence have vanishing Poincare distance.
+Let $X = \CC$ then $d_X = 0$. Indeed, by choosing larger and larger discs containing $p,q$ their pullback to the unit disk is then closer and closer to the origin and hence has vanishing Poincare distance.
 \end{example}
 
 \begin{rmk}
-Recall the Schwartz-Pick lemma says that any holomorphic map $f : \Delta \to \Delta$ is a contraction for the Poincare metric. Therefore, $d_{\Delta} = \rho$.
+Recall the Schwarz--Pick lemma says that any holomorphic map $f : \Delta \to \Delta$ is a contraction for the Poincare metric. Therefore, $d_{\Delta} = \rho$.
 \end{rmk}
 
 \begin{lemma}
@@ -46,9 +48,9 @@ Indeed, let $z_1, z_2 \in \CC$ map to $x,y$ respectively. Then,
 \[ d_X(x,y) \le d_{\CC}(z_1, z_2) = 0 \]
 \end{proof}
 
-Brody's theorem is a converse to this result. We start by considering an infinitesimal anlogue of the Kobayashi pseudodistance. Let $v \in T_{X, x_0}$ be a holomorphic tangent vector at $x_0 \in X$ and define,
+Brody's theorem is a converse to this result. We start by considering an infinitesimal analogue of the Kobayashi pseudodistance. Let $v \in T_{X, x_0}$ be a holomorphic tangent vector at $x_0 \in X$ and define,
 \[ \kk_X(v) = \inf \{ \lambda > 0 \mid \exists f : \Delta \to X \text{ such that } f(0) = x_0 \text{ and } \lambda f'(0) = v \} \]
-where $f : \Delta \to X$ is holomorphic. It is easy to check that holomorphic maps contract this pseduometric and for $X = \Delta$ it agrees with the Poincare metric.
+where $f : \Delta \to X$ is holomorphic. It is easy to check that holomorphic maps contract this pseudometric and for $X = \Delta$ it agrees with the Poincare metric.
 
 \begin{theorem}
 Let $X$ be a complex manifold. Then,
@@ -57,7 +59,7 @@ where the infimum is taken over all piecewise smooth curves joining $p$ and $q$.
 \end{theorem}
 
 \begin{defn}
-A \textit{Brody curve} $f : \CC \to X$ is an entire curve which has bounded derivative (wrt to some/any hermitian metric).
+A \textit{Brody curve} $f : \CC \to X$ is an entire curve which has bounded derivative with respect to some (equivalently, any) Hermitian metric.
 \end{defn}
 
 \begin{theorem}[Brody]
@@ -76,7 +78,7 @@ Of course, in the case that $X$ is compact any entire curve is automatically Bro
 We say a directed pair $(X, V)$ is,
 \begin{enumerate}
 \item \textit{Brody hyperbolic} if there does not exist a nonconstant entire map $f : \CC \to X$ tangent to $V$
-\item \textit{Kobyashi hyperbolic} if the Kobayashi pseudodistance is nondegenerate (i.e. it is a metric).
+\item \textit{Kobayashi hyperbolic} if the Kobayashi pseudodistance is nondegenerate (i.e. it is a metric).
 \end{enumerate}
 \end{defn}
 
@@ -91,7 +93,7 @@ Therefore, we will call manifolds with this property just ``hyperbolic'' or ``an
 \begin{defn}
 If $X$ is a complex projective algebraic variety we say $(X, V)$ is
 \begin{enumerate}
-\item \textit{algebraically hyperbolic} if there exists $\epsilon > 0$ such that for every complete intergral curve $C \subset X$ we have,
+\item \textit{algebraically hyperbolic} if there exists $\epsilon > 0$ such that for every complete integral curve $C \subset X$ we have,
 \[ 2 g(C) - 2 \ge \epsilon \deg_H{C} \]
 where $g(C)$ is the geometric genus of $C$
 \item \textit{algebraically quasi-hyperbolic} if $X$ contains finitely many genus $0$ and genus $1$ curves.
@@ -99,7 +101,7 @@ where $g(C)$ is the geometric genus of $C$
 \end{defn}
 
 \begin{theorem}[Demailly]
-Let $X$ be a smooth projective varitety. Then the following hold,
+Let $X$ be a smooth projective variety. Then the following hold,
 \[ X \text{ is hyperbolic} \implies X \text{ is algebraically hyperbolic} \]
 \end{theorem}
 
@@ -116,8 +118,8 @@ Some references:
 
 \subsection{The Green-Griffiths Locus and Jets}
 
-\begin{theorem}[\chref{https://www-fourier.ujf-grenoble.fr/~demailly/manuscripts/hyperbolic.pdf}{Demilly's Notes} Theorem 7.9]
-Let $(X, V)$ be a direct projective manifold and $A$ an ample line bundle. Then for any entire curve $f : \CC \to X$ tangent to $V$ and any $P \in H^0(X, E^{GG}_{k,m}(V^*) \ot A^{-1})$  we have $P(f', f'', \dots, f^{(k)}) = 0$ identically.
+\begin{theorem}[\chref{https://www-fourier.ujf-grenoble.fr/~demailly/manuscripts/hyperbolic.pdf}{Demailly's Notes} Theorem 7.9]
+Let $(X, V)$ be a directed projective manifold and $A$ an ample line bundle. Then for any entire curve $f : \CC \to X$ tangent to $V$ and any $P \in H^0(X, E^{GG}_{k,m}(V^*) \ot A^{-1})$  we have $P(f', f'', \dots, f^{(k)}) = 0$ identically.
 \end{theorem}
 
 Therefore, if we fix an ample line bundle we can consider the locus cut out by all these differential equations.
@@ -128,7 +130,7 @@ The \textit{Green-Griffiths locus} $\GG_A(X, V)$ is the set $x \in X$ such that 
 \end{defn}
 
 \begin{rmk}
-The locus $\GG_A(X, V)$ is independent of the choice of ample line bundle (see \chref{https://arxiv.org/pdf/1302.4756.pdf}{Diverio and Rousseau} Lemma 2.2. This paper also gives many examples showing that $\Exc(X)$ can be strictly smaller than $\GG(X)$. However, it is conjectured that if $X$ is general type then $\GG(X) \subsetneq X$.
+The locus $\GG_A(X, V)$ is independent of the choice of ample line bundle (see \chref{https://arxiv.org/pdf/1302.4756.pdf}{Diverio and Rousseau} Lemma 2.2. This paper also gives many examples showing that $\Exc(X)$ can be strictly smaller than $\GG(X)$. However, it is conjectured that if $X$ is of general type then $\GG(X) \subsetneq X$.
 \end{rmk}
 
 
@@ -165,11 +167,11 @@ Suppose $X$ is algebraically hyperbolic. If $X$ is not of general type then $X$ 
 \section{Theorems}
 
 \begin{theorem}[Bogomolov]
-Let $X$ is a smooth projective surface with $s_2(X) = c_1(X)^2 - c_2(X) > 0$ then $X$ has finitely many genus $0$ or genus $1$ curves (i.e. it is algebraically quasi-hyperbolic).
+Let $X$ be a smooth projective surface with $s_2(X) = c_1(X)^2 - c_2(X) > 0$ then $X$ has finitely many genus $0$ or genus $1$ curves (i.e. it is algebraically quasi-hyperbolic).
 \end{theorem}
 
-\begin{theorem}[McQuillian]
-Let $X$ is a smooth projective surface with $s_2(X) = c_1(X)^2 - c_2(X) > 0$ and $X$ has \textit{no} genus $0$ or genus $1$ curves then $X$ is hyperbolic.
+\begin{theorem}[McQuillan]
+Let $X$ be a smooth projective surface with $s_2(X) = c_1(X)^2 - c_2(X) > 0$ and $X$ has \textit{no} genus $0$ or genus $1$ curves then $X$ is hyperbolic.
 \end{theorem}
 
 Ingredients in Bogomolov's proof:
@@ -191,7 +193,7 @@ Ingredients in Bogomolov's proof:
 The notion of stability of a point on a space of linear representations of a reductive group, due to Mumford [10], leads to a notion of stabilite for fiber bundles over a curve, whose properties were studied in [13] and [19].
 
 \begin{defn}
-Over a smooth proper integral curve, a vector bundle $E$ of rank $r(E)$ and degree $d(E)$ is \textit{stable} (resp. \textit{semistable}) is for every nonzero proper subbundle $F \subsetneq E$ we have,
+Over a smooth proper integral curve, a vector bundle $E$ of rank $r(E)$ and degree $d(E)$ is \textit{stable} (resp. \textit{semistable}) if for every nonzero proper subbundle $F \subsetneq E$ we have,
 \[ \frac{d(F)}{r(F)} < \frac{d(E)}{r(E)} \quad \left( \text{resp.} \frac{d(F)}{r(F)} \le \frac{d(E)}{r(E)} \right) \]
 A vector bundle is \textit{unstable} if it is not semistable.
 \end{defn}
@@ -204,7 +206,7 @@ We say a rank $2$ vector bundle is \textit{instable} if there exists a represent
 
 If the characteristic of $k$ is zero, which we will assume for the remainder, then Bogomolov's instabilite criterion is simply expressed in terms of devissage of bundles of rank $2$. It is interesting to note that we can here short-circuit the theory and prove directly using these simpler methods.
 \par
-There are many applications. We quote from memory a proof, elegant and algebraic, of the vanishing theorem of Kodaira-Ramanujan. In the remaning section we prove the following:
+There are many applications. We quote from memory a proof, elegant and algebraic, of the vanishing theorem of Kodaira-Ramanujan. In the remaining section we prove the following:
 
 \begin{theorem}[0.3]
 Let $X$ be a proper smooth surface of general type. Then $\Omega_X$ is not unstable.
@@ -212,35 +214,35 @@ Let $X$ be a proper smooth surface of general type. Then $\Omega_X$ is not unsta
 
 As a consequence, we obtain the inequality $c_1^2 \le 4 c_2$ where $c_1, c_2$ are the Chern classes of the sheaf $\Omega_X^1$ -- improved by Miyaoka [9] which is the best form possible $c_1^2 \le 3 c_2$ - and a geometric result that we will develop here.
 \par
-The problem is the following: can we show 'bound'' the familly of curves of bounded geometric genus on a smooth proper surface $X$? We construct easily examples where the answer is negative. Bogomolov provides a partial solution in the case that $X$ is a surface of general type. We summarize briefly the method.
+The problem is the following: can we ``bound'' the family of curves of bounded geometric genus on a smooth proper surface $X$? We easily construct examples where the answer is negative. Bogomolov provides a partial solution in the case that $X$ is a surface of general type. We summarize briefly the method.
 \par
-Let $\pi : P = \P(\Omega_X^1) \to X$ be the canonical projection from the projectiviation of the canonical bundle. We construct on $P$ a good linear system of divisors alowing it to be mapped to the projective space $\P^N$. If $C$ is a smooth proper curve and $f: C \to X$ is a nonconstant morphism there is a lift $t_f : C \to P$ via the differential defined over points $\alpha \in P$ where $f$ is unramified as $t_f(\alpha) = (f(\alpha), f(v_\alpha))$ where $v_\alpha$ is a nonzero tangent vector to $C$ at $\alpha$. We apply this to the normalizations of curves embedded in $X$ and study their images in $\P^N$.
+Let $\pi : P = \P(\Omega_X^1) \to X$ be the canonical projection from the projectiviation of the canonical bundle. We construct on $P$ a good linear system of divisors allowing it to be mapped to the projective space $\P^N$. If $C$ is a smooth proper curve and $f: C \to X$ is a nonconstant morphism there is a lift $t_f : C \to P$ via the differential defined over points $\alpha \in P$ where $f$ is unramified as $t_f(\alpha) = (f(\alpha), f(v_\alpha))$ where $v_\alpha$ is a nonzero tangent vector to $C$ at $\alpha$. We apply this to the normalizations of curves embedded in $X$ and study their images in $\P^N$.
 \bigskip\\
 We prove the following result:
 
 \begin{theorem}
 Let $X$ be a smooth proper surface minimal of general type.
 \begin{enumerate}
-\item If $c_1^2 > c_2$ then the curves of bounded geomeric genus on $X$ form a bounded family.
+\item If $c_1^2 > c_2$ then the curves of bounded geometric genus on $X$ form a bounded family.
 \item If $c_1^2 \le c_2$ and $\rank \NS{X} \ge 2$ then there exists a nonempty open cone $C \subset \NS{X}_{\RR}$ containing the cone $\{ z \mid z \in \NS{X}_{\RR} , z^2 \le 0 \}$ such that for any closed cone $C'$ contained in $C$ the family of curves of bounded geometric genus on $X$ have image in $\NS{X}_{\RR}$ contained in $C'$ forms a bounded family. Moreover, any translate of $C$ parallel to $K_X$ has the same property.
 \end{enumerate}
 \end{theorem}
 
 As a corollary, we obtain finiteness of curves with negative self-intersection and bounded geometric genus on surfaces of general type. In particular a solution to Mordell's problem.
 \par
-Let's point out finally that Bogomolov uses a powerful result of Deidenberg on differential equations [18] but a recent paper of Jouanalou [5] alows us to avoid the use of this sledgehammer.
+Let's point out finally that Bogomolov uses a powerful result of Seidenberg on differential equations [18] but a recent paper of Jouanolou [5] allows us to avoid the use of this sledgehammer.
 
 \subsection{Criteria for instability of vector bundles of rank $2$ on surfaces}
 
 Considering the form of representations of $\PGL_2$ we give a definition equivalent to above.
 
 \begin{defn}
-A vector bundle $E$ of rank $2$ on a surfaces is \textit{unstable} if and only if there exists $n > 0$ such that $S^{2n} E \ot (\det{E})^{-n}$ has a nonzero section vanishing at some point of $X$.
+A vector bundle $E$ of rank $2$ on a surface is \textit{unstable} if and only if there exists $n > 0$ such that $S^{2n} E \ot (\det{E})^{-n}$ has a nonzero section vanishing at some point of $X$.
 \end{defn}
 
 \subsubsection{Remark: devissage of vector bundles of rank $2$}
 
-Let $E$ be a vector bundle of rank $2$ and $L$ an invertible sheaf and $s : L \to E$ a nonzero map. The bidual $M$ of $E/L$ is reflexive and hence invertible (since $X$ is a smooth surface), and the kernel $L_1$ of the homomorphism $E \to M$ is a larger invertible subsheaf of $E$ contining $L$. We say that it is a saturated line bundle of $E$. The cokernel $E/L_1$ is torsion-free in rank $1$, and hence of the form $I_Z \ot M$ for $M$ an invertible sheaf and $I_Z$ a sheaf of ideals defining a closed subscheme $Z$ of dimension $0$ outside of which $L'$ is a subbundle of $E$. We have a diagram of exact sequences,
+Let $E$ be a vector bundle of rank $2$ and $L$ an invertible sheaf and $s : L \to E$ a nonzero map. The bidual $M$ of $E/L$ is reflexive and hence invertible (since $X$ is a smooth surface), and the kernel $L_1$ of the homomorphism $E \to M$ is a larger invertible subsheaf of $E$ containing $L$. We say that it is a saturated line bundle of $E$. The cokernel $E/L_1$ is torsion-free in rank $1$, and hence of the form $I_Z \ot M$ for $M$ an invertible sheaf and $I_Z$ a sheaf of ideals defining a closed subscheme $Z$ of dimension $0$ outside of which $L_1$ is a subbundle of $E$. We have a diagram of exact sequences,
 \begin{center}
 \begin{tikzcd}
 0 \arrow[r] & L \arrow[d] \arrow[r] & E \arrow[r] \arrow[d, equals] & E/L \arrow[d] \arrow[r] & 0
@@ -259,7 +261,7 @@ such that if $L' = L \ot M^{-1} = L^2 \ot (\det{E})^{-1}$ then either,
 \item $L'$ is in the cone $C_+ \subset \NS{X}_{\Q}$ generated by positive divisors (the component of $C = \{ \alpha \mid \alpha^2 > 0\}$ containing the ample classes)
 \item or $L' = \struct{X}$ and $Z$ is nonempty
 \end{enumerate}
-Moreoverm the devissage is unique.
+Moreover, the devissage is unique.
 \end{theorem}
 
 \begin{rmk}
@@ -268,8 +270,8 @@ A divisor class is \textit{positive} if and only if $D^2 > 0$ and $D \cdot H > 0
 
 We will prove this using only Mumford's theory of instability.
 \par
-Let $P = \P(E)$ and $p : P \to X$ the projection and $\struct{P}(1)$ the canonical relatively ample bundle on $P$. A nonzero section $s \in H^0(X, S^{2n} E \ot (\det{E})^{-n})$ corresponds to a nonzero section $t \in H^0(P, \struct{P}(2n) \ot p^* (\det{E})^{-n}))$ . Let $\xi \in X$ be the generic point and $K = \kappa(\xi)$. If we chose a basis of $E_K$ then $s(\xi)$ corresponds to a homogeneous polynomial $F$ of degree $2n$ in two variables. Since $s$ is zero t some point of $X$, we know $s(\xi)$ is unstable for the action of $\PGL_2$ on $S^{2n} E_K \ot (\det{E_K})^{-n}$ (WHY?). We deduce from the stability criterion using 1-parameter subgroups [11] that $F$ has a root of order greater than $n$ in the algebraic closure of $K$, so also in $K$ (WHAT? WHY?), that's to say there exists an integer $r \ge 1$ and two polynomials $G, H$ homogeneous of degrees $1$ and $n-r$ respectively such that $F = G^{n+r} H$. Let $D$ be the divisor of $t$ and $\Delta$ the closure of the divisor defined over a generic point by $G$. We can write $D = (n + r) \Delta + \Delta'$ where has degree $1$ and $\Delta'$ has degree $n - r$ on $P$. Therefore, there exist invertible modules $L, L'$ on $X$ such that,
-\[ \struct{P}(\Delta) = \struct{P}(1) \ot p^* L \quad \cO_P(\Delta') = \cO_P(n-r) \ot p^* L' \]
+Let $P = \P(E)$ and $p : P \to X$ the projection and $\struct{P}(1)$ the canonical relatively ample bundle on $P$. A nonzero section $s \in H^0(X, S^{2n} E \ot (\det{E})^{-n})$ corresponds to a nonzero section $t \in H^0(P, \struct{P}(2n) \ot p^* (\det{E})^{-n})$. Let $\xi \in X$ be the generic point and $K = \kappa(\xi)$. If we choose a basis of $E_K$ then $s(\xi)$ corresponds to a homogeneous polynomial $F$ of degree $2n$ in two variables. Since $s$ is zero at some point of $X$, we know $s(\xi)$ is unstable for the action of $\PGL_2$ on $S^{2n} E_K \ot (\det{E_K})^{-n}$ (WHY?). We deduce from the stability criterion using 1-parameter subgroups [11] that $F$ has a root of order greater than $n$ in the algebraic closure of $K$, so also in $K$ (WHAT? WHY?), that's to say there exists an integer $r \ge 1$ and two polynomials $G, H$ homogeneous of degrees $1$ and $n-r$ respectively such that $F = G^{n+r} H$. Let $D$ be the divisor of $t$ and $\Delta$ the closure of the divisor defined over a generic point by $G$. We can write $D = (n + r) \Delta + \Delta'$ where $\Delta$ has degree $1$ and $\Delta'$ has degree $n - r$ on $P$. Therefore, there exist invertible modules $L, L'$ on $X$ such that,
+\[ \struct{P}(\Delta) = \struct{P}(1) \ot p^* L \quad \struct{P}(\Delta') = \struct{P}(n-r) \ot p^* L' \]
 and hence,
 \[ (\det{E})^{-n} = L^{n+r} \ot L' \]
 The divisor $\Delta$ corresponds to a section of $E \ot L$ and thus an injection $L^{-1} \embed E$ which by construction is saturated in $E$. We verify that it provides the desired devissage.
@@ -290,7 +292,7 @@ Instability is preserved by passage to the dual and tensor product with a line b
 
 Suppose that $\Omega_X^1$ is unstable. Then there exists a devissage:
 \[ 0 \to L \to \Omega^1_X \to I_Z \ot M \to 0 \]
-and an integer $n > 0$ such that there is an injection $\cO_X \embed (L \ot M^{-1})^{\ot n}$. Note yhat $L \ot M^{-1}  = L^2 \ot (\det{\Omega^1_X})^{-1} = L^2 \ot (\Omega_X^2)^{\ot -1}$. Also, for $m \gg 0$,
+and an integer $n > 0$ such that there is an injection $\cO_X \embed (L \ot M^{-1})^{\ot n}$. Note that $L \ot M^{-1}  = L^2 \ot (\det{\Omega^1_X})^{-1} = L^2 \ot (\Omega_X^2)^{\ot -1}$. Also, for $m \gg 0$,
 \[ h^0(L^{2m}) = h^0((L \ot M^{-1})^{\ot m} \ot (\Omega^2_X)^{\ot m}) \ge h^0((\Omega_X^2)^{\ot m}) \in O(m^2) \]
 Therefore, the theorem is a consequence of the following.
 
@@ -316,7 +318,7 @@ so we choose $\theta_1, \theta_2$ holomorphic forms on $U$ which pull back to $\
 {\color{red} (WHY DOES IT EXTEND??) THIS SEEMS WRONG}
 
 
-Since $\omega_1, \omega_2$ are $k$-independent so are $\theta_1, \theta_2$. Hence $g(C) \ge 2$ and therefore the map $u : X' \to C$ contracts all rational curves and hence factors through $X' \to X$ giving the requried map.
+Since $\omega_1, \omega_2$ are $k$-independent so are $\theta_1, \theta_2$. Hence $g(C) \ge 2$ and therefore the map $u : X' \to C$ contracts all rational curves and hence factors through $X' \to X$ giving the required map.
 
 
 
@@ -342,18 +344,18 @@ Let $X = \P^2$ then $\NS{X} = \Z$. There exist in the projective plane curves of
 \end{example}
 
 \begin{example}
-Let $E$ be an elliptic curve without complex multiplication and let $X = E \times E$. Then $\NS{X} = \Z f_1 \oplus \Z f_2 \oplus \Z \Delta$ where $f_i$ are the fiber classes and $\Delta$ is the diagonal. For every pair of integers $(m, n)$ the image in $X$ od the morphism $f_{m,n} : E \to X$ given by $f_{m,n}(\alpha) = (m \alpha, n \alpha)$ is a curve of class $m^2 f_1 + n^2 f_2 + (m-n)^2 \Delta$ and genus $1$.
+Let $E$ be an elliptic curve without complex multiplication and let $X = E \times E$. Then $\NS{X} = \Z f_1 \oplus \Z f_2 \oplus \Z \Delta$ where $f_i$ are the fiber classes and $\Delta$ is the diagonal. For every pair of integers $(m, n)$ the image in $X$ of the morphism $f_{m,n} : E \to X$ given by $f_{m,n}(\alpha) = (m \alpha, n \alpha)$ is a curve of class $m^2 f_1 + n^2 f_2 + (m-n)^2 \Delta$ and genus $1$.
 \end{example}
 
 \begin{example}
 Let $B$ be a smooth proper curve and $\pi : X \to B$ a nonisotrivial (that is to say it does not become trivial after some finite base change $B' \to B$) minimal elliptic fibration admitting a section $\sigma : B \to X$ of infinite order. Let $\omega$ be the conormal bundle of $\sigma$. Then there exist global sections $g_2 \in H^0(X, \omega^4)$ and $g_3 \in H^0(X, \omega^6)$ such that $X$ is the minimal resolution of the surface $Y \subset \P_B(\omega^2 \oplus \omega^3 \oplus \cO_B)$ defined by the Weierstrass equation,
 \[ y^2 z = x^3 - g_2 x z^2 - g_3 z^3 \]
-Morover, $\omega$ is independent of the section $\sigma$ as has degree $- \sigma(B)^2$. If the degree is zero, then $g_2$ and $g_3$ are constant and the fibration $\pi$ is isotrivial. There exist infinitely many sections of negative self-intersection and the classes are algebraically distict.
+Moreover, $\omega$ is independent of the section $\sigma$ and has degree $- \sigma(B)^2$. If the degree is zero, then $g_2$ and $g_3$ are constant and the fibration $\pi$ is isotrivial. There exist infinitely many sections of negative self-intersection and the classes are algebraically distinct.
 \end{example}
 
 Notation: we write $K_X$ for a canonical divisor of $X$ and $T_X$ the tangent bundle and $\pi : \P(\Omega_X) \to X$ the canonical projection and $L = \cO_P(1)$ the relatively ample bundle for $\pi$.
 \par
-Let $F$ be a invertible bundle on $X$. We note that $F$ is a divisor of some linear system {\color{red} WHAT'S THE CONTENT?}. Moreover, for any rational number $\ell \in \QQ$, we allow ourselves to form the sheaf $\ell F$, extending that we consider the tensor powers $(\ell F)^{\ot m}$ for which $m$ is such that $m \ell$ is an integer.
+Let $F$ be an invertible bundle on $X$. We note that $F$ is a divisor of some linear system {\color{red} WHAT'S THE CONTENT?}. Moreover, for any rational number $\ell \in \QQ$, we allow ourselves to form the sheaf $\ell F$, extending that we consider the tensor powers $(\ell F)^{\ot m}$ for which $m$ is such that $m \ell$ is an integer.
 
 
 \subsection{Construction of a good linear system of divisors on $P$}
@@ -377,7 +379,7 @@ and hence for $m \gg 0$,
 \[ h^0(S^m(\Omega_X^1 \ot \ell F)) + h^2(S^m(\Omega_X^1 \ot \ell F)) \sim h^1(S^m(\Omega_X^1 \ot \ell F)) + \frac{m^3}{6} \left[ c_1^2(\Omega_X \ot \ell F) - c_2(\Omega_X^1 \ot \ell F) \right] \ge O(m^3) \]
 By Serre duality, {\color{red} HOW DO I FIX THE DUAL AND $S^m$ IN POSITIVE CHAR}
 \[ h^2(S^m(\Omega_X \ot \ell F)) = h^0(K \ot S^m(T_X \ot -\ell F)) \]
-Chosing some divisors $D$ and $D'$ ample and smooth such that,
+Choosing some divisors $D$ and $D'$ ample and smooth such that,
 \[ \cO_X(-D') \subset K \subset \cO_X(D) \]
 we find that,
 \[ \bigg| h^0(K \ot S^m(T_X \ot -\ell F)) - h^0(S^m(T_X \ot -\ell F)) \bigg| \in O(m^2) \]
@@ -389,22 +391,23 @@ For any $m > 0$ we have $H^0(S^m(T_X \ot - \ell F)) = 0$.
 \end{lemma}
 
 \begin{proof}
-We showed that $T_X \ot -\ell F$ is not unstable. Hence, the only sections of $H^0(S^{2m}(T_X \ot -\ell F) \ot (\det{(T_X \ot -\ell F)})^{-m})$ are nowhere vanishing. If we show for $m \gg 0$ that $H^0(\det{(T_X \ot - \ell F})^{-m})$ has a nonzero section with a zero at some point $x \in X$ then its product with a section $H^0(S^{2m}(T_X \ot - \ell F))$ will give a contradiction.
+We showed that $T_X \ot -\ell F$ is not unstable. Hence, the only sections of $H^0(X, S^{2m}(T_X \ot -\ell F) \ot \det{(T_X \ot -\ell F)}^{-m})$ are nowhere vanishing. If we show for $m \gg 0$ that $H^0(\det{(T_X \ot - \ell F)}^{-m})$ has a nonzero section with a zero at some point $x \in X$ then its product with a section $H^0(S^{2m}(T_X \ot - \ell F))$ will give a contradiction.
 Thus, the result will follow from the definition,
-\[ \det{(T_X \ot - \ell F)^{-m}} = m (K + 2 \ell F) \]
+% REVIEW: Should the exponent $-m$ be outside the \det? i.e. $\det(T_X \otimes -\ell F)^{-m} = \cO_X(m(K + 2\ell F))$? Also the RHS is a divisor class, not a line bundle -- consider using $\cO_X(m(K + 2\ell F))$.
+\[ \det{(T_X \ot - \ell F)}^{-m} = m (K + 2 \ell F) \]
 and Riemann-Roch,
 \[ \chi(m(K + 2 \ell F)) \sim \frac{m^2}{2} (K + 2 \ell F)^2 \in O(m^2) \]
 and therefore,
 \[ h^0(m(K + 2 \ell F)) + h^2(m(K + 2 \ell F)) \ge O(m^2) \]
 by Serre duality,
-\[ h^0(m(K + 2 \ell F)) = h^0(K - m(K + 2 \ell F)) \]
+\[ h^2(m(K + 2 \ell F)) = h^0(K - m(K + 2 \ell F)) \]
 Since $K \cdot (K - m(K + 2 \ell F)) = K^2 - m K \cdot (K + 2 \ell F) < 0$ and $K$ is nef (we assumed that $X$ is minimal) $h^0(K - m (K + 2 \ell F)) = 0$ for $m \gg 0$ giving the result.
 \end{proof}
 
-Our any bundle $F$ verifying the conditions of the properosition, we fix, once and for all, $m$ and $\ell$ and let $Z_F$ be the closed subset of $\P(\Omega_X)$ outside of which $u_F$ is defined.
+For any bundle $F$ verifying the conditions of the proposition, we fix, once and for all, $m$ and $\ell$ and let $Z_F$ be the closed subset of $\P(\Omega_X)$ outside of which $u_F$ is defined.
 
 \begin{defn}
-Let $C$ be a curve embedded in $C$ and $f : \wt{C} \to C$ its normalization. If $t_f(\wt{C})$ is not contained in (resp. is contained in) $Z_F$, we say that $C$ is $F$-regular (resp. $F$-irregular).
+Let $C$ be a curve embedded in $X$ and $f : \wt{C} \to C$ its normalization. If $t_f(\wt{C})$ is not contained in (resp. is contained in) $Z_F$, we say that $C$ is $F$-regular (resp. $F$-irregular).
 \end{defn}
 
 \subsection{Proof of Theorem 0.4}
@@ -433,7 +436,7 @@ The following theorem which we will prove later
 The family of $F$-irregular curves is bounded.
 \end{theorem}
 
-finishes the proposition. This result, along with the preceeding proposition, applied to the case $F = 0$ (so that the existence of $A$ is automatic), finishes the proof of the first assertion of the main theorem.
+finishes the proposition. This result, along with the preceding proposition, applied to the case $F = 0$ (so that the existence of $A$ is automatic), finishes the proof of the first assertion of the main theorem.
 
 \subsubsection{Proof in the case $c_1^2 \le c_2$ and $\rank \NS(X) \ge 2$}
 
@@ -443,16 +446,16 @@ and
 \[ c_2(\Omega_X^1 \ot \ell F) = c_2 + \ell K_X \cdot F + \ell^2 F^2 \]
 The conditions of 3.3.1 result in
 \[ K_X \cdot F \ge 0 \quad (K_X + 2 \ell )^2 > \frac{4 c_2 - c_1^2}{3} \ge c_1^2 \]
-where we use $c_1^2 \le c_2$. Consider the plane in $\NS(X)_{\RR}$ spanned by the images of $F$ and $K_X$, let us take an orthonormal basis formed by a vector colinear with $K_X$ and some orthogonal vector, in which the intersection form is given by the matrix
+where we use $c_1^2 \le c_2$. Consider the plane in $\NS(X)_{\RR}$ spanned by the images of $F$ and $K_X$, let us take an orthonormal basis formed by a vector collinear with $K_X$ and some orthogonal vector, in which the intersection form is given by the matrix
 \[ \begin{pmatrix}
 1 & 0
 \\
 0 & -1
 \end{pmatrix} \]
-The points $2 \ell F$ which verify the above inequalites are the interior of the hatched area (see figure). Let $C_0$ be the open cone tangent to the positive asymtotes of the hyperbola and centered at the oiring. The line bundles $F$ verifying the inequalities are those whose images in $\NS(X)_{\RR}$ are contained in $C_0$. Let $C_1$ be the dual closed cone, and $C$ the complement, which contains the cone
+The points $2 \ell F$ which verify the above inequalities are the interior of the hatched area (see figure). Let $C_0$ be the open cone tangent to the positive asymptotes of the hyperbola and centered at the origin. The line bundles $F$ verifying the inequalities are those whose images in $\NS(X)_{\RR}$ are contained in $C_0$. Let $C_1$ be the dual closed cone, and $C$ the complement, which contains the cone
 \[ \{ z \in \NS(X)_{\RR} \mid z^2 \le 0 \} \]
 where
-\[ C_1 = \bigcap_{F \in C_0} \{ z \mid z \cdot F \ge 0 \]
+\[ C_1 = \bigcap_{F \in C_0} \{ z \mid z \cdot F \ge 0 \} \]
 and
 \[ C = \bigcup_{F \in C_0} \{ z \mid z \cdot F < 0 \} \]
 We finish the argument by compactness.
@@ -473,14 +476,14 @@ It is a consequence of the fact that a surface of general type is not ruled or e
 On a minimal surface of general type, a family of curves of bounded self intersection and bounded geometric genus is bounded.
 \end{cor}
 
-\begin{cor}[Problem of Mordel]
-Let $X$ be a minimal surface of general type, $C$ a proper smooth curve and $f : X \to C$ a morphisms with connected reduced fibers. Then if the fibration $f$ is nontrivial, there is a finique number of sections.
+\begin{cor}[Problem of Mordell]
+Let $X$ be a minimal surface of general type, $C$ a proper smooth curve and $f : X \to C$ a morphism with connected reduced fibers. Then if the fibration $f$ is nontrivial, there is a finite number of sections.
 \end{cor}
 
 \begin{proof}
 Let $E$ be a section and $L = \struct{X}(E) \ot f^* \struct{E}(E)$. If $r = E^2 = \deg{\struct{E}(E)} > 0$ we verify that $L$ is numerically positive, so by the vanishing theorem of Kodaira-Ramanujam [15], $H^1(X, L^{-1}) = 0$. Furthermore, the Leray spectral sequence establishes
 \[ H^1(X, L^{-1}) \iso H^0(C, R^1 f_* L^{-1}) \]
-The exact sequnence
+The exact sequence
 \[ 0 \to \struct{X}(-E) \to \struct{X} \to \struct{E} \to 0 \]
 gives $R^1 f_* \struct{X}(-E) = R^1 f_* \struct{X}$ hence
 \[ R^1 f_* L^{-1} = \struct{E}(-E) \ot R^1 f_* \struct{X}(-E) \iso \struct{E}(-E) \ot R^1 f_* \struct{X} \]
@@ -490,15 +493,16 @@ we deduce the sequence
 \[ 0 \to f_* \struct{X} \to f_* \struct{X}(E) \to \struct{E}(E) \to R^1 f_* \struct{X} \]
 and since the genus of the fibers is nonzero, the map $\struct{E}(E) \to R^1 f_* \struct{X}$ is not zero, which contradicts the vanishing of $H^1(X, L^{-1})$.
 \par
-Therefore $E^2 \le 0$ (for another proof see [1] and [14]), if there are infinitely many they are contained in the fiberes of some foliation on $X$ and then we check that $f$ must be a trivial fibration.
+Therefore $E^2 \le 0$ (for another proof see [1] and [14]), if there are infinitely many they are contained in the fibers of some foliation on $X$ and then we check that $f$ must be a trivial fibration.
 \end{proof}
 
 \begin{rmk}
-In characteristic $p$, M. Raynaud [16] used this procedure to construct a counter-example to the vanishing theorem. More precisely, he constructed a fibration $f : X \to C$ whose fibers are integral curve of nonzero arithmetic genus with a section $E$ such that $E^2 > 0$.
+In characteristic $p$, M. Raynaud [16] used this procedure to construct a counter-example to the vanishing theorem. More precisely, he constructed a fibration $f : X \to C$ whose fibers are integral curves of nonzero arithmetic genus with a section $E$ such that $E^2 > 0$.
 \end{rmk}
 
 \begin{rmk}
-If we do not bound the genus, the families of curves of negative self-intersection on a surface of general type can be unbounded: let $Y \to B$ be a nonisotrivial elliptic fibration having infinitely many section of negative self-intersection (see 3.1.3). There exists a cover $X \to Y$ ramified along a smooth hyperplane section which is a surface of general type. The preimages of the sections of $Y \to $ are curves such that at least one component has negative self-intersection, and there are finitely many such curves on $X$.
+If we do not bound the genus, the families of curves of negative self-intersection on a surface of general type can be unbounded: let $Y \to B$ be a nonisotrivial elliptic fibration having infinitely many section of negative self-intersection (see 3.1.3). There exists a cover $X \to Y$ ramified along a smooth hyperplane section which is a surface of general type. % REVIEW: Missing target of morphism "$Y \to$" -- should this be "$Y \to B$"? Also "finitely many" seems to contradict the point about unboundedness; should this be "infinitely many"?
+The preimages of the sections of $Y \to B$ are curves such that at least one component has negative self-intersection, and there are infinitely many such curves on $X$.
 \end{rmk}
 
 \subsection{Study of $F$-irregular Curves}
@@ -516,13 +520,13 @@ is zero. The integral curves of a foliation are also integral curves of the asso
 \end{defn}
 
 \begin{prop}
-There exsits a finite number of surfaces smooth proper surfaces $Z_i$ dominating $X$, each equipped with an algebraic foliation, and such that the $F$-irregular curves of $X$, except for finitely many, are the images in $X$ of integral curves of these foliations.
+There exists a finite number of smooth proper surfaces $Z_i$ dominating $X$, each equipped with an algebraic foliation, and such that the $F$-irregular curves of $X$, except for finitely many, are the images in $X$ of integral curves of these foliations.
 \end{prop}
 
 \begin{proof}
 The irreducible component of the closed set $Z_F \subset \P(\Omega_X^1)$ are curves or surfaces. The curves $C$ such that $t_f(\wt{C})$ is contained in the some component that does not dominate $X$ are finite in number.
 \par
-Let $Z_i$ be the desginularization of the components that dominate $X$ and $\alpha_i : Z_i \to X$ the resoluting dominant morphisms, and $C$ a curve which lifts to $Z_i$
+Let $Z_i$ be the desingularization of the components that dominate $X$ and $\alpha_i : Z_i \to X$ the resulting dominant morphisms, and $C$ a curve which lifts to $Z_i$
 \begin{center}
 \begin{tikzcd}
 Z_i \arrow[r] \arrow[rd, "\alpha_i"] & \P(\Omega_X^1) \arrow[d, "\pi"]
@@ -539,10 +543,10 @@ The injection
 defines an algebraic foliation and we easily verify that $g(\wt{C})$ is an integral curve.
 \end{proof}
 
-To finish the proof of Theorem 0.4, two methods are possilbe -- we can, as is done by Bogomolov, use the following analyitc result
+To finish the proof of Theorem 0.4, two methods are possible -- we can, as is done by Bogomolov, use the following analytic result
 
 \begin{theorem}[Seidenberg]
-Lt $A$ and $B$ be two elements of the complete local ring $R = k[[x,y]]$. There exists a scheme $S$ obtained from $\Spec{R}$ by a finite sequence of blowups at closed points located above the closed point of $\Spec{R}$ such that the strict transforms on $S$ of the analytic branches of solutions of the differential equation $A \d{x} = B \d{y}$ are, except for possibly a finite number, are pairwise disjoint.
+Let $A$ and $B$ be two elements of the complete local ring $R = k[[x,y]]$. There exists a scheme $S$ obtained from $\Spec{R}$ by a finite sequence of blowups at closed points located above the closed point of $\Spec{R}$ such that the strict transforms on $S$ of the analytic branches of solutions of the differential equation $A \d{x} = B \d{y}$ are, except for possibly finitely many, are pairwise disjoint.
 \end{theorem}
 
 then we show that a family $(C_i)_{i \in I}$ of pairwise disjoint curves on a surface is bounded.
@@ -592,13 +596,14 @@ which is then identified with the required quotient. $\psi$ satisfies the follow
 \item if $D$ is an element of $\Div^{\tau}(X)$ and $\mu \in H^0(X, \Omega_X^1 \ot \K_X)$ is a representative of $\psi(D)$ then $\d{\mu} = 0$
 \item if $D$ is defined on an open $U$ by the zeros of a function $g$ then $\d{\log{g}} - \mu$ is holomorphic on $U$
 \item for any free subgroup $L \subset \Div^{\tau}(X)$ the morphism
-\[ \psi_G : L_{\CC} \to H^0(X, \Omega_X^1 \ot \K_X) / H^0(X, \Omega_X^1) \]
+% REVIEW: The subscript $G$ on $\psi_G$ seems inconsistent -- should this be $\psi|_L$ or $\psi_L$?
+\[ \psi_L : L_{\CC} \to H^0(X, \Omega_X^1 \ot \K_X) / H^0(X, \Omega_X^1) \]
 is injective.
 \end{enumerate}
 
 Let $M$ be the subgroup of $\Div(X)$ generated by the integral curves of $\F$ and $M^{\tau} := M \cap \Div^{\tau}(X)$. There is an exact sequence
 \[ 0 \to M^{\tau} \to M \xrightarrow{c_1} H^2(X, \CC) \]
-In the above, notation, for $D \in M^{\tau}$, the meromorphic $2$-form $\omega \wedge \mu$ can be locally writen as
+In the above, notation, for $D \in M^{\tau}$, the meromorphic $2$-form $\omega \wedge \mu$ can be locally written as
 \[ \omega \wedge \d{\log}(g) - \omega \wedge v \]
 where $v$ is holomorphic. This defines a morphism
 \[ h : M^{\tau}_{\CC} \to H^0(X, \Omega_X^2) / \omega \wedge H^0(X, \Omega_X^1) \quad D \mapsto \omega \wedge v \]
@@ -609,7 +614,7 @@ If $\dim{\ker{h}} > 1$ then there exist meromorphic functions $f$ and $\varphi$ 
 \end{lemma}
 
 \begin{proof}
-Let $D_1$ and $D_2$ be linearly independent divisors in $\ker{h}$ and $\mu_1, \mu_2$ be the corresponding meromorphic $2$-forms. Since these live in the kernel, there exist holomorphic froms $\theta_i$ such that $\omega \wedge \mu_i = \omega \wedge \theta_i$ for $i = 1,2$ and hence nonzero meromorphic functions $k_i$ such that $\mu_i - \theta_i = k_i \omega$. Since $\d{\mu_i} = 0$ and $\d{\theta
+Let $D_1$ and $D_2$ be linearly independent divisors in $\ker{h}$ and $\mu_1, \mu_2$ be the corresponding meromorphic $2$-forms. Since these live in the kernel, there exist holomorphic forms $\theta_i$ such that $\omega \wedge \mu_i = \omega \wedge \theta_i$ for $i = 1,2$ and hence nonzero meromorphic functions $k_i$ such that $\mu_i - \theta_i = k_i \omega$. Since $\d{\mu_i} = 0$ and $\d{\theta
 _i} = 0$ (it is $\mu_i - \d{\log{g_i}}$ locally),
 \[ \d(k_i \omega) = \d{k_i} \wedge \omega + k_i \d{\omega} = 0 \]
 Thus,
@@ -627,7 +632,8 @@ This suffices because it proves that $M^{\tau}_{\CC}$ is finite dimensional unle
 
 
 
-\section{Miles Ried?}
+% REVIEW: Section title "Miles Reid?" appears to be a placeholder -- should be given a proper title
+\section{Miles Reid?}
 
 \subsubsection{Interlude: regularizing meromorphic 1-forms via covers}
 
@@ -638,11 +644,11 @@ Let $f : X \to Y$ be a morphism of locally noetherian schemes. If $Z \subset Y$ 
 \end{lemma}
 
 \begin{proof}
-Using that $\codim{Z,Y} = \dim{\stalk{Y}{\xi}}$ where $\xi \in Z$ is the generic point we immediately reduce to the affine case. Either $\xi \notin f(X)$ and we are done or we can choose $f : U \to V$ a mp of affine schemes sending $\xi' \in U$ to $\xi \in V$. Let $\varphi : A \to B$ be a map of noetherian rings and $\p \subset A$ a prime of height $\le r$ in the image of $\Spec{B} \to \Spec{A}$. Passing to $A_\p \to B_\p$ we need to find a prime $\q$ of $B_\p$ of height $\le r$ with $\varphi^{-1}(\q)$ maximal. Then $\p$ is the unique minimal prime over an ideal of definition $(x_1, \dots, x_r) \subset A_\p$ generated by at most $r$ elements by \chref{https://stacks.math.columbia.edu/tag/00KQ}{Tag 00KQ}. Since $B_\p / \p B_\p$ is nonzero (the fiber is nonempty) the ideal $(x_1, \dots, x_r) B_\p$ is proper hence, by the Krull height theorem, there exists a prime $\q$ containing it of height $\le r$. Then each $x_i \in \varphi^{-1}(\q)$ so $\p \subset \varphi^{-1}(\q)$ and we conclude.
+Using that $\codim{Z,Y} = \dim{\stalk{Y}{\xi}}$ where $\xi \in Z$ is the generic point we immediately reduce to the affine case. Either $\xi \notin f(X)$ and we are done or we can choose $f : U \to V$ a map of affine schemes sending $\xi' \in U$ to $\xi \in V$. Let $\varphi : A \to B$ be a map of noetherian rings and $\p \subset A$ a prime of height $\le r$ in the image of $\Spec{B} \to \Spec{A}$. Passing to $A_\p \to B_\p$ we need to find a prime $\q$ of $B_\p$ of height $\le r$ with $\varphi^{-1}(\q)$ maximal. Then $\p$ is the unique minimal prime over an ideal of definition $(x_1, \dots, x_r) \subset A_\p$ generated by at most $r$ elements by \chref{https://stacks.math.columbia.edu/tag/00KQ}{Tag 00KQ}. Since $B_\p / \p B_\p$ is nonzero (the fiber is nonempty) the ideal $(x_1, \dots, x_r) B_\p$ is proper hence, by the Krull height theorem, there exists a prime $\q$ containing it of height $\le r$. Then each $x_i \in \varphi^{-1}(\q)$ so $\p \subset \varphi^{-1}(\q)$ and we conclude.
 \end{proof}
 
 \begin{example}
-Noetherianity is essential in the above. Indeed, we could take a domain $D$ with every nonzero prime of infinite height (as constructed in ``Anti-archimedean rings and power series rings'' by D.D. Anderson). Then for any nonzero nonunit $t \in D$ the map $k[t] \to D$ certainly falisfies the claim that the divisor $V(t)$ is in the image of a divisor (since there are none) although it is in the image of some prime.
+Noetherianity is essential in the above. Indeed, we could take a domain $D$ with every nonzero prime of infinite height (as constructed in ``Anti-archimedean rings and power series rings'' by D.D. Anderson). Then for any nonzero nonunit $t \in D$ the map $k[t] \to D$ certainly falsifies the claim that the divisor $V(t)$ is in the image of a divisor (since there are none) although it is in the image of some prime.
 \end{example}
 
 \begin{prop}
@@ -650,31 +656,32 @@ Let $f : X \to Y$ be a proper dominant morphism of locally noetherian integral $
 \end{prop}
 
 \begin{proof}
-Since $Y$ is regular in codimension $1$ it suffices to show that for each $\xi \in Y$ of height $1$ that $\omega_\xi \in (\Omega_Y)_{\xi}$. Since $f$ is proper and dominant it is surjective so we may choose $\xi' \in X$ mapping to $\xi$. The fiber over a divisor must contain a divisor of $X$ so we can choose  $\xi'$ in the smooth locus. locus hence $f^* \omega$ is a well-defined differential form over $\stalk{X}{\xi'}$.  Since $\stalk{X}{\xi'}$ is a noetherian local domain by [Hartshorne, Ex.4.11] there exists a DVR $R \subset \Frac{\stalk{X}{\xi'}}$ dominating $\stalk{X}{\xi'}$.
+Since $Y$ is regular in codimension $1$ it suffices to show that for each $\xi \in Y$ of height $1$ that $\omega_\xi \in (\Omega_Y)_{\xi}$. Since $f$ is proper and dominant it is surjective so we may choose $\xi' \in X$ mapping to $\xi$. The fiber over a divisor must contain a divisor of $X$ so we can choose $\xi'$ in the smooth locus, hence $f^* \omega$ is a well-defined differential form over $\stalk{X}{\xi'}$.  Since $\stalk{X}{\xi'}$ is a noetherian local domain by [Hartshorne, Ex.4.11] there exists a DVR $R \subset \Frac{\stalk{X}{\xi'}}$ dominating $\stalk{X}{\xi'}$.
 
 {\color{red} FINISH}
 
 \end{proof}
 
 \begin{rmk}
-For example, this holds for any tame dominant map of normal proper varities over a perfect field.
+For example, this holds for any tame dominant map of normal proper varieties over a perfect field.
 \end{rmk}
 
 {\color{red} COUNTEREXAMPLES}
 
 \subsection{Proof of Theorem 0.4}
 
-We suppose that $\L \embed \Omega_X^1$ is a invertible subsheaf. If $h^0(X, \L^{\ot n}) \le 1$ for all $n$ then we are done. Otherwise, there is some $n > 0$ such that $h^0(X, \L^{\ot n}) \ge 2$. In this case, by passing to a cyclic cover we may assume that $h^0(X, \L) \ge 2$. Therefore, there are two independent $1$-forms $\omega_1, \omega_2 \in H^0(X, \L) \subset H^0(X, \Omega^1_X)$ such that $\omega_1 \wedge \omega_2 = 0$ because they lie in the same $1$-dimensional subspace at the generic point $\L_{\eta} \subset \Omega_{X, \eta}^1$. Therefore, we may apply Castelnuovo's lemma to produce a morphism $f : X \to C$ to some curve of genus $g \ge 2$ with $\omega_1, \omega_2$ pulled back along $f$. By the proof of this lemma, we see that any local section of $\L$ is pulled back along $f$ hence $\L \embed f^* \Omega_C$.
+We suppose that $\L \embed \Omega_X^1$ is an invertible subsheaf. If $h^0(X, \L^{\ot n}) \le 1$ for all $n$ then we are done. Otherwise, there is some $n > 0$ such that $h^0(X, \L^{\ot n}) \ge 2$. In this case, by passing to a cyclic cover we may assume that $h^0(X, \L) \ge 2$. Therefore, there are two independent $1$-forms $\omega_1, \omega_2 \in H^0(X, \L) \subset H^0(X, \Omega^1_X)$ such that $\omega_1 \wedge \omega_2 = 0$ because they lie in the same $1$-dimensional subspace at the generic point $\L_{\eta} \subset \Omega_{X, \eta}^1$. Therefore, we may apply Castelnuovo's lemma to produce a morphism $f : X \to C$ to some curve of genus $g \ge 2$ with $\omega_1, \omega_2$ pulled back along $f$. By the proof of this lemma, we see that any local section of $\L$ is pulled back along $f$ hence $\L \embed f^* \Omega_C$.
 
 \subsubsection{Ramified Cyclic Covers}
 
 Let $X$ be a scheme and $\L \in \Pic{X}$ a line bundle and $s \in H^0(X, \L^{\ot n})$ a nonzero section of some tensor power. Then we may form a finitely-presented sheaf of $\struct{X}$-algebras,
 \[ \cA = \struct{X} \oplus t \L^{\ot -1} \oplus \cdots \oplus t^{n-1} \L^{\ot -(n-1)} \]
 where multiplication is defined in the obvious manner,
-\[ (t^a f_1) (t^b t_2)  =
+\[ (t^a f_1) (t^b f_2)  =
 \begin{cases}
 t^{a+b} f_1 f_2 & a + b < n
 \\
+% REVIEW: Since $0 \le a,b \le n-1$, we have $k \le 1$; the condition $nk \le a+b < (n+1)k$ for $k=1$ gives $n \le a+b < n+1$, which seems too restrictive. Should the second case simply be $a + b \ge n$ (with $k=1$)?
 t^{a + b - nk} [(s^\vee)^{\ot k} \ot \id](f_1 f_2) & nk \le a + b < (n+1)k
 \end{cases}  \]
 where $[(s^\vee)^{\ot k} \ot \id] : \L^{\ot -(a+b)} \to \L^{\ot -(a + b - nk)}$. Then we define $X_{\L, s} := \rSpec{X}{\cA}$. Over the locus where $s$ is nonvanishing it is clear that $X_{\L, s} \to X$ is a degree $n$ cyclic cover which is \etale for $n$ nonzero in the base scheme.
@@ -685,7 +692,7 @@ which is the quotient as a sheaf of algebras by the ideal generated by $(t^n f -
 \bigskip\\
 Note that under $\pi : \V_X(\L) \to X$ we get a canonical section $t \in H^0(\V_X(\L), \pi^* \L)$ and hence for $f : X_{\L, s} \to X$ there is a canonical section $t \in H^0(X_{\L, s}, f^* \L)$ such that $t^n = f^* s$.
 \bigskip\\
-Now suppose that $s_1, s_2 \in H^0(X, \L^{\ot n})$ are two independent sections. Then by passing to the iterating cyclic cover, $X' = (X_{\L, s_1})_{f^* \L, f^* s_2} \to X_{\L, s_1} \to X$ we get $\L' = f^* \L$ and two canonical sections $t_1, t_2 \in H^0(X', \L')$ such that $t_i^n = f^* s_i$ for $i = 1,2$.
+Now suppose that $s_1, s_2 \in H^0(X, \L^{\ot n})$ are two independent sections. Then by passing to the iterated cyclic cover, $X' = (X_{\L, s_1})_{f^* \L, f^* s_2} \to X_{\L, s_1} \to X$ we get $\L' = f^* \L$ and two canonical sections $t_1, t_2 \in H^0(X', \L')$ such that $t_i^n = f^* s_i$ for $i = 1,2$.
 \bigskip\\
 Furthermore, suppose that $n$ is invertible on the base and there is an injection $\L \embed \Omega_X^1$. Then passing to the cyclic cover (which is generically \etale) we get $f^* \L \embed f^* \Omega_X^1 \embed \Omega_{X'}^1$ which is injective because it is at the generic point. Hence we reduce to the situation that $h^0(X, \L) \ge 2$.
 
@@ -701,7 +708,8 @@ $\Exc(X,V) \subset GG_A(X,V)$.
 
 \begin{theorem}
 Let $W \subset V$ be a saturated coherent subsheaf so that
-\[ H^0(X, W^[-m] \ot A^{-1}) = 0 \]
+% REVIEW: $W^{[-m]}$ is unusual notation -- should this be $S^m W^*$ or similar? Check the reference for the intended meaning.
+\[ H^0(X, W^{[-m]} \ot A^{-1}) = 0 \]
 for all $m > 0$ then $GG(X,V) = X$.
 \end{theorem}
 
@@ -710,11 +718,11 @@ We get surjections
 \[ E^{GG}_{k,m} T_X^* \to E^{GG}_{k,m} V^* \to E_{k,m}^{GG} W^* \]
 Using the standard filtration, the assumption implies
 \[ H^0(X, E_{k,m}^{GG} W^*) = 0 \]
-for all $k, m$. Therefore, any jet tangent to $W$ living over $x \in X$ contributes to $GG_A(X,V)$ so we conclude. There is a little subtily making this work when $W$ is not a subbundle, but then we can just shrink to throw out the codimension $2$ subset where it is not a subbundle and make the same argument since sections of the jet bundles extend.
+for all $k, m$. Therefore, any jet tangent to $W$ living over $x \in X$ contributes to $GG_A(X,V)$ so we conclude. There is a little subtlety making this work when $W$ is not a subbundle, but then we can just shrink to throw out the codimension $2$ subset where it is not a subbundle and make the same argument since sections of the jet bundles extend.
 \end{proof}
 
 \begin{rmk}
-Note that there is also a $DS(X,V)$ DEmailly-Semple locus using ``invariant jets'' meaning sections of the Demailly-Semple jets.
+Note that there is also a $DS(X,V)$ Demailly-Semple locus using ``invariant jets'' meaning sections of the Demailly-Semple jets.
 \end{rmk}
 
 \begin{example}
@@ -726,7 +734,7 @@ Furthermore, we can take quotients of products of curves. For example $X = C^{(2
 \subsection{Symmetric Domains}
 
 \begin{defn}
-A bounded domain $\Omega \subset \CC^n$ is called a \textit{bounded symmetric domain} if for all $x \in \Omega$ there is an involutive ($\sigma_x^2 = \id$) biolomorphism $\sigma_x : \Omega \to \Omega$ for which $x$ is an isolated fixed point.
+A bounded domain $\Omega \subset \CC^n$ is called a \textit{bounded symmetric domain} if for all $x \in \Omega$ there is an involutive ($\sigma_x^2 = \id$) biholomorphism $\sigma_x : \Omega \to \Omega$ for which $x$ is an isolated fixed point.
 \end{defn}
 
 Question: is aut transitive?
@@ -740,7 +748,7 @@ If $X$ is uniformized by the $n$-ball $\mathbb{B}^n$ then $X$ has ample cotangen
 \end{theorem}
 
 \begin{proof}
-The Bergman metric on $\mathbb{B}^n$ is invariant under biholomorphisms and hence descends to $X$. It has negative sectional Riemannian curvature and hence $\Omega_X$ is ample by Kodiara's theorem.
+The Bergman metric on $\mathbb{B}^n$ is invariant under biholomorphisms and hence descends to $X$. It has negative sectional Riemannian curvature and hence $\Omega_X$ is ample by Kodaira's theorem.
 \end{proof}
 
 \begin{defn}
@@ -748,5 +756,12 @@ We say that $X = \Omega / \Gamma$ is \textit{reducible} if there is a finite ind
 \end{defn}
 
 \begin{theorem}
-Let $X$ be a complex projective manifold uniformiaed by a reducible bounded symmetric domain. Then $GG(X) = X$.
+Let $X$ be a complex projective manifold uniformized by a reducible bounded symmetric domain. Then $GG(X) = X$.
 \end{theorem}
+
+\ifSubfilesClassLoaded{%
+  \bibliographystyle{alpha}
+  \bibliography{refs}
+}{}
+
+\end{document}
