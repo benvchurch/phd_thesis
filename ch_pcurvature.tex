@@ -1,430 +1,139 @@
 \documentclass[main.tex]{subfiles}
 \begin{document}
-\chapter{Jet Obstructions and $p$-Curvature}
+\chapter{Foliations in Positive Characteristic and $p$-Curvature} \label{chapter:foliations}
 
-%% All commands are in macros.sty
 
-% REVIEW: This section "Talk" appears to be an informal draft/lecture version. Several theorems and propositions (Shioda's theorem, the jet amplitude theorem, the asymptotic cohomology bound, the supersingularity proposition) are duplicated verbatim in later sections ("Addendum", "Proof of the Jet Amplitude Theorem"). Consider consolidating to avoid redundancy.
-\section{Talk}
+In this chapter we review the definition and basic properties of foliations in positive characteristic. Since there is no reference known to the author containing all these statements in the precise form given here (e.g.\ for general foliations as opposed to flat connections), we spell out some of the non-commutative algebra involved in working with $p$-curvatures.
+\par 
+First we make a few remarks about conventions. Let $p$ be a prime number. For a scheme $X$ of pure characteristic $p$, let $\Frob_X : X \to X$ denote the absolute Frobenius, the morphism given by the identity on the underlying topological space and with $\Frob_X^{\#} : \cO_X \to \cO_X$ given by $f \mapsto f^p$. Let $f : X \to S$ be a morphism of schemes in characteristic $p$, then the diagram,
+\begin{center}
+\begin{tikzcd}[column sep = large, row sep = large]
+X \arrow[r, "\Frob_X"] \arrow[d, "f"] & X \arrow[d, "f"]
+\\
+S \arrow[r, "\Frob_S"] & S 
+\end{tikzcd}
+\end{center}  
+The fiber product $X^{(p/S)} := X \times_{S, \Frob_S} S$ is called the \textit{Frobenius twist} of $X$ relative to $S$. This diagram implies the existence of a morphism $F_{X/S} : X \to X^{(p/S)}$ via the universality of the pullback square
+\begin{center}
+\begin{tikzcd}[column sep = large, row sep = large]
+X \arrow[r, "F_{X/S}"] \arrow[rd] \arrow[rr, bend left, "\Frob_X"] & X^{(p/S)} \arrow[d] \pullback \arrow[r] & X \arrow[d]
+\\
+& S \arrow[r, "\Frob_S"] & S
+\end{tikzcd}
+\end{center}
+which we call the \textit{relative Frobenius} of $X$ over $S$. When there is no ambiguity about the base scheme, such as when $X$ lives over a ground field $k$, we will write $F_{X}$ for $F_{X/k}$. 
+\par 
+On a (possibly singular) $S$-scheme, we define the \textit{relative tangent sheaf} 
+\[ \T_{X/S} := \Omega_{X/S}^{\vee} = \shDer_{\cO_S}(\cO_X, \cO_X) \]
+as the dual of the sheaf of K\"{a}hler differentials which equals the sheaf of $S$-derivations on $X$. This is a sheaf of $\cO_S$-linear Lie algebras via the Lie bracket of derivations. When $X$ is a variety over a field $k$ we will write $\Omega_{X}$ for $\Omega_{X/k}$ and likewise $\T_{X}$ for $\T_{X/k}$. Note that the tangent sheaf enjoys much worse functorial properties than the cotangent sheaf. If $f : X \to Y$ is a morphism of $S$-schemes with $Y$ smooth over $S$ then dualizing the pullback map
+\[ f^* \Omega_{Y/S} \to \Omega_{X/S} \]
+we obtain a map called the \textit{differential}
+\[ \d{f} : \T_{X/S} \to f^* \T_{Y/S}. \]
+Since the map goes the wrong way, we do not obtain a map of sections of the tangent sheaf. Moreover, if $\Omega_{Y/S}$ is not locally free, the differential map is not well-defined since duals do not commute with pullbacks. In general we only have the following diagram of $\cO_X$-modules,
+\begin{center}
+\begin{tikzcd}
+\T_{X/S} \arrow[r, "\d{f}"] & (f^* \Omega_{Y/S})^{\vee}
+\\
+& f^* \T_{Y/S} \arrow[u] 
+\end{tikzcd}
+\end{center}
+Therefore, care must be taken when making functoriality arguments in the singular setting. In the following, we usually assume the target is smooth for simplicity.
 
-\subsection{Motivation: unirationality}
-
-Unirationality is the weakest notion of a polynomial system being ``solvable'' by polynomials.
+\section{Foliations}
 
 \begin{defn}
-Let $X$ be a variety over $k$. We say that $X$ is \textit{unirational} (over $k$) if there is a dominant rational map $\P^n \rat X$.
-\end{defn}
-
-This says exactly that (most) points of $X$ can be parametrized by some rational functions.
-
-\begin{theorem}[Luroth]
-If $X$ is a curve then $X$ is unirational iff $X$ has genus $0$.
-\end{theorem}
-
-% REVIEW: Theorem name is traditionally "Castelnuovo" (no second 'l')
-\begin{theorem}[Castelnuovo]
-Let $X / \CC$ be a smooth proper surface. TFAE
+Let $X$ be a normal variety. A \textit{foliation} $\F$ is a coherent subsheaf $\F \subset \T_X$ of the tangent sheaf $\T_X$ of $X$ which is
 \begin{enumerate}
-\item $X$ is unirational
-\item $H^0(X, \omega_X^{\ot 2}) = 0$ and $H^1(X, \CC) = 0$
-\item $X \birat \P^2$
+    \item \textit{involutive}: $[\F, \F] \subset \F$ meaning $\F$ is closed under the Lie bracket
+    \item \textit{saturated}: $\T_X / \F$ is torsion free.
 \end{enumerate}
-\end{theorem}
-
-Let's talk about how we prove varieties are not unirational in characteristic zero.
-
-\subsubsection{Characteristic Zero}
-
-Proving that a variety is not unirational is often quite subtle. For example, even in characteristic zero there is no known example of a rationally connected variety where we can prove it is not unirational.
-\par
-However, if the variety admits any sort of forms we can use these as an obstruction.
-
-\begin{prop} 
-Let $k$ be of characteristic zero and $X$ a proper $k$-variety. Then if $\omega \in H^0(X, \Omega_X^{\ot m})$ is a nonzero form for $m > 0$ then $X$ is not unirational.
-\end{prop}
-
-\begin{proof}
-Indeed, if $f : \P^n \rat X$ is a unirational parametrization with $n = \dim{X}$ then $f$ is generically \etale. Furthermore, since $X$ is proper $f$ is defined in codimension $1$ so $f^* \omega$ extends to a section of $H^0(\P^n, \Omega_{\P^n}^{\ot m})$ giving a contradiction.
-\end{proof}
-
-This argument fails completely in positive characteristic because of the existence of inseparable maps for which $f^* \omega = 0$.
-
-\begin{example}
-Consider a surface $X / \FF_p$ defined as a smooth compactification of an equation of the form,
-\[ z^p = f(x,y) \]
-for some $f \in \FF_p[x,y]$. Then if we choose $f$ to have large degree $X$ may be of general type. However, notice that if we adjoin $p^{\text{th}}$-roots $s,t$ of $x$ and $y$ then the equation becomes
-\[ z^p = f(s^p, t^p) = f(s,t)^p \]
-therefore $k(X) \subset k(s,t)$ given by $z = f(s,t)$ and $x = s^p$ and $y = t^p$. This shows that $X$ is always unirational.
-\end{example}
-
-This demonstrates that unirationality in positive characteristic is a phenomenon that persists even for quite ``complex'' varieties from the perspective of the usual classification of surfaces.
-
-\subsection{Shioda's Example}
-
-Shioda used some very clever tricks and computations to compute the following.
-
-\begin{theorem}[Shioda]
-Let $F_n$ be the Fermat surface over $\FF_p$ ($p > 2$) given by the equation
-\[ \{ X^n + Y^n + Z^n + W^n = 0 \} \subset \P^3 \]
-Then $F_n$ is unirational if and only if $p^\nu \equiv -1 \mod n$ for some $\nu$.
-\end{theorem}
-
-\begin{example}
-Let $G = \Z / 5 \Z$ act on $F_5$ by $\lambda \cdot [X : Y : Z : W] = [X : \lambda Y : \lambda^2 Z : \lambda^3 W]$. This action is free and hence $X = F_5 / G$ is a smooth projective surface with $\pi_1(X) = \Z / 5 \Z$ called the Godeaux surface. Shioda's result shows that this is supersingular over infinitely many primes. However, we saw this cannot happen over $\CC$, indeed $X$ has general type.
-\end{example}
-
-How does Shioda prove this theorem: for the ``if'' part he uses an extremely clever change of variables to just write down the unirational parametrization. To show the ``only if'' he needs an obstruction, this comes from \etale cohomology.
-
-\begin{prop}
-Let $X$ be a smooth projective unirational surface over $\FF_q$. Then $\Frob_q \acts H^2_{\et}(X, \QQ_\ell)$ has eigenvalues of the form $\zeta \cdot q$ for $\zeta$ a root of unity. We call this property \textit{supersingularity}.
-\end{prop}
-
-\begin{proof}
-Pass to an extension $\FF_{q^n}$ such that the unirational parametrization and all points of indeterminacy are defined over $\FF_{q^n}$. Resolving the indeterminacy locus, we get $\Bl_S \P^2 \to X$ where $S \subset \P^2$ is a finite set of points. Therefore $H^2_{\et}(X, \QQ_\ell) \embed H^2_{\et}(\Bl_S \P^2, \Q_\ell) = \Q_\ell(-1)^{1 + \# S}$. Thus $\Frob_{q^n} = \Frob_{q}^n$ acts via $q^n$.
-\end{proof}
-
-
-\subsection{Jet Obstructions}
-
-
-Here we describe one approach to obstructing unirationality. The idea is very simple: recall that in characteristic zero we may use forms to obstruct unirationality. However, the issue is that degree $p$ purely inseparable maps can kill first-order derivatives. The fundamental observation is that they cannot kill $p^{\text{th}}$-order derivatives. Therefore, if we can find higher-order forms on our varieties then these will pull back nontrivially even along certain inseparable maps to produce obstructions. This idea can be formalized using various notions of jet bundles.
-
-\begin{defn}
-Let $X \to S$ be a smooth scheme. Then $J^n_{X/S} := \pi_{1*} \pi_2^* \struct{X}$ where the projections are along the $n^{\text{th}}$-order thickening of the diagonal $\Delta^n_{X/S} := V(\I_{\Delta}^{n+1}) \subset X \times_S X$. This satisfies the following universal property,
-\[ \shHom{\struct{X}}{J^n_{X/S}}{\E} = \shDiff{\le n}{X}{\struct{X}}{\E} \]
 \end{defn}
 
-Now I define a notion of bigness for lifts of jets.
+We will almost always only consider foliations on smooth varieties.
+In this text, we will only consider \textit{algebraic} foliations where the objects in the above definition lie in the algebraic category and the sheaves are coherent sheaves of $\cO_X$-modules on finite type schemes. 
+One can also consider \textit{analytic} or \textit{smooth} foliations taking subsheaves of the tangent bundle in those corresponding categories. Over $\CC$, the involutive condition ensures that $\F$ is locally \textit{integrable}. Integrability means that through any smooth point of $X$ where $\F$ is a sub-bundle, there is a unique analytic submanifold ``integrating'' $\F$ in the sense that its tangent space everywhere agrees with the subspaces $\F \subset \T_X$. However, in a small analytic neighborhood of such a point, the leaves look like fibers of a smooth (submersive) morphism. This motivates the following definition. 
 
 \begin{defn}
-Let $\wt{J}^n_X := \ker{(J^n_X \to \struct{X})}$ using the natural projection $J^n_X \to J^0_X = \struct{X}$.
+The \textit{singular locus} of a foliation $\F \subset \T_X$ denoted as $\Sing(\F)$ is the union of $X^{\sing}$ and the locus where $\F \subset \T_X$ is not a sub-bundle. 
 \end{defn}
 
-\begin{defn}
-Let $X$ be a smooth proper variety. Define the \textit{jet-amplitude} of $X$ to be
-\[ \jetamp(X) := \sup \left \{ \frac{n}{r} : \exists \, \omega \in H^0(X, \wt{J}^{n}_X) \text{ such that } \omega|_{\wt{J}^{r}_X} \neq 0 \right\} \]
-\end{defn}
+The saturation condition implies that a foliation on a normal variety is determined by its restriction to any dense open set. Hence algebraic foliations are of a birational nature and often inform the birational study of $X$. This, along with the following functoriality result, implies that foliations can be pulled back along rational maps, confirming their birational nature.
 
-\begin{theorem}[C]
-Let $X$ be a smooth proper variety over a perfect field $k$. Suppose that $\log_p \jetamp(X) > \ell$ then there does not exist a unirational parametrization $\P^n \rat X$ of inseparability degree $\ell$.
-\end{theorem}
-
-\begin{proof}
-There is a factorization of rational maps
+\begin{defn} \label{defn:pullback_foliation}
+Let $f : X \to Y$ be a morphism of varieties and $\F \subset \T_{Y}$ a foliation on $Y$. Then we define the \textit{pullback foliation} $f^+ \F \subset \T_X$ as the saturation of the image of $\G \to \T_Y$ arising in the pullback square
 \begin{center}
 \begin{tikzcd}
-X^{(1/q)} \arrow[r, dashed, "f'"] \arrow[rd, "F"'] & \P^n \arrow[d, dashed, "f"]
+\G \pullback \arrow[r] \arrow[d] & \T_{X} \arrow[d, "\d{f}"]
 \\
-& X
+(f^* \F^{\vee})^{\vee} \arrow[r] & (f^* \Omega_{Y})^{\vee}
 \end{tikzcd}
-\end{center}
-where $F : X^{(1/q)} \to X$ is the $\ell^{\text{th}}$-relative Frobenius.
-Using extension in codimension $\ge 2$, there are well-defined pullback maps
-\begin{center}
-\begin{tikzcd}
-H^0(X, \wt{J}^{s}_X) \arrow[r] \arrow[d, "f^*"] & H^0(X, \wt{J}^{r}_X) \arrow[d, "f^*"]
-\\
-H^0(\P^n, \wt{J}^{s}_{\P^n}) \arrow[d, "f'^*"] \arrow[r] & H^0(\P^n, \wt{J}^{r}_{\P^n}) \arrow[d, "f'^*"]
-\\
-H^0(X^{(1/q)}, \wt{J}^{s}_{X^{(1/q)}}) \arrow[r] & H^0(X^{(1/q)}, \wt{J}^{r}_{X^{(1/q)}})
-\end{tikzcd}
-\end{center}
-where the composition along column is $F^*$. Therefore, it suffices to show that $F^* \omega \neq 0$. To do this, we may work \etale-locally and reduce to the following computation: $J^r_{\A^n}$ is represented by the algebra,
-\[ k[x_1, \dots, x_n][\d{x_1}, \dots, \d{x_n}] / (\d{x_1}, \dots, \d{x_n})^{r+1} \] and $F^* \d{x_i} = \d{x_i^{q}} = (\d{x_i})^{q}$. Therefore, this is nonzero if $s/r \ge q$.
-\end{proof}
-
-Unfortunately it is quite difficult to compute $\jetamp(X)$. For ``generic'' complete intersections of large degree, it is known that $\jetamp(X) = \infty$. However, for any particular example it is very hard to get one's hands on this thing. There is a trivial bound as follows.
-
-
-\begin{prop}
-Let $X$ be a smooth projective variety. Then,
-\[ \jetamp(X) \ge \left(\frac{\ul{\hat{h}}^0(\Omega_X)}{\hat{h}^1(\Omega_X)}\right)^{\frac{1}{2 \dim{X}}} \]
-where $\hat{h}^i$ these are so-called \textit{asymptotic cohomology}
-\[ \hat{h}^i(X, \E) := \limsup_{m \to \infty} \frac{h^0(X, \nSym{m}{\E})}{m^{\dim{X} + \rank{\E} - 1}} \]
-and likewise $\ul{\hat{h}}^i$ are the \textit{lower asymptotic cohomology}
-\[ \ul{\hat{h}}^i(X, \E) := \liminf_{m \to \infty} \frac{h^0(X, \nSym{m}{\E})}{m^{\dim{X} + \rank{\E} - 1}} \]
-\end{prop}
-
-
-\begin{proof}
-This arises from the exact sequence
-\begin{center}
-\begin{tikzcd}
-0 \arrow[r] & \nSym{n}{\Omega_X} \arrow[r] & J^n_X \arrow[r] & J^{n-1}_X \arrow[r] & 0
-\end{tikzcd}
-\end{center}
-\end{proof}
-
-\begin{example}
-Suppose $h^0(X, \nSym{2}{\Omega_X}) \ge h^1(X, \nSym{3}{\Omega_X}) + h^1(X, \nSym{4}{\Omega_X})$ then $X$ is not a Zariski space in characteristic $2$.
-\end{example}
-
-\subsection{Hyperbolicity}
-
-\begin{defn}
-A complex variety $X$ is \textit{hyperbolic} if every entire map $f : \CC \to X$ is constant.
+\end{center} 
 \end{defn}
 
-In particular, this says that $X$ does not contain any rational or elliptic curves. It is expected that general type varieties are \textit{close} to being hyperbolic in the following precise sense.
-
-\begin{conj}[Green-Griffiths-Lang]
-Let $X$ be a smooth projective complex surface of general type. Then there exists a proper Zariski closed subset $Z \subsetneq X$ such that any entire curve $f : \CC \to X$ has image inside $Z$.
-\end{conj}
-
-The remarkable feature of this conjecture is that we expect every entire curve to be \textit{algebraically degenerate} meaning it satisfies a polynomial relation (i.e. it lives in $Z$). Moreover, we expect that these relations can be chosen independently of the map!
-% REVIEW: \bigskip\\ produces a forced linebreak after vertical space -- consider replacing with \par or a blank line for cleaner formatting.
-\bigskip\\
-The strategy developed by Green, Griffiths, Demailly and many others towards this conjecture is to produce algebraic differential equations that entire curves must satisfy. We can think of a first-order differential equation as a closed subspace of the tangent bundle of $X$. If we could produce enough differential equations so that the intersection of these loci in $T X$ does not dominate $X$ then we win.
-
-\subsection{Induced Foliations}
-
-Suppose that $\omega \in H^0(P_k X, \struct{P_k X}(m))$ is a Demailly-Semple jet. Then the vanishing locus $V(\omega) \subset P_k X$ is pure codimension $1$. For each irreducible component $Z$, consider the following subbundle of the tangent bundle,
-\[ \F := \ker{(\T_Z \oplus \struct{P_k X}(-1)|_Z \to \pi^* \T_{P_{k-1}X} |_Z)} \]
-Since $X$ is a surface, $\F$ is generically rank $1$ and therefore automatically closed under Lie bracket i.e. it defines a foliation. {\color{red} CHECK THIS} Since every curve $f : C \to X$ lifts to a curve $f_k : C \to P_k X$ parallel to the directed structure (meaning its differential $\d{f_k} : \T_C \to \T_{P_k X}$ factors through $\E_k$)
-
-\subsection{$p$-Curvature}
+If $f$ is generically smooth, this operation preserves the corank, $\rank{\T_X} - \rank{\F}$, of the foliation. 
+\par 
+Often these analytic leaves are very far from being algebraic as they have wild global behavior. For example, they can be dense in the analytic topology and hence only form \textit{immersed} submanifolds (when restricted away from the singular locus of the foliation). It will also be important to study \textit{algebraic leaves} which are subvarieties tangent to the foliations. This is exactly the special case when some analytic leaf is Zariski closed. 
 
 \begin{defn}
-Let $k$ be a field of characteristic $p$ and $\partial : A \to A$ a derivation. Then there is a well-defined derivation $\partial^p$ given by
+Let $\F \subset \T_X$ be a foliation on $X$. We say a subvariety $Z \embed X$ is \textit{tangent} to $\F$  if the map $\T_Z \to \T_X |_Z$ factors through $\F_Z \subset \T_X|_Z$, the saturation of $(\F|_Z)^{\vee \vee} \embed \T_X|_Z$. If additionally $\T_Z \to \T_X|_Z$ is identified with $\F_Z$ we say that $Z$ \textit{is a leaf} of $\F$.
+\end{defn}
+
+Note that the property of being tangent depends only on behavior along a dense open set (e.g.\ along the smooth locus of $Z$). 
+
+\section{$p$-Curvature}
+
+In positive characteristic, there is a new invariant of a foliation called the $p$-curvature. To motivate its definition, we take a moment to consider the ordinary curvature of a subsheaf $\F \subset \T_X$. The \textit{curvature} is the obstruction to $\F$ being a sheaf of sub Lie algebras of $\T_X$ i.e.\ it measures the failure of the involutivity condition $[\F, \F] \subset \F$. In analogy with connections, we sometimes call this condition \textit{flatness}. 
+
+\begin{defn}
+If $\F$ is not involutive, then there is a $\cO_X$-linear map called the \textit{curvature} or \textit{residual Lie bracket} witnessing the failure of involutivity. It is defined as the map of $\cO_X$-modules,
+\[ \ell_{\F_X} : \bigwedge\nolimits^{\! 2} \F \to \T_X / \F \quad \text{ via } \quad \ell_{\F_X} : X \wedge Y \mapsto [X,Y] \mod \F. \]
+The map $\ell_{\F_X}$ is well-defined and $\cO_X$-linear because for any $f \in \cO_X$
+\[ f [X,Y] = [f X, Y] + Y(f) \cdot X = [X, f Y] - X(f) \cdot Y \]
+and therefore
+\[ f [X, Y] \equiv [f X, Y] \equiv [X, f Y] \mod \F \]
+because if $X, Y \in \F$ then so are $Y(f) \cdot X$ and $X(f) \cdot Y$ since $\F$ is a $\cO_X$-module.
+\end{defn}
+
+In characteristic $p > 0$, the tangent bundle $\T_X$ is not just a Lie algebra, it is a $p$-Lie algebra meaning there is a Frobenius semi-linear operation $(-)^{p}$ commuting with the Lie-bracket defined by $\partial \mapsto \partial^p$ where $\partial^p$ is the differential operator given by iteratively applying $\partial$. 
+
+\begin{lemma}
+Let $A$ be an algebra over a field $k$ of characteristic $p$ and $\partial : A \to A$ a $k$-derivation. Then the differential operator $\partial^p$ given by
 \[ x \mapsto \underbrace{\partial \cdots \partial}_{p \text{ times}} x \]
-This defines a nonlinear map $\T_X \to \T_X$. Given an involutive subsheaf $\F$ the $p$-\textit{curvature} map
-\[ \psi_p : \Frob^* \F \to \T_X / \F \]
-is a \textit{linear} $\struct{X}$-module map measuring the failure of $\F$ to be $p$-closed.
+is a $k$-derivation.
+\end{lemma}
+
+\begin{proof}
+It is clear that $\partial^p$ is $k$-linear. The Leibniz rule implies that
+\[ \partial^n(fg) = \sum_{k = 0}^n { n \choose k} \partial^k(f) \partial^{n-k}(g). \]
+Taking $n = p$ and using the divisibility of binomial coefficients gives
+\[ \partial^p(fg) = \partial^p(f) g + f \partial^p(g). \]
+\end{proof}
+
+The $p$-curvature is the obstruction to $\F \subset \T_X$ being a subsheaf of $p$-Lie algebras given that it is a Lie algebra subsheaf. 
+
+
+\begin{defn}
+Given an involutive subsheaf $\F \subset \T_X$, the $p$-\textit{curvature} map is the map
+\[ \psi_{\F,p} : \Frob^* \F \to \T_X / \F \quad  \text{ via } \quad \psi_{\F,p} : \partial \mapsto \partial^p \mod \F. \]
+measuring the failure of $\F$ to be $p$-\textit{closed} i.e.\ $\F^p \subset \F$ meaning $\F \subset \T_X$ is a sub $p$-Lie algebra.
 \end{defn}
 
-% REVIEW: This is labeled \begin{proof} but no theorem/proposition precedes it -- it seems to be a continuation of the Definition of $p$-curvature. Consider changing to a proof sketch or adding a Proposition stating $\psi_p$ is $\struct{X}$-linear.
-\begin{proof}
-To show $\psi_p(\partial_1 + \partial_2) = \psi_p(\partial_1) + \psi_p(\partial_2)$ we use that
-\[ (\partial_1 + \partial_2)^p = \partial_1^p + \partial_2^p + \sum_{i = 1}^{p-1} s_i(\partial_1, \partial_2) \]
-but the $s_i$ are Lie polynomials so $s_i(\partial_1, \partial_2) \in \F$ because $\F$ is closed under Lie bracket.
-We need to show that $\psi_p(f \partial) = f^p \psi_p(\partial)$. Indeed,
-\[ (f \partial)^p = f^p \partial^p + f \ad_{\partial}^{p-1}(f^{p-1}) \partial \]
-and because $\ad_{\partial}$ is just the action of $\partial$ on a function, so the second term lies in $\F$.
-\end{proof}
+The $p$-curvature turns out to be an $\cO_X$-linear map of $\cO_X$-modules. The proof of this fact is surprisingly tricky. The easiest route is via the following Jacobson relations and Deligne's formula for $p$-powers in noncommutative rings. By a \textit{Lie polynomial} we mean a noncommutative polynomial formed from addition and compositions of commutators.
 
-
-
-\begin{prop}
-Suppose that $f : C \to X$ is a map from a curve to a foliated variety $(X, \F)$ meaning that $\d{f} : \T_C \to f^* \F \to f^* \T_X$. Then $f^* \psi_p = 0$. Hence if $X$ is a surface and $\F$ is a foliation by curves then $\im{f} \subset \Delta_p := V(\psi_p)$.
-\end{prop}
-
-
-\begin{theorem}
-Let $X$ be a smooth projective surface over $k$ a field of characteristic $p$. Suppose that $\omega \in H^0(X, \nSym{n}{\Omega_X})$ is a nonzero symmetric form and $\F_{\omega}$ is the foliation induced on $V(\omega)$. If $\F_{\omega}$ is \textit{not} $p$-closed (on each irreducible component) then $X$ has finitely many rational curves.
-\end{theorem}
-
-\begin{proof}
-Indeed, $V(\omega) \subset \P(\Omega_X)$ is pure codimension $1$. The induced foliation $\F_\omega$ is assumed to be not $p$-closed on each irreducible component $Z \subset V(\omega)$ therefore $\psi_p : \Frob^* \F \to \T_Z/\F$ is a nonzero map of generically rank $1$-torsion-free sheaves. Hence its zero locus is not dense in $Z$ and hence is dimension $1$. Therefore, the union of these images in $X$ is a finite union of curves. However, we have seen that any rational curve on $X$ must lie inside this locus.
-\end{proof}
-
-\begin{example}
-Consider two curves $C_1, C_2$ defined as $A_6$-covers of $\P^1$ branched over three points with monodromies
-\begin{enumerate}
-\item $(1 6)(3 4) \quad (25436) \quad (16452)$
-\item $(123)(456) \quad (125) \quad (1465)(23)$
-\end{enumerate}
-Let $X$ be the minimal resolution of $(C_1 \times C_2)/A_6$. This is a minimal surface with $c_1(X)^2 = c_2(X) = 6$ and $\pi_1(X) = A_4 \times \Z / 5 \Z$ which is finite. Furthermore, $h^{2,0} = 0$ so the cohomology of $X_{\CC}$ is generated by algebraic cycles by the Lefschetz $(1,1)$ theorem. Therefore, $X$ is supersingular when reduced mod any prime of good reduction. From the main two invariants we cannot see that $X$ is not unirational except at $p = 2,3,5$. However, one can show that $\Omega_X$ is big. Choosing a symmetric form $\omega$ we get a foliation $\F_\omega$ and whenever $\F_{\omega}$ is not $p$-closed $X$ is not unirational. The Grothendieck $p$-curvature conjecture predicts this happens infinitely often. One can put this on a computer and start generating a list of primes where $X$ is not unirational.
-\end{example}
-
-\section{Addendum}
-
-\begin{prop}
-Let $X / \CC$ be a smooth proper variety. If $X$ is unirational then $\pi_1(X) = 0$.
-\end{prop}
-
-
-\begin{proof}
-Let $f : \P^n \sm Z \to X$ be a unirational parametrization and we can choose $\codim{Z} \ge 2$. Thus $\pi_1(\P^n \sm Z) = 1$ so the map lifts to the universal cover $\wt{X} \to X$ as a holomorphic map. However $f$ is generically a finite cover so this forces $\wt{X} \to X$ to be a finite cover also. Hence $\wt{X}$ is also a smooth proper variety. Now consider the diagram,
-\begin{center}
-\begin{tikzcd}
-Y \arrow[r] \arrow[d] \pullback & \wt{X} \arrow[d]
-\\
-\P^n \sm Z \arrow[r] & X
-\end{tikzcd}
-\end{center}
-since $\pi_1(\P^n \sm Z) = 1$ we see that $Y$ is a finite union of copies of $\P^n \sm Z$ and hence $\wt{X}$ is also unirational. Therefore we showed that $h^0(\wt{X}, \Omega_{\wt{X}}^p) = 0$ so by Hodge symmetry $h^p(\wt{X}, \struct{\wt{X}}) = 0$ so $\chi(\wt{X}) = 1$. However, it is well-known that if $\wt{X} \to X$ has degree $n$ then $\chi(\struct{\wt{X}}) = n \chi(\struct{X})$ hence $n = 1$.
-\end{proof}
-
-
-\begin{lemma}
-Let $f : X \to Y$ be surjection of smooth proper varieties. Then $f^* : H^i_{\et}(Y, \Q_\ell) \embed H^i_{\et}(X, \Q_\ell)$ is injective.
-\end{lemma}
-
-\begin{proof}
-\Poincare duality defines a pushforward map $f_* = D^{-1} \circ (f_*)^{\vee} \circ D$ where $D(\alpha) = \tr{(\alpha \smile -)}$. If $f$ is generically finite, it suffices to show that $f_* f^* = \deg{f}$ since this is invertible on $\Q_\ell$. Indeed,
-\[ D(f_* f^* \alpha) = \tr{(f^* \alpha \smile f^* - )} = \tr{f^* (\alpha \smile -)} = (\deg{f}) D(\alpha) \]
-because $f^* = \deg{f}$ on top cohomology. If $f$ is not generically finite then we may take a generic multisection $Z \subset X \to Y$ and then $(f \circ \iota)^*$ is injective so $f^*$ is injective.
-\end{proof}
-
-\subsection{Shioda's Example}
-
-Shioda used some very clever tricks and computations to compute the following.
-
-\begin{theorem}[Shioda]
-Let $F_n$ be the Fermat surface over $\FF_p$ ($p > 2$) given by the equation
-\[ \{ X^n + Y^n + Z^n + W^n = 0 \} \subset \P^3 \]
-Then $F_n$ is unirational if and only if $p^\nu \equiv -1 \mod n$ for some $\nu$.
-\end{theorem}
-
-\begin{example}
-Let $G = \Z / 5 \Z$ act on $F_5$ by $\lambda \cdot [X : Y : Z : W] = [X : \lambda Y : \lambda^2 Z : \lambda^3 W]$. This action is free and hence $X = F_5 / G$ is a smooth projective surface with $\pi_1(X) = \Z / 5 \Z$ called the Godeaux surface. Shioda's result shows that this is supersingular over infinitely many primes. However, we saw this cannot happen over $\CC$, indeed $X$ has general type.
-\end{example}
-
-How does Shioda prove this theorem: for the ``if'' part he uses an extremely clever change of variables to just write down the unirational parametrization. To show the ``only if'' he needs an obstruction, this comes from \etale cohomology.
-
-\begin{prop}
-Let $X$ be a smooth projective unirational surface over $\FF_q$. Then $\Frob_q \acts H^2_{\et}(X, \QQ_\ell)$ has eigenvalues of the form $\zeta \cdot q$ for $\zeta$ a root of unity. We call this property \textit{supersingularity}.
-\end{prop}
-
-\begin{proof}
-Pass to an extension $\FF_{q^n}$ such that the unirational parametrization and all points of indeterminacy are defined over $\FF_{q^n}$. Resolving the indeterminacy locus, we get $\Bl_S \P^2 \to X$ where $S \subset \P^2$ is a finite set of points. Therefore $H^2_{\et}(X, \QQ_\ell) \embed H^2_{\et}(\Bl_S \P^2, \Q_\ell) = \Q_\ell(-1)^{1 + \# S}$. Thus $\Frob_{q^n} = \Frob_{q}^n$ acts via $q^n$.
-\end{proof}
-
-Shioda then computes that $F_n$ is supersingular exactly when $p^\nu \equiv - 1 \mod n$ for some $\nu$ and this covers all the cases his construction works to show $F_n$ is moreover unirational. This, and a handful of other examples, leads him to make the following conjecture.
-
-\begin{conj}[Shioda]
-Let $X$ be a smooth projective surface over $\FF_q$. Suppose that
-\begin{enumerate}
-\item $\pi_1(X) = 1$
-\item $X$ is supersingular
-\end{enumerate}
-then $X$ is unirational.
-\end{conj}
-
-\begin{rmk}
-One might ask why doesn't Shioda just require that $\pi_1(X)$ is finite as suggested by Serre's theorem and the Godeaux surface example: this conjecture would be false because it turns out the Godeaux surface is supersingular in every characteristic (of good reduction) but is unirational only in the characteristics that $F_5$ is unirational in.
-\end{rmk}
-
-The goal of this talk is to describe new obstructions to unirationality that could be used to test Shioda's conjecture.
-
-\subsection{Proof of the Jet Amplitude Theorem}
-
-\begin{theorem}[C]
-Let $X$ be a smooth proper variety over a perfect field $k$. Suppose that $\log_p \jetamp(X) > \ell$ then there does not exist a unirational parametrization $\P^n \rat X$ of inseparability degree $\ell$.
-\end{theorem}
-
-\begin{proof}
-Since $\jetamp$ only increases along separable maps we may assume that $X$ has a purely inseparable unirational parametrization $f : \P^n \rat X$ of degree $k$. Now suppose that $\jetamp \ge p^{\ell} := q$ then there are integers $r,s \ge 0$ such that $\omega \in H^0(X, \wt{J}_X^{s})$ such that $\omega|_{\wt{J}^{r}} \neq 0$ and $s \ge q r$. By decreasing $r$ we may assume that $\omega|_{\wt{J}^{r-1}} = 0$ so $\omega|_{\wt{J}^{r}} \in H^0(X, \nSym{r}{\Omega_X})$ then decreasing $s$ we may assume $s = q r$. There is a factorization of rational maps
-\begin{center}
-\begin{tikzcd}
-X^{(1/q)} \arrow[r, dashed, "f'"] \arrow[rd, "F"'] & \P^n \arrow[d, dashed, "f"]
-\\
-& X
-\end{tikzcd}
-\end{center}
-where $F : X^{(1/q)} \to X$ is the $\ell^{\text{th}}$-relative Frobenius.
-Using extension in codimension $\ge 2$, there are well-defined pullback maps
-\begin{center}
-\begin{tikzcd}
-H^0(X, \wt{J}^{s}_X) \arrow[r] \arrow[d, "f^*"] & H^0(X, \wt{J}^{r}_X) \arrow[d, "f^*"]
-\\
-H^0(\P^n, \wt{J}^{s}_{\P^n}) \arrow[d, "f'^*"] \arrow[r] & H^0(\P^n, \wt{J}^{r}_{\P^n}) \arrow[d, "f'^*"]
-\\
-H^0(X^{(1/q)}, \wt{J}^{s}_{X^{(1/q)}}) \arrow[r] & H^0(X^{(1/q)}, \wt{J}^{r}_{X^{(1/q)}})
-\end{tikzcd}
-\end{center}
-where the composition along column is $F^*$. Therefore, it suffices to show that $F^* \omega \neq 0$. To do this, we may work \etale-locally. Indeed, if $c : U \to X$ is an \etale chart then it suffices to show that $F_U^* \omega|_U \neq 0$ since the diagram
-\begin{center}
-\begin{tikzcd}
-U^{(1/q)} \arrow[r, "F_U"] \arrow[d] & U \arrow[d]
-\\
-X^{(1/q)} \arrow[r, "F"] & X
-\end{tikzcd}
-\end{center}
-commutes. Since $X$ is smooth, there are \etale charts $U \to X$ with $g : U \to \A^n_k$ \etale. The diagram,
-\begin{center}
-\begin{tikzcd}
-\wt{J}^s_{\A^n} \arrow[d, "F^*"] \arrow[r] & \wt{J}^r_{\A^n} \arrow[d, "F^*"] \arrow[ld, "t", dashed]
-\\
-\wt{J}^s_{\A^n} \arrow[r] & \wt{J}^r_{\A^n}
-\end{tikzcd}
-\end{center}
-has a commuting lift $t$. Indeed, $J^r_{\A^n}$ is represented by the algebra,
-\[ k[x_1, \dots, x_n][\d{x_1}, \dots, \d{x_n}] / (\d{x_1}, \dots, \d{x_n})^{r+1} \] and $F^* \d{x_i} = \d{x_i^{q}} = (\d{x_i})^{q}$. Therefore, the kernel of $\wt{J}^s_{\A^n} \to \wt{J}^r_{\A^n}$ are polynomials $h(\d{x_1}, \dots, \d{x_n})$ with coefficients in $k[x_1, \dots, x_n]$ of minimal degree $\ge r + 1$ and hence $F^* h = h(\d{x_1^{q}}, \dots, \d{x_n^{q}}) = 0$ in $J^s_{\A^n}$ since it has minimal degree $\ge q (r + 1) \ge s + 1$. Furthermore, consider a symmetric form $\eta \in H^0(\A^n, \nSym{r}{\Omega})$ write
-\[ \eta = \sum_{I} f_I(x_1, \dots, x_n) \d{x_{i_1}} \cdots \d{x_{i_r}} \]
-then we see
-\[ t(\eta) = \sum_I f_I(x_1^q, \dots, x_n^q) \d{x_{i_1}^q} \cdots \d{x_{i_r}^q} \in H^0(\A^n, \nSym{s}{\Omega}) \]
-but for different $I \subset \{1, \dots, n\}$ of size $r$, these are distinct basis elements of $H^0(\A^n, \nSym{s}{\Omega})$. Therefore, $t(\eta) = 0$ if and only if all $f_I(x_1^q, \dots, x_n^q) = 0$ if and only if all $f_I = 0$. Hence $t$ is injective. Since $g$ is \etale, we get isomorphisms $g^* \wt{J}_{\A^n}^r \iso \wt{J}^r_{U}$ for all $r$ so the diagram pulls back to
-\begin{center}
-\begin{tikzcd}
-\wt{J}^s_{U} \arrow[r] \arrow[d, "F^*_U"] & \wt{J}^r_{U} \arrow[d, "F^*_U"] \arrow[dl, "t_U"]
-\\
-\wt{J}^s_{U} \arrow[r] & \wt{J}^r_{U}
-\end{tikzcd}
-\end{center}
-such that the restriction $t_U : \nSym{r}{\Omega_U} \to \nSym{s}{\Omega_U}$ is injective. Therefore $F^*_U \omega|_U = t(\omega|_{\wt{J}^r_U}) \neq 0$ because we assumed that $\omega|_{\wt{J}^r} \in H^0(X, \nSym{r}{\Omega_X})$ and is nonzero.
-\end{proof}
-
-\begin{prop}
-Let $X$ be a smooth projective variety. Then,
-\[ \jetamp(X) \ge \left(\frac{\ul{\hat{h}}^0(\Omega_X)}{\hat{h}^1(\Omega_X)}\right)^{\frac{1}{2 \dim{X}}} \]
-where $\hat{h}^i$ these are so-called \textit{asymptotic cohomology}
-\[ \hat{h}^i(X, \E) := \limsup_{m \to \infty} \frac{h^0(X, \nSym{m}{\E})}{m^{\dim{X} + \rank{\E} - 1}} \]
-and likewise $\ul{\hat{h}}^i$ are the \textit{lower asymptotic cohomology}
-\[ \ul{\hat{h}}^i(X, \E) := \liminf_{m \to \infty} \frac{h^0(X, \nSym{m}{\E})}{m^{\dim{X} + \rank{\E} - 1}} \]
-\end{prop}
-
-
-\begin{proof}
-This arises from the exact sequence
-\begin{center}
-\begin{tikzcd}
-0 \arrow[r] & \nSym{n}{\Omega_X} \arrow[r] & J^n_X \arrow[r] & J^{n-1}_X \arrow[r] & 0
-\end{tikzcd}
-\end{center}
-Therefore,
-\[ \dim \im{(H^0(X, J^{rs}_X) \to H^0(X, J^r_X))} \ge h^0(X, J^r_X) - \sum_{k = r+1}^{rs} \left[h^1(X, \nSym{k}{\Omega_X}) \right] \]
-but also
-\[ h^0(X, J^r_X) \ge \sum_{i = 1}^r \left[ h^0(X, \nSym{i}{\Omega_X}) - h^1(X, \nSym{i}{\Omega_X}) \right] \]
-therefore
-\[ \dim \im{(H^0(X, J^{rs}_X) \to H^0(X, J^r_X))} \ge \sum_{i = 1}^r h^0(X, \nSym{i}{\Omega_X}) - \sum_{i = 1}^{rs} h^1(X, \nSym{i}{\Omega_X}) \]
-Applying the lemma, for any $\epsilon > 0$ for $r \gg_{\epsilon} 0$ we have
-\[ \sum_{i = 1}^r h^0(X, \nSym{i}{\Omega_X}) - \sum_{i = 1}^{rs} h^1(X, \nSym{i}{\Omega_X}) \ge \frac{1}{2 \dim{X}} \left[ (\ul{\hat{h}}^0 - \epsilon) r^{2 \dim{X}} - (\hat{h}^1 + \epsilon) (rs)^{2 \dim{X}} \right] \]
-Thus,
-\[ s^{2 \dim{X}} \le \frac{\ul{\hat{h}}^0 - \epsilon}{\hat{h}^1 + \epsilon} \implies \jetamp(X) \ge s  \]
-\end{proof}
-
-\begin{lemma}
-Let $f : \N \to \RR^+$ be an integer function. Suppose that
-\[ \liminf_{n \to \infty} \frac{f(n)}{n^k} = a \quad \text{ and } \quad \limsup_{n \to \infty} \frac{f(n)}{n^k} = b \]
-then\footnote{Notice that the outer inequalities are not usually equalities. For example let
-\[ f(n) = \begin{cases} 0 & n \text{ even} \\ 1 & n \text{ odd} \end{cases} \]
-then the hypotheses are satisfied with $k = 0$ and $a = 0$ and $b = 1$ but
-\[ \sum_{i = 1}^n f(i) = \ceil{\frac{n}{2}} \]
-and therefore the limit
-\[ \lim_{n \to \infty} \frac{1}{n} \sum_{i = 1}^n f(i) = \frac{1}{2} \]
-exists so the inequalities in the conclusion of the lemma are strict. }
-\[ \frac{b}{k+1} \ge \limsup_{n \to \infty} \frac{1}{n^{k+1}} \sum_{i = 1}^n f(i) \ge \liminf_{n \to \infty} \frac{1}{n^{k+1}} \sum_{i = 1}^n f(i) \ge \frac{a}{k+1}  \]
-\end{lemma}
-
-\begin{proof}
-The assumptions give for all $\epsilon > 0$ there is $n_\epsilon$ such that $n \ge n_\epsilon$ implies
-\[ (b + \epsilon) n^k \ge f(n) \ge (a - \epsilon) n^k \]
-summing over this we get,
-\[ (b + \epsilon) \frac{1}{n^{k+1}} \sum_{i = 1}^n i^k \ge \frac{1}{n^{k+1}} \sum_{i = n_\epsilon}^n f(i) + \frac{1}{n^{k+1}} \sum_{i = 1}^{n_\epsilon} i^k \ge (a - \epsilon) \frac{1}{n^{k+1}} \sum_{i = 1}^n i^k \]
-Therefore,
-\[ \frac{b + \epsilon}{k + 1} (1 + O(n^{-1})) \ge \frac{1}{n^{k+1}} \sum_{i = 1}^n f(i) + \frac{1}{n^{k+1}} \sum_{i = 1}^{n_\epsilon} (i^k - f(i)) \ge \frac{a - \epsilon}{k+1} (1 + O(n^{-1}))  \]
-Taking the limit $n \to \infty$ and then $\epsilon \to 0$ gives the bounds
-\[ \frac{b}{k+1} \ge \limsup_{n \to \infty} \frac{1}{n^{k+1}} \sum_{i = 1}^n f(i) \ge \liminf_{n \to \infty} \frac{1}{n^{k+1}} \sum_{i = 1}^n f(i) \ge \frac{a}{k+1}  \]
-Furthermore, for any $\epsilon > 0$ and $n_0$ there is $n \ge n_0$ such that $(a + \epsilon) n^k \ge f(n)$
-\end{proof}
-
-\section{p-curvature computations}
-
-\begin{lemma}
+\begin{lemma}[Jacobson, Deligne] (cf. \cite[Theorem~5.3]{katz:nilpotent_connections})
 Let $R$ be a (possibly noncommutative) associative ring of characteristic $p$. Then,
 \begin{enumerate}
-\item there are universal Lie polynomials $s_i(x,y) \in R \left< x, y \right>$ such that
+\item there are universal Lie polynomials $s_i(x,y) \in \FF_p \left< x, y \right>$ such that for all $a,b \in R$
 \[ (a + b)^p = a^p + b^p + \sum_{i = 1}^{p-1} s_i(a,b) \]
-where $s_i$ is defined by the relation,
-\[ (\ad_{a t + b})^{p-1}(a) = \sum_{i = 1}^{p-1} i s_i(a,b) t^{i-1} \]
+where $s_i$ is defined by the universal relation in $\FF_p \left< x, y \right>[t]$,
+\[ (\ad_{a t + b})^{p-1}(a) = \sum_{i = 1}^{p-1} i \, s_i(a,b) \, t^{i-1} \]
 \item for all $g, \theta \in R$ such that $\{ \ad_{\theta}^n(g^m) \}_{n,m \ge 0}$ commute with each other,
-\[ (g \theta)^p = g^p \theta^p + g \cdot \ad_{\theta}^{p-1}(g^{p-1}) \theta \]
+\[ (g \theta)^p = g^p \theta^p + g \cdot \ad_{\theta}^{p-1}(g^{p-1}) \theta. \]
 \end{enumerate}
 \end{lemma}
 
 \begin{rmk}
-$s_i(x,y) \in \Lie(x,y)_{p-1}$ for the $(p-1)^{\text{th}}$-stage of the lower central series $\g_{i+1} = [\g_i, \g]$.
+Since they arise from applying $\ad_{x t + y}^{p-1}$ to $x$, the polynomials $s_i(x,y)$ lie in $\Lie(x,y)_{p-1}$, the $(p-1)^{\text{th}}$-stage of the lower central series. Recall that for a Lie algebra $\g$ the lower central series is the sequence of Lie subalgebras: $\g_{i+1} = [\g_i, \g]$ setting $\g_0 = \g$. 
 \end{rmk}
 
 
@@ -432,13 +141,159 @@ $s_i(x,y) \in \Lie(x,y)_{p-1}$ for the $(p-1)^{\text{th}}$-stage of the lower ce
 For example, if $p = 2$ then $(a + b)^2 = a^2 + ab + ba + b^2$ so $s_1(a,b) = ab + ba = [a,b]$ because the characteristic is 2.
 \end{example}
 
+\begin{lemma}
+If $\F$ is involutive, the $p$-curvature map $\psi_{\F,p}$ is an $\cO_X$-linear map of $\cO_X$-modules.
+\end{lemma}
+
+\begin{proof}
+To show $\psi_{\F,p}(\partial_1 + \partial_2) = \psi_p(\partial_1) + \psi_p(\partial_2)$ we use the relation
+\[ (\partial_1 + \partial_2)^p = \partial_1^p + \partial_2^p + \sum_{i = 1}^{p-1} s_i(\partial_1, \partial_2) \]
+where the $s_i$ are Lie polynomials so $s_i(\partial_1, \partial_2) \in \F$ because $\F$ is closed under Lie bracket.
+We further need to show that $\psi_{\F,p}(f \partial) = f^p \psi_p(\partial)$ so that it becomes $\cO_X$-linear viewed as a map on $\Frob_X^* \F$. Indeed, since $\ad_{\partial}^n(f^m) = \partial^n(f^m)$ is a scalar, these commute in the ring of differential operators. Hence by Jacobson's lemma,
+\[ (f \partial)^p = f^p \partial^p + f \ad_{\partial}^{p-1}(f^{p-1}) \partial \]
+and because $\ad_{\partial}^{p-1}(f^{p-1}) = \partial^{p-1}(f^{p-1}) \in \cO_X$, the second term lies in $\F$.
+\end{proof}
+
+\subsection{Compatibility}
+
+It will be important to know that $p$-curvature is compatible with pullbacks. One of the main applications of the $p$-curvature map is that it imposes a restriction on the algebraic leaves of a foliation. When $\F$ is not involutive, the residual Lie bracket map $\ell$ gives a restriction on the locus of integrable subvarieties.
+
+\begin{prop}
+Let $X$ be a smooth variety and $f : Z \to X$ a morphism \textit{invariant} under a subsheaf $\F \subset \T_X$ in the sense that the tangent map factors as
+\[ \d{f} : \T_Z \to f^* \F \to f^* \T_X \]
+then the composition of $\T_Z \to f^* \F$ with the pullback of the curvature,
+\[ \bigwedge\nolimits^{\! 2} \T_Z \to \bigwedge\nolimits^{\! 2} f^* \F \xrightarrow{f^* \ell_{\F}} f^* (\T_X / \F)  \]
+is identically zero.  
+\end{prop}
+
+\begin{proof}
+This follows immediately from the following Proposition~\ref{prop:curvature_pullback_compatibility} expressing the compatibility of curvature with pullback applied to the map $f : (Z, \T_Z) \to (\T_X, \F)$ and using that the subsheaf $\T_Z \subset \T_Z$ trivially has zero curvature.
+\end{proof}
+
+Of course, if $Z$ is a curve, the curvature of $\F$ imposes no restriction since $\bigwedge\nolimits^{\! 2} \T_Z = 0$. However, this is a nontrivial obstruction to finding invariant subvarieties (or immersed submanifolds in the analytic setting) of dimension $> 1$. 
+
+\begin{prop} \label{prop:curvature_pullback_compatibility}
+Suppose $f : X \to Y$ is a map of $S$-schemes where $Y \to S$ is smooth. Suppose there is a commutative diagram
+\begin{center}
+\begin{tikzcd}
+\F_{X} \arrow[d, "\kappa"] \arrow[r, "\alpha"] & \T_{X/S} \arrow[d, "\d{f}"]
+\\
+\F_{Y} \arrow[r, "f^* \beta"] & f^* \T_{Y/S}
+\end{tikzcd}
+\end{center}
+where $\F_X$ and $\F_Y$ are coherent sheaves on $X$ and $Y$ respectively. As before consider the curvature maps
+\[ \ell_{\F_{X}} : \bigwedge\nolimits^{\! 2} \F_X \to \T_{X/S} / \F_X  \quad \text{ via } \quad \ell_{\F_X} : X \wedge Y \mapsto [X,Y] \mod \F \] 
+and likewise for $\ell_{\F_{Y}}$. These maps are compatible in the sense that the following diagram relating the curvatures
+\begin{center}
+\begin{tikzcd}
+\bigwedge\nolimits^{\! 2} \F_X \arrow[d, "\wedge^2 \kappa"'] \arrow[r, "\ell_{\F_X}"] & \T_{X/S} / \F_{X} \arrow[d, "\d{f}"]
+\\
+f^* \bigwedge\nolimits^{\! 2} \F_{Y} \arrow[r, "f^* \ell_{\F_Y}"] & f^* \T_{Y/S} / \F_{Y}
+\end{tikzcd}
+\end{center}
+commutes.
+\end{prop}
+
+\begin{proof}
+We turn this into the corresponding algebra statement: let $\phi : A \to B$ be a map of $R$-algebras, $N$ an $A$-module and $M$ a $B$-module equipped with a commutative diagram of $B$-modules,
+\begin{center}
+\begin{tikzcd}[column sep = large]
+\Der[R]{B}{B} \arrow[r, "\partial \mapsto \partial \circ \phi"] & \Der[R]{A}{B} & B \ot_A \Der[R]{A}{A} \arrow[l, equals]
+\\
+M \arrow[u, "\alpha"] \arrow[rr, "\kappa"] & & B \ot_A N \arrow[u, "\id_B \ot \beta"']
+\end{tikzcd}
+\end{center}
+then we need to show that $[\alpha(m), \alpha(m')] = [\beta(\kappa(m)), \beta(\kappa(m'))]$ modulo $M$ where the second Lie bracket is defined by taking the image of $\kappa(m)$ in $B \ot_A \Der[R]{A}{A}$ and extending the bracket $B$-linearly. This is well-defined up to elements of $N \ot_A B$. Explicitly, write,
+\[ \beta(\kappa(m)) = \sum f_i \ot \partial_i \]
+for some $\partial_i \in \Der[R]{A}{A}$ in the image of $\beta : N \to \Der[R]{A}{A}$ and $f_i \in B$ and likewise
+\[ \beta(\kappa(m')) = \sum f'_i \ot \partial_i. \]
+Then,
+\[ [\beta(\kappa(m)), \beta(\kappa(m'))] = \sum f_i f_j' [\partial_i, \partial_j] \in \Der[R]{A}{B}/(N \ot_A B). \]
+However, $\beta(\kappa(m))$ has image $\alpha(m) \circ \phi$ in $\Der[R]{A}{B}$. Therefore, for $a \in A$,
+\begin{align*}
+[\alpha(m), \alpha(m')](a) &= \alpha(m) \alpha(m') \phi(a) - \alpha(m') \alpha(m) \phi(a) 
+\\
+& = \alpha(m) \left[ \sum_j f_j' \partial_j a \right] - \alpha(m') \left[ \sum_i f_i \partial_i a \right]
+\\
+& = \sum_j  \left[ f_j' \alpha(m) (\partial_j a) + \alpha(m)(f_j') \cdot (\partial_j a) \right] - \sum_i \left[ f_i \alpha(m') (\partial_i a) + \alpha(m')(f_i) \cdot (\partial_i a) \right]
+\\
+& = \sum_{i,j} f_i f_j' [\partial_i, \partial_j](a) + \left[ \sum_j \alpha(m)(f_j') \cdot \partial_j - \sum_i \alpha(m')(f_i) \cdot \partial_j \right]
+\end{align*}
+but $\partial_i$ is in the image of $N \to \Der[R]{A}{A}$ so the last term is zero in $\Der[R]{A}{B} / B \ot_A N$ proving the claim. 
+\end{proof}
+
+Likewise, when $\F$ is not $p$-closed, its $p$-curvature also provides an obstruction to the existence of algebraic leaves. For example, the following elementary observation is quite powerful. 
+
+\begin{prop}
+Let $X$ be a smooth variety and $f : Z \to X$ a morphism invariant under a foliation $\F \subset \T_X$ in the sense that the tangent map factors as
+\[ \d{f} : \T_Z \to f^* \F \to (f^* \Omega_Y)^{\vee} \]
+then the composition of $\T_Z \to f^* \F$ with the pullback of the $p$-curvature
+\[ \T_Z \to \F \xrightarrow{f^* \psi_{\F,p}} f^* (\T_X / \F)  \]
+is identically zero.   
+\end{prop}
+
+\begin{proof}
+This follows immediately from the following Proposition~\ref{prop:pullback_p_curvature} expressing the compatibility of $p$-curvature with pullbacks applied to the map $f : (Z, \T_Z) \to (X, \F)$ of foliated varieties noting that the $p$-curvature of the trivial foliation $\T_C \subset \T_C$ is zero. 
+\end{proof}
+
+Our primary application of this result is in the case of (families of) curves. We have assumed previously that $f : Z \to X$ is invariant in the strong sense that $\d{f}$ factors globally through the foliation. When we defined a leaf, it was important to relax this condition along the singular locus of the foliation. Similarly, here we only require that the tangent space lies in $\F$ generically. This is only a generalization in the presence of singularities. Indeed, since $\T_Z$ is torsion-free, along the smooth locus of $\F \subset \T_X$ where $\F$ is a sub-bundle, the tangent map $\d{f}$ factors globally if and only if it factors at the generic point. 
+
+\begin{cor}
+Let $X$ be a smooth variety and $f : C \to X$ a generically immersed map from a smooth curve generically invariant under a foliation $\F$. Then
+\[ f(C) \subset \Sing{\F} \cup \ol{K^1(\psi_{\F,p})} \]
+where $K^1$ is the locus where a map of $\cO_X$-modules has nontrivial kernel.
+\end{cor}
+
+\begin{proof}
+Assume $f(C) \not\subset \Sing(\F)$ then by definition there is a dense open subset $U \subset C$ such that $f(U)$ is contained in the smooth locus of $X$ and $\F$ and there is a factorization
+\begin{center}
+\begin{tikzcd}
+\T_U \arrow[rd] \arrow[r, "\d{f}"] & f|_{U}^* \T_X \arrow[d]
+\\
+& f|_{U}^* \F \arrow[u, hook]
+\end{tikzcd}
+\end{center}
+where $\d{f}$ is nonvanishing on $U$. By the previous proposition, the composition,
+\[ \T_U \to f|_{U}^* \F \xrightarrow{f|_U^* \psi_{\F,p}} f|_{U}^* (\T_X / \F) \]
+is identically zero. Since $\T_U  \to f|_{U}^* \F$ is nonvanishing, $f(U) \subset K^1(\psi_{\F,p})$ and therefore $f(C) \subset \ol{K^1(\psi_{\F,p})}$. 
+\end{proof}
+
+For example, if $\F$ is a rank $1$ foliation then,
+\[ \im{f} \subset \Sing{\F} \cup V(\psi_{\F,p}) \]
+If $X$ is a surface and $\F$ is not $p$-closed then $\Sing{\F}$ is a finite collection of points so any invariant curve is contained in $\Delta_{\F,p} := V(\psi_{\F,p})$. In particular, on a surface, there are only finitely many curves tangent to a foliation with nonvanishing $p$-curvature. Now we prove the compatibility of $p$-curvature with pullback.
+
+
+\begin{prop} \label{prop:pullback_p_curvature}
+Let $f : (X, \F_X) \to (Y, \F_Y)$ be a map of foliated $S$-schemes with $Y \to S$ smooth. Explicitly, this means there is a commutative diagram
+\begin{center}
+\begin{tikzcd}
+\F_{X} \arrow[d, "\kappa"] \arrow[r, "\alpha"] & \T_{X/S} \arrow[d, "\d{f}"]
+\\
+\F_{Y} \arrow[r, "f^* \beta"] & f^* \T_{Y/S}
+\end{tikzcd}
+\end{center}
+and the subsheaves $\F_X$ and $\F_Y$ are assumed to be involutive. Then the diagram
+\begin{center}
+\begin{tikzcd}
+\Frob_X^* \F_X \arrow[r, "\psi_{\F,p}"] \arrow[d] & \T_{X/S} / \F_X \arrow[d]
+\\
+f^* \Frob_Y^* \F_Y \arrow[r, "f^* \psi_{\F,p}"] & f^* (\T_{Y/S} / \F_Y)
+\end{tikzcd}
+\end{center}
+of $\struct{X}$-linear maps commutes.
+\end{prop}
+
+First we need a lemma.
+
 
 \begin{lemma}
-Let $A,B$ be (possibly noncommutative) associative rings of characteristic $p$ and $M$ is an $(A,B)$-bimodule. Suppose that for some $a \in A$ and $m \in M$,
+Let $A,B$ be (possibly noncommutative) associative rings of characteristic $p$ and let $M$ be an $(A,B)$-bimodule. Suppose that for some $a \in A$ and $m \in M$,
 \[ a \cdot m = \sum_i f_i \cdot m \cdot b_i \]
-such that the $f_i \in A$ commute with each other and $b_i \in B$ then
-\[ a^p \cdot m - \sum_i f_i^p \cdot m \cdot b_i^p \in \left< r \cdot m \cdot s \mid r \in \ZZ[f_1, \dots, f_r, \Lie(a, f_1, \dots, f_r)_{p-1}] \text{ and } s \in \Lie(b_1, \dots, b_r)_{p-1} \right>  \]
-where the $1$ indicates the first stage of the lower central series.
+such that the $f_i \in A$ commute with each other and $b_i \in B$. Then the difference,
+\[ a^p \cdot m - \sum_i f_i^p \cdot m \cdot b_i^p \]
+lies in the subspace
+\[  \left< r \cdot m \cdot s \mid r \in \ZZ[f_1, \dots, f_r, \Lie(a, f_1, \dots, f_r)_{p-1}] \text{ and } s \in \Lie(b_1, \dots, b_r)_{p-1} \right>  \]
+where $\Lie(x_1, \dots, x_r)_{p-1}$ denotes the $(p-1)$-th stage of the lower central series of the Lie algebra generated by $x_1, \dots, x_r$. 
 \end{lemma}
 
 
@@ -447,126 +302,107 @@ $M$ is an $A \ot B^\op$-module and $(a \ot 1 - \sum_i f_i \ot b_i)$ acts as zero
 \[ (a \ot 1 - \sum_i f_i \ot b_i)^p = a^p \ot 1 + \left(- \sum_i f_i \ot b_i \right)^p + \sum_{j = 1}^{p-1} s_j(a \ot 1, -\sum_i f_i \ot b_i) \]
 so the last term is in the span of $\Lie(a, f_1, \dots, f_r)_{p-1} \ot b_i$. By Jacobson again,
 \[  \left(- \sum_i f_i \ot b_i \right)^p = - \sum_i f_i^p \ot b_i^p + g \]
-where $g$ is in the span of $f_i \ot \Lie(b_1, \dots, b_r)_{p-1}$. Therefore,
-\[ a^p \cdot m - \sum_i f_i^p \cdot m \cdot b_i^p = -\sum_{j = 1}^{p-1} s_j(a \ot 1, \sum_i f_i \ot b_i) \cdot m  -g \cdot m \]
+where $g$ is in the span of $f_i \ot \Lie(b_1, \dots, b_r)_{p-1}$. Therefore, applying this element to $m \in M$ we obtain,
+\[ a^p \cdot m - \sum_i f_i^p \cdot m \cdot b_i^p = -\sum_{j = 1}^{p-1} s_j(a \ot 1, \sum_i f_i \ot b_i) \cdot m  -g \cdot m. \]
 \end{proof}
 
-\begin{prop}
-Suppose that $f : C \to X$ is a map from a curve to a foliated variety $(X, \F)$ such that there is a factorization $\d{f} : \T_C \to f^* \F \to f^* \T_X$. Then $f^* \psi_p = 0$. Hence if $X$ is a surface and $\F$ is a foliation by curves then $\im{f} \subset \Delta_p := V(\psi_p)$.
-\end{prop}
 
-\begin{proof}
-Indeed, this follows from the following lemma.
-\end{proof}
 
-\begin{prop}
-Let $f : (X, \F_X) \to (Y, \F_Y)$ be a map of foliated varieties. Then the diagram
+\begin{proof}[Proof of proposition]
+This is a local statement so we may reduce to an $R$-algebra map $\phi : A \to B$ with $R \to A$ smooth along with a diagram of $B$-modules
 \begin{center}
-\begin{tikzcd}
-\Frob^* \F_X \arrow[r, "\psi_p"] \arrow[d] & \T_X / \F_X \arrow[d]
-\\
-f^* \Frob^* \F_Y \arrow[r, "f^* \psi_p"] & f^* (\T_Y / \F_Y)
-\end{tikzcd}
-\end{center}
-of $\struct{X}$-linear maps commutes.
-\end{prop}
-
-\begin{proof}
-This is a local statement so we reduce to a ring map $\phi : A \to B$ with a diagram,
-\begin{center}
-\begin{tikzcd}
+\begin{tikzcd}[column sep = large]
 \Der[R]{B}{B} \arrow[r, "\partial \mapsto \partial \circ \phi"] & \Der[R]{A}{B}
 \\
 M \arrow[u] \arrow[r, "\kappa"] & B \ot_A N \arrow[u]
 \end{tikzcd}
 \end{center}
-Suppose that $\partial \in M$ we need to show that $\psi_p(\partial) \circ \phi - \psi_p(\kappa(\partial)) \in B \ot_A N$. Indeed, let
+Suppose that $\partial \in M$ we need to show that 
+\[ \psi_p(\Frob^* \partial) \circ \phi - \psi_p(\Frob^* \kappa(\partial)) \in \im{( B \ot_A N \to \Der[R]{A}{B})}. \] 
+We can expand the $\kappa(\partial) \in B \ot_A N$ 
 \[ \kappa(\partial) = \sum_i b_i \ot \partial_i \]
-for $\partial_i \in N$. Then
-\[ \psi_p(\Frob^* \kappa(\partial)) = \psi_p \left(\sum_i b_i^p \ot \partial_i \right) = \sum_i b_i^p \ot \partial_i^p \]
-We apply the lemma to $B \ot_A \D_A$ as a $(\D_B, \D_A)$-bimodule and $\kappa$ shows that $\partial \cdot 1 = \sum_i b_i \cdot 1 \cdot \partial_i$. Therefore,
-\[ \kappa(\psi_p(\partial)) - \psi_p(\Frob^* \kappa(\partial)) \]
-is in the submodule spanned by elements of the form $r \ot s$ for $r$ generated by iterated application of $\partial$ to the $b_i$ and products of $b_i$ and $s$ is generated by commutators of $\partial_i$ which lie in $N$ so we see this is zero in $B \ot_A (\Der[R]{A}{A} / N)$.
+in terms of elements $\partial_i \in N$ and scalars $b_i \in B$. Recall that $\psi_p$ is $\Frob$-semilinear so $f^* \psi_p$ is $B$-semilinear meaning,
+\[ \psi_p(\kappa(\partial)) = \psi_p \left(\sum_i b_i \ot \partial_i \right) = \sum_i b_i^p \ot \partial_i^p. \]
+Let $\D_A$ be the algebra consisting of differential operators on $A$ generated by derivations. We apply the lemma to $B \ot_A \D_A$ viewed as a $(\D_B, \D_A)$-bimodule. The left $\D_B$ action is defined via
+\[ g \cdot (b \ot D) = gb \ot D \quad \text{and} \quad \partial \cdot (b \ot D) = (\partial b) \ot D + b \cdot (\partial \circ \phi) D \]
+where, using smoothness of $A$ over $R$, $\partial \circ \phi \in \Der[R]{A}{B} = B \ot_A \Der[R]{A}{A}$ so the element $(\partial \circ \phi) D$ is a well-defined element of $B \ot_A \D_A$. This $(\D_B, \D_A)$-bimodule is sometimes called the ``transfer module'' in $D$-module theory.
+Commutativity of the diagram involving $\kappa$ shows that, viewing $\partial$ and $\partial_i$ as differential operators in $\D_B$ and $\D_A$ respectively, we have the relation,
+\[ \partial \cdot 1 = \sum_i b_i \cdot 1 \cdot \partial_i \]
+in $B \ot_A \D_A$. Therefore, applying the lemma we see that
+\[ \psi_p(\partial) \circ \phi - \psi_p(\kappa(\partial)) = \partial^p \circ \phi - \sum_i f_i^p \ot \partial_i^p \in B \ot_A \D_A \]
+is in the submodule spanned by elements of the form $r \cdot 1 \cdot s = rs$ where $r$ is in the subalgebra generated by iterated application of $\partial$ to the scalars $b_i \in A$ and products of the $b_i$ and $s$ is generated by commutators of $\partial_i$ which lie in $N$. Hence the difference lies in the image of $B \ot_A N$ completing the proof.
 \end{proof}
 
-\subsection{Semple Jets}
+
+\section{Ekedahl's theory of positive characteristic foliations} \label{section:Ekedahl}
+
+We now review the theory of $p$-closed foliations, what Ekedahl calls $1$-foliations, as developed by Ekedahl \cite{ekedahl:foliations}. In particular, there is an equivalence between $p$-closed foliations and certain purely inseparable morphisms. This correspondence was first understood by Jacobson in the context of developing a Galois theory for purely inseparable extensions \cite{jacobson:galois_theory_purely_inseparable} and realized in its modern form by Ekedahl in \cite{ekedahl:foliations}. From now on in this section, let $k$ be a perfect field of characteristic $p$ and all varieties will be varieties over $k$. As before, we let $\Frob_X : X \to X$ denote the ($k$-semilinear) absolute Frobenius and $F_{X/k} : X \to X^{(p)}$ denote the ($k$-linear) relative Frobenius.
+
 
 \begin{defn}
-A \textit{directed variety} $(X, \E)$ is a pair of a variety $X$ with a subbundle $\E \subset \T_X$. A morphism of directed varieties $f : (X, \E) \to (Y, \E')$ is a morphism $f : X \to Y$ such that under $f_* \T_X \to \T_Y$ we have $f_* \E \to \E'$.
+Let $f : X \rat Y$ be a dominant rational map of varieties. We say that $f$ is \textit{purely inseparable} if the extension of function fields $k(Y) \embed k(X)$ is purely inseparable. If, moreover, $f$ is generically finite, then 
+$k(X)^{p^h} \subset k(Y)$ for some $h$. The smallest such $h$ is called the \textit{height} of $f$.
+Note that if $f$ has height $h$ then by definition there is a rational map $g : Y \rat X^{(p^h)}$ so that $g \circ f : X \rat Y \rat X^{(p^h)}$ is $h$-iterated relative Frobenius $F_{X/k}^h : X \to X^{(p^h)}$ giving a factorization $g \circ f = F_{X/k}^h$.
 \end{defn}
 
-\begin{rmk}
-Demailly's philosophy is that it is useful to study this ``relative notion'' even for the absolute case $\E = \T_X$ since it has better functoriality properties.
-\end{rmk}
+\begin{theorem}[Ekedahl] \label{thm:ekedahl}
+Let $X$ be a smooth variety. There is an equivalence between the following two posets
+\begin{enumerate}
+    \item $p$-closed foliations $\F \subset \T_X$
+    \item finite height-$1$ purely inseparable morphisms $f : X \to Y$ with $Y$ normal
+\end{enumerate}
+constructed as follows: given a $p$-closed foliation $\F \subset \T_X$ we define $f : X \to X / \F$ where $f$ is the identity of the underlying topological spaces and $\cO_{X/\F} = \Ann_{\F}(\cO_X)$ where explicitly
+\[ \struct{X/\F}(U) := \{ s \in \struct{X}(U) \mid \forall \partial \in \F(U) : \partial s = 0 \}. \]
+Therefore, $f$ is the map $X \to \mathbf{Spec}_X(\Ann_{\F}(\cO_X))$.
+In reverse, given $f : X \to Y$ the $p$-closed foliation is the subsheaf $\T_{X/Y} \subset \T_X$ of relative tangent fields or equivalently $\Ann_{\T_X}(f^{-1} \cO_Y)$. Furthermore, the correspondence has the following properties:
+\begin{enumerate}
+    \item $Y$ is smooth iff $\F$ is \textit{nonsingular} ($\F \subset \T_X$ is a subbundle) iff $f$ is flat
+    \item over the open set $U := X \sm \Sing(\F)$ where $\F \subset \T_X$ is a sub-bundle, there is an exact sequence of $\cO_X$-modules
+    \[ 0 \to \F \to \T_X \to f^* \T_Y \to \Frob_X^* \F \to 0 \]
+    which implies that, over $U$,
+    \[ K_X = f^* K_Y + (p-1) c_1(\F) \]
+    \item over $U$, the map $f^* \T_Y \to \Frob_X^* \F$ is the pullback of a map $\T_Y \to g^* \sigma^* \F$ where $g : Y \to X^{(p)}$ is such that $g \circ f = F_X$ and $\sigma : X^{(p)} \to X$ is the canonical $k$-semilinear isomorphism. Furthermore, the kernel of $\T_Y \to g^* \sigma^* \F$ is a $p$-closed foliation defining $g$. 
+\end{enumerate}
+\end{theorem}
 
-\begin{rmk}
-Here our convention is that $\P(\E) := \rProj{X}{\Sym{}{\E^\vee}}$ so that $\cO(-1)$ is the universal subbundle. Hence $\cO(1)$ on $\P(\T_X)$ is what I usually call $\cO(1)$ on $\P(\Omega_X)$.
-\end{rmk}
+In general, $Y$ can have quite nasty singularities so $K_Y$ may only be represented by a Weil divisor. In this case, $f^* K_Y$ may not be well-defined except over $U$. We will use Ekedahl's constructions to understand the leaves of a foliation $\F$ in characteristic $p$. When $\F$ is $p$-closed, we get the following useful characterization of the leaves of $\F$.
 
-\begin{defn}
-To a directed pair $(X, \E)$ we introduce the \textit{projectivization} to produce a new pair $\P(X, \E) := (\wt{X}, \wt{\E})$ where $\wt{X} := \P(\E)$ and $\wt{\E}$ is defined via the diagram,
-\begin{center}
-\begin{tikzcd}[row sep = small, column sep = large]
-0 \arrow[r] & \T_{\wt{X}/X} \arrow[dd] \arrow[r] & \wt{\E} \arrow[dd] \pullback \arrow[r] & \cO(-1) \arrow[d, hook] \arrow[r] & 0
-\\
-& & & \pi^* \E \arrow[d, hook]
-\\
-0 \arrow[r] & \T_{\wt{X}/X} \arrow[r] & \T_{\wt{X}} \arrow[r] & \pi^* \T_{X} \arrow[r] & 0
-\end{tikzcd}
-\end{center}
-Then we have,
-\[ \dim{\wt{X}} = \dim{X} + \rank{\E} - 1 \quad \quad \rank{\wt{\E}} = \rank{\E} \]
-\end{defn}
-
-\begin{rmk}
-Note that the Euler exact sequence takes the form,
-\begin{center}
-\begin{tikzcd}
-0 \arrow[r] & \cO \arrow[r] & \pi^* \E \ot \cO(1) \arrow[r] & \T_{\wt{X}/X} \arrow[r] & 0
-\end{tikzcd}
-\end{center}
-\end{rmk}
-
-\begin{prop}
-Given a morphism of directed varieties $f : (X, \E) \to (Y, \F)$ we get a rational map $\wt{f} : (\wt{X}, \wt{\E}) \rat (\wt{Y}, \wt{\F})$ such that the diagram,
-\begin{center}
-\begin{tikzcd}
-(\wt{X}, \wt{\E}) \arrow[d,"\pi"] \arrow[r, "\wt{f}", dashed] & (\wt{Y}, \wt{\F}) \arrow[d, "\pi"]
-\\
-(X, \E) \arrow[r, "f"] & (Y, \F)
-\end{tikzcd}
-\end{center}
-commutes in the category of directed manifolds (with rational maps). Moreover, if $f$ is ``immersive along $\E$'', meaning $f_{\#} : \E \to f^* \F$ is injective, then $\wt{f}$ is a morphism.
-\end{prop}
-
-\begin{defn}
-Let $(X, V)$ be a directed manifold. The \textit{projectivized Semple $k$-jet bundle} $P_k V = X_k$ is defined iteratively via,
-\[ (X_0, V_0) := (X, V) \quad \quad (X_{k+1}, V_{k+1}) := (\wt{X_k}, \wt{V_k}) \]
-and we have,
-\[ \dim{P_k V} = \dim{X} + k (\rank{V} - 1) \quad \quad \rank{V_k} = \rank{V} \]
-\end{defn}
-
-
-% REVIEW: In the paragraph below, "$\d{f} : \T_X \to f'^* \wt{\E}$" should likely be "$\d{f'} : \T_C \to f'^* \wt{\E}$" (using $\T_C$, not $\T_X$).
-The Semple tower is defined so that the following holds. Suppose that $f : C \to X$ is an immersed curve such that $\d{f} : \T_C \to f^* \T_X$ factors through $f^* \E \subset f^* \T_X$. Since $\d{f}$ is a subbundle this gives a subbundle $\T_X \embed \pi^* \E$ and hence a lift $f' : C \to \wt{X}$ such $\d{f} : \T_C \to f^* \E \to f^* \T_X$ is $f'^* [\struct{\wt{X}}(-1) \to \pi^* \E \to \pi^* \T_X]$. Therefore, consider $\d{f'} : \T_C \to f'^* \T_{\wt{X}}$. Since this map lifts $\d{f}$ we see that $\d{f'} : \T_X \to f'^* \wt{\E}$.
-
-Hence, if we start with an immersed curve $f : C \to X$ then there are lifts $f_k : C \to P_k$ for all $k$. The fundamental property is:
-
-\begin{prop}
-Let $f : \P^1 \to X$ be a rational curve. Then the lift $f_k : \P^1 \to P_k X$ lies in the base locus of $H^0(P_k X, \struct{P_k X}(m))$ for all $m > 0$.
-\end{prop}
+\begin{lemma} \label{lem:tangent_leaf_pullback}
+Let $\F$ be a $p$-closed foliation on a smooth variety $X$. Let $Z \subset X$ be a subvariety of dimension $\rank{\F}$ not contained in the singular locus of $\F$. Then $Z$ arises as the (generically reduced) pullback of a subvariety $Z' \subset X / \F$ if and only if $Z$ is a leaf of $\F$.    
+\end{lemma}
 
 \begin{proof}
-Analogous to the statement that for any symmetric form $\omega \in H^0(X, \nSym{n}{\Omega_X})$ we must have $f^* \omega = 0$ because there are no global pluri-forms on $\P^1$.
+There is always a commutative diagram of relative Frobenii,
+\begin{center}
+    \begin{tikzcd}
+    Z \arrow[r, "F_Z"] \arrow[d] & Z^{(p)} \arrow[d]
+    \\
+    X \arrow[r, "F_X"] & X^{(p)}
+    \end{tikzcd}
+\end{center}
+This diagram is not Cartesian: the fiber product is rather the extension of $Z$ by nilpotents along its conormal sheaf. If $Z$ is a leaf, the map $\T_Z \to \T_X|_Z$ is identified with (the reflexive hull) of $\F_X|_Z \to \T_X$ therefore there is a compatible diagram of quotients by foliations
+\begin{center}
+    \begin{tikzcd}
+     Z \arrow[d] \arrow[r] & Z^{(p)} \arrow[d] \arrow[r, equals] & Z^{(p)} \arrow[d]
+     \\
+     X \arrow[r] & X / \F \arrow[r] & X^{(p)}
+    \end{tikzcd}
+\end{center}
+so the unique map $Z \to Z^{(p)} \times_{X / \F} X$ must be an isomorphism at the generic point by degree considerations. 
+\par 
+Since $Z$ is not contained in the singular locus of $\F$, we may shrink to assume that $Y = X / \F$ is smooth and $f : X \to X / \F = Y$ is flat. Now, let $Z' \subset X / \F$ be a subvariety and consider the fiber product $F := Z' \times_{X / \F} X$. By base change, the relative cotangent bundle $\Omega_{F/Z'}$ is the pullback of $\Omega_{X/Y} \cong \F^{\vee}$ where $f : X \to X / \F$ is the quotient map. Hence, if $F$ is generically reduced, i.e., the case when $Z$ is the preimage of $Z'$, then $Z \to Z'$ must have zero differential. Therefore, from the diagram
+\begin{center}
+    \begin{tikzcd}
+    & & \T_Z \arrow[r, "0"] \arrow[d] \arrow[ld, dashed] & \T_{Z'}|_Z \arrow[d]
+    \\
+    0 \arrow[r] & (\F|_Z)^{\vee \vee} \arrow[r] & \T_X |_Z \arrow[r] & \T_{X / \F}|_Z
+    \end{tikzcd}
+\end{center}
+we see that $\T_Z \to \T_X|_Z$ factors through $(\F|_Z)^{\vee \vee} \to \T_X|_Z$. 
 \end{proof}
 
-The following result gives some hope of proving the GGL conjecture:
 
-\begin{theorem}[Green-Griffiths, Demailly]
-Let $(X, \E)$ be a smooth projective directed variety that lifts to characteristic zero. Suppose that $\det{\E^\vee}$ is big. Then
-\[ H^0(P_k(X, \E), \struct{}(m)) \]
-has (many) nonzero sections for $m \gg k \gg 1$.
-\end{theorem}
+
 
 \ifSubfilesClassLoaded{%
   \bibliographystyle{alpha}

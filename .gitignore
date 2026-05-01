@@ -1,4 +1,4 @@
-*.aux
+re*.aux
 *.log
 *.lot
 *.lof
@@ -7,3 +7,4 @@
 *.blg
 *.bbl
 main.pdf
+Aaron/

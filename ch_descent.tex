@@ -1,8 +1,11 @@
 \documentclass[main.tex]{subfiles}
 \begin{document}
-\chapter{Descent Obstruction}
+\chapter{Foliated Descent in General} \label{chapter:descent}
+\epigraph{%
+``Here is the Labyrinth,'' Albert said, gesturing towards a tall lacquered writing cabinet. ``An ivory labyrinth!'' I exclaimed. ``A very small sort of labyrinth ...'' \\ ``A labyrinth of symbols,'' he corrected me. 
+}{Jorge Luis Borges}
 
-In the previous chapter, we developed an argument to show the non-uniruledness of product-quotient surfaces carrying a particular symmetric form. The main technique is the principle of infinite descent. Here we will explore further applications of this technique to the unirationality of surfaces in positive characteristic. In particular, we will develop something of a general criterion, at least a sort of infinite algorithm, which in certain special cases will yield the desired answer to the question: is $X$ covered by rational curves.
+In the previous chapter, we developed an argument to show the non-uniruledness of product-quotient surfaces carrying a particular kind of symmetric form. The main technique is the principle of infinite descent. Here we will explore further applications of this technique to the unirationality of surfaces in positive characteristic. In particular, we will develop something of a general criterion, at least a sort of infinite algorithm, which in certain special cases will yield the desired answer to the question: is $X$ covered by rational curves?
 
 The descent argument has three main phases that must be understood in order to run such a procedure. These are:
 \begin{enumerate}
@@ -15,12 +18,12 @@ In this chapter, we will focus on the first and second in some generality. This 
 
 \section{Descent using an arbitrary symmetric form}
 
-Let $X$ be a smooth projective surface over a field $k$ of positive characteristic. Given that $X$ carries a symmetric differential form $\omega \in H^0(X, \Sym^m \Omega_X)$ for some $m > 0$ we would like to argue that any rational curve on $X$ must lie tangent to some foliation as in the previous chapter. However, this is not true in general, first we must replace $X$ by a suitable cover ``extracting a linear differential equation'' from the nonlinear differential equation induced by $\omega$. This is done analogously to the arguments in \cite{bogomolov:families_curves} and is reproduced as follows.
+Let $X$ be a smooth projective surface over a field $k$ of positive characteristic. Given that $X$ carries a symmetric differential form $\omega \in H^0(X, \Sym^m \Omega_X)$ for some $m > 0$ we would like to argue that any rational curve on $X$ must lie tangent to some foliation as in the previous chapter. However, this is not true in general; first we must replace $X$ by a suitable cover ``extracting a linear differential equation'' from the nonlinear differential equation induced by $\omega$. This is done analogously to the arguments in \cite{bogomolov:families_curves} and is reproduced as follows.
 
 Consider the projective bundle $\pi : \P_X(\Omega_X) \to X$ and note that $\omega \in H^0(X, \Sym^m \Omega_X)$ defines a section of the tautological line bundle $s_{\omega} \in H^0(\P_X(\Omega_X), \cO_{\P}(m))$ on the $3$-fold $\P := \P_X(\Omega_X)$. Therefore, the vanishing locus $Z := Z(s_{\omega})$ is a divisor in $\P$ whose support is the locus of pairs $(x, v) \in \P$ where $\omega_x(v) = 0$. We replace $Z$ by its reduction and decompose $Z$ into two collections of irreducible components: those that dominate $X$ and those that are contracted onto a curve inside $X$. Denote the union of these by $\Zhor$ and $\Zcont$ respectively. 
 \par
 For any generically immersive map $f : C \to X$ from a smooth projective curve to $X$, there is a unique ``holonomic'' lift $t_f : C \to \P_X(\Omega_X)$ defined by the map of bundles
-\[ f^* : f^* \Omega_X \onto \im{f^*} \subset \omega_C \]
+\[ f^* : f^* \Omega_X \onto \im{(f^*)} \subset \omega_C \]
 where $\im{f^*}$ is torsion-free of rank $1$ and hence a line bundle. This defines $t_f$ in such a way that $t_f^* \cO_{\P}(1) = \im{f^*}$. At the points $t \in C$ where $f$ is an immersion, the map $t_f$ is defined by $s \mapsto (f(s), \d{f}_s(\partial_s))$, viewing $\P := \P(\Omega_X)$ as the projectivization of the physical tangent bundle. Since $C$ is a smooth projective curve and $\P_X(\Omega_X)$ is proper, the extension over the points where $f$ is not an immersion exists uniquely.
 \par
 Now if $f : C \to X$ is any curve such that $f^* \omega = 0$, we see that the canonical lift $\wt{f} := t_f : C \to \P$ lands inside $Z$ giving a diagram:
@@ -113,7 +116,7 @@ Now we describe the strategy to prove that $X$ is not unirational assuming $(\as
 T
 \end{tikzcd}
 \end{center}
-by curves of genus $0$ or $1$. As before we may assume that $f$ is generically immersive on fibers. Let $S_1, \dots, S_r \to \P$ denote resolutions of the components of $\Zhor$. Since $f$ dominates $X$ it lifts to one of $S_1, \dots, S_r$ and the lift consists of curves tangent to the foliation $\F_i$ on $S_i$. If its $p$-curvature $\psi_{p,\F_i}$ is nonzero, then the image of $\wt{f}$ lies inside $V(\psi_{p, \F_i}) \subset S_i$ which does not dominate $X$. Therefore, $f$ must lift to a component $S_i$ on which $\psi_{p, \F_i} = 0$ hence we may form the quotient. By Lemma (TODO) the family $\wt{f} : \cC \to S_i$ is generically pulled back from a family of curves on $S_i / \F_i$ in the sense that there exists a diagram
+by curves of genus $0$ or $1$. As before we may assume that $f$ is generically immersive on fibers. Let $S_1, \dots, S_r \to \P$ denote resolutions of the components of $\Zhor$. Since $f$ dominates $X$ it lifts to one of $S_1, \dots, S_r$ and the lift consists of curves tangent to the foliation $\F_i$ on $S_i$. If its $p$-curvature $\psi_{p,\F_i}$ is nonzero, then the image of $\wt{f}$ lies inside $V(\psi_{p, \F_i}) \subset S_i$ which does not dominate $X$. Therefore, $f$ must lift to a component $S_i$ on which $\psi_{p, \F_i} = 0$ hence we may form the quotient. By Lemma \todo{CITE} the family $\wt{f} : \cC \to S_i$ is generically pulled back from a family of curves on $S_i / \F_i$ in the sense that there exists a diagram
 \begin{center}
 \begin{tikzcd}
 \cC \arrow[d, "\wt{f}"'] \arrow[r, "F_{\cC/T}"] & \cC^{(p/T)} \arrow[d, "\wt{f}'"]
@@ -166,7 +169,7 @@ To reach a contradiction, we wish to show that some measure of ``degree'' of the
 \par 
 A natural candidate for this measure is the \textit{canonical degree}: 
 \[ \deg_{\cC_t}{f^*_t \omega_X} = C \cdot f^* K_X \]
-where $C$ is the class of a fiber of $g : \cC \to T$. There are a number of issues that need to be overcome in order to prove this is a good measure in the sense that it strictly decreases after descent down a roof. We turn out attention now to these issues.
+where $C$ is the class of a fiber of $g : \cC \to T$. There are a number of issues that need to be overcome in order to prove this is a good measure in the sense that it strictly decreases after descent down a roof. We turn our attention now to these issues.
 
 \subsection{Replacing $X$ to modify the covering family}
 
@@ -174,15 +177,15 @@ The most important obstacle is that $S / \F$ may be highly singular along the lo
 \par
 The remedy is to make sure that the covering family $\wt{f} : \cC \to S$ can be chosen so that a generic curve does not intersect the singular locus of $\F$ and hence $\wt{f}' : \cC' \to S/\F$ lands inside the nonsingular locus of $S / \F$ after possibly shrinking $T$. This can be accomplished by blowing up $X$ to replace the initial family $f : \cC \to X$ by a quasi-finite covering family. Now replacing $X$ by its blowup may increase the initial canonical degree of the family so the astute reader may worry that such a replacement, if needed at each roof, will overwhelm the reduction in degree given by descent along the foliation. However, we will see that given a covering of $X$, we can perform \textit{once and for all} a sequence of blowups of $X$ so that the problems are solved for the sufficiently general curve at every stage of the descent. Then the replacement is harmless since it only increases the canonical degree a finite amount initially and hence the argument by infinite descent still proceeds. 
 \par 
-To see this argument in action, we need two lemmas: the first showing that after finite sequence of blowups (depending on the given covering family $f : \cC \to X$) we obtain a quasi-finite covering family, the second showing that once we start with a quasi-finite covering family, the descent along a roof remains quasi-finite, so this replacement procedure need not be repeated. 
+To see this argument in action, we need two lemmas: the first showing that after a finite sequence of blowups (depending on the given covering family $f : \cC \to X$) we obtain a quasi-finite covering family, the second showing that once we start with a quasi-finite covering family, the descent along a roof remains quasi-finite, so this replacement procedure need not be repeated. 
 
 \begin{lemma} \label{lemma:replace_by_quasi-finite}
-Let $X$ be a nonsingular variety and suppose $g : \cC \to T$ is a smooth proper family of curves over a nonsingular irreducible base variety $T$. Let $f : \cC \to X$ be a dominant map. Then there exists a (not necessarily proper or quasi-finite) birational morphism $j : \wt{X} \to X$ from a nonsingular variety $\wt{X}$ produced as a sequence of restrictions to open sets and blowups along smooth centers so that the image of $j$ has complement in codimension $\ge 3$ along with a dense open set $T' \subset T$ fitting into a diagram
+Let $X$ be a nonsingular variety and suppose $g : \cC \to T$ is a smooth proper family of curves over a nonsingular irreducible base variety $T$. Let $f : \cC \to X$ be a dominant map. Then there exists a (not necessarily proper or quasi-finite) birational morphism $j : \wt{X} \to X$ from a nonsingular variety $\wt{X}$ so that the image of $j$ has complement in codimension $\ge 3$ along with a dense open set $T' \subset T$ fitting into a diagram
 \begin{center}
 \begin{tikzcd}
 & & \wt{X} \arrow[d, "j"]
 \\
-\cC_{T'} \arrow[r, hook] \arrow[rru, "f'"] \arrow[d, "g"] & \cC \arrow[r, "f"] \arrow[d, "g"] & X
+\cC_{T'} \arrow[r, hook] \arrow[rru, "\wt{f}"] \arrow[d, "g"] & \cC \arrow[r, "f"] \arrow[d, "g"] & X
 \\
 T' \arrow[r, hook] & T 
 \end{tikzcd}
@@ -190,7 +193,75 @@ T' \arrow[r, hook] & T
 so that the induced rational map $f' : \cC_{T'} \to \wt{X}$ is a quasi-finite morphism.
 \end{lemma}
 
-{\color{red} either build the blowups or use raynaud-gruson and resolve singularities in codim 2 using lipman's algorithm}
+\begin{proof}
+Let $U \subset X$ be the locus where $f$ is flat. Since $X$ is irreducible and $f$ is dominant, by generic flatness $U$ is dense. We apply the flatification theorem of Raynaud-Gruson \cite[Theorem~5.2.2]{raynaud-gruson:flatification} to obtain a $U$-admissible blowup $b : \wt{X}_0 \to X$ such that the strict transform $\wt{\cC} \to \wt{X}_0$ is flat hence quasi-finite for reasons of dimension. Recall that the strict transform (the scheme theoretic closure of $\cC_U$ inside $\cC_{\wt{X}_0}$) is a $\cC_{U}$-modification $\wt{\cC} \to \cC$. Since $\cC$ is normal, by Zariski's main theorem $\wt{\cC} \to \cC$ has connected fibers and thus, by irreducibility of $\wt{\cC}$ and dimension counting, $\wt{\cC} \to \cC$ is an isomorphism over an open set $V \subset \cC$ of complementary codimension $\ge 2$. Thus, $\cC \sm V \to T$ lands in a proper closed subset so we may shrink to an open set $T' \subset T$ so that $\wt{\cC}_{T'} \to \cC_{T'}$ is an isomorphism. Thus we obtain the diagram, 
+\begin{center}
+\begin{tikzcd}
+& & \wt{X}_0 \arrow[d, "b"]
+\\
+\cC_{T'} \arrow[r, hook] \arrow[rru, "\wt{f}_0"] \arrow[d, "g"] & \cC \arrow[r, "f"] \arrow[d, "g"] & X
+\\
+T' \arrow[r, hook] & T 
+\end{tikzcd}
+\end{center}
+However, $\wt{X}_0$ is likely not smooth since it involves arbitrary $U$-admissible blowups. In characteristic zero, we may simply resolve the singularities of $\wt{X}_0$. In fact, applying Hironaka's resolution algorithm via blowups at smooth centers gives a refinement of Raynaud-Gruson producing flatification via a sequence of $U$-admissible blowups at smooth centers \cite[Theorem~A]{rydh:functorial_flatification}. Luckily for our positive characteristic applications, we will not need this. It is enough to resolve singularities in codimension $\le 2$ which is accomplished in all characteristics by the Zariski-Lipman normalized blowup algorithm \cite{lipman:desingularization}. A sequence of normalizations and blowups at the singular locus of $\wt{X}_0$ will produce, in a finite number of steps, a variety $\wt{X}_N$ whose singular locus has codimension $\ge 3$. Since $\cC_{T'}$ is normal, each normalization step $\wt{X}_{i+1} \to \wt{X}_i$ admits a lifting
+\begin{center}
+\begin{tikzcd}
+& \wt{X}_{i+1}
+\\
+\cC_{T'} \arrow[r, "\wt{f}_i"] \arrow[ru, dashed, "\wt{f}_{i+1}"] & \wt{X}_i
+\end{tikzcd}
+\end{center}
+automatically. For a blowup step $\wt{X}_{i+1} \to \wt{X}_i$, since the singular locus of the normal variety $\wt{X}_i$ lives in codimension $\ge 2$, the blowup is an isomorphism over an open set of $\wt{X}_i$ of complementary codimension $\ge 2$. Since $\wt{f}_i : \cC_{T'} \to \wt{X}_i$ is quasi-finite, the preimage of the center of the blowup is also codimension $\ge 2$ in $\cC$ hence we may shrink $T'$ further to obtain a lift $f_{i+1} : \cC_{T''} \to \wt{X}_{i+1}$. Iterating this process and replacing $T'$ by the successive smaller open sets results in a diagram,
+\begin{center}
+\begin{tikzcd}
+& & \wt{X}_N \arrow[d]
+\\
+& & \wt{X}_0 \arrow[d, "b"]
+\\
+\cC_{T'} \arrow[r, hook] \arrow[rruu, "\wt{f}_N"] \arrow[d, "g"] & \cC \arrow[r, "f"] \arrow[d, "g"] & X
+\\
+T' \arrow[r, hook] & T 
+\end{tikzcd}
+\end{center}
+Finally, the singular locus of $\wt{X}_N$ lives in codimension $\ge 3$ so, after possibly shrinking $T'$ further, $\wt{f}_N : \cC_{T'} \to \wt{X}_N$ has image inside the smooth locus of $\wt{X}_N$. Hence taking $\wt{X} := (\wt{X}_N)^{\smooth}$ completes the asserted construction. 
+\end{proof}
+
+\begin{rmk}
+The full power of flatification is really overkill for our purposes. In fact, the arguments will not really use quasi-finiteness but rather the weaker property that $\wt{f} : \cC \to \wt{X}$ does not contract any horizontal divisor of $\cC \to T$ to a lower-dimensional subvariety of $\wt{X}$. The existence of a modification $j : \wt{X} \to X$ forcing this property can be established simply by blowing up successively the images of each divisor of $\cC$ contracted by $\wt{f}$. After sufficiently many blowups, the codimension of the image of a divisor $E \subset \cC$ strictly decreases. 
+\end{rmk}
+
+\begin{comment}
+This is a consequence of the following commutative algebra lemma.
+
+{\color{red} ISSUE WITH THE LEMMA, codim only goes down if $\m_A$ does not map into $\m_R^2$. Otherwise the blowup reduced the power $\m_A \to \m_R^e$} 
+
+\begin{lemma}
+Let $\varphi : A \to R$ be a local ring map from a regular local ring $A$ to a dvr $R$ over an algebraically closed field $k$. Assume that $A \to R$ does not factor through a map $A \to k$. Let $\m = \m_A$ be the maximal ideal of $A$. Then the map induced by the valuative criterion of properness
+\begin{center}
+\begin{tikzcd}
+& \Bl_{\m} \Spec{A} \arrow[d]
+\\
+\Spec{R} \arrow[ru, dashed] \arrow[r] & \Spec{A}
+\end{tikzcd}
+\end{center}
+has the property that the maximal ideal of $R$ maps to a point $x \in \Bl_{\m} \Spec{A}$ with
+\[ \trdeg{(\kappa(x)/k)} \ge \min \{\trdeg{(\Frac{R} / k)} - 1, \trdeg{(\kappa(\m) / k)} + 1 \}. \]
+\end{lemma}
+
+\begin{proof}
+Consider the map on the associated graded rings,
+\begin{center}
+\begin{tikzcd}
+A \arrow[r] \arrow[d, hook] & R \arrow[d,hook]
+\\
+\mathbf{gr}_{\m} A \arrow[r, "\gr \varphi"] & \mathbf{gr}_{\m_R} R 
+\end{tikzcd}
+\end{center}
+The exceptional divisor of $\Bl_{\m} \Spec{A}$ is $\Proj{(\mathbf{gr}_{\m} A)}$ and thus $\trdeg{\kappa(x) / k} = \trdeg{\Frac{\im{\gr \varphi}} / k}$. 
+\end{proof}
+
+\end{comment}
 
 Returning to the situation that $X$ is a smooth projective surface satisfying $(\ast)_g$ we prove that quasi-finiteness is preserved after descent along a roof.
 
@@ -201,11 +272,11 @@ Suppose that $f : \cC \to X$ is a quasi-finite covering family of smooth curves.
 & & \cC_{T'} \arrow[ldddd, hook'] \arrow[dddddd] \arrow[rddd] \arrow[rrr, "\wt{f}"] & & & S 
 \\
 \\
-& & & & \cC^{(p/T)} \arrow[ld, hook'] \arrow[rrr, "\wt{f}''"] \arrow[dddl] & & & X' \arrow[ld]
+& & & & \cC^{(p/T)}_{T''} \arrow[ld, hook'] \arrow[rrr, "\wt{f}''" {xshift = 20pt}] \arrow[dddl] & & & X' \arrow[ld]
 \\
-& & & \cC^{(p/T)} \arrow[dddl] \arrow[rrr, "\wt{f}'"', crossing over] & & & S/\F \arrow[from=luuu, crossing over]
+& & & \cC^{(p/T)}_{T'} \arrow[dddl] \arrow[rrr, "\wt{f}'"' {xshift = 20pt}, crossing over] & & & S/\F \arrow[from=luuu, crossing over]
 \\
-& \cC \arrow[rrr, "f", crossing over] \arrow[ddd, "g"] & & & X \arrow[from=ruuuu, crossing over]
+& \cC \arrow[rrr, "f" {xshift = -15pt}, crossing over] \arrow[ddd, "g"'] & & & X \arrow[from=ruuuu, crossing over]
 \\
 & & & T'' \arrow[ld, hook']
 \\
@@ -214,10 +285,36 @@ Suppose that $f : \cC \to X$ is a quasi-finite covering family of smooth curves.
 & T  
 \end{tikzcd}
 \end{center}
-then $\cC^{(p/T)} \to X'$ is quasi-finite.
+then $\wt{f}'' : \cC^{(p/T)}_{T''} \to X'$ is quasi-finite.
 \end{lemma}
 
-{\color{red} TODO}
+\begin{proof}
+It is clear that for any finite type maps $f$ and $g$ if $f \circ g$ is quasi-finite then $f$ is quasi-finite. We start with the assumption that $f : \cC \to X$ is quasi-finite. The square
+\begin{center}
+\begin{tikzcd}
+\cC_{T'} \arrow[d, hook] \arrow[r, "\wt{f}"] & S \arrow[d]
+\\
+\cC \arrow[r, "f"] & X
+\end{tikzcd}
+\end{center}
+implies that $\wt{f} : \cC_{T'} \to S$ is quasi-finite. Next, the square 
+\begin{center}
+\begin{tikzcd}
+\cC_{T'} \arrow[d, hook] \arrow[r, "\wt{f}"] & S \arrow[d]
+\\
+\cC^{(p/T)}_{T'} \arrow[r, "\wt{f}'"] & S/\F
+\end{tikzcd}
+\end{center}
+using that $S \to S / \F$ is finite and hence $\cC_{T'} \to S \to S / \F$ is quasi-finite proves that $\wt{f}' : \cC^{(p/T)}_{T'} \to S / \F$ is quasi-finite. Finally, the square
+\begin{center}
+\begin{tikzcd}
+\cC^{(p/T)}_{T''} \arrow[d, hook] \arrow[r, "\wt{f}''"] & X' \arrow[d]
+\\
+\cC^{(p/T)}_{T'} \arrow[r, "\wt{f}'"] & S/\F
+\end{tikzcd}
+\end{center}
+implies that $\wt{f}'' : \cC^{(p/T)}_{T''} \to X'$ is quasi-finite.
+\end{proof}
 
 \subsection{Canonical degree change in the quotient}
 
@@ -258,9 +355,9 @@ Moreover, if the family has genus $0$ then this inequality is strict.
 \end{prop}
 
 \begin{proof}
-Let $\pi : S \to S/\F$ denote the quotient map. Recall the relationship between the canonical divisors for the quotient by a foliation \todo{(CITE IN THE PAPER!)}
-\[ K_S = \pi^* K_{S/\F} + (p-1) c_1(\F). \]
-The divisor $K_{S/\F}$ is well-defined because $S/\F$ is normal. However, if a curve passed through the singularities of $S/\F$ its intersection with $K_{S/\F}$ may not be well-defined. However, since $f : \cC \to X$ is quasi-finite and dominant, the general curve misses $\Sing(\F) \subset X$ since it lies in codimension $2$. Hence, the general curve in the family $\cC^{(p/T)} \to S/\F$ misses the singular points so $f_t^* K_{S/\F} = f_t^* K_{X'}$ is well-defined and equals $c_1(f_t^* \omega_{S/\F})$. From the diagram,
+Let $\pi : S \to S/\F$ denote the quotient map. Recall from Theorem~\ref{thm:ekedahl}(2), the relationship between the canonical divisors for the quotient by a foliation: 
+\[ K_S = \pi^* K_{S/\F} + (p-1) c_1(\F) \]
+which holds over the smooth locus $U \subset S$ of the foliation. Although the divisor $K_{S/\F}$ is well-defined because $S/\F$ is normal, if a curve passed through the singularities of $S/\F$ its intersection with $K_{S/\F}$ may not be defined. Moreover, the pullback $\pi^* K_{S/\F}$ may not make sense if $K_{S/\F}$ is not $\Q$-Cartier. However, since $f : \cC \to X$ is quasi-finite and dominant, the general curve misses $\Sing(\F) \subset X$ since it lies in codimension $2$. Hence, the general curve in the family $\cC^{(p/T)} \to S/\F$ misses the singular points so $f_t^* K_{S/\F} = f_t^* K_{X'}$ is well-defined and equals $c_1(f_t^* \omega_{S/\F})$. From the diagram,
 \begin{center}
 \begin{tikzcd}
 \cC_{T'} \arrow[r, "F_{\cC/T}"] \arrow[d, "f"] & \cC^{(p/T)}_{T'} \arrow[d, "f'"] 
@@ -268,7 +365,7 @@ The divisor $K_{S/\F}$ is well-defined because $S/\F$ is normal. However, if a c
 S \arrow[r, "\pi"] & S/\F 
 \end{tikzcd}
 \end{center}
-we see that 
+and since, for $t \in T'$ possibly in an open subset $f_t$ has image inside $U$,
 \[ \deg{f_t^* \omega_S} = \deg{\Frob^* f_t'^* \omega_{X'}} + (p-1) \deg{f_t^* \F}. \]
 However, $\deg{\Frob^* f_t'^* \omega_{X'}} = p \cdot \deg{f_t'^* \omega_{X'}}$ and $\deg{f_t^* \F} \ge 2-2g$ by Lemma~\ref{lemma:degree_of_rank_1_foliation}. Since $g \le 1$, the Lemma gives $\deg{f_t^* \F} \ge 0$. Rearranging gives,
 \[  \deg{f_t'^* \omega_{X'}} = \frac{1}{p} \deg{f_t^* \omega_S} - \frac{p-1}{p} \deg{f_t^* \F} \le \frac{1}{p} \deg{f_t^* \omega_S}. \]
@@ -309,7 +406,7 @@ C \arrow[rr, "f"] \arrow[ru, dashed, "\wt{f}"] & & X
 \end{tikzcd}
 \end{center} 
 is defined by the map of bundles on $C$ 
-\[ f^* : f^* \Omega_X \onto \im{f^*} \subset \omega_C \]
+\[ f^* : f^* \Omega_X \onto \im{(f^*)} \subset \omega_C \]
 so by definition $\wt{f}^* \cO_{\P}(1) = \im{f^*} \embed \omega_C$. We first calculate the canonical degree of $\wt{f}$ on $\P$. To do this, recall that the Euler sequence for $\P := \P_X(\Omega_X) \to X$,
 \[ 0 \to \Omega_{\P/X} \to \pi^* \Omega_X \ot \cO_{\P}(-1) \to \cO_{\P} \to 0 \]
 implies that
@@ -322,7 +419,7 @@ Now, let $Z_i \subset \Zhor$ be the component containing the image of $\wt{f}$. 
 \par 
 Note that the total divisor $Z \subset \P$ is cut out by the symmetric form viewed as section $s_{\omega} \in H^0(\P, \cO_{\P}(m))$ so its divisor class equals
 \[ Z = \sum_{j = 1}^r m_j Z_j = m \xi \]
-where $\xi := c_1(\cO_{\P}(1))$ and $Z_1, \dots, Z_r$ are the irreducible components of $Z$ with multiplicites $m_1, \dots, m_r$. Since $Z_i$ is a divisor, adjunction gives
+where $\xi := c_1(\cO_{\P}(1))$ and $Z_1, \dots, Z_r$ are the irreducible components of $Z$ with multiplicities $m_1, \dots, m_r$. Since $Z_i$ is a divisor, adjunction gives
 \[ \omega_{Z_i} = \omega_{\P}(Z_i)|_{Z_i}. \]
 Therefore,
 \begin{align*}
@@ -354,7 +451,7 @@ Furthermore, since $f$ is quasi-finite, $\wt{f}'$ must also be quasi-finite and 
 \end{equation}
 Now we must analyze the second term on the right for a family of curves of genus $\le 1$. Note that $\wt{f}_t^{*} \cO_{\P}(1) \embed \omega_{\cC_t}$ by the construction of the lift to $\P(\Omega_{X})$. Therefore,
 \[ \deg{\wt{f}_t^{*} \cO_{\P}(1)} \le \deg{\omega_{\cC_t}} \le 0 \]
-since the curves are smooth and have genus $\le 1$. However, this term might still be problematic if $\left( \frac{m}{m_i} - 2 \right) < 0$ since if $\deg{\wt{f}_t^{(k)*} \cO_{\P}(1)}$ is large and negative, together they may give an unbounded positive contribution. However, recall that these $m_1, \dots, m_r$ are the multiplicites appearing in the effective decomposition
+since the curves are smooth and have genus $\le 1$. However, this term might still be problematic if $\left( \frac{m}{m_i} - 2 \right) < 0$ since if $\deg{\wt{f}_t^{(k)*} \cO_{\P}(1)}$ is large and negative, together they may give an unbounded positive contribution. However, recall that these $m_1, \dots, m_r$ are the multiplicities appearing in the effective decomposition
 \[ Z = \sum_{j = 1}^r m_j Z_j = m \xi \]
 and $m$ is the degree of the map $Z \to X$. Setting $d_j := \deg{(Z_j \to X)}$ then we can write the relation $m = m_1 d_1 + \cdots + m_r d_r$. Hence, $\frac{m}{m_i} < 2$ implies that $d_i = 1$ since $m_j, d_j \ge 0$. Therefore the problematic case occurs only when $Z_i \to X$ is birational. But in this case, the induced foliation on $S$, the resolution of $Z_i$, induces a foliation on $X$ for which the curves $f : \cC \to X$ are already tangent. Hence, in this case we may actually choose $S = X$  
 with the obvious corollary that,
@@ -372,12 +469,17 @@ In the notation of diagram~\ref{diag:infinite_brach}, if each $X^{(k)}$ is of ge
 
 \begin{proof}
 Let $f : \cC \to X$ be a covering family. Using Lemma~\ref{lemma:replace_by_quasi-finite} we modify $X$ by a sequence of blowups $j : \wt{X} \to X$ to obtain a new covering family $f' : \cC_{T'} \to \wt{X}$ that is quasi-finite. Since we may pull back foliations and symmetric forms, and since quotients by foliations are functorial, we obtain a morphism between branches,
+
+
 \begin{center}
-\begin{tikzcd}[column sep = small]
+\begin{tikzcd}[column sep = small, row sep = large]
+& \wt{S}^{(0)} \arrow[ld] \arrow[rd] \arrow[dd, dashed] & & & \wt{S}^{(1)} \arrow[rd] \arrow[ld] \arrow[dd, dashed]
+\\
+\wt{X}^{(0)} \arrow[dd, dashed] & & \wt{S}^{(0)} / \wt{\F}^{(0)} \arrow[dd, dashed] & \arrow[l] \wt{X}^{(1)} \arrow[dd, dashed] & & \wt{S}^{(1)} / \wt{\F}^{(1)} \arrow[dd, dashed] & \cdots \arrow[l]
 \\
 & S^{(0)} \arrow[ld] \arrow[rd] & & & S^{(1)} \arrow[rd] \arrow[ld]
 \\
-X^{(0)} & & S^{(0)} / \F^{(0)} & \arrow[l] X^{(1)} & & S^{(1)} / \F^{(1)} & \cdots \arrow[l] 
+X^{(0)} & & S^{(0)} / \F^{(0)} & \arrow[l] X^{(1)} & & S^{(1)} / \F^{(1)} & \cdots \arrow[l]
 \end{tikzcd}
 \end{center}
 
@@ -388,9 +490,7 @@ which is strict in the case of genus $0$. For genus $0$, we obtain
 \[ \deg{f^{(k+1)*}_t \omega_{\wt{X}^{(k+1)}}} < \frac{2}{p} \deg{f^{(k)*}_t \omega_{\wt{X}^{(k)}}} \le \deg{f^{(k)*}_t \omega_{\wt{X}^{(k)}}} \]
 proving that the canonical degree strictly decreases at each roof. Likewise, for genus $1$, we are under assumption $(\ast)_1$, meaning that $V(\omega)$ contains a big divisor. Since $f^{(k)}$ is a covering family, the term $\deg{f_t^{(k)*} [V(\omega)]^{\div}}$ is strictly positive. Hence, we also conclude that 
 \[ \deg{f^{(k+1)*}_t \omega_{\wt{X}^{(k+1)}}} < \frac{2}{p} \deg{f^{(k)*}_t \omega_{\wt{X}^{(k)}}} \le \deg{f^{(k)*}_t \omega_{\wt{X}^{(k)}}}. \]
-Assuming that $\wt{X}^{(k)}$ is of general type, the canonical degree of a covering family must be positive (since $K_{\wt{X}^{(k)}}$ is $\Q$-effective). 
-% REVIEW: "$\deg{f^* \wt{X}}$" appears to be a typo; should this be $\deg{f_t^{(0)*} \omega_{\wt{X}^{(0)}}}$ or just the initial canonical degree?
-Since the canonical degree is finite, it can only decrease finitely many times while remaining positive proving the theorem.
+Assuming that $\wt{X}^{(k)}$ is of general type, the canonical degree of a covering family must be positive (since $K_{\wt{X}^{(k)}}$ is $\Q$-effective). Since $\deg{f_t^{(0)*} \omega_{\wt{X}^{(0)}}}$ is finite, it can only decrease finitely many times while remaining positive proving the theorem.
 \end{proof}
 
 Therefore, together with the discussion of this and the previous sections, we have proven the following criterion.

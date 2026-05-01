@@ -4,188 +4,6 @@
 
 %% All commands are in macros.sty
 
-\section{The Kobayashi Pseudodistance}
-
-\begin{defn}
-A \textit{directed pair} $(X, V)$ is a pair of a complex manifold $X$ and a holomorphic subbundle $V \subset T_X$.
-\end{defn}
-
-Here let $\Delta$ be the unit disk in $\CC$ and $\rho$ the Poincare metric on $\Delta$.
-
-\begin{defn}
-Let $X$ be a complex manifold. The \textit{Kobayashi pseudodistance} is the pseudometric defined as follows:
-\[ d_X(p,q) = \inf_\alpha \ell(\alpha) \]
-where $\alpha$ is a chain of holomorphic disks $f_i : \Delta \to X$ and points $p = p_0, p_1, \dots, p_k = q$ of $X$ and pairs $a_1, b_1, \dots, a_k, b_k \in \Delta$ such that,
-\[ f_i(a_i) = p_{i-1} \quad f_i(b_i) = p_i \]
-and the length $\ell(\alpha)$ of the chain is defined as,
-\[ \ell(\alpha) := \rho(a_1, b_1) + \cdots + \rho(a_k, b_k) \]
-where $\rho$ is the Poincare metric on $\Delta$.
-\end{defn}
-
-\begin{example}
-Let $X = \CC$ then $d_X = 0$. Indeed, by choosing larger and larger discs containing $p,q$ their pullback to the unit disk is then closer and closer to the origin and hence has vanishing Poincare distance.
-\end{example}
-
-\begin{rmk}
-Recall the Schwarz--Pick lemma says that any holomorphic map $f : \Delta \to \Delta$ is a contraction for the Poincare metric. Therefore, $d_{\Delta} = \rho$.
-\end{rmk}
-
-\begin{lemma}
-Let $f : X \to Y$ be holomorphic. Then $d_Y(f(x), f(y)) \le d_X(x,y)$
-\end{lemma}
-
-\begin{proof}
-Indeed, choosing any chain of disks $g_i : \Delta \to X$ computing $d_X(x,y)$ we see that $f \circ g_i$ is a chain of disks connecting $f(x)$ and $f(y)$ of the same length. Therefore,
-\[ d_Y(f(x), f(y)) = \inf_{\alpha} \ell(\alpha) \le d_X(x, y) \]
-\end{proof}
-
-\begin{cor}
-If $f : \CC \to X$ is an entire curve then for $x, y \in f(\CC)$ we have $d_X(x,y) = 0$ meaning if $f$ is nonconstant then $d_X$ is degenerate along the image of $f$.
-\end{cor}
-
-\begin{proof}
-Indeed, let $z_1, z_2 \in \CC$ map to $x,y$ respectively. Then,
-\[ d_X(x,y) \le d_{\CC}(z_1, z_2) = 0 \]
-\end{proof}
-
-Brody's theorem is a converse to this result. We start by considering an infinitesimal analogue of the Kobayashi pseudodistance. Let $v \in T_{X, x_0}$ be a holomorphic tangent vector at $x_0 \in X$ and define,
-\[ \kk_X(v) = \inf \{ \lambda > 0 \mid \exists f : \Delta \to X \text{ such that } f(0) = x_0 \text{ and } \lambda f'(0) = v \} \]
-where $f : \Delta \to X$ is holomorphic. It is easy to check that holomorphic maps contract this pseudometric and for $X = \Delta$ it agrees with the Poincare metric.
-
-\begin{theorem}
-Let $X$ be a complex manifold. Then,
-\[ d_X(p,q) = \inf_\gamma \int_\gamma \kk_X(\gamma'(t)) \d{t} \]
-where the infimum is taken over all piecewise smooth curves joining $p$ and $q$.
-\end{theorem}
-
-\begin{defn}
-A \textit{Brody curve} $f : \CC \to X$ is an entire curve which has bounded derivative with respect to some (equivalently, any) Hermitian metric.
-\end{defn}
-
-\begin{theorem}[Brody]
-Let $X$ be a compact complex manifold. If $d_X$ is degenerate then there exists a Brody curve in $X$.
-\end{theorem}
-
-\begin{rmk}
-Of course, in the case that $X$ is compact any entire curve is automatically Brody.
-\end{rmk}
-
-
-
-\section{Definitions}
-
-\begin{defn}
-We say a directed pair $(X, V)$ is,
-\begin{enumerate}
-\item \textit{Brody hyperbolic} if there does not exist a nonconstant entire map $f : \CC \to X$ tangent to $V$
-\item \textit{Kobayashi hyperbolic} if the Kobayashi pseudodistance is nondegenerate (i.e. it is a metric).
-\end{enumerate}
-\end{defn}
-
-\begin{theorem}[Brody]
-Let $X$ be a compact complex manifold. Then $X$ is Kobayashi hyperbolic if and only if it is Brody hyperbolic.
-\end{theorem}
-
-\begin{rmk}
-Therefore, we will call manifolds with this property just ``hyperbolic'' or ``analytically hyperbolic'' for emphasis.
-\end{rmk}
-
-\begin{defn}
-If $X$ is a complex projective algebraic variety we say $(X, V)$ is
-\begin{enumerate}
-\item \textit{algebraically hyperbolic} if there exists $\epsilon > 0$ such that for every complete integral curve $C \subset X$ we have,
-\[ 2 g(C) - 2 \ge \epsilon \deg_H{C} \]
-where $g(C)$ is the geometric genus of $C$
-\item \textit{algebraically quasi-hyperbolic} if $X$ contains finitely many genus $0$ and genus $1$ curves.
-\end{enumerate}
-\end{defn}
-
-\begin{theorem}[Demailly]
-Let $X$ be a smooth projective variety. Then the following hold,
-\[ X \text{ is hyperbolic} \implies X \text{ is algebraically hyperbolic} \]
-\end{theorem}
-
-\begin{theorem}
-If $X$ is algebraically hyperbolic then $X$ admits no nonconstant morphisms from an abelian variety.
-\end{theorem}
-
-
-Some references:
-\begin{enumerate}
-\item \chref{https://arxiv.org/pdf/math/0103084.pdf}{Xi Chen}
-\item \chref{https://arxiv.org/pdf/1807.03665.pdf}{Javanpeykar}
-\end{enumerate}
-
-\subsection{The Green-Griffiths Locus and Jets}
-
-\begin{theorem}[\chref{https://www-fourier.ujf-grenoble.fr/~demailly/manuscripts/hyperbolic.pdf}{Demailly's Notes} Theorem 7.9]
-Let $(X, V)$ be a directed projective manifold and $A$ an ample line bundle. Then for any entire curve $f : \CC \to X$ tangent to $V$ and any $P \in H^0(X, E^{GG}_{k,m}(V^*) \ot A^{-1})$  we have $P(f', f'', \dots, f^{(k)}) = 0$ identically.
-\end{theorem}
-
-Therefore, if we fix an ample line bundle we can consider the locus cut out by all these differential equations.
-
-
-\begin{defn}
-The \textit{Green-Griffiths locus} $\GG_A(X, V)$ is the set $x \in X$ such that for all $k > 0$ there exists a $k$-jet $\varphi_k : (\CC, 0) \to (X, x)$ tangent to $V$ so that for all $m > 0$ every global jet differential $P \in H^0(X, E^{GG}_{k,m}(V^*) \ot A^{-1})$ satisfies $P(\varphi_k) = 0$.
-\end{defn}
-
-\begin{rmk}
-The locus $\GG_A(X, V)$ is independent of the choice of ample line bundle (see \chref{https://arxiv.org/pdf/1302.4756.pdf}{Diverio and Rousseau} Lemma 2.2. This paper also gives many examples showing that $\Exc(X)$ can be strictly smaller than $\GG(X)$. However, it is conjectured that if $X$ is of general type then $\GG(X) \subsetneq X$.
-\end{rmk}
-
-
-LOOK AT THE HILBERT MODULAR SURFACES FOR WHICH THE GG LOCUS IS EVERYTHING
-
-
-\section{Conjectures}
-
-\begin{conj}[Kobayashi]
-For $n \ge 2$ and $D \subset \P^n$ a very general hypersurface of degree $\deg{D} \ge 2n + 1$ then,
-\begin{enumerate}
-\item $D$ is hyperbolic
-\item $\P^n \sm D$ is hyperbolic.
-\end{enumerate}
-\end{conj}
-
-\begin{conj}[Green-Griffiths-Lang]
-Let $X$ be a projective variety of general type. Then there exists a proper algebraic subvariety containing all non-constant entire curves $f : \CC \to X$.
-\end{conj}
-
-\begin{conj}[Demailly]
-If $X$ is algebraically hyperbolic then $X$ is hyperbolic.
-\end{conj}
-
-\begin{prop}
-The Green-Griffiths-Lang conjecture implies the Demailly conjecture.
-\end{prop}
-
-WHY?
-\begin{proof}
-Suppose $X$ is algebraically hyperbolic. If $X$ is not of general type then $X$ has a fibration over its canonical model by varities of Kodaira dimension $0$. (I NEED THAT IF NOT GENERAL TYPE THEN NOT ALGEBRAICALLY HYPERBOLIC DOES THIS FOLLOW FROM MMP)
-\end{proof}
-
-\section{Theorems}
-
-\begin{theorem}[Bogomolov]
-Let $X$ be a smooth projective surface with $s_2(X) = c_1(X)^2 - c_2(X) > 0$ then $X$ has finitely many genus $0$ or genus $1$ curves (i.e. it is algebraically quasi-hyperbolic).
-\end{theorem}
-
-\begin{theorem}[McQuillan]
-Let $X$ be a smooth projective surface with $s_2(X) = c_1(X)^2 - c_2(X) > 0$ and $X$ has \textit{no} genus $0$ or genus $1$ curves then $X$ is hyperbolic.
-\end{theorem}
-
-Ingredients in Bogomolov's proof:
-\begin{enumerate}
-\item existence of a symmetric differential form $\omega \in H^0(X, S^m \Omega_X)$
-\begin{enumerate}
-\item stability of the cotangent bundle
-\item Bogomolov vanishing theorem
-\end{enumerate}
-\item construction of foliations
-\item Jouanolou's theorem on algebraic leaves of foliations
-\end{enumerate}
-
-\newpage
 
 \section{Translation: Courbes de genre g\'{e}om\'{e}trique born\'{e} sur une surface de type g\'{e}n\'{e}ral}
 
@@ -348,7 +166,7 @@ Let $E$ be an elliptic curve without complex multiplication and let $X = E \time
 \end{example}
 
 \begin{example}
-Let $B$ be a smooth proper curve and $\pi : X \to B$ a nonisotrivial (that is to say it does not become trivial after some finite base change $B' \to B$) minimal elliptic fibration admitting a section $\sigma : B \to X$ of infinite order. Let $\omega$ be the conormal bundle of $\sigma$. Then there exist global sections $g_2 \in H^0(X, \omega^4)$ and $g_3 \in H^0(X, \omega^6)$ such that $X$ is the minimal resolution of the surface $Y \subset \P_B(\omega^2 \oplus \omega^3 \oplus \cO_B)$ defined by the Weierstrass equation,
+Let $B$ be a smooth proper curve and $\pi : X \to B$ a nonisotrivial (i.e.\ it does not become trivial after a finite base change $B' \to B$) minimal elliptic fibration admitting a section $\sigma : B \to X$ of infinite order. Let $\omega$ be the conormal bundle of $\sigma$. Then there exist global sections $g_2 \in H^0(X, \omega^4)$ and $g_3 \in H^0(X, \omega^6)$ such that $X$ is the minimal resolution of the surface $Y \subset \P_B(\omega^2 \oplus \omega^3 \oplus \cO_B)$ defined by the Weierstrass equation,
 \[ y^2 z = x^3 - g_2 x z^2 - g_3 z^3 \]
 Moreover, $\omega$ is independent of the section $\sigma$ and has degree $- \sigma(B)^2$. If the degree is zero, then $g_2$ and $g_3$ are constant and the fibration $\pi$ is isotrivial. There exist infinitely many sections of negative self-intersection and the classes are algebraically distinct.
 \end{example}
@@ -524,7 +342,7 @@ There exists a finite number of smooth proper surfaces $Z_i$ dominating $X$, eac
 \end{prop}
 
 \begin{proof}
-The irreducible component of the closed set $Z_F \subset \P(\Omega_X^1)$ are curves or surfaces. The curves $C$ such that $t_f(\wt{C})$ is contained in the some component that does not dominate $X$ are finite in number.
+The irreducible component of the closed set $Z_F \subset \P(\Omega_X^1)$ are curves or surfaces. The curves $C$ such that $t_f(\wt{C})$ is contained in some component that does not dominate $X$ are finite in number.
 \par
 Let $Z_i$ be the desingularization of the components that dominate $X$ and $\alpha_i : Z_i \to X$ the resulting dominant morphisms, and $C$ a curve which lifts to $Z_i$
 \begin{center}

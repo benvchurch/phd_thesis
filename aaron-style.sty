@@ -13,6 +13,9 @@
 \usepackage{amsmath,amsfonts,amsthm,amssymb}
 \usepackage[T1]{fontenc}
 \usepackage{newtxtext,newtxmath}
+\DeclareMathAlphabet{\oldmathcal}{OMS}{ntxsy}{m}{n}   % save the old mathcal
+\usepackage[bb=pazo]{mathalpha} % replace the ugly mathcal and mathbb
+\usepackage{BOONDOX-cal}   
 
 % --- Prevent colonequals from loading (conflicts with newtxmath) -------------
 \@namedef{ver@colonequals.sty}{9999/01/01}
@@ -28,8 +31,12 @@
 
 % --- 4. Epigraphs: chapter-opening quotations --------------------------------
 \usepackage{epigraph}
+\setlength{\epigraphwidth}{0.55\textwidth}
+\newlength{\versewidth}
 
-% --- 5. Hyperlink colors: blue citations (matching Aaron's setup) ------------
+
+% --- 5. Hyperlink colors: match Aaron's setup (no colored text, just borders)
+%     Stanford thesis requires font color to be black, so colorlinks must be off.
 \AtBeginDocument{%
   \@ifpackageloaded{hyperref}{%
     \hypersetup{citecolor=blue}%

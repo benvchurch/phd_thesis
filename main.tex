@@ -13,7 +13,7 @@
 \usepackage{graphicx}  % figures
 \usepackage{tabularx}  % nice single page tables
 \usepackage{longtable}  % tables spanning multiple pages
-\usepackage[colorlinks=true, allcolors=blue]{hyperref}  % URLs
+\usepackage{hyperref}  % URLs
 
 % Aaron-style formatting (Times font, 1.5 spacing, etc.)
 % Comment out the next line to revert to default Computer Modern / double-spaced
@@ -52,20 +52,17 @@
 \include{preface_acknowledgements}
 \afterpreface
 \subfile{ch_intro}
-\subfile{ch_hyperbolicity}
-\subfile{ch_bogomolov}
-\subfile{ch_fermat}
+%\subfile{ch_hyperbolicity}
+%\subfile{ch_bogomolov}
 \subfile{ch_pcurvature}
 \subfile{ch_obstructions}
 \subfile{ch_hurwitz}
 \subfile{ch_descent}
 \subfile{ch_hilbert}
 \subfile{ch_jets}
-\subfile{ch_conclusion}
 
-% uncomment below if you have an appendix
-% \appendix
-% \chapter{A Long Proof}
+\appendix
+\subfile{app_notation}
 
 \bibliographystyle{alpha}
 \bibliography{refs}

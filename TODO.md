@@ -1,0 +1,7 @@
+- Epigrams
+- introduction (move sections from acknolegements in obstructions paper)
+- move conventions + notation list to introduction and expand (ask ravi should each section have a notation list?)
+- bogomolov's proof (decide how much to do)
+- what to do with the jet bundles?
+- write p-curvature section
+- do I need a Fermat example section? no thing with jet bundles should go in last chapter if it will exist

@@ -1,18 +1,27 @@
 \documentclass[main.tex]{subfiles}
+
 \begin{document}
 %% All commands are in macros.sty
+ 
 
 \chapter{Supersingular Reduction of Hurwitz Curves}
-
+\epigraph{%
+\raggedright
+Out of this stony rubbish? Son of man,\\
+You cannot say, or guess, for you know only \\
+A heap of broken images, where the sun beats,\\
+And the dead tree gives no shelter, the cricket no relief,\\
+And the dry stone no sound of water.
+}{T.S.\ Eliot}
 \section{Introduction}
 
 Let $C / K$ be a smooth projective curve over a field of characteristic zero. Hurwitz proved a uniform bound on the number of automorphisms of $C$ depending on the genus $g$,
 \[ \# \Aut(C) \le 84(g-1). \]
-We call a curve achieving this bound a \textit{Hurwitz curve}. Every Hurwitz curve is defined over a number field because the quotient by the automorphism group $C \to C / \Aut(C) \cong \P^1$ canonically presents $C$ as a $G$-\Belyi map with orders of monodromy $(2,3,7)$ over $(0,1,\infty)$. The arithmetic of Hurwitz curves is quite rich, for example Gonz\'alez-Diez and Jaikin-Zapirain \cite{gonzalez-diez:galois_moduli} showed that the action of $\Gal(\ol{\Q}/\Q)$ on the set of isomorphism classes of Hurwitz curves is faithful. However, Hurwitz curves only appear in a sparse set of genera. Their geometric classification can be entirely reduced to group theory. Indeed, over $\CC$, the set of isomorphism classes of pairs $(C, \varphi : \Aut(C) \iso G)$ where $C$ is a Hurwitz curve and $\varphi : \Aut(C) \iso G$ is an identification of its automorphism group with $G$ is in canonical bijection with the set of surjections
+We call a curve achieving this bound a \textit{Hurwitz curve}. Every Hurwitz curve is defined over a number field because the quotient by the automorphism group $C \to C /\Aut(C) \cong \P^1$ canonically presents $C$ as a $G$-\Belyi map with orders of monodromy $(2,3,7)$ over $(0,1,\infty)$. The arithmetic of Hurwitz curves is quite rich, for example Gonz\'alez-Diez and Jaikin-Zapirain \cite{gonzalez-diez:galois_moduli} showed that the action of $\Gal(\ol{\Q}/\Q)$ on the set of isomorphism classes of Hurwitz curves is faithful. However, Hurwitz curves only appear in a sparse set of genera. Their geometric classification can be entirely reduced to group theory. Indeed, over $\CC$, the set of isomorphism classes of pairs $(C, \varphi : \Aut(C) \iso G)$ where $C$ is a Hurwitz curve and $\varphi : \Aut(C) \iso G$ is an identification of its automorphism group with $G$ is in canonical bijection with the set of surjections
 \[ \Delta(2,3,7) \onto G \]
-up to conjugacy where $\Delta(a,b,c)$ is the von Dyck group
+up to conjugacy where $\Delta(a,b,c)$ is the triangle group
 \[ \Delta(a,b,c) := \left< x,y,z \mid x^a, y^b, z^c, xyz \right> \]
-which is the index $2$ subgroup consisting of orientation-preserving isometries of the $(a,b,c)$-hyperbolic triangle group. Then $\Out(G)$ acts freely on the set of conjugacy classes of surjections whose orbits correspond to unmarked Hurwitz curves.
+identified with the orientation-preserving isometries of the hyperbolic tiling by $(\frac{\pi}{a},\frac{\pi}{b},\frac{\pi}{c})$-hyperbolic triangles. Then $\Out(G)$ acts freely on the set of conjugacy classes of surjections whose orbits correspond to unmarked Hurwitz curves.
 
 \begin{figure}
 \begin{center}
@@ -25,28 +34,45 @@ which is the index $2$ subgroup consisting of orientation-preserving isometries 
          \\
          $14$ & $\PSL_2(\FF_{13})$ & $3$ & $\Z / 2 \Z$
          \\
-         $17$ & $G_{17}$ & $2$ & $\Z / 2 \Z$
+         $17$ & $G_{1344}$ & $2$ & $\Z / 2 \Z$
     \end{tabular}
 \end{center}
     \caption{The Hurwitz curves of genus $g \le 100$. Here $G$ is the automorphism group (of which there is a unique isomorphism class for each genus in the table), $N$ is the number of non-isomorphic geometric curves of genus $g$, and $\Out(G)$ is the outer automorphism group of $G$ \cite{Conder:survey, Conder:update}.}
     \label{table:low_genus}
 \end{figure}
 
-Hurwitz curves of genus $\le 100$ have been tabulated by Conder \cite{Conder:survey, Conder:update} and their results are summarized in table~\ref{table:low_genus}. Here $G_{17}$ is the non-split extension $2^3.\PSL_2(\FF_7)$ of order $1344$, arising from Macbeath's homology cover construction \cite{Macbeath:eightfold, macbeath:hurwitz_theorem} applied to the Klein quartic. It fits in a non-split exact sequence $0 \to (\Z/2\Z)^3 \to G_{17} \to \PSL_2(\FF_7) \to 0$ corresponding to an irreducible $3$-dimensional $\FF_2$-representation of $\PSL_2(\FF_7)$. The fact that $\mathrm{(P)SL}_2$ of a finite field shows up as the automorphism group for $g \le 14$ is not a coincidence. Indeed, those curves are all \textit{Shimura curves} for a particular quaternion algebra over the totally real field $F = \Q(\zeta_7)^+$ (see \S\ref{sec:shimura}). However, the curves of genus $17$ are uniformized by a \textit{non-congruence} normal subgroup of $\Delta(2,3,7)$ and hence do not arise as Shimura curves.
+Hurwitz curves of genus $\le 100$ have been tabulated by Conder \cite{Conder:survey, Conder:update} and the results are summarized in table~\ref{table:low_genus}. Here $G_{1344}$ denotes the particular group of order $1344$ arising from Macbeath's homology cover construction \cite{Macbeath:eightfold, macbeath:hurwitz_theorem} applied to the Klein quartic. It is a non-split extension
+\[ 0 \to (\Z/2\Z)^3 \to G_{1344} \to \PSL_2(\FF_7) \to 0 \]
+corresponding to an irreducible $3$-dimensional $\FF_2$-representation of $\PSL_2(\FF_7)$. In the GAP Small Groups library, this group is \texttt{SmallGroup(1344,814)}. The fact that $\mathrm{(P)SL}_2$ of a finite field shows up as the automorphism group for $g \le 14$ is not a coincidence. Indeed, those curves are all \textit{Shimura curves} for a particular quaternion algebra over the totally real field $F = \Q(\zeta_7)^+$ (see \S\ref{sec:shimura}). However, the curves of genus $17$ are uniformized by a \textit{non-congruence} normal subgroup of $\Delta(2,3,7)$ and hence do not arise as Shimura curves. In this chapter, we also study other genus $17$ curves with large automorphism groups. In particular, we show that a genus $17$ curve related to the Fermat quartic, uniformized by $\Delta(2,3,8)$ rather than $\Delta(2,3,7)$, has infinitely many primes of supersingular reduction (see \S\ref{sec:17_Fermat}).
+\par 
+We say an abelian variety $A / k$ over a field of characteristic $p$ is \textit{supersingular} if $A_{\bar{k}}$ is isogenous to $E^g$ where $E$ is a supersingular elliptic curve over $\bar{k}$ \cite{Oort:subvarieties}. Over a finite field $k = \FF_q$, this is equivalent to requiring that the eigenvalues of $\Frob_q$ on $H_{\et}^1(A_{\bar{k}}, \Q_{\ell})$ are all of the form $\zeta \cdot q^{1/2}$ for $\zeta$ a root of unity \cite{tate:endomorphisms}. We say a smooth curve $C / k$ is \textit{supersingular} if $\Jac(C)$ is supersingular. It is unknown for which pairs $(p,g)$ there is a supersingular curve of genus $g$ in characteristic $p$.
+\par
+Given a curve $C / K$ over a number field, a natural question concerns the set of primes of $K$ for which the reduction of $C$ is supersingular. This set is often sparse and, in large genus, expected to be finite. Elkies \cite{elkies:supersingular} proved that if $E / K$ is an elliptic curve and $K$ has a real place then $E$ has infinitely many primes of supersingular reduction. Our arguments reduce the supersingularity problem for these curves to elliptic curves arising as isogeny factors of Jacobians or Prym varieties.
 
-We say an abelian variety $A / k$ over a field of characteristic $p$ is \textit{supersingular} if it is isogenous to $E^g$ where $E$ is a supersingular elliptic curve over $\bar{k}$ \cite{Oort:subvarieties}. Over a finite field $k = \FF_q$, this is equivalent to requiring that the eigenvalues of $\Frob_q$ on $H_{\et}^1(A_{\bar{k}}, \Q_{\ell})$ are all of the form $\zeta \cdot q^{1/2}$ for $\zeta$ a root of unity \cite{tate:endomorphisms}. Over a general field of characteristic $p$, the definition is geometric: $A$ is supersingular if $A_{\bar{k}}$ is isogenous to a power of a supersingular elliptic curve.
-
-We say a smooth curve $C / k$ is \textit{supersingular} if $\Jac(C)$ is supersingular. It is unknown what pairs $(p,g)$ appear over primes $p$ so that there is a supersingular curve of genus $g$ in characteristic $p$.
-
-Given a curve $C / K$ over a number field, it is very interesting to ask about the set of primes of $K$ for which the reduction of $C$ is supersingular. This set is often sparse and, in large genus, expected to be finite. Elkies \cite{elkies:supersingular} proved that if $E / K$ is an elliptic curve and $K$ has a real place then $E$ has infinitely many primes of supersingular reduction. We prove that Hurwitz curves of small genera have infinitely many primes of supersingular reduction.
-
-\begin{thm}\label{thm:main}
-Let $C/K$ be a Hurwitz curve of genus $g = 3,7,14,17$. Then there are infinitely many primes of $K$ at which $C$ has supersingular reduction.
+\begin{thm}\label{thm:main_3_7_14}
+Let $C/K$ be a Hurwitz curve of genus $g = 3,7,14$. Then there are infinitely many primes of $K$ at which $C$ has supersingular reduction.
 \end{thm}
 
-This will follow from a careful analysis of the representation theory of their automorphism group and the arithmetic of certain quotients. The proof is given genus by genus and is spread over \S\ref{sec:genus3_7}--\S\ref{sec:genus17}. One motivation for this result is the author's recent counterexample to Shioda's conjecture on unirationality for surfaces. This conjecture, due to Shioda \cite{Shioda:unirational}, predicts that a smooth projective surface $X$ with $\pi_1^{\et}(X) = 1$ over an algebraically closed field of characteristic $p > 0$ is unirational if and only if it is supersingular.
+It seems interesting and difficult to determine if Hurwitz curves of larger genera can have infinitely many primes of supersingular reduction. In genus $17$, the isogeny structure of the Jacobian $E^{14} \times E_{\Q(\sqrt{-7})}^3$ where $E_{\Q(\sqrt{-7})}$ is CM, suggests the answer is yes. 
 
-To construct further examples, one needs a source of high genus curves with large automorphism groups admitting many primes of supersingular reduction. The Hurwitz curves therefore provide natural candidates. Theorem~\ref{thm:main} in $g = 14,17$ can be used to produce two infinite lists of primes at which Shioda's conjecture is known to fail. These lists are ultimately related to the supersingular primes of some particular elliptic curves. Hence the number of these primes up to $x$ are expected to satisfy the Lang--Trotter estimates $\sim x^{1/2 - o(1)}$ \cite{lang:frobenius_distributions}.
+\begin{conj}
+The two Hurwitz curves of genus $17$ have infinitely many primes of supersingular reduction.
+\end{conj} 
+
+Although we are unable to answer this question, we show that a similar genus $17$ curve we call $X_{17, \mathrm{Fermat}}$ which is uniformized by $\Delta(2,3,8)$ does have infinitely many primes of supersingular reduction.
+
+\begin{thm} \label{thm:main_17}
+The curve $X_{17, \mathrm{Fermat}}$ is defined over $\Q$ and has infinitely many primes of supersingular reduction.
+\end{thm}
+
+
+However, for higher genera, the infinitude of supersingular primes becomes more unlikely. For example, the Hurwitz curve with automorphism group $\PSL_2(\FF_{3^3})$ arising as a Shimura curve (see \S~\ref{sec:shimura_as_hurwitz}) has in its Jacobian a $3$-dimensional isogeny factor \cite[\S~6]{fischer:hurwitz_auts}. It would be interesting to understand the supersingular primes of curves uniformized by triangle groups $\Delta(a,b,c)$ of large genus. The proofs of these results are organized by genus. Section~\ref{sec:shimura} supplies the Shimura-curve input needed for genus $14$. Sections~\ref{sec:genus3}-\ref{sec:genus7} treat the genera $3$ and $7$ Hurwitz curves by explicit equations, while the following section on the first Hurwitz triplet handles genus $14$. Section~\ref{sec:genus17} develops Macbeath's construction for the genus $17$ curves, and the later Prym computations culminate in the auxiliary Fermat congruence argument of \S\ref{sec:17_Fermat}. One motivation for this study is the author's construction of counterexamples to Shioda's conjecture on unirationality. To construct further examples, one needs a source of high genus curves with large automorphism groups admitting many primes of supersingular reduction. The Hurwitz curves therefore provide natural candidates. Theorem~\ref{thm:main_3_7_14} for $g = 14$ was used in the previous chapter to conclude the constructed surfaces had supersingular reduction infinitely often. Similarly, Theorem~\ref{thm:main_17} can be used to produce another infinite list of primes at which Shioda's conjecture is known to fail (see \S~\ref{section:new_counterexamples}). 
+
+The lists of characteristics at which we have so far constructed a counterexample to Shioda's conjecture are ultimately just the lists of supersingular primes of certain elliptic curves. The number of such primes up to $x$ is expected to satisfy the Lang--Trotter estimates $\sim x^{1/2 - o(1)}$ \cite{lang:frobenius_distributions}.
+
+\begin{comment}
+One motivation for this result is the author's recent counterexample to Shioda's conjecture on unirationality for surfaces. This conjecture, due to Shioda \cite{Shioda:unirational}, predicts that a smooth projective surface $X$ with $\pi_1^{\et}(X) = 1$ over an algebraically closed field of characteristic $p > 0$ is unirational if and only if it is supersingular.
+\end{comment}
 
 \section{Shimura curves} \label{sec:shimura}
 
@@ -54,14 +80,14 @@ We survey Shimura's groundbreaking work \cite{shimura:curves} constructing canon
 
 \subsection{Canonical models of Shimura curves}
 
-The exposition follows \S2--3 of \cite{shimura:curves}. Let $F$ be a totally real number field and $B$ a quaternion algebra over $F$. Write $g = [F : \Q]$ and $\frD(B/F)$ for the product of the non-archimedean primes of $F$ at which $B$ is \textit{non-split}, meaning $B \ot_F F_{\p}$ is a division algebra over $F_{\p}$. % REVIEW: "split" and "ramified" are opposite notions for quaternion algebras; non-split places are the ramified ones. Check which term is intended here.
-At all other finite places $B$ is \textit{split} (or \textit{ramified}) meaning $B \ot_F F_{\p} \cong M_2(F_{\p})$. Let $\nu_1, \dots, \nu_g : F \embed \RR$ be the archimedean places ordered such that $B$ is split at $\nu_1, \dots, \nu_r$ and non-split at $\nu_{r+1}, \dots, \nu_{g}$. We also choose an isomorphism compatible with these fixed places
+The exposition follows \S2--3 of \cite{shimura:curves}. Let $F$ be a totally real number field and $B$ a quaternion algebra over $F$. Write $g = [F : \Q]$ and $\frD(B/F)$ for the product of the non-archimedean primes of $F$ at which $B$ is \textit{non-split} (or \textit{ramified}), meaning $B \ot_F F_{\p}$ is a division algebra over $F_{\p}$. 
+At all other finite places $B$ is \textit{split} meaning $B \ot_F F_{\p} \cong M_2(F_{\p})$. Let $\nu_1, \dots, \nu_g : F \embed \RR$ be the archimedean places ordered such that $B$ is split at $\nu_1, \dots, \nu_r$ and non-split at $\nu_{r+1}, \dots, \nu_{g}$. We also choose an isomorphism compatible with these fixed places
 \[ B \ot_{\QQ} \RR \iso M_2(\RR)^r \times \HH^{g-r} \]
 where $\HH$ are the Hamiltonian quaternions. Assuming $r > 0$, this defines an embedding
 \[ \iota_{\infty} : B \embed M_2(\RR)^r. \]
 Let $B^+$ denote the elements of $B$ with totally positive reduced norm (note that Shimura writes $N_{B/F} : B \to F$ for the reduced norm whereas often this denotes the full norm $(\Nm_{B/F})^2$ where $\Nm_{B/F}$, often written as $\mathrm{nrd}_{B/F}$, is the reduced norm).  Equivalently, since the definite quaternion algebra $\HH$ has only elements of positive norm, these are the elements $\gamma \in B$ so that $\iota_{\infty}(\gamma)$ is a sequence of real matrices with positive determinant.
 \par
-Via the embedding $\iota_{\infty} : B^+ \to \GL_2^+(\RR)^r$ we get an action $B^+ \acts \frH^r$ where $\frH \subset \CC$ is the upper half-plane. Quotients by special subgroups of $B^+$ will lead to Shimura varieties. The associated Shimura datum is for the algebraic group $G := \Res_{F/\Q} B^\times$, the functor $A \mapsto (B \times_{\Q} A)^\times$ on $\Q$-algebras, with the conjugacy class $X$ generated by the map $h : \SS \to G_{\RR}$ defined by
+Via the embedding $\iota_{\infty} : B^+ \to \GL_2^+(\RR)^r$ we get an action $B^+ \acts \frH^r$ where $\frH \subset \CC$ is the upper half-plane. Quotients by special subgroups of $B^+$ will lead to Shimura varieties. The associated Shimura datum is for the algebraic group $G := \Res_{F/\Q} B^\times$ which represents the functor $A \mapsto (B \times_{\Q} A)^\times$ on $\Q$-algebras, with the conjugacy class $X$ generated by the map $h : \SS \to G_{\RR}$ defined by
 \[ \CC^\times \to \GL_2(\RR)^r \times \HH^{g-r} \quad \quad x + i y \mapsto \left( \begin{pmatrix}
     x & y
     \\
@@ -72,34 +98,35 @@ Via the embedding $\iota_{\infty} : B^+ \to \GL_2^+(\RR)^r$ we get an action $B^
     -y & x
 \end{pmatrix}, 1, \dots, 1 \right).  \]
 In general, the Shimura datum $(G, X)$ is of abelian type but not necessarily of Hodge type \cite{milne:canonical_models}. Fix a maximal order $\cQ \subset B$ and set $\Gamma(\cQ, 1) := \cQ^\times \cap B^+$. The action $\Gamma(\cQ, 1) \acts \frH^r$ is totally discontinuous and cocompact as long as $B$ is not split over $F$. For a finite index subgroup $\Gamma \subset \Gamma(\cQ, 1)$ the quotients $Y = \frH^r / \Gamma$ are the complex points of the associated Shimura variety. For example:
+\todo{review}
 \begin{enumerate}
-    \item when $B = M_2(F)$ then $\cQ = M_2(\cO_F)$ and $Y$ is a Hilbert-Blumenthal modular variety which parametrizes abelian $2g$-folds with real multiplication by $\cO_F$
-    \item $F = \Q$ and $B$ is a non-split indefinite quaternion algebra with discriminant $d$ then $Y$ is a Shimura curve parameterizing abelian surfaces with QM by $B$
-    \item likewise, when $B$ is non-split over $F$ and $r = g$ then $Y$ is an honest moduli space parameterizing abelian $2g$-folds with QM by $\cQ$
-    \item when $r = 1$ these $Y$ are the \textit{Shimura curves} but for $g > 1$ these are not honest moduli spaces of abelian varieties.
+    \item If $B = M_2(F)$ then $\cQ = M_2(\cO_F)$ and $Y$ is a Hilbert--Blumenthal modular variety which parametrizes abelian $g$-folds with real multiplication by $\cO_F$.
+    \item If $F = \Q$ and $B$ is a non-split indefinite quaternion algebra with discriminant $d$, then $Y$ is a Shimura curve parameterizing abelian surfaces with QM by $B$.
+    \item If $B$ is split at every real place, so $r = g$, then $Y$ is one of the higher-dimensional quaternionic Shimura varieties that admit honest moduli interpretations.
+    \item The case relevant for this chapter is $r = 1$. These one-dimensional quotients $Y$ are the \textit{Shimura curves}; when $g > 1$ they are no longer honest moduli spaces of abelian varieties, but Shimura's theory still provides canonical models over number fields.
 \end{enumerate}
 
-These moduli interpretations make sense over a number field, leading to \textit{canonical models} for the modular Shimura varieties over this field. As in Shimura's original article, we focus here on the case $r = 1$. Even when $g > 1$ and the Shimura curve is not an honest moduli space, Shimura was able to construct canonical models over number fields by using isogenies to other moduli spaces. For an ideal $\frJ \subset \cO_F$, Shimura defines \textit{congruence subgroups}
-\[ \Gamma(\cQ, \frJ) := \{ \gamma \in \cQ^\times \cap B^+ \mid \gamma - 1 \in \frJ \cQ \} \]
-and he produces a canonical model for $\frH / \Gamma(\cQ, \frJ)$ as follows.
+These moduli interpretations make sense over a number field, leading to \textit{canonical models} for the modular Shimura varieties over this field. As in Shimura's original article, we focus here on the case $r = 1$. Even when $g > 1$ and the Shimura curve is not an honest moduli space, Shimura was able to construct canonical models over number fields by using isogenies to other moduli spaces. For an ideal $\aa \subset \cO_F$, Shimura defines \textit{congruence subgroups}
+\[ \Gamma(\cQ, \aa) := \{ \gamma \in \cQ^\times \cap B^+ \mid \gamma - 1 \in \aa \cQ \} \]
+and he produces a canonical model for $\frH / \Gamma(\cQ, \aa)$ as follows.
 
 \begin{theorem}\cite[(3.2) Main Theorem I and (3.3)]{shimura:curves} \label{thm:canonical_models}
-Let $F^{(\frJ \infty)}$ be the narrow ray class field of $\frJ$. Fix an embedding $F^{(\frJ \infty)} \embed \CC$ compatible with $\nu_1 : F \embed \RR$. Then there exists a curve $C$ defined over $F^{(\frJ \infty)}$ and a holomorphic map $\varphi : \frH \to C_{\CC}$ such that
+Let $F^{(\aa \infty)}$ be the narrow ray class field of $\aa$. Fix an embedding $F^{(\aa \infty)} \embed \CC$ compatible with $\nu_1 : F \embed \RR$. Then there exists a curve $C$ defined over $F^{(\aa \infty)}$ and a holomorphic map $\varphi : \frH \to C_{\CC}$ such that
 \begin{enumerate}
-    \item $\varphi$ descends to a biholomorphism $\frH  /\Gamma(\cQ, \frJ) \iso C_{\CC}$
-    \item For any $K/F$ totally imaginary quadratic extension so that $B \ot_F K \cong M_2(K)$ and embedding $K \embed \CC$ compatible with $\nu_1 : F \embed \RR$ and any $F$-linear embedding $f : K \embed B$ so that $f(\cO_K) \subset \cQ$, let $z$ be the fixed point of $f(K) \acts \frH$; then $K^{(\frJ' \infty)}$ equals the compositum $K \cdot F^{(\frJ \infty)}(\varphi(z)) = K^{(\frJ' \infty)}$ where $\frJ' := \frJ \cO_K$ and $F^{(\frJ \infty)}(\varphi(z))$ is the field of definition of the point $\varphi(z) \in C(\ol{\Q})$.
+    \item $\varphi$ descends to a biholomorphism $\frH /\Gamma(\cQ, \aa) \iso C_{\CC}$
+    \item For any $K/F$ totally imaginary quadratic extension so that $B \ot_F K \cong M_2(K)$ and embedding $K \embed \CC$ compatible with $\nu_1 : F \embed \RR$ and any $F$-linear embedding $f : K \embed B$ so that $f(\cO_K) \subset \cQ$, let $z$ be the fixed point of $f(K) \acts \frH$; then $K^{(\aa' \infty)}$ equals the compositum $K \cdot F^{(\aa \infty)}(\varphi(z)) = K^{(\aa' \infty)}$ where $\aa' := \aa \cO_K$ and $F^{(\aa \infty)}(\varphi(z))$ is the field of definition of the point $\varphi(z) \in C(\ol{\Q})$.
 \end{enumerate}
-Furthermore, let $(C, \varphi)$ and $(C', \varphi')$ be two such pairs. Then there exists an isomorphism $j : C \to C'$ defined over $F^{(\frJ \infty)}$ such that $\varphi' = j_{\CC} \circ \varphi$.
+Furthermore, let $(C, \varphi)$ and $(C', \varphi')$ be two such pairs. Then there exists an isomorphism $j : C \to C'$ defined over $F^{(\aa \infty)}$ such that $\varphi' = j_{\CC} \circ \varphi$.
 \end{theorem}
 
-Due to the uniqueness property, we call such a pair $(C, \varphi)$ a \textit{canonical model} and denote $C$ by $\X(\cQ, \frJ)$. This uniqueness property has the following consequence for automorphisms of $\X(\cQ, \frJ)$. Note that $\Gamma(\cQ, \frJ) \triangleleft \Gamma(\cQ, 1)$ so there is a well-defined action $\Gamma(\cQ, 1) \acts \frH/\Gamma(\cQ, \frJ)$ which induces an action on $\X(\cQ, \frJ)_{\CC}$ via $\varphi$.
+Due to the uniqueness property, we call such a pair $(C, \varphi)$ a \textit{canonical model} and denote $C$ by $\X(\cQ, \aa)$. This uniqueness property has the following consequence for automorphisms of $\X(\cQ, \aa)$. Note that $\Gamma(\cQ, \aa) \triangleleft \Gamma(\cQ, 1)$ so there is a well-defined action $\Gamma(\cQ, 1) \acts \frH/\Gamma(\cQ, \aa)$ which induces an action on $\X(\cQ, \aa)_{\CC}$ via $\varphi$.
 
 \begin{lemma} \label{lem:automorphisms_defined_over_reflex}
-$\Gamma(\cQ, 1)$ acts on $\X(\cQ, \frJ)$ via automorphisms \textit{defined over} $F^{(\frJ \infty)}$.
+$\Gamma(\cQ, 1)$ acts on $\X(\cQ, \aa)$ via automorphisms \textit{defined over} $F^{(\aa \infty)}$.
 \end{lemma}
 
 \begin{proof}
-For any $\alpha \in \cQ^\times \cap B^+$, we can conjugate $f : K \to B$ to get $f^{\alpha} : K \to B$ with image $\alpha f(K) \alpha^{-1}$ and $f^{\alpha}(\cO_K) = \alpha f(\cO_K) \alpha^{-1} \subset \cQ$ since $\alpha \in \cQ^\times$ and $f(\cO_K) \subset \cQ$. Thus, if $z \in \frH$ is the fixed point of $f(K)$ then $\alpha \cdot z$ is fixed by $f^{\alpha}(K)$, so the hypothesis says that $K \cdot F^{(\frJ \infty)}(\varphi(\alpha \cdot z)) = K^{(\frJ' \infty)}$. Let $\varphi' := \varphi \circ \alpha$ viewing $\alpha$ as its action on $\frH$. Then the pair $(C, \varphi')$ is a canonical model because $\varphi(z') = \varphi(\alpha \cdot z)$ also satisfies $K \cdot F^{(\frJ \infty)}(\varphi(z)) = K^{(\frJ' \infty)}$ for any choice of $K/F$. Therefore, there exists $j : C \to C$ defined over $F^{(\frJ \infty)}$ so that $\varphi' = j_{\CC} \circ \varphi$, meaning exactly that the automorphism of $\X(\cQ, \frJ)$ induced by $\alpha$ is defined over $F^{(\frJ \infty)}$.
+For any $\alpha \in \cQ^\times \cap B^+$, we can conjugate $f : K \to B$ to get $f^{\alpha} : K \to B$ with image $\alpha f(K) \alpha^{-1}$ and $f^{\alpha}(\cO_K) = \alpha f(\cO_K) \alpha^{-1} \subset \cQ$ since $\alpha \in \cQ^\times$ and $f(\cO_K) \subset \cQ$. Thus, if $z \in \frH$ is the fixed point of $f(K)$ then $\alpha \cdot z$ is fixed by $f^{\alpha}(K)$, so the hypothesis says that $K \cdot F^{(\aa \infty)}(\varphi(\alpha \cdot z)) = K^{(\aa' \infty)}$. Let $\varphi' := \varphi \circ \alpha$ viewing $\alpha$ as its action on $\frH$. Then the pair $(C, \varphi')$ is a canonical model because $\varphi'(z) = \varphi(\alpha \cdot z)$ also satisfies $K \cdot F^{(\aa \infty)}(\varphi(z)) = K^{(\aa' \infty)}$ for any choice of $K/F$. Therefore, there exists $j : C \to C$ defined over $F^{(\aa \infty)}$ so that $\varphi' = j_{\CC} \circ \varphi$, meaning exactly that the automorphism of $\X(\cQ, \aa)$ induced by $\alpha$ is defined over $F^{(\aa \infty)}$.
 \end{proof}
 
 \subsection{Congruence subgroups}
@@ -107,58 +134,60 @@ For any $\alpha \in \cQ^\times \cap B^+$, we can conjugate $f : K \to B$ to get 
 At split places of $B$ we can also define other congruence subgroups in analogy with the modular curves $X_0(p)$ and $X_1(p)$. Then we can fix an isomorphism:
 \[ \iota_{\p} : B \ot_F F_{\p} \iso M_2(F_{\p}) \]
 with the property that it restricts to an isomorphism $\iota_{\p} : \cQ \ot_{\cO_F} \cO_{F_\p} \iso M_2(\cO_{\p})$ (see \cite[Lemma~10.4.3]{voight:quaternion_algebras}).
-Hence, reduction mod $\p^{\ell}$ gives an isomorphism
+Hence, reduction mod $\p$ gives an isomorphism
 \[ \iota_{\p} : \cQ / \p \cQ \iso M_2(\kappa_{\p}) \]
 where $\kappa_{\p} = \cO_F / \p$ is the residue field. This defines a reduction map
 \[ \iota_{\p} : \Gamma(\cQ, 1) \to \GL_2(\kappa_{\p}) \]
-whose kernel is exactly $\Gamma(\cQ, \p)$. More generally, if $\frJ \subset \cO_F$ is any ideal whose prime factorization consists entirely of primes splitting $B$, then we can fix a reduction map
-\[ \iota_{\frJ} : \Gamma(\cQ, 1) \to \GL_2(\cO_F / \frJ).  \]
-Taking the preimage of the upper Borel (resp.\ its unipotent radical, the upper triangular matrices) gives congruence subgroups $\Gamma_0(\cQ, \frJ)$ (resp.\ $\Gamma_1(\cQ, \frJ)$). Beware: this is not consistent with Shimura's use of the notation $\Gamma_1$. The groups $\Gamma_0(\cQ, \frJ)$ are the totally positive units in an \textit{Eichler order} $\cQ_0(\frJ) \subset \cQ$ of level $\frJ$ cf.\ \cite[\S3]{Voight:explicit_methods}.
+whose kernel is exactly $\Gamma(\cQ, \p)$. More generally, if $\aa \subset \cO_F$ is any ideal whose prime factorization consists entirely of primes splitting $B$, then we can fix a reduction map
+\[ \iota_{\aa} : \Gamma(\cQ, 1) \to \GL_2(\cO_F / \aa).  \]
+Taking the preimage of the upper Borel (resp.\ its unipotent radical, the upper triangular matrices) gives congruence subgroups $\Gamma_0(\cQ, \aa)$ (resp.\ $\Gamma_1(\cQ, \aa)$). Beware: this is not consistent with Shimura's use of the notation $\Gamma_1$. The groups $\Gamma_0(\cQ, \aa)$ are the totally positive units in an \textit{Eichler order} $\cQ_0(\aa) \subset \cQ$ of level $\aa$ cf.\ \cite[\S3]{Voight:explicit_methods}. Vitally, using Eichler approximation (see Lemma~\ref{lem:eicher_approximation}), the map 
+\[ \iota_{\aa} : \Gamma^1(\cQ, 1) \to \SL_2(\cO_F / \aa)  \]
+is surjective for any nonzero ideal $\aa \subset \cO_F$. 
 \par
-However, there are two caveats with these definitions: first $\iota_{\frJ} : \Gamma(\cQ, 1) \to \GL_2(\cO_F / \frJ)$ may not be surjective because of the restriction that elements live in $B^+$. Second, $\iota_{\infty}$ does not give a \textit{faithful} action of $\Gamma(\cQ, 1)$ on $\frH$ because the action factors through $\GL_2^+(\RR) \to \PGL_2^+(\RR)$. In order to understand the relationship between quotients by the various congruence subgroups, we need to precisely understand these failings.
+However, there are two caveats with these definitions: first $\iota_{\aa} : \Gamma(\cQ, 1) \to \GL_2(\cO_F / \aa)$ may not be surjective even when $\cO_F^\times \to (\cO_F / \aa)^{\times}$ is surjective because of the restriction that elements of the source live in $B^+$. Second, $\iota_{\infty}$ does not give a \textit{faithful} action of $\Gamma(\cQ, 1)$ on $\frH$; the action factors through $\GL_2^+(\RR) \to \PGL_2^+(\RR)$. In order to understand the relationship between quotients by the various congruence subgroups, we need to precisely understand these failings.
 \par
 For any $\Gamma \subset \Gamma(\cQ, 1)$ denote by $\mathrm{P} \Gamma$ the quotient
 \[ \mathrm{P} \Gamma := \frac{\Gamma}{\cO_F^\times \cap \Gamma} = \frac{\cO_F^{\times} \cdot \Gamma}{\cO_F^{\times}} \]
-where $\cO_F^\times \embed \Gamma(\cQ, 1)$ are the scalar matrices. Since $\cQ^{\Nm = 1} \subset \Gamma(\cQ, 1)$ generates $\SL_2(\cO_{\p}) \subset \GL_2(\cO_{\p})$ it is clear that $\im{\iota_{\frJ}}$ contains $\SL_2(\cO_F / \frJ)$. Let
-\[ \Gamma^1(\cQ, \frJ) := \Gamma(\cQ, \frJ)^{\Nm = 1} = \{ \gamma \in \cQ^{\Nm = 1} \mid \gamma - 1 \in \frJ \cQ \} \]
-be the subgroup consisting of elements of $\Gamma(\cQ, \frJ)$ with reduced norm $1$. This is the kernel of $\iota_{\frJ}$ restricted to $\Gamma^1(\cQ, 1) := \cQ^{\Nm = 1}$.
+where $\cO_F^\times \embed \Gamma(\cQ, 1)$ are the scalar matrices. Let
+\[ \Gamma^1(\cQ, \aa) := \Gamma(\cQ, \aa)^{\Nm = 1} = \{ \gamma \in \cQ^{\Nm = 1} \mid \gamma - 1 \in \aa \cQ \} \]
+be the subgroup consisting of elements of $\Gamma(\cQ, \aa)$ with reduced norm $1$. This is the kernel of $\iota_{\aa}$ restricted to $\Gamma^1(\cQ, 1) := \cQ^{\Nm = 1}$.
 We get a diagram of exact sequences:
 \begin{center}
-    \begin{tikzcd}
+    \begin{tikzcd}[column sep = small]
         & 0 \arrow[d] & 0 \arrow[d] & 0 \arrow[d] & 0 \arrow[d]
         \\
-        0 \arrow[r] & L \arrow[d, hook] \arrow[r] & \Gamma^1(\cQ, \frJ) \arrow[d, hook] \arrow[r] & \mathrm{P} \Gamma(\cQ, \frJ) \arrow[r, "\Nm"] \arrow[d, hook] & U_{\p}^+ / U_\p^2\arrow[d, hook] &
+        0 \arrow[r] & L \arrow[d, hook] \arrow[r] & \Gamma^1(\cQ, \aa) \arrow[d, hook] \arrow[r] & \mathrm{P} \Gamma(\cQ, \aa) \arrow[r, "\Nm"] \arrow[d, hook] & U_{\aa}^+ / U_{\aa}^2\arrow[d, hook] &
         \\
-        0 \arrow[r] & \{ \pm 1 \} \arrow[r] \arrow[d] & \Gamma^1(\cQ, 1) \arrow[r] \arrow[d, "\iota_{\frJ}"] & \mathrm{P} \Gamma(\cQ, 1) \arrow[r, "\Nm"] \arrow[d] & (\cO_F^\times)^+ / (\cO_F^{\times})^2 \arrow[d]
+        0 \arrow[r] & \{ \pm 1 \} \arrow[r] \arrow[d] & \Gamma^1(\cQ, 1) \arrow[r] \arrow[d, "\iota_{\aa}"] & \mathrm{P} \Gamma(\cQ, 1) \arrow[r, "\Nm"] \arrow[d] & (\cO_F^\times)^+ / (\cO_F^{\times})^2 \arrow[d]
         \\
-        0 \arrow[r] & \mu_2 \arrow[r] & \SL_2(\cO_F / \frJ) \arrow[r] & \PGL_2(\cO_F / \frJ) \arrow[r, "\det"] & (\cO_F / \frJ)^\times / (\cO_F / \frJ)^{\times 2} \arrow[r] & 0
+        0 \arrow[r] & \mu_2  \arrow[d] \arrow[r] & \SL_2(\cO_F / \aa)  \arrow[d] \arrow[r] & \PGL_2(\cO_F / \aa) \arrow[r, "\det"] & \frac{(\cO_F / \aa)^\times}{(\cO_F / \aa)^{\times 2}} \arrow[r] & 0
+        \\
+        & 0 & 0
     \end{tikzcd}
 \end{center}
-where $U_{\p} \subset \cO^\times_F$ is the group of $u \in \cO_F^{\times}$ such that $u \equiv 1 \mod \p$ and $L$ is $\{ \pm 1 \}$ if $2 \in \p$ and trivial otherwise. Therefore, when $(\cO_F^\times)^+ = (\cO_F^\times)^2$, for example, when the narrow class number of $F$ equals its class number, then the diagram shows that
-\[ \Gamma^1(\cQ, \frJ) / L = \mathrm{P} \Gamma(\cQ, \frJ) \text{ and } \Gamma^1(\cQ, 1) / \{ \pm 1 \} = \mathrm{P} \Gamma(\cQ, 1) \text{ and } \im{\iota_{\frJ}} = \PSL_2(\cO_F / \frJ). \]
-Therefore, in this case, $\X(\cQ, \frJ) \to \X(\cQ, 1)$ is a $\PSL_2(\cO_F / \frJ)$-cover. It has intermediate covers
-\[ \X(\cQ, \frJ) \to \X_1(\cQ, \frJ) \to \X_0(\cQ, \frJ) \to \X(\cQ, 1) \]
-which are quotients of $\X(\cQ, \frJ)$ by the Borel and its unipotent radical respectively.
+where $U_{\aa} \subset \cO^\times_F$ is the group of $u \in \cO_F^{\times}$ such that $u \equiv 1 \mod \aa$ and $L$ is $\{ \pm 1 \}$ if $2 \in \aa$ and trivial otherwise. Therefore, when $(\cO_F^\times)^+ = (\cO_F^\times)^2$, for example, when the narrow class number of $F$ equals its class number, then the diagram shows that:
+\[ \Gamma^1(\cQ, \aa) / L = \mathrm{P} \Gamma(\cQ, \aa) \text{ and } \Gamma^1(\cQ, 1) / \{ \pm 1 \} = \mathrm{P} \Gamma(\cQ, 1) \text{ and } \im{\iota_{\aa}} = \PSL_2(\cO_F / \aa). \]
+Therefore, in this case, $\X(\cQ, \aa) \to \X(\cQ, 1)$ is a $\PSL_2(\cO_F / \aa)$-cover. It has intermediate covers
+\[ \X(\cQ, \aa) \to \X_1(\cQ, \aa) \to \X_0(\cQ, \aa) \to \X(\cQ, 1) \]
+which are quotients of $\X(\cQ, \aa)$ by the Borel and its unipotent radical respectively.
 
-Let $H \subset \GL_2(\cO_{\p})$ be an open subgroup for a prime $\p$ at which $B$ is split. The \textit{level} of $H$ is the smallest $\ell$ such that $H$ is the preimage of a subgroup $\ol{H} \subset \GL_2(\cO_F / \p^{\ell})$. Then we can define the Shimura curve $\X_H(\cQ)$ with $H$-level structure as the quotient of $\X(\cQ, \p^{\ell})$ by the subgroup $\Gamma_H(\cQ) := \Gamma(\cQ, 1) \cap H = \iota_{\p^{\ell}}^{-1}(\ol{H})$. By Lemma~\ref{lem:automorphisms_defined_over_reflex}, $\X_H(\cQ)$ also has a canonical model over $F^{(\frJ \infty)}$.
+Let $H \subset \GL_2(\cO_{\p})$ be an open subgroup for a prime $\p$ at which $B$ is split. The \textit{level} of $H$ is the smallest $\ell$ such that $H$ is the preimage of a subgroup $\ol{H} \subset \GL_2(\cO_F / \p^{\ell})$. Then we can define the Shimura curve $\X_H(\cQ)$ with $H$-level structure as the quotient of $\X(\cQ, \p^{\ell})$ by the subgroup $\Gamma_H(\cQ) := \Gamma(\cQ, 1) \cap H = \iota_{\p^{\ell}}^{-1}(\ol{H})$. By Lemma~\ref{lem:automorphisms_defined_over_reflex}, $\X_H(\cQ)$ also has a canonical model over $F^{(\aa \infty)}$.
 
-\subsection{Certain Hurwitz curves as Shimura curves}
+\subsection{Certain Hurwitz curves as Shimura curves} \label{sec:shimura_as_hurwitz}
 
 Much of the favorable arithmetic of the genus 14 Hurwitz curves is due to their realization as Shimura curves for a particular quaternion algebra $B$ over $K_+ = \Q(\eta)$ where $\eta = \zeta_7 + \zeta_7^{-1} = 2 \cos{\tfrac{2\pi}{7}}$. The exposition here closely follows \S3.19 of \cite{shimura:curves} and Elkies' article \cite[\S4.4]{elkies:klein_quartic}. Choose as $B$ the following quaternion algebra:
 \[ B = \left( \frac{\eta, \eta}{F} \right) := \frac{K_+ \langle i, j \rangle}{(i^2 - \eta, j^2 - \eta, ij + ji)}. \]
 This is the unique quaternion algebra over $K_+$ that is non-split exactly over the two real places of $K_+$ where $\eta$ embeds negatively and split over all non-archimedean places. Let $v_{\infty} : K_+ \embed \RR$ denote the obvious real embedding sending $\eta \mapsto 2 \cos{\tfrac{2\pi}{7}}$ which splits $B$. We can thus fix an embedding $\iota_{\infty} : B \embed M_2(\RR)$ compatible with $v_{\infty}$ arising from a choice of isomorphism $B \ot_{K_+, v_{\infty}} \RR \iso M_2(\RR)$. We apply Shimura's construction from the previous section to this quaternion algebra. Define the following maximal order:
 \[ \cQ_{\mathrm{Hur}} = \cO_{K_+}[i,j,j'] \subset B \]
-where $j' := \tfrac{1}{2}(1 + \eta i + \tau j)$ and $\tau := 1 + \eta + \eta^2$. Since $K_+$ has narrow class number $1$, the previous section shows $\Gamma(\cQ,1) \onto \PSL_2(\cO_{K_+} / \frJ) \subset \PGL_2(\cO_{K_+} / \frJ)$.
+where $j' := \tfrac{1}{2}(1 + \eta i + \tau j)$ and $\tau := 1 + \eta + \eta^2$. Since $K_+$ has narrow class number $1$, the previous section shows $\Gamma(\cQ,1) \onto \PSL_2(\cO_{K_+} / \aa) \subset \PGL_2(\cO_{K_+} / \aa)$.
 \par
 Miraculously,
-\[ \mathrm{P} \Gamma(\cQ_{\Hur}, 1) = (\cQ_{\Hur})^{\Nm = 1} / \{ \pm 1 \} \cong \TT(2,3,7) = \left< g_1, g_2, g_3 \mid g_1^2, g_2^3, g_3^7, g_1 g_2 g_3 \right> \]
-recovers the Hurwitz triangle group. Therefore, any finite-index normal subgroup $\Gamma \subset \Gamma(\cQ_{\Hur}, 1)$ without elliptic elements produces a cover $\X_{\Gamma} \to \X(\cQ_{\Hur},1) \cong \P^1$ ramified at exactly three points with orders $2,3,7$ and hence a Hurwitz curve with automorphism group $\rmP \Gamma(\cQ_{\Hur},1) / \rmP \Gamma$. % REVIEW: This sentence has a grammatical issue -- "any Hurwitz curve is uniformized ... is conjugate" lacks a main verb connecting the two clauses. Consider restructuring.
-Conversely, any Hurwitz curve uniformized by $\frH$ with deck transformation group $\Gamma \subset \SL_2(\RR)$ (i.e., $\Gamma$ is a Fuchsian subgroup so that $\frH / \Gamma$ has $84(g-1)$ automorphisms) is conjugate in $\SL_2(\RR)$ to a normal subgroup of $\Gamma(\cQ_{\Hur}, 1)$ modulo the center.
+\[ \mathrm{P} \Gamma(\cQ_{\Hur}, 1) = (\cQ_{\Hur})^{\Nm = 1} / \{ \pm 1 \} \cong \Delta(2,3,7) = \left< g_1, g_2, g_3 \mid g_1^2, g_2^3, g_3^7, g_1 g_2 g_3 \right> \]
+recovers the Hurwitz triangle group. Therefore, any finite-index normal subgroup $\Gamma \subset \Gamma(\cQ_{\Hur}, 1)$ without elliptic elements produces a cover $\X_{\Gamma} \to \X(\cQ_{\Hur},1) \cong \P^1$ ramified at exactly three points with orders $2,3,7$ and hence a Hurwitz curve with automorphism group $\rmP \Gamma(\cQ_{\Hur},1) / \rmP \Gamma$. Conversely, any Hurwitz curve uniformized by $\frH$ with deck transformation group $\Gamma \subset \SL_2(\RR)$ (i.e., $\Gamma$ is a Fuchsian subgroup so that $\frH / \Gamma$ has $84(g-1)$ automorphisms) is conjugate in $\SL_2(\RR)$ to a normal subgroup of $\Gamma(\cQ_{\Hur}, 1)$ modulo the center.
 \par
-% REVIEW: "$\cQ_{\Hur}/\p \cong \SL_2(\kappa_\p)$" -- should this be $\cQ_{\Hur}/\p\cQ_{\Hur} \cong M_2(\kappa_\p)$ (as a matrix algebra), with the group statement being $\Gamma^1(\cQ_{\Hur},1) \onto \SL_2(\kappa_\p)$?
-Because $B$ is non-split only at $\infty$ we know that $\cQ_{\Hur} / \p\cQ_{\Hur} \cong M_2(\kappa_{\p})$ for all primes $\p \subset \cO_{K_+}$. Therefore, % REVIEW: Should $\X(\cO, \p)$ be $\X(\cQ_{\Hur}, \p)$ to match the notation?
-the Shimura curves $\X(\cQ_{\Hur}, \p)$ are Hurwitz curves with automorphism groups $\PSL_2(\kappa_{\p})$. By Theorem~\ref{thm:canonical_models}, this curve is defined over the ray class field $K_+^{(\p \infty)}$. For any prime $\p_{13}$ lying over $13$ this field $(K_+)^{(\p_{13} \infty)}$ is isomorphic to the field $K$ described in the main text (\cite[\href{https://www.lmfdb.org/NumberField/6.2.31213.1}{Number field 6.2.31213.1}]{lmfdb}). In fact, when $p$ is inert ($p \equiv \pm 2, \pm 3 \mod 7$) or ramified ($p = 7$) in $K_+$, the curves $\X^{\Hur}(\p)$ for the unique prime $\p$ over $p$ are defined over $\Q$ and when $p$ splits ($p \equiv \pm 1 \mod 7$) in $K_+$ the three curves $\X^{\Hur}(\p)$ for $\p \mid p$ are defined over $K_+$ and arise from the three embeddings $K_+ \embed \CC$ by \cite[Theorem~B]{voight:triangle_groups}
-(cf. \cite[Proposition~5.1.2]{voight:thesis}). From now on, we make the abbreviation $\X^{\Hur}(\frJ) := \X(\cQ_{\Hur}, \frJ)$.
+Because $B$ is non-split only at $\infty$ we know that $\cQ_{\Hur} / \p\cQ_{\Hur} \cong M_2(\kappa_{\p})$ for all primes $\p \subset \cO_{K_+}$. Therefore, 
+the Shimura curves $\X(\cQ_{\Hur}, \p)$ are Hurwitz curves with automorphism groups $\PSL_2(\kappa_{\p})$. By Theorem~\ref{thm:canonical_models}, this curve is defined over the ray class field $K_+^{(\p \infty)}$. For any prime $\p_{13}$ lying over $13$ this field $(K_+)^{(\p_{13} \infty)}$ is isomorphic to the field $K$ described in the main text (\cite{lmfdb:nf-6.2.31213.1}). In fact, when $p$ is inert ($p \equiv \pm 2, \pm 3 \mod 7$) or ramified ($p = 7$) in $K_+$, the curves $\X^{\Hur}(\p)$ for the unique prime $\p$ over $p$ are defined over $\Q$ and when $p$ splits ($p \equiv \pm 1 \mod 7$) in $K_+$ the three curves $\X^{\Hur}(\p)$ for $\p \mid p$ are defined over $K_+$ and arise from the three embeddings $K_+ \embed \CC$ by \cite[Theorem~B]{voight:triangle_groups}
+(cf. \cite[Proposition~5.1.2]{voight:thesis}). From now on, we make the abbreviation $\X^{\Hur}(\aa) := \X(\cQ_{\Hur}, \aa)$.
 
 \begin{figure}
 \begin{center}
@@ -177,7 +206,7 @@ the Shimura curves $\X(\cQ_{\Hur}, \p)$ are Hurwitz curves with automorphism gro
          29 & $\p_{29}$ & 3 & 146 & $\PSL_2(\FF_{29})$
     \end{tabular}
 \end{center}
-\caption{Prime ideals of $\cO_F$ ordered by norm. Here $m$ is the number of Galois conjugate prime ideals which all give distinct Hurwitz curves (see \cite[3.19.2]{shimura:curves}) each having genus $g$ and automorphism group $G$.}
+\caption{Prime ideals of $\cO_{K_+}$ ordered by norm. Here $m$ is the number of Galois conjugate prime ideals which all give distinct Hurwitz curves (see \cite[3.19.2]{shimura:curves}) each having genus $g$ and automorphism group $G$.}
 \end{figure}
 
 \begin{theorem}
@@ -185,38 +214,32 @@ All three Hurwitz curves of genus $14$ occur as $\X^{\Hur}(\p_{13})$ for the thr
 \end{theorem}
 
 \begin{proof}
-As tabulated in \cite[\href{https://www.lmfdb.org/HigherGenus/C/Aut/14.1092-25.0.2-3-7}{Higher Genus Family: 14.1092-25.0.2-3-7}]{lmfdb}, there are exactly three isomorphism classes of curves over $\CC$ of genus $14$ with automorphism group $\PSL_2(\FF_{13})$ and no other Hurwitz groups with order $1092$ exist. Furthermore, by \cite[3.19.2]{shimura:curves}, no two $\X^{\Hur}(\p_{13})$ are isomorphic over $\CC$ (base changed along the fixed embedding $K_+ \embed \RR$) for different choices of the prime $\p_{13}$ over $p$. Therefore, all three isomorphism classes of Hurwitz curves over $\CC$ appear.
+As tabulated in \cite{lmfdb:hgcwa-14.1092-25.0.2-3-7}, there are exactly three isomorphism classes of curves over $\CC$ of genus $14$ with automorphism group $\PSL_2(\FF_{13})$ and no other Hurwitz groups with order $1092$ exist. Furthermore, by \cite[3.19.2]{shimura:curves}, no two $\X^{\Hur}(\p_{13})$ are isomorphic over $\CC$ (base changed along the fixed embedding $K_+ \embed \RR$) for different choices of the prime $\p_{13}$ over $p$. Therefore, all three isomorphism classes of Hurwitz curves over $\CC$ appear.
 \end{proof}
 
 \begin{rmk}
-Transitivity of the Galois action also follows from \cite[Theorem B (b)]{voight:triangle_groups} where it is shown that the $K_+$ is the field of moduli for $\PSL_2(\FF_{13})$-Galois $(2,3,7)$ \Belyi maps forgetting the isomorphism $\PSL_2(\FF_{13}) \iso \Aut(C)$. Note: given a Hurwitz curve, its $(2,3,7)$ \Belyi map is unique and canonically determined as the group scheme quotient $C \to C / \Aut(C)$.
+Transitivity of the Galois action also follows from \cite[Theorem B (b)]{voight:triangle_groups} where it is shown that $K_+$ is the field of moduli for $\PSL_2(\FF_{13})$-Galois $(2,3,7)$ \Belyi maps forgetting the isomorphism $\PSL_2(\FF_{13}) \iso \Aut(C)$. Note: given a Hurwitz curve, its $(2,3,7)$ \Belyi map is unique and canonically determined as the group scheme quotient $C \to C / \Aut(C)$.
 \end{rmk}
 
 
 \begin{theorem} \label{app:thm:isogeny_decomp_defined_over_K}
-Let $\X^{\Hur}(\p_{13})$ be a genus $14$ Hurwitz curve. Then there is an elliptic curve $E$ defined over $K = (K_+)^{(\p_{13}\infty)}$ such that $\Jac(\X(\p_{13}))$ is isogenous to $E^{14}$ over $K$.
+Let $\X^{\Hur}(\p_{13})$ be a genus $14$ Hurwitz curve. Then there is an elliptic curve $E$ defined over $K = (K_+)^{(\p_{13}\infty)}$ such that $\Jac(\X^{\Hur}(\p_{13}))$ is isogenous to $E^{14}$ over $K$.
 \end{theorem}
 
 \begin{proof}
-Let $C = \X^{\Hur}(\p_{13})$. Computing fixed points and comparing to genera of curves in the quotient lattice, we determine $H^1(C(\CC), \Q)$ as a $G$-representation to be $V_{14} \oplus V_{14}$ where $V_{14}$ is the $14$-dimensional irreducible $\Q$-representation of $G$ corresponding to the character \cite[\href{https://beta.lmfdb.org/Groups/Abstract/Qchar_table/1092.25?char_highlight=1092.25.14b}{1092.25.14b}]{lmfdb}. Moreover, the action of $\Q[G]$ on $V_{14}$ gives a surjection $\Q[G] \onto M_{14}(\Q)$ through which $\Q[G] \acts H^1(C(\CC), \Q)$ factors. Since $G \acts C$ is defined over $K$, the group algebra $\Q[G]$ acts by $K$-isogenies on $\Jac(C)$ so the idempotents in $M_{14}(\Q)$ give an isogeny decomposition
+Let $C = \X^{\Hur}(\p_{13})$. Computing fixed points and comparing to genera of curves in the quotient lattice, we determine $H^1(C(\CC), \Q)$ as a $G$-representation to be $V_{14} \oplus V_{14}$ where $V_{14}$ is the $14$-dimensional irreducible $\Q$-representation of $G$ corresponding to the character \cite{lmfdb:grp-1092.25.14b}. Moreover, the action of $\Q[G]$ on $V_{14}$ gives a surjection $\Q[G] \onto M_{14}(\Q)$ through which $\Q[G] \acts H^1(C(\CC), \Q)$ factors. Since $G \acts C$ is defined over $K$, the group algebra $\Q[G]$ acts by $K$-isogenies on $\Jac(C)$ so the idempotents in $M_{14}(\Q)$ give an isogeny decomposition
 \[ \Jac(C) \sim E^{14} \]
 defined over $K$.
 \end{proof}
 
-% REVIEW: Should "primes of $K_+$" be "primes of $K$"? The curve and the elliptic curve $E$ are defined over $K = (K_+)^{(\p_{13}\infty)}$, not $K_+$.
 \begin{cor} \label{app:cor:supersingular_reduction}
-$\X^{\Hur}(\p_{13})$ has supersingular reduction at infinitely many primes of $K$.
+$\X^{\Hur}(\p_{13})$ has supersingular reduction at infinitely many primes of $K_+$.
 \end{cor}
 
 \begin{proof}
-Since $K$ has a real place, $E$ has infinitely many primes of supersingular reduction by \cite{elkies:supersingular}. Therefore, for infinitely many primes $\p \subset \cO_{K_+}$ there is a prime $\mathfrak{P} \subset \cO_{K}$ over $\p$ such that $E_{\mathfrak{P}}$ is supersingular. Therefore, whenever $C$ and $E$ have good reduction, we conclude that $C_{\mathfrak{P}}$ is supersingular since supersingularity is a  property of the Tate module of $\Jac(C)_{\mathfrak{P}}$ which is isomorphic to the Tate module of $E_{\mathfrak{P}}^{14}$. However, supersingularity is a geometric property, so $C_{\p}$ is supersingular as well.
+Since $K$ has a real place, $E$ has infinitely many primes of supersingular reduction by \cite{elkies:supersingular}. Therefore, for infinitely many primes $\p \subset \cO_{K_+}$ there is a prime $\mathfrak{P} \subset \cO_{K}$ over $\p$ such that $E_{\mathfrak{P}}$ is supersingular. Therefore, whenever $C$ and $E$ have good reduction, we conclude that $C_{\mathfrak{P}}$ is supersingular since supersingularity is a property of the Tate module of $\Jac(C)_{\mathfrak{P}}$ which is isomorphic to the Tate module of $E_{\mathfrak{P}}^{14}$. However, supersingularity is a geometric property, so $C_{\p}$ is supersingular as well.
 \end{proof}
 
-\section{Explicit computations in genera $3$ and $7$} \label{sec:genus3_7} \label{section:models}
-
-(MODELS OF THE KLEIN QUARTIC)
-
-{\color{red} TODO}
 
 \section{Arithmetic of the first Hurwitz triplet}
 
@@ -235,19 +258,19 @@ a & b
 c & d
 \end{pmatrix} \in \GL_2(\RR) \]
 and $\tau \in \frH$ define the \textit{factor of automorphy}
-\[ j(\gamma, \tau) := c \tau + d \in \CC \]
+\[ j(\gamma, \tau) := (c \tau + d) \cdot (\det{\nu_i(\gamma)})^{-1/2} \in \CC \]
 For a \textit{weight} vector $k = (k_1, \dots, k_n) \in (\Z^+)^r$, we define a right \textit{weight-k action} of $\Gamma(\cQ, 1)$ on functions $f : \frH^r \to \CC$ via
-\[ (f|_k \gamma)(\tau) := f(\gamma \cdot \tau) \prod_{i = 1}^r (\det{\nu_i(\gamma)})^{k_i/2} j(\nu_i(\gamma), \tau_i)^{-k_i} \]
+\[ (f|_k \gamma)(\tau) := f(\gamma \cdot \tau) \prod_{i = 1}^r j(\nu_i(\gamma), \tau_i)^{-k_i} \]
 For $\Gamma \subset \Gamma(\cQ, 1)$ the space $M_k^B(\Gamma)$ of \textit{weight-k modular forms at level} $\Gamma$ is the $\CC$-vector space of holomorphic functions $f : \frH^r \to \CC$ invariant under the weight-$k$ action of $\Gamma$ and bounded at the cusps. The space $S_k^B(\Gamma)$ of \textit{weight-k cusp forms at level} $\Gamma$ is the subspace of functions vanishing at the cusps of $\frH^r / \Gamma$.
 \end{defn}
 
-In the case $B = M_2(F)$, $\cQ = M_2(\cO_F)$, and  $r = g$, we recover the spaces of Hilbert modular forms for the totally real field $F$. In that example, we drop the quaternion algebra ``$B$'' from the notation. We focus on the case $\Gamma = \Gamma_0(\cQ, \frJ)$ because these spaces have been computed in \cite{lmfdb} for small level. Write $S_k^B(\frJ) := S_k^B(\Gamma_0(\cQ, \frJ))$ and ditto for $M_k^B(\frJ)$. Parallel to the usual story, there is a Hecke algebra action on $S_k(\Gamma)$ now with Hecke operators $T_{\p}$ indexed by prime ideals $\p \subset \cO_F$. In the case when $B$ is non-split over $F$ it turns out there are no cusps (the corresponding subgroup is cocompact) so the condition at cusps is vacuous. In this case we say $S_k^B(\frJ) = M_k^B(\frJ)$ is the space of \textit{quaternionic cusp forms}.
+In the case $B = M_2(F)$, $\cQ = M_2(\cO_F)$, and  $r = g$, we recover the spaces of Hilbert modular forms for the totally real field $F$. In that example, we drop the quaternion algebra ``$B$'' from the notation. We focus on the case $\Gamma = \Gamma_0(\cQ, \aa)$ because these spaces have been computed in \cite{lmfdb} for small level. Write $S_k^B(\aa) := S_k^B(\Gamma_0(\cQ, \aa))$ and ditto for $M_k^B(\aa)$. Parallel to the usual story, there is a Hecke algebra action on $S_k(\Gamma)$ now with Hecke operators $T_{\p}$ indexed by prime ideals $\p \subset \cO_F$. In the case when $B$ is non-split over $F$ it turns out there are no cusps (the corresponding subgroup is cocompact) so the condition at cusps is vacuous. In this case we say $S_k^B(\aa) = M_k^B(\aa)$ is the space of \textit{quaternionic cusp forms}.
 \par
 The case of parallel weight $2$, meaning $k = (2,\dots,2)$, is particularly important because such cusp forms define holomorphic symmetric $r$-forms on the Shimura variety $\frH^r / \Gamma$ (really the associated analytic quotient stack). In the case $r = 1$, this induces the \textit{Eichler--Shimura isomorphism}
-\[ S_2^B(\frJ) \oplus \ol{S_2^B(\frJ)} \iso H^1(\X_0(\frJ), \CC). \]
-Let $\TT_0(\frJ)$ be the quotient of the Hecke algebra acting faithfully on $S_2^B(\frJ)$. Then $H^1(\X_0(\frJ), \CC)$ becomes a free $\TT_0(\frJ)_{\CC}$-module of rank $2$. A Galois orbit of \textit{eigenforms} $f \in S_2^B(\frJ)$ for the Hecke operators is equivalent to an evaluation map $\ev_f : S_2^B(\frJ) \onto K_f$ sending $T_{\p} \mapsto a_{\p}(f)$ where $a_{\p}(f)$ is the eigenvalue of $T_{\p} f = a_{\p}(f) f$ and $K_f$ is the trace field generated by the $a_{\p}(f)$. The kernel defines a prime $\p_f = \ker{\ev_f}$ of the Hecke algebra. Since $\TT_0(\frJ)$ acts by correspondences, it acts on $\Jac(\X_0(\frJ))$ by isogenies so there is a quotient $A_f$ by $\p_f$ well-defined up to isogeny. Here $A_f$ is an abelian variety of dimension $[K_f : \Q]$ defined over $F$ \cite{zhang:heegner_points}. By above, its Tate module $V_{\ell}(A_f)$ is a $\Q_{\ell} \ot_{\Q} K_f$-module (whose action commutes with the Galois action) of rank $2$. The \textit{Eichler--Shimura relation} then says that for the Galois representation
+\[ S_2^B(\aa) \oplus \ol{S_2^B(\aa)} \iso H^1(\X_0(\aa), \CC). \]
+Let $\TT_0(\aa)$ be the quotient of the Hecke algebra acting faithfully on $S_2^B(\aa)$. Then $H^1(\X_0(\aa), \CC)$ becomes a free $\TT_0(\aa)_{\CC}$-module of rank $2$. A Galois orbit of \textit{eigenforms} $f \in S_2^B(\aa)$ for the Hecke operators is equivalent to an evaluation map $\ev_f : S_2^B(\aa) \onto K_f$ sending $T_{\p} \mapsto a_{\p}(f)$ where $a_{\p}(f)$ is the eigenvalue of $T_{\p} f = a_{\p}(f) f$ and $K_f$ is the trace field generated by the $a_{\p}(f)$. The kernel defines a prime $\p_f = \ker{\ev_f}$ of the Hecke algebra. Since $\TT_0(\aa)$ acts by correspondences, it acts on $\Jac(\X_0(\aa))$ by isogenies so there is a quotient $A_f$ by $\p_f$ well-defined up to isogeny. Here $A_f$ is an abelian variety of dimension $[K_f : \Q]$ defined over $F$ \cite{zhang:heegner_points}. By above, its Tate module $V_{\ell}(A_f)$ is a $\Q_{\ell} \ot_{\Q} K_f$-module (whose action commutes with the Galois action) of rank $2$. The \textit{Eichler--Shimura relation} then says that for the Galois representation
 \[ \rho_{A_f, \ell} : \Gal(\ol{F}/F) \to \GL_2(\Q_{\ell} \ot_{\Q} K_f) \]
-and any prime $\p \subset \cO_F$ with $\p \nmid \ell \frJ$, the characteristic polynomial of $\rho_{A_f, \ell}(\Frob_{\p})$ is
+and any prime $\p \subset \cO_F$ with $\p \nmid \ell \aa$, the characteristic polynomial of $\rho_{A_f, \ell}(\Frob_{\p})$ is
 \[ T^2 - a_{\p}(f) \, T + N(\p) \]
 viewed as a polynomial over $\Q_{\ell} \ot_{\Q} K_f$ \cite[\S10.3]{carayol:representations}.
 \par
@@ -258,12 +281,12 @@ This construction of A_f is the ``Eichler--Shimura construction'' described for 
 \end{comment}
 
 \begin{theorem}[Eichler--Shimizu--Jacquet--Langlands correspondence] \label{thm:jacquet_langlands}
-Let $\frD \subset \cO_F$ be the discriminant of $B$ and $\frJ \subset \cO_F$ an ideal coprime to $\frD$. Then there is a Hecke module embedding
-\[ S_2^B(\frJ) \embed S_2(\frD \frJ) \]
+Let $\frD \subset \cO_F$ be the discriminant of $B$ and $\aa \subset \cO_F$ an ideal coprime to $\frD$. Then there is a Hecke module embedding
+\[ S_2^B(\aa) \embed S_2(\frD \aa) \]
 whose image consists of Hilbert cusp forms which are new at all $\p \mid \frD$.
 \end{theorem}
 
-See \cite[Proposition~2.12]{hida:abelian_varieties} (cf.\ \cite[Theorem~2.9]{Voight:computing_hecke} and \cite[Theorem~3.9]{Voight:explicit_methods}). In particular, when $\frD = (1)$, Theorem~\ref{thm:jacquet_langlands} yields an isomorphism $S_2^B(\frJ) \cong S_2(\frJ)$ as Hecke modules.
+See \cite[Proposition~2.12]{hida:abelian_varieties} (cf.\ \cite[Theorem~2.9]{Voight:computing_hecke} and \cite[Theorem~3.9]{Voight:explicit_methods}). In particular, when $\frD = (1)$, Theorem~\ref{thm:jacquet_langlands} yields an isomorphism $S_2^B(\aa) \cong S_2(\aa)$ as Hecke modules.
 
 \subsection{Conjugation isomorphisms between Shimura curves}
 
@@ -307,16 +330,16 @@ a & b
 \right \} \]
 This conjugation action on subgroups induces nontrivial isomorphisms between Shimura curves at different levels. To prove this, we need an important result of Eichler.
 
-\begin{lemma}[Eichler Approximation] \cite[Lemma~2.15]{shimura:curves}
+\begin{lemma}[Eichler Approximation] \cite[Lemma~2.15]{shimura:curves} \label{lem:eicher_approximation}
 Let $\cQ \subset B$ be a maximal order in a quaternion algebra over $F$ and $\mathfrak{I} \subset \cQ$ a two-sided ideal. Let $\beta \in \cO_F$ and $\gamma \in \cQ$ such that $\beta$ is positive at the non-split non-archimedean places of $B$ and $\Nm(\gamma) \equiv \beta \mod (\mathfrak{I} \cap \cO_F)$. Then there exists $\gamma' \in \cQ$ such that $\gamma' \equiv \gamma \mod \mathfrak{I}$ and $\Nm(\gamma') = \beta$.
 \end{lemma}
 
 \begin{prop} \label{prop:conjugation_isomorphism}
-Let $H \subset \GL_2(\cO_{\p})$ be an open subgroup for a prime $\p$ at which $B$ is split contained in the preimage of the upper Borel of $\GL_2(\kappa_{\p})$. Then the Shimura curves $\X_H(\cQ)$ and $\X_{H^{\varpi}}(\cQ)$ are isomorphic as curves over $F^{(\frJ \infty)}$.
+Let $H \subset \GL_2(\cO_{\p})$ be an open subgroup for a prime $\p$ at which $B$ is split contained in the preimage of the upper Borel of $\GL_2(\kappa_{\p})$. Then the Shimura curves $\X_H(\cQ)$ and $\X_{H^{\varpi}}(\cQ)$ are isomorphic as curves over $F^{(\aa \infty)}$.
 \end{prop}
 
 \begin{proof}
-We need to show that there is an automorphism of $\frH$ taking the action of $\Gamma_H(\cQ)$ to $\Gamma_{H^{\varpi}}(\cQ)$. A natural candidate is $\nu_1(\varpi)$ but it is not clear that this element actually does the job since conjugation by it may not preserve $B$. Instead, we will $\pi$-adically approximate $\varpi$ by an element of $\cQ$. Using the isomorphism $\iota_{\frJ} : \cQ / \p^{\ell} \cQ \iso M_2(\cO_F / \p^{\ell})$ we can find an element $\varpi_{\ell}' \in \cQ$ so that $\varpi_{\ell}' \equiv \varpi \mod \p^{\ell}$. Now we use Eichler's approximation theorem to find $\varpi_{\ell} \in \cQ$ such that $\Nm(\varpi_{\ell}) = \pi$ and $\varpi_{\ell} \equiv \varpi \mod \p^{\ell}$. It is clear that $(-)^{\varpi_{\ell}}$ preserves $B^+$. Since $\pi$ is totally positive, $\iota_{\infty}(\varpi_{\ell})$ acts on $\frH$. Now, if $H$ has level $\p^{\ell}$ then notice
+We need to show that there is an automorphism of $\frH$ taking the action of $\Gamma_H(\cQ)$ to $\Gamma_{H^{\varpi}}(\cQ)$. A natural candidate is $\nu_1(\varpi)$ but it is not clear that this element actually does the job since conjugation by it may not preserve $B$. Instead, we will $\pi$-adically approximate $\varpi$ by an element of $\cQ$. Using the isomorphism $\iota_{\aa} : \cQ / \p^{\ell} \cQ \iso M_2(\cO_F / \p^{\ell})$ we can find an element $\varpi_{\ell}' \in \cQ$ so that $\varpi_{\ell}' \equiv \varpi \mod \p^{\ell}$. Now we use Eichler's approximation theorem to find $\varpi_{\ell} \in \cQ$ such that $\Nm(\varpi_{\ell}) = \pi$ and $\varpi_{\ell} \equiv \varpi \mod \p^{\ell}$. It is clear that $(-)^{\varpi_{\ell}}$ preserves $B^+$. Since $\pi$ is totally positive, $\iota_{\infty}(\varpi_{\ell})$ acts on $\frH$. Now, if $H$ has level $\p^{\ell}$ then notice
 \[ H^{\varpi} = H^{\varpi_{\ell}} \]
 because $\varpi_{\ell} \gamma \varpi^{-1}_{\ell} \equiv \varpi \gamma \varpi^{-1} \mod \p^{\ell}$ and $H$ contains every element which is $1 \mod \p^{\ell}$. Now, $B^+$ is stable under $(-)^{\varpi_{\ell}}$ but $\cQ^{\times}$ is not, so we need to be careful in checking that $(-)^{\varpi_{\ell}}$ takes $\Gamma_H(\cQ)$ to $\Gamma_{H^{\varpi}}(\cQ)$. We do this at each local place using that
 \[ \cQ = \bigcap_{\p' \subset \cO_F} (\cQ_{\p'} \cap B) \]
@@ -326,7 +349,7 @@ with the intersection taking place in $B$. Since $\Nm(\varpi_{\ell}) = \pi$ is a
 For modular curves, Deligne--Rapoport prove that this isomorphism is defined over $\Q$ \cite[Propositions IV-3.16 and IV-3.19]{deligne:schemas_modules}. It is likely that the above isomorphism is defined over the reflex field $F^{(\p \infty)}$ but we will not need this.
 
 \begin{example} \label{example:conjugation_p_squared_level}
-For example, let $\p \subset \cO_F$ be a prime ideal generated by a totally positive element $\pi$ at which $B$ is split. The full congruence subgroup $\Gamma(\cQ, \p)$ is associated to the subgroup $H := \ker{(\GL_2(\cO_{\p}) \to \GL_2(\cO_F / \p)}$ which satisfies
+For example, let $\p \subset \cO_F$ be a prime ideal generated by a totally positive element $\pi$ at which $B$ is split. The full congruence subgroup $\Gamma(\cQ, \p)$ is associated to the subgroup $H := \ker{(\GL_2(\cO_{\p}) \to \GL_2(\cO_F / \p))}$ which satisfies
 \[ H^{\varpi} = \left \{
 \begin{pmatrix}
 d & - c
@@ -378,7 +401,7 @@ is exactly the Borel in $\GL_2(\cO_F/\p^2)$. Therefore, Proposition~\ref{prop:co
 
 Here we compute the $j$-invariant of the elliptic curve $E$ appearing in the isogeny decomposition of $\Jac(\X^{\Hur}(\p_{13}))$. From Figure~\ref{fig:subgroups_genera} we know that $\X_{\mathrm{sp}}^{\Hur}(\p_{13})$, the quotient of $\X^{\Hur}(\p_{13})$ by the maximal torus $C_6$, is a genus $2$ curve. Since $\Jac(\X^{\Hur}(\p_{13})) \sim E^{14}$ over $K$ it suffices to compute $\Jac(\X_1^{\Hur}(\p_{13}))$. The conjugation isomorphism of Example~\ref{example:conjugation_p_squared_level} exhibits $\X_{\mathrm{sp}}^{\Hur}(\p_{13}) \iso \X_0^{\Hur}(\p_{13}^2)$. The Eichler--Shimizu--Jacquet--Langlands correspondence,
 \[ S^B_2(\p_{13}^2) \cong S_2(\p_{13}^2) \]
-expresses the Hecke action on $H^1(\X_0^{\Hur}(\p_{13}^2)_{\CC}, \QQ)$ in terms of Hilbert cusp forms of parallel weight $2$ for level $\Gamma_0(\p_{13}^2)$. Fixing the prime $\p_{13}$ over $13$, the space $S_2(\p_{13}^2)$ consists of a unique Galois orbit $f$ of Hilbert eigenforms \cite[\href{https://www.lmfdb.org/ModularForm/GL2/TotallyReal/3.3.49.1/holomorphic/3.3.49.1-169.4-a}{3.3.49.1-169.4-a}]{lmfdb}. The Hecke trace field is $K_f = \Q(\sqrt{3})$, hence $f$ corresponds to the abelian surface $A_f \cong \Jac(\X_0^{\Hur}(\p_{13}^2))$. We expect an elliptic curve $E$ in the isogeny decomposition over $K$ but the Hecke eigenvalues are not rational so the eigenform cannot correspond to an elliptic curve over $K_+$. Indeed, $K$ is the field of definition of $E$ and there is an isogeny $A_f \iso \Res^{K}_{K_+} E$. To find $E$ we analyze the Galois representation $\rho_{A_f, \ell}$ attached to the Tate module $V_{\ell}(A_f)$. Eichler-Shimura gives
+expresses the Hecke action on $H^1(\X_0^{\Hur}(\p_{13}^2)_{\CC}, \QQ)$ in terms of Hilbert cusp forms of parallel weight $2$ for level $\Gamma_0(\p_{13}^2)$. Fixing the prime $\p_{13}$ over $13$, the space $S_2(\p_{13}^2)$ consists of a unique Galois orbit $f$ of Hilbert eigenforms \cite{lmfdb:hmf-3.3.49.1-169.4-a}. The Hecke trace field is $K_f = \Q(\sqrt{3})$, hence $f$ corresponds to the abelian surface $A_f \cong \Jac(\X_0^{\Hur}(\p_{13}^2))$. We expect an elliptic curve $E$ in the isogeny decomposition over $K$ but the Hecke eigenvalues are not rational so the eigenform cannot correspond to an elliptic curve over $K_+$. Indeed, $K$ is the field of definition of $E$ and there is an isogeny $A_f \iso \Res^{K}_{K_+} E$. To find $E$ we analyze the Galois representation $\rho_{A_f, \ell}$ attached to the Tate module $V_{\ell}(A_f)$. Eichler-Shimura gives
 \[ \tr{\rho_{A_f, \ell}(\Frob_{\p})} = a_{\p}(f) \]
 for $\p \subset \cO_{K_+}$ not dividing $\ell \p_{13}$.
 If $V_{\ell}(A_f)$ splits when restricted to $\Gal(\ol{K} / K)$, we can compute its traces of Frobenius directly. Consider $\frP \subset \cO_{K}$ lying over $\p \subset \cO_{K_+}$. If $\p$ is split or ramified then $\Frob_{\frP}$ and $\Frob_{\p}$ are conjugate in $\Gal(\ol{K_+} / K_+)$, so $\tr{\rho_{A_f, \ell}(\Frob_{\frP})} = a_{\p}(f)$. If $\p$ is inert, then $\Frob_{\frP}$ is conjugate to $\Frob_{\p}^2$ in $\Gal(\ol{K_+} / K_+)$ and therefore, by Cayley--Hamilton,
@@ -390,6 +413,37 @@ As expected, every irrational value of $a_{\p}(f)$ appears for $\p$ inert in $K$
     & + 5634850735711464943 x - 5057260487992776789167.
 \end{align*}
 This elliptic curve has bad reduction exactly at the unique prime of $K$ lying over $\p_{13}$ which is also where $K / K_+$ is ramified. The first few supersingular primes of $E$ have norms $1091, 2339, 6551, 7643, \dots$.
+
+\section{Genus $3$} \label{sec:genus3} \label{section:models}
+
+Let us first consider which Hurwitz curves may be produced via the Shimura construction.
+Since $7$ is ramified in $K_+ = \Q(\cos{\frac{2 \pi}{7}})$, there is a unique prime $\p_7$ over $7$ leading to a Hurwitz curve $\X^{\Hur}(\p_{7})$ of genus $3$. It turns out that, up to isomorphism over $\ol{\Q}$, there is a unique such Hurwitz curve $X_3$. This follows from an elementary search over surjections $\Delta(2,3,7) \onto G$ onto a group of size $84 \cdot (3-1)$ up to isomorphism. Since it is a non-hyperelliptic curve of genus $3$, this Hurwitz curve arises as a plane quartic. Classically known as the Klein quartic, it has the following Klein model over $\Q$:
+\[ C_{\mathrm{Klein}} : \quad x^3 y + y^3 z + z^3 x = 0. \]
+Elkies discusses various $\Q$-models of this curve at length in \cite{elkies:klein_quartic}. Purely from the representation theory of $\Aut(C_{\mathrm{Klein}, \ol{\Q}}) \cong \PSL_2(\FF_7)$ acting on $H^1(C_{\mathrm{Klein}}(\CC), \Q)$, we can conclude that $\Jac(C_{\mathrm{Klein}})_{\ol{\Q}} \sim E_{\Q(\sqrt{-7})}^3$ where $E_{\Q(\sqrt{-7})}$ is an elliptic curve with CM by $\Q(\sqrt{-7})$. However, Elkies gives a more satisfying explanation of the Jacobian of $C_{\mathrm{Klein}}$. He identifies $C_{\mathrm{Klein}}$ with the modular curve $X(7)$ over $\Q$ and therefore determines the Galois structure of
+\[ \Aut(C_{\mathrm{Klein}}) = \Aut(X(7)) = \mathrm{P}\Aut_{\wedge}(\Z / 7 \Z \oplus \mu_7) / \{ \pm \id \}, \]
+where $\Aut^{\wedge}$ denotes automorphisms preserving the standard $\mu_7$-valued symplectic pairing. The quotient by the diagonal maximal torus gives a degree $3$ map $X(7) \to X_0(49)$ producing a surjection $\Jac(X(7)) \to \Jac(X_0(49)) = E_{\Q(\sqrt{-7})}$. Over $\Q(\zeta_7)$ there are additional maps $X(7) \to X_0(49)$ given by quotienting the other maximal tori, giving the isogeny decomposition
+\[ \Jac(X(7))_{\Q(\zeta_7)} \to (E_{\Q(\sqrt{-7})}^3)_{\Q(\zeta_7)}. \]
+There is no $\Q$-model of the Klein quartic with automorphism group defined over $\Q$. However, there is a model with all automorphisms defined over $\Q(\sqrt{-7})$.
+Since $\PSL_2(\FF_7)$ is centerless, the moduli space $\H_{\PSL_2(\FF_7)}$ of pairs $(X, \varphi)$ consisting of a curve $X$ of genus $3$ and an isomorphism $\varphi : \PSL_2(\FF_7) \iso \Aut(X)$ is a scheme of degree $2$ over $\Q$ because it has two geometric points corresponding to the outer automorphisms of $\PSL_2(\FF_7)$. Thus, $\H_{\PSL_2(\FF_7)} = \Spec{\Q(\sqrt{-7})}$, so this $\Q(\sqrt{-7})$-model is unique. In fact, this model is defined over $\Q$ as the quartic curve
+\[ C_{\mathrm{twist}} : \quad x^4 + y^4 + z^4 + 6(xy^3 + yz^3 + zx^3) - 3(x^2 y^2 + y^2 z^2 + z^2 x^2) + 3xyz(x+y+z) \]
+or what Elkies calls the \textit{rational $S_3$ model} because it has automorphism group $S_3$ over $\Q$ \cite[p.59, (1.22)]{elkies:klein_quartic}.
+\begin{prop}
+$C_{\mathrm{twist}}$ is the unique curve of genus $3$ over $\Q$ such that over $\Q(\sqrt{-7})$ it has automorphism group $\PSL_2(\FF_7)$.
+\end{prop}
+
+\begin{proof}
+We know that any such curve is a form of $C_{\mathrm{twist}}$ trivialized by $\Q(\sqrt{-7})$. Therefore, it suffices to compute
+\[ H^1(\Gal(\Q(\sqrt{-7})/\Q), \Aut(C_{\mathrm{twist}})) = 1. \]
+This is done in the \textsc{Magma} script \cite[\texttt{H1\_crossed\_homs.m}]{church:github}.
+\end{proof}
+
+Since $\Jac(X_3)$ is CM, it is immediate that it has infinitely many primes of supersingular reduction; in fact, these primes have positive density.
+
+\section{Genus $7$} \label{sec:genus7}
+
+Likewise, we first look at the Shimura curves. Since $(2)$ is inert in $K_+$ we obtain a single Hurwitz curve $\X^{\Hur}(\p_{2})$ with genus $7$ and automorphism group $\SL_2(\FF_8)$. As before, an elementary search proves this is the unique Hurwitz curve of this genus. This curve $X_7 = \X^{\Hur}(\p_{2})$ is often called the \textit{Fricke--Macbeath curve}. Again, a purely representation-theoretic argument shows that $\Jac(X_7)_{\ol{\Q}} \sim E^7$ for some elliptic curve $E$. This elliptic curve factor is defined by an idempotent in $\End(\Jac(X_7)_{\ol{\Q}})$ defined over the field of definition of $\Aut(X_7)$. The theory of canonical models for Shimura curves then implies (see Lemma~\ref{lem:automorphisms_defined_over_reflex}) that the automorphisms are defined over $(K_+)^{(2 \infty)} = K_+$. Hence $E$ is defined over $K_+$, which is a totally real field. Therefore, $E$, and hence $X_7$, have infinitely many primes of supersingular reduction by Elkies' theorem \cite{elkies:supersingular}. In fact, up to a choice of isogeny, the curve $E$ is defined over $\Q$ and has a model
+\[ y^2 = x^3 + x^2 - 114 x - 127 \]
+according to the explicit computations of \cite[Theorem~3]{top:counting_points_on_fricke_macbeath}. See \cite{wolfart:CM_jacobians} for a nice overview of some of the techniques discussed in these sections. 
 
 
 \section{Genus $17$} \label{sec:genus17}
@@ -403,7 +457,7 @@ The construction proceeds topologically as follows. Let $\pi_1(C) \to H_1(C, \Z)
 
 Applying this construction to the Klein quartic, for $m = 2$ we get a Hurwitz curve $C_2$ of genus $129$. However, $C_2 \to C$ has intermediate quotients. In general, there is an extension,
 \[ 0 \to (\Z / m \Z)^{2g} \to \Aut(C_m) \to \Aut(C) \to 0 \]
-and intermediate Galois quotients of $C_m \to C$ correspond to subgroups of $(\Z / m \Z)^{2g}$ stable under the $\Aut(C)$-action. % REVIEW: $(\Z/2\Z)^6$ has dimension 6 over $\FF_2$ but the Klein quartic has genus 3 so $H_1(C,\Z/2\Z) \cong (\Z/2\Z)^6$; confirm the exponent is correct here.
+and intermediate Galois quotients of $C_m \to C$ correspond to subgroups of $(\Z / m \Z)^{2g}$ stable under the $\Aut(C)$-action.
 We will see that, for the Klein quartic, $(\Z / 2 \Z)^{6}$ splits as a direct sum of two irreducible $\Aut(X_3)$-representations over $\FF_2$. These give intermediate curves $(X_3)_2 \to X_{17,i} \to X_3$ for $i \in \{ 1,2 \}$ which are unramified $(\Z/2\Z)^3$-covers of $X_3$ and hence have genus $17$. These produce the only two Hurwitz curves of genus $17$.
 
 \subsection{Arithmetic aspects of Macbeath's construction}
@@ -418,13 +472,13 @@ Suppose we are given a finite index open subgroup $\Gamma \subset \pi_1(X_{\bar{
 1 \arrow[r] & \Gamma \arrow[u, hook] \arrow[r] & \wt{\Gamma} \arrow[u, hook] \arrow[r] & G_k \arrow[u, equals] \arrow[r] & 1
 \end{tikzcd}
 \end{center}
-in which case $\wt{\Gamma} \subset \pi_1(X)$ defines a finite \etale cover $Y \to X$  pulling back to $\ol{Y} \to X_{\bar{k}}$. 
+in which case $\wt{\Gamma} \subset \pi_1(X)$ defines a finite \etale cover $Y \to X$ pulling back to $\ol{Y} \to X_{\bar{k}}$. 
 
 The existence of $\wt{\Gamma}$ is a purely group-theoretic question which we turn to next. We phrase the existence of $\wt{\Gamma}$ as a series of obstructions that must be overcome successively.
 \begin{enumerate}
-\item Let $N := N_{\pi_1(X)}(\Gamma)$ be the normalizer of $\Gamma$ in the arithmetic fundamental group $\pi_1(X)$. If $N \to G_k$ is not surjective then no $\wt{\Gamma}$ exists since $\wt{\Gamma}$ must live inside $N$. If $N \to G_k$ is not surjective, this froms the primary obstruction. 
+\item Let $N := N_{\pi_1(X)}(\Gamma)$ be the normalizer of $\Gamma$ in the arithmetic fundamental group $\pi_1(X)$. If $N \to G_k$ is not surjective then no $\wt{\Gamma}$ exists since $\wt{\Gamma}$ must live inside $N$. If $N \to G_k$ is not surjective, this forms the primary obstruction. 
 
-\item Assuming $N \to G_k$ is surjective, now let $K := \ker{(N \onto G_k)}$. Next we must construct an extension
+\item Assuming $N \to G_k$ is surjective, now let $K := \ker{(N \onto G_k)}$. Next we must construct an extension $\wt{\Gamma} \supset \Gamma$ fitting into a diagram,
 \begin{center}
 \begin{tikzcd}
 1 \arrow[r] & K \arrow[r] & N \arrow[r] & G_k \arrow[r] & 1
@@ -432,132 +486,607 @@ The existence of $\wt{\Gamma}$ is a purely group-theoretic question which we tur
 1 \arrow[r] & \Gamma \arrow[u, hook] \arrow[r] & \wt{\Gamma} \arrow[u, hook] \arrow[r] & G_k \arrow[u, equals] \arrow[r] & 1
 \end{tikzcd}
 \end{center}
-reducing the problem to the case that $\Gamma \subset \pi_1(X_{\bar{k}})$ is normal.  To do this, consider the quotient $Q := K / \Gamma$ and the induced diagram of exact sequences of groups,
+This reduces the problem to the case that $\Gamma \subset \pi_1(X_{\bar{k}})$ is normal. To do this, consider the quotient $Q := K / \Gamma$ and the induced diagram of exact sequences of groups,
 \begin{center}
 \begin{tikzcd}
-1 \arrow[r] & Q \arrow[r] & E \arrow[r] & G_k \arrow[r] & 1
+1 \arrow[r] & Q \arrow[r] & E \arrow[r] & G_k \arrow[r] \arrow[l, bend right, dashed] & 1
 \\
-1 \arrow[r] & K \arrow[r] & N \arrow[r] & G_k \arrow[r] \arrow[u, equals] & 1
+1 \arrow[r] & K \arrow[r] \arrow[u, two heads] & N \arrow[r] \arrow[u, two heads] & G_k \arrow[r] \arrow[u, equals] & 1
 \\
-1 \arrow[r] & \Gamma \arrow[u, hook]
+ & \Gamma \arrow[u, hook]
 \end{tikzcd}
 \end{center}
-Here $E$ is constructed as the pushout of $K \onto Q$ and $K \embed N$ (PROVE THE SEQUENCE IS EXACT!). Then the existence of $\wt{\Gamma}$ is equivalent to the existence of $\Gamma_0 \subset E$ so that $\Gamma_0 \to G_k$ is an isomorphism. Indeed, then we take $\wt{\Gamma}$ to be the preimage of $\Gamma_0 \subset E$. This is the condition that the extension
+Here $E$ is constructed as the pushout of $K \onto Q$ and $K \embed N$ (in this case, $E = N / \Gamma$ and exactness follows from the third isomorphism theorem). Then the existence of $\wt{\Gamma}$ is equivalent to the existence of $\Gamma_0 \subset E$ so that $\Gamma_0 \to G_k$ is an isomorphism. Indeed, then we take $\wt{\Gamma}$ to be the preimage of $\Gamma_0 \subset E$. This is the condition that the extension
 \[ 1 \to Q \to E \to G_k \to 1 \]
-is split on the right meaning the class $\ob \in H^2(G_k, Q)$ is trivial (NOTE ABOUT NONABELIAN COHOMOLGY?). 
+is split on the right. In general the obstruction is its class in pointed non-abelian cohomology; when $Q$ is abelian this obstruction is the cohomology class
+\[ \ob \in H^2(G_k,Q). \]
 \end{enumerate}
 
-An important observation about the secondary obstruction $\ob \in H^2(G_k, Q)$ is as follows. Let $X_N \to X$ be the finite \etale cover corresponding to $N$, % REVIEW: These exact sequences are missing the rightmost term $G_k$; should read $1 \to K \to N \to G_k \to 1$ and $1 \to Q \to E \to G_k \to 1$.
-if $X_N$ has a $k$-point then
+We first make an important observation about the secondary obstruction. Let $X_N \to X$ be the finite \etale cover corresponding to $N$.
+If $X_N$ has a $k$-point then
 \[ 1 \to K \to N \to G_k \to 1 \]
 has a section inducing a section of
 \[ 1 \to Q \to E \to G_k \to 1 \]
 and hence the obstruction vanishes.
 
-Let us specialize to the particular case when $\Gamma \subset \pi_1(X_{\bar{k}})$ is a characteristic subgroup. Then $N = \pi_1(X)$ and the first obstruction is trivial. Therefore, the obstruction to extending $\Gamma$ to $\wt{\Gamma}$ is a class 
+Let us specialize to the particular case when $\Gamma \subset \pi_1(X_{\bar{k}})$ is a normal subgroup with abelian quotient preserved by the outer action of $G_k$ (e.g.\ $\Gamma$ is a characteristic subgroup with abelian quotient). Then $N = \pi_1(X)$ and the primary obstruction is trivial. Therefore, the obstruction to extending $\Gamma$ to $\wt{\Gamma}$ is a class 
 \[ \ob \in H^2(G_k, Q). \]
 For Macbeath's construction, $Q = H_{1,\et}(X_{\bar{k}}, \Z/m\Z) := \pi_1(X_{\bar{k}})^{\ab} \ot \Z / m \Z$ as a $G_k$-module and the obstruction lives in 
 \[ H^2(G_k, H_{1,\et}(X_{\bar{k}}, \Z/m\Z)). \]
 Furthermore, we know that if $X$ has a $k$-point then this obstruction vanishes. 
 
-\subsection{The mod $2$ representation of the Klein Quartic} \label{sec:mod2_rep}
+\subsection{The mod $2$ representation of the Klein quartic (REVIEW)} \label{sec:mod2_rep}
 
-{\color{red} TODO}
+Let $k := \Q(\sqrt{-7})$ and let
+\[
+G := \Aut(C_{\mathrm{twist}, \ol{\Q}}) \cong \PSL_2(\FF_7) \cong \GL_3(\FF_2).
+\]
+Recall from \S\ref{section:models} that $C_{\mathrm{twist}}$ is the unique $\Q$-model of the Klein quartic for which all automorphisms are defined over $k$. Let $M$ denote the natural $3$-dimensional $\FF_2$-representation of $\GL_3(\FF_2)$ and let $M^{\vee}$ denote its dual. Write $\bar{\rho}_{C_{\mathrm{twist}},2} : G_{\Q} \to \GL(H^1_{\et}(C_{\mathrm{twist},\ol{\Q}}, \FF_2))$ for the Galois action on the mod $2$ \etale cohomology.
+\par
+Elkies analyzes the Klein model $C_{\mathrm{Klein}} \cong X(7)$, and the resulting decomposition is a statement about the common geometric curve $C_{\mathrm{Klein},\ol{\Q}} \cong C_{\mathrm{twist},\ol{\Q}}$. He shows that the action of $G$ on $H^0(C_{\mathrm{Klein},\CC}, \omega_{C_{\mathrm{Klein}}})$ is the contragredient $3$-dimensional complex representation and that the associated $G$-stable $\cO_k$-lattice $L$ has the property that reduction modulo either prime above $2$ yields the natural $3$-dimensional representation of $\GL_3(\FF_2)$, with the two reductions related by the outer automorphism of $G$ \cite[\S\S1.4, 2.3]{elkies:klein_quartic}. Since $2 = \mathfrak{p}_2 \bar{\mathfrak{p}}_2$ splits in $\cO_k$, Elkies' description of the Jacobian as $\Jac(C_{\mathrm{Klein}})_{\ol{\Q}} \cong E_{\Q(\sqrt{-7})} \ot_{\cO_k} L$ (as abelian varieties with $\cO_k$-action) yields
+\[
+\Jac(C_{\mathrm{twist},\ol{\Q}})[2] \cong (\cO_k / 2) \ot_{\cO_k} L \cong L / \mathfrak{p}_2 L \oplus L / \bar{\mathfrak{p}}_2 L \cong M \oplus M^{\vee}
+\]
+as $G$-modules, where the last identification uses Elkies' determination of the two reductions. The Kummer sequence identifies $H^1_{\et}(C_{\mathrm{twist},\ol{\Q}}, \FF_2)$ with $\Pic^0(C_{\mathrm{twist},\ol{\Q}})[2]$, which is dual to $\Jac(C_{\mathrm{twist},\ol{\Q}})[2]$. Since $M \oplus M^{\vee}$ is self-dual via the Weil pairing, we obtain
+\[
+H^1_{\et}(C_{\mathrm{twist},\ol{\Q}}, \FF_2) \cong M \oplus M^{\vee}.
+\]
+In particular, the mod $2$ \etale cohomology is the direct sum of two nonisomorphic irreducible $3$-dimensional $\FF_2$-representations of $G$.
 
+\begin{prop} \label{prop:klein_mod2_rep}
+As an $\FF_2[G]$-module, the mod $2$ \etale cohomology of the Klein quartic decomposes as
+\[
+H^1_{\et}(C_{\mathrm{twist},\ol{\Q}}, \FF_2) \cong M \oplus M^{\vee}
+\]
+where $M$ and $M^{\vee}$ are the natural representation and its dual, which are nonisomorphic irreducible representations of dimension $3$ over $\FF_2$. Furthermore:
+\begin{enumerate}
+\item[\emph{(i)}] The Galois action satisfies $\bar{\rho}_{C_{\mathrm{twist}},2}|_{G_k} = \id$.
+\item[\emph{(ii)}] The nontrivial element of $\Gal(k/\Q)$ exchanges the two summands $M$ and $M^{\vee}$.
+\end{enumerate}
+\end{prop}
 
-{\color{red} from construction show that $A$ has full $2$-torsion over $\Q(\sqrt{-7})$. because its 2-homology has no Galois action by construction. THINK THIS IS FALSE}
+\begin{proof}
+The decomposition is the content of the preceding paragraph.
+\par
+For (i), because all automorphisms of $C_{\mathrm{twist}}$ are defined over $k$, the Galois action of $G_k$ on $H^1_{\et}(C_{\mathrm{twist},\ol{\Q}}, \FF_2)$ commutes with the action of $G$. Hence $\bar{\rho}_{C_{\mathrm{twist}},2}(G_k)$ is contained in the centralizer of $G$ in $\GL(H^1_{\et}(C_{\mathrm{twist},\ol{\Q}}, \FF_2))$. Since $M$ and $M^{\vee}$ are nonisomorphic irreducibles, Schur's lemma gives $\Hom_G(M, M^{\vee}) = 0$, so
+\[
+\End_G(M \oplus M^{\vee}) \cong \End_G(M) \times \End_G(M^{\vee}) \cong \FF_2 \times \FF_2.
+\]
+The only invertible element of $\FF_2 \times \FF_2$ is $(1,1)$, so the centralizer is trivial and $\bar{\rho}_{C_{\mathrm{twist}},2}|_{G_k} = \id$.
+\par
+For (ii), the nontrivial element of $\Gal(k/\Q)$ acts on $\Aut(C_{\mathrm{twist},\ol{\Q}})$ through the nontrivial outer automorphism of $\PSL_2(\FF_7)$. Elkies' description identifies this outer automorphism with the permutation of the two reductions $L / \mathfrak{p}_2 L$ and $L / \bar{\mathfrak{p}}_2 L$, so it exchanges the two summands $M$ and $M^{\vee}$.
+\end{proof}
 
-In this section let $X$ be the unique $\Q$-model of the Klein quartic with full automorphism group defined over $\Q(\sqrt{-7})$ (see \S\ref{section:models}). Our goal is to compute
-% REVIEW: Should this be $\GL_6(\FF_2)$ or $\GL(H_1(X_{\bar{\Q}}, \FF_2))$? The mod-2 representation of a genus-3 curve has dimension 6, not 2.
-\[ \rho_{X,2} : G_{\Q} \to \GL_6(\FF_2) \]
-We will see that $\rho_{X,2}|_{G_{\Q(\sqrt{-7})}} = \id$. This will then prove the following:
+\begin{rmk}
+The above decomposition is the mod $2$ avatar of the Fano plane. The $7$ points of $\P(M)$ and the $7$ lines of $\P(M^{\vee})$ give the two $G$-orbits of maximal $S_4$-subgroups described by Elkies \cite[\S2.2]{elkies:klein_quartic}. If one chooses an even theta characteristic to identify $\Jac(C_{\mathrm{twist},\ol{\Q}})[2]$ with the set of theta characteristics, then the corresponding quadratic form on $M \oplus M^{\vee}$ is
+\[
+q(v,\ell) = \ell(v),
+\]
+so the $28$ odd theta characteristics, equivalently the $28$ bitangents, are exactly the anti-flags $(v,\ell)$ with $\ell(v) = 1$.
+\end{rmk}
+
+Proposition~\ref{prop:klein_mod2_rep} determines $\bar{\rho}_{C_{\mathrm{twist}},2} : G_{\Q} \to \GL_6(\FF_2)$: its restriction to $G_k$ is trivial, and the nontrivial element of $\Gal(k/\Q)$ exchanges the two summands. This implies the following:
 
 \begin{theorem}
-The two Hurwitz curves of genus $17$ are defined over $\Q(\sqrt{-7})$ and are exchanged by the Galois action.
+The two Hurwitz curves of genus $17$ are defined over $k = \Q(\sqrt{-7})$ and are exchanged by the Galois action.
 \end{theorem}
 
 \begin{proof}
-Notice that $X$ is isomorphic to the Klein quartic over $\Q(\zeta_7)$ and hence has a point over this field. Over {\color{red} FINISH}
+The two irreducible summands $M, M^{\vee} \subset H^1_{\et}(C_{\mathrm{twist},\ol{\Q}}, \FF_2)$ from Proposition~\ref{prop:klein_mod2_rep} define (dually) two $G$-stable quotients of $\pi_1(C_{\mathrm{twist},\ol{\Q}})^{\ab} \ot \FF_2$ and hence two normal subgroups of $\pi_1(C_{\mathrm{twist},\ol{\Q}})$ giving unramified $(\Z/2\Z)^3$-covers. These are the two geometric genus $17$ Hurwitz curves produced by Macbeath's construction.
+\par
+By Proposition~\ref{prop:klein_mod2_rep}(i), $G_k$ acts trivially on $H^1_{\et}(C_{\mathrm{twist},\ol{\Q}}, \FF_2)$, so each summand is $G_k$-stable. Therefore the corresponding subgroups of $\pi_1(C_{\mathrm{twist},\ol{\Q}})$ are preserved by the outer $G_k$-action, and the primary obstruction of the previous subsection vanishes. The descent obstruction is thus a class in $H^2(G_k, (\Z/2\Z)^3)$.
+\par
+Over $K := \Q(\zeta_7)$ the twist model $C_{\mathrm{twist}}$ becomes isomorphic to the Klein model $C_{\mathrm{Klein}}$, and the latter has the $K$-rational point $(1:0:0)$. Hence, after base change to $K$, the descent obstruction vanishes by the observation at the end of the previous subsection. Since $[K:k] = 3$, the composition of restriction and corestriction
+\[
+H^2(G_k, (\Z/2\Z)^3) \xrightarrow{\mathrm{res}} H^2(G_K, (\Z/2\Z)^3) \xrightarrow{\mathrm{cor}} H^2(G_k, (\Z/2\Z)^3)
+\]
+is multiplication by $3$, which is invertible on a module killed by $2$. Therefore the restriction map is injective, and since the obstruction vanishes over $K$ it already vanishes over $k$. Both covers thus descend to curves over $k$.
+\par
+Finally, the nontrivial element of $\Gal(k/\Q)$ exchanges $M$ and $M^{\vee}$ by Proposition~\ref{prop:klein_mod2_rep}(ii), so it exchanges the two descended genus $17$ curves as well.
 \end{proof}
 
 \subsection{The Jacobian of $X_{17}$}
 
-% REVIEW: Should this be "over $\Q(\sqrt{-7})$" rather than "$\ol{\Q}(\sqrt{-7})$"? The previous theorem says these curves are defined over $\Q(\sqrt{-7})$.
-In this section, we let $X_{17}$ denote either Hurwitz curve of genus $17$ over $\Q(\sqrt{-7})$.
-
-The map $X_{17} \to X_3$ gives an isogeny decomposition $\Jac(X_{17}) \sim \Jac(X_3) \times \Prym(X_{17} / X_3)$ and % REVIEW: Should "$X_0(49)^3$" be "$\Jac(X_0(49))^3$" or "$E_0^3$" where $E_0$ is the elliptic curve $\Jac(X_0(49))$?
-$\Jac(X_3)$ is a CM abelian $3$-fold isogenous to $E_0^3$. Therefore, it suffices to compute $\Prym(X_{17} / X_3)$. Luckily, we can further exploit the symmetries to reduce the computation to a Prym of a more tractable low genus cover.
-
-From the description of $\Aut(X_3) \acts \FF_2^3$ we can easily find a presentation for $G_{1344} = \Aut(X_{17})$ a group of order $1344$. It is SmallGroup(1344, 11686) in the GAP library and an explicit presentation as a $(2,3,7)$-group can be extracted from this data \cite{Macbeath:eightfold, Conder:survey}.
-
-We can compute the decomposition into irreducible $\Q$-reps of $G_{1344} \acts H^1(X_{17}, \Q)$ in a number of ways. One way is to consider all intermediate curves whose genera can be computed via the Riemann-Hurwitz formula and compare these numbers to the space of fixed points for the representation. We find that $H^1(X_{17}, \Q) \cong V_{14}^2 \times V_6$ where $V_{14}$ is an absolutely irreducible representation of dimension $14$ and $V_6$ is a representation of dimension $6$ factoring through $G_{1344} \to \Aut(X_3) \cong \PSL_2(\FF_7)$ which becomes a sum of two conjugate $3$-dimensional representations over $\Q(\sqrt{-7})$. This implies the $\Q$-algebra map $\QQ[G_{1344}] \to \End{H^1(X_{17}, \Q)}$ factors through an injection
-\[ M_{14}(\Q) \times M_3(\Q(\sqrt{-7})) \embed \End{H^1(X_{17}, \Q)}. \] 
-Each idempotent projects onto a $2$-dimensional subspace leading to an isogeny decomposition $\Jac(X_{17}) \sim E^{14} \times E_0^3$ where $E_0 = X_0(49)$ is an elliptic curve with CM by $\Q(\sqrt{-7})$. Then we can identify the $E_0^3$ factor with $\Jac(X_3)$ and the $E^{14}$ factor with $\Prym(X_{17}/X_3)$. Note this decomposition occurs only geometrically (at least over a field where the full group of automorphisms is defined).
-\todo{here the point is we need to compute different $C_5$ them seperately}
+In this section, we let $X_{17}$ denote either Hurwitz curve of genus $17$ over $\ol{\QQ}$. The map $X_{17} \to X_3$ gives an isogeny decomposition $\Jac(X_{17}) \sim \Jac(X_3) \times \Prym(X_{17} / X_3)$ and 
+$\Jac(X_3)$ is a CM abelian $3$-fold isogenous to $E_{\Q(\sqrt{-7})}^3$. Therefore, it suffices to compute $\Prym(X_{17} / X_3)$. Luckily, we can further exploit the symmetries to reduce the computation to a Prym of a more tractable low genus cover. From the description of $\Aut(X_3) \acts \FF_2^3$ we can easily find a presentation for $G_{1344} = \Aut(X_{17})$ a group of order $1344$. It is \texttt{SmallGroup(1344,814)} in the GAP library and an explicit presentation as a $(2,3,7)$-group can be extracted from this data \cite{Macbeath:eightfold, Conder:survey}.
+\par 
+We can compute the decomposition into irreducible $\Q$-reps of $G_{1344} \acts H^1(X_{17}(\CC), \Q)$ in a number of ways. One way is to consider all intermediate curves whose genera can be computed via the Riemann-Hurwitz formula and compare these numbers to the space of fixed points for the representation. We find that $H^1(X_{17}(\CC), \Q) \cong V_{14}^{\oplus 2} \oplus V_6$ where $V_{14}$ is an absolutely irreducible representation of dimension $14$ and $V_6$ is a representation of dimension $6$ factoring through $G_{1344} \to \Aut(X_3) \cong \PSL_2(\FF_7)$ which becomes a sum of two conjugate $3$-dimensional representations over $\Q(\sqrt{-7})$. This implies the $\Q$-algebra map $\QQ[G_{1344}] \to \End{H^1(X_{17}(\CC), \Q)}$ factors through an injection
+\[ M_{14}(\Q) \times M_3(\Q(\sqrt{-7})) \embed \End{H^1(X_{17}(\CC), \Q)}. \] 
+Each idempotent projects onto a $2$-dimensional subspace leading to an isogeny decomposition $\Jac(X_{17}) \sim E^{14} \times E_{\Q(\sqrt{-7})}^3$ where $E_{\Q(\sqrt{-7})} = \Jac(X_0(49))$ is an elliptic curve with CM by $\Q(\sqrt{-7})$. Then we can identify the $E_{\Q(\sqrt{-7})}^3$ factor with $\Jac(X_3)$ and the $E^{14}$ factor with $\Prym(X_{17}/X_3)$. Note this decomposition occurs only geometrically (at least over a field where the full group of automorphisms is defined).
 To compute $E$ up to isogeny, we take an intermediate quotient $X_{17} \to C_5 \to X_3$ with $C_5$ a curve of genus $5$. Then $\Prym(C_5/X_3)$ is an abelian surface which is isogenous to $E^2$ since it maps to $\Prym(X_{17}/X_3)$. Since we have equations for $X_3$ we will be able to leverage explicit results on degree $2$ unramified coverings to compute equations for a curve $C_2$ such that $\Jac(C_2) \cong \Prym(C_5/X_3)$ and thus determine $E$.
+\par 
+First, we choose $C_5$ by quotienting by one of the $7 = 2^3 - 1$ hyperplanes of $\FF_2^3 \subset G_{1344}$ making up the kernel $\ker(\Aut(X_{17}) \to \Aut(X_3)) = \Aut(X_{17}/X_3)$. These are not $\Aut(X_3)$-invariant (since the representation is irreducible) so $C_5$ is not itself a Hurwitz curve. In fact, all $7$ choices of $C_5$ are permuted by $G_{1344}$. Furthermore, $\Prym(C_5/X_3) \to \Prym(X_{17}/X_3)$ span $\Prym(X_{17}/X_3)$ as we take different choices of $C_5$ by Lemma~\ref{lemma:prym_decomposition}. Unfortunately, we will not be able to prove that $X_{17}$ has infinitely many primes of supersingular reduction (see \S\ref{sec:Klein_supersingular_covers}) but we will be able to show that similarly constructed curve $X_{17, \mathrm{Fermat}}$ uniformized by the triangle group $\Delta(2,3,8)$ does (see \S\ref{sec:17_Fermat}).
 
-First, we choose $C_5$ by quotienting by one of the $7 = 2^3 - 1$ hyperplanes of $\FF_2^3 \subset G_{1344}$ making up the kernel $\ker(\Aut(X_{17}) \to \Aut(X_3)) = \Aut(X_{17}/X_3)$. These are not $\Aut(X_3)$-invariant (since the representation is irreducible) so $C_5$ is not itself a Hurwitz curve. In fact, all $7$ choices of $C_5$ are permuted by $G_{1344}$. Furthermore, $\Prym(C_5/X_3) \to \Prym(X_{17}/X_3)$ span $\Prym(X_{17}/X_3)$ as we take different choices of $C_5$ {\color{red} HOW TO CHECK?}
+\section{Prym varieties of degree $2$ covers of genus $3$ curves}
 
-\subsection{Prym varieties of degree $2$ covers of genus $3$ curves}
-
-Given an \etale cover $\pi : D \to C$ of a genus $5$ curve over a genus $3$ curve, the \textit{Prym variety} 
+Given an \etale double cover $\pi : D \to C$, the \textit{Prym variety}
 \[ \Prym(D/C) :=  (\ker{\pi_* : \Jac(D) \to \Jac(C)})^{\circ} = \im{(\id - \iota_* : \Jac(D) \to \Jac(D))} \]
-for $\iota$ the involution preserving $\pi$, is a principally polarized abelian variety of dimension $2$. Therefore, there is a uniquely determined -- by the Torelli theorem -- hyperelliptic curve $H$ such that $\Prym(D/C) \cong \Jac(H)$. If $\pi : D \to C$ is defined over a number field $K$ then $H$ and the isomorphism $\Prym(D/C) \cong \Jac(H)$ are all defined over $K$ (this holds because the map of stacks $\cM_2 \to \cA_2$ is a closed immesion \cite[Theorem 1.2]{aaron:torelli_map} -- a fact that is special to genus $2$). 
+for $\iota$ the involution preserving $\pi$, is a \textit{principally polarized} abelian variety of dimension $g(D) - g(C)$. We investigate here the case that $C$ is a non-hyperelliptic curve of genus $3$ hence $D$ is a curve of genus $5$ and $\Prym(D/C)$ is a principally polarized abelian surface. Therefore, there is a uniquely determined -- by the Torelli theorem -- hyperelliptic curve $H$ such that $\Prym(D/C) \cong \Jac(H)$. If $\pi : D \to C$ is defined over a number field $K$ then $H$ and the isomorphism $\Prym(D/C) \cong \Jac(H)$ are all defined over $K$ (this holds because the map of stacks $\cM_2 \to \cA_2$ is a locally closed immersion \cite[Theorem 1.2]{aaron:torelli_map} -- a fact that is special to genus $2$).
 \par 
-There is a well-known construction of $H$ explicitly in terms of equations for $\pi$ (see \cite{prym_genus_3}) which we review here. Suppose $\pi$ 
+There is a well-known construction of $H$ explicitly in terms of equations for $\pi$ (see \cite{bruin:prym_genus_3}) which we review here. Suppose $\pi : D \to C$ is an \etale double cover. Then $\pi_* \omega_D = \pi_* \pi^* \omega_C \cong \omega_C \ot \pi_* \cO_D$. In characteristic $\neq 2$ we can write $\pi_* \cO_D = \cO_C \oplus \L$ for some $2$-torsion line bundle $\L$ which is the line bundle defining $D$ in the sense that it is the unique $\L \in J(K)[2]$ such that $\pi^* \L \cong \cO_D$ and we can write $D$ as the cyclic cover ``$z^2 = s$'' where $s \in H^0(C, \L^{\ot 2})$ trivializes $\L^{\ot 2}$. Then
+\[ H^0(D, \omega_D) = \pi^* H^0(C, \omega_C) \oplus H^0(C, \omega_C \ot \L) \]
+and counting dimensions gives $h^0(C, \omega_C \ot \L) = 2$. This splitting is exactly the eigenspace decomposition of $\iota^*$ on $H^0(D, \omega_D)$ with $H^0(C, \omega_C)$ the $+1$-eigenspace and $H^0(C, \omega_C \ot \L)$ the $-1$-eigenspace. Consider the diagram of canonical embeddings,
+\begin{center}
+\begin{tikzcd}
+D \arrow[r, hook] \arrow[d, "\pi"] & \P^4 \arrow[d, dashed]
+\\
+C \arrow[r, hook] & \P^2
+\end{tikzcd}
+\end{center}
+Since $D$ is a non-hyperelliptic genus $5$ curve, its canonical model is a complete intersection of quadrics: elements in $\Sym^2 H^0(D, \omega_D)$. Since $D$ is invariant under the linear action of $\iota^*$ on $\P^4$ we get an action of $\iota$ on the ideal sheaf defining $D$. Since $D$ is a complete intersection of quadrics $H^1(\P^4, \I_D(2)) = 0$ giving an exact sequence of $\Z/2$-modules
+\[ 0 \to H^0(\P^4, \I_D(2)) \to H^0(\P^4, \cO_{\P^4}(2)) \to H^0(D, \omega_D^{\ot 2}) \to 0 \]
+Furthermore, the odd subspace ($-1$-eigenspace) $H^0(C, \omega_C^{\ot 2} \ot \L) \subset H^0(D, \omega_D^{\ot 2})$ has dimension $6$ equal to the dimension of the odd subspace of $H^0(\P^4, \cO_{\P^4}(2)) = \Sym^2 H^0(D, \omega_D)$. Hence $H^0(\P^4, \I_D(2)) \subset [\Sym^2 H^0(D, \omega_D)]^{+}$ lies in the even part. Choosing coordinates $u,v,w \in H^0(C, \omega_C)$ and $r,s \in H^0(C, \omega_C \ot \L)$ we may choose a basis of the three quadrics cutting out $D$ to isolate the three generators of $\Sym^2 H^0(C, \omega_C \ot \L)$ so that $D$ is defined by equations
+\[ D : \quad 
+\begin{cases}
+Q_1(u,v,w) = r^2
+\\
+Q_2(u,v,w) = rs
+\\
+Q_3(u,v,w) = s^2
+\end{cases} \]
+where $Q_1, Q_2, Q_3 \in K[u,v,w]$ are quadratic forms. 
+Since $r^2 \cdot s^2 = (rs)^2$ and $C$ is cut out by a quartic equation $F(u,v,w) = 0$, the equations for $D$ imply that $F$ takes the form,
+\[ \lambda F(u,v,w) = Q_1(u,v,w) Q_3(u,v,w) - Q_2(u,v,w)^2 \]
+for some $\lambda \in K$. We refer to such a rewriting of $F$ as a \textit{quadric decomposition}. Conversely, given such a quadric decomposition, we may build $\pi : D \to C$ using the above formulas. In this case, $H$ is determined by the hyperelliptic equation
+\[ H : \quad y^2 = -\det{(Q_1 + 2 x Q_2 + x^2 Q_3)} \]
+where we regard $Q_i$ as the symmetric $3 \times 3$ matrices representing the corresponding quadratic form \cite{bruin:prym_genus_3}. Note that $\pi : D \to C$ is determined (up to $K^{\times} / K^{\times 2}$-twists replacing $Q_i \mapsto \alpha Q_i$) by the $2$-torsion line bundle
+\[ \L \cong \cO_C(\tfrac{1}{2} \div{Q_1|_C} - K_C) \cong \cO_C(\tfrac{1}{2} \div{Q_3|_C} - K_C) \]
+since on $D$ the divisors $\tfrac{1}{2} \div{Q_1|_C}$ and $\tfrac{1}{2} \div{Q_3|_C}$ pull back to $\div{r|_D}$ and $\div{s|_D}$ respectively which are in the linear series $|K_D|$.
 
-\todo{write down equations}
+\subsection{Setup for the arithmetic aspects of Prym varieties}
 
-Now the question becomes, if we define a \etale cover of degree $2$ via a cohomology class $\alpha \in H^2_{\et}(\ol{C}, \FF_2)$ where $\ol{C}$ is the base change to the algebraic closure $\ol{K}$, how do we compute the equations for $H$. First, we should recall that even if $\alpha$ is $G_K$-invariant, we saw in the previous section there is an obstruction to $\alpha$ defining a cover defined over $K$. This obstruction comes from the 5-term sequence for the Leray/Hochschild-Serre spectral sequence,
-\[ E^{p,q}_2 := H^p(G_K, H^q_{\et}(\ol{C}, \FF_2)) \implies H^{p+q}_{\et}(C, \FF_2) \]
+Now the question becomes, if we define a \etale cover of degree $2$ via a cohomology class $\alpha \in H^1_{\et}(\ol{C}, \FF_2)$ where $\ol{C}$ is the base change to the algebraic closure $\ol{K}$, how do we compute the equations for $H$. First, we should recall that even if $\alpha$ is $G_K$-invariant, we saw in the previous section there is an obstruction to $\alpha$ corresponding to a cover defined over $K$. This obstruction comes from the 5-term sequence for the Leray/Hochschild-Serre spectral sequence,
+\[ E^{p,q}_2 = H^p(G_K, H^q_{\et}(\ol{C}, \FF_2)) \implies H^{p+q}_{\et}(C, \FF_2) \]
 computing absolute \etale cohomology. The 5-term sequence has the form
-\[ 0 \to H^1(G_K, \FF_2) \to H^1_{\et}(C, \FF_2) \to H^1(\ol{C}, \FF_2)^{G_K} \to H^2(G_K, \FF_2) \to H^2_{\et}(C, \FF_2) \]
-and therefore the obstruction to lifting along $H^1_{\et}(C, \FF_2) \to H^1(\ol{C}, \FF_2)^{G_K}$ lies in $H^2(G_K, \FF_2) = \Br(K)[2]$. We can rephrase this in terms of our previous obstructions. View $\alpha : \pi_1(\ol{C}) \to \FF_2$ and let $\Gamma := \ker{\alpha}$. If $\alpha$ is $G_K$-invariant then $\Gamma$ is stable under $G_K$-conjugation and $\Gamma \subset \pi_1(\ol{C})$ is normal so $N_{\pi_1(C)}(\Gamma) = \pi_1(C)$. Thus the primary obstruction vanishes and the secondary obstruction is a class $\ob \in H^2(G_K, Q)$ where $Q = \ker{(N \to G_K)} / \Gamma = \pi_1(\ol{C})/\Gamma = \FF_2$. 
+\[ 0 \to H^1(G_K, \FF_2) \to H^1_{\et}(C, \FF_2) \to H^1_{\et}(\ol{C}, \FF_2)^{G_K} \to H^2(G_K, \FF_2) \to H^2_{\et}(C, \FF_2) \]
+and therefore the obstruction to lifting along $H^1_{\et}(C, \FF_2) \to H^1_{\et}(\ol{C}, \FF_2)^{G_K}$ lies in $H^2(G_K, \FF_2) = \Br(K)[2]$. We can rephrase this in terms of our previous obstructions. View $\alpha : \pi_1(\ol{C}) \to \FF_2$ and let $\Gamma := \ker{\alpha}$. If $\alpha$ is $G_K$-invariant then $\Gamma$ is stable under $G_K$-conjugation and $\Gamma \subset \pi_1(\ol{C})$ is normal so $N_{\pi_1(C)}(\Gamma) = \pi_1(C)$. Thus the primary obstruction vanishes and the secondary obstruction is a class $\ob \in H^2(G_K, Q)$ where $Q = \ker{(N \to G_K)} / \Gamma = \pi_1(\ol{C})/\Gamma = \FF_2$. Note also that the descent of the line bundle $\ol{\L}$ defining $\bar{\pi} : \ol{D} \to \ol{C}$ to a line bundle $\L$ on $C$ defined over $K$ is sufficient to build $\pi : D \to C$ over $K$ using the cyclic cover construction. The bundle $\L$ is unique and the isomorphism class of $\pi$ is well-defined up to the action of $K^{\times} / K^{\times 2}$ given by scaling $s \in H^0(C, \L^{\ot 2})$. This construction realizes the map of exact sequences
+\begin{center}
+\begin{tikzcd}[column sep = small]
+0 \arrow[r] & H^1(G_K, \FF_2) \arrow[r] \arrow[d] &  H^1_{\et}(C, \FF_2) \arrow[d] \arrow[r] &  H^1_{\et}(\ol{C}, \FF_2)^{G_K} \arrow[d, equals] \arrow[r] & H^2(G_K, \FF_2) \arrow[d, equals] \arrow[r] & H^2_{\et}(C, \FF_2) \arrow[d]
+\\
+0 \arrow[r] & 0 \arrow[r] & \Pic(C)[2] \arrow[r] & \Pic_{C/K}[2](K) \arrow[r] & \Br(C)[2] \arrow[r] & H^2_{\et}(C, \Gm)[2]
+\end{tikzcd}
+\end{center}
+induced by the map of 5-term Leray/Hochschild-Serre sequences for $\FF_2 = \mu_2 \embed \Gm$. Recall that when $C$ has a $K$-point, then $\Pic_{C/K}(K) = \Pic(C)$ verifying that the Brauer obstruction vanishes. However, in general $\Pic_{C/K}(K) = \Pic_{C/K}(\ol{K})^{G_K}$ is larger.
 \par 
-Suppose we have a choose an extension $K_{\alpha} / K$ killing the obstruction $\ob(\alpha) \in \Br(K)[2]$. Then there exists an \etale double cover $\pi : D \to C$ defined over $K_{\alpha}$ and hence a quadratic decomposition $Q_1 Q_3 - Q_2^2 = \lambda F$ of the quartic polynomial $F$ cutting out $C$. It is computationally very expensive to find quadratic decompositions by exhaustively searching over quadrics with algebraic coefficients until we find a complete set of $2$-torsion points. However, we can exploit the structure of theta characteristics and their relation to bitangent lines of $C$ to reduce the search to finding all bitangents and certain quadrics witnessing so called syzygies of bitangents, a much more computationally feasible task. 
+Suppose we have chosen an extension $K_{\alpha} / K$ killing the obstruction $\ob(\alpha) \in \Br(K)[2]$. Then there exists an \etale double cover $\pi : D \to C$ defined over $K_{\alpha}$ and hence a quadratic decomposition $Q_1 Q_3 - Q_2^2 = \lambda F$ of the quartic polynomial $F$ cutting out $C$. It is computationally very expensive to find quadratic decompositions by exhaustively searching over quadrics with algebraic coefficients until we find a complete set of $2$-torsion points. However, we can exploit the structure of theta characteristics and their relation to bitangent lines of $C$ to reduce the search to finding all bitangents and certain quadrics witnessing so-called syzygies of bitangents, a much more computationally feasible task.
 
 
 \subsection{Theta characteristics and bitangents}
 
+In this section let $C$ be a smooth projective curve over a field $K$ of characteristic not $2$.
+
 \begin{defn}
-A \textit{theta characteristic} $\theta$ on a smooth curve $C$ is a line bundle such that $\theta^{\ot 2} \cong \omega_C$.
+A \textit{theta characteristic} $\theta$ on $C$ is a line bundle such that $\theta^{\ot 2} \cong \omega_C$.
 \end{defn}
 
-Theta characteristics have a natural notion of parity meaning they come in two types \textit{even} and \textit{odd} determined by the pairity of $h^0(C, \theta)$. We can give a nice interpretation of this pairty in terms of a quadratic form on $J(\ol{K})[2]$ where $J = \Jac(C)$. It is clear that the set of isomorphism classes of (geometric) theta characteristics is a $J(\ol{K})[2]$-torsor.
+Theta characteristics have a natural notion of parity meaning they come in two types \textit{even} and \textit{odd} determined by the parity of $h^0(C, \theta)$. We can give a nice interpretation of this parity in terms of a quadratic form on $J(\ol{K})[2]$ where $J = \Jac(C)$. It is clear that the set of isomorphism classes of (geometric) theta characteristics is a $J(\ol{K})[2]$-torsor.
 For each theta characteristic $\theta$ we can define a quadratic form on the $\FF_2$-vector space $J(\ol{K})[2]$.
 
 \begin{lemma} \cite[Theorem~1.13]{harris:theta_chars}
 The assignment
-\[ q_{\theta} : \L \mapsto h^0(C, \L \ot \theta_0) - h^0(C, \theta) \mod 2 \]
+\[ q_{\theta} : \L \mapsto h^0(C, \theta \ot \L) - h^0(C, \theta) \mod 2 \]
 defines a quadratic form on $J(\ol{K})[2]$ whose associated bilinear form is the Weil pairing composed with the unique isomorphism $\mu_2 \iso \Z / 2 \Z$.
 \end{lemma}
 
-In fact, the association $\theta \mapsto q_{\theta}$ defines an bijection $\Theta(\ol{C}) \iso Q(J(\ol{K})[2], \inner{-}{-})$ where $Q(V, \inner{-}{-})$ is the space of quadratic forms on $V$ whose associated bilinear form is $\inner{-}{-}$. Furthermore, $Q(V) := Q(V, \inner{-}{-})$ naturally decomposes into two subsets $Q(V)^+$ and $Q(V)^{-}$ of quadratic forms of Arf invariant $0$ and $1$ respectively. These are the two orbits of $Q(V)$ under the action of the symplectic group $\Sp(V)$. This decomposition gives the parity of a theta characteristic because
+In fact, the association $\theta \mapsto q_{\theta}$ defines a bijection $\Theta(\ol{C}) \iso Q(J(\ol{K})[2], \inner{-}{-})$ where $Q(V, \inner{-}{-})$ is the space of quadratic forms on $V$ whose associated bilinear form is $\inner{-}{-}$. Furthermore, $Q(V) := Q(V, \inner{-}{-})$ naturally decomposes into two subsets $Q(V)^+$ and $Q(V)^{-}$ of quadratic forms of Arf invariant $0$ and $1$ respectively. These are the two orbits of $Q(V)$ under the action of the symplectic group $\Sp(V)$. This decomposition gives the parity of a theta characteristic because
 \[ \Arf(q_{\theta}) = h^0(C, \theta) \mod 2 \]
-by \cite[Theorem~4]{johnson:spin_structures}. Atiyah proved that there are exactly $2^{g-1} (2^g + 1)$ even and $2^{g-1}(2^g - 1)$ odd theta characteristics and that the parity of $\theta$ is a deformation invariant (unlike $h^0(C, \theta) \in \Z_{\ge 0}$) \cite{atiyah:spin_structures}. 
+by \cite[Theorem~4]{johnson:spin_structures}. Atiyah proved there are exactly $2^{g-1} (2^g + 1)$ even and $2^{g-1}(2^g - 1)$ odd theta characteristics and that parity is a deformation invariant of $\theta$ (unlike the integer $h^0(C, \theta)$ which is only upper semicontinuous) \cite{atiyah:spin_structures}. 
 \par 
-In the particular case of $g = 3$, there are $36$ even and $28$ odd theta characteristics. The $28$ odd theta characteristics correspond exactly to the $28$ bitangents of the canonical embedding $C \embed \P^2$. Indeed, an odd theta characteristic is an effective divisor $D$ of degree $2$ such that $2D \sim K_C$ thus $2D \in |\ell|$ is in the linear series of lines. Since $C$ is irrational, $h^0(C, \cO_C(D)) \le \deg{D} - 1 = 1$ there is a unique representation, $D = P + Q$ for points $P, Q \in C$. Then $2 P + 2 Q = C \cdot \ell$ for some line $\ell \subset \P^2$ meaning exactly that the line through $P, Q$ (resp.\ the tangent line through $P = Q$) is a bitangent (resp.\ hyperflex).
+Farkas explains \cite{farkas:theta} that Frobenius' \textit{theory of fundamental systems} of theta characteristics is captured in modern notation by the notion of \textit{syzygetic triads} and \textit{tetrads}.
 
+\begin{defn}
+We say that a system of three theta characteristics $\theta_1, \theta_2, \theta_3 \in \Theta(C)$ is \textit{syzygetic} or that $\{ \theta_1, \theta_2, \theta_3 \}$ form a \textit{syzygetic triad} if
+\[ \Arf(q_{\theta_1}) + \Arf(q_{\theta_2}) + \Arf(q_{\theta_3}) + \Arf(q_{\theta_1 + \theta_2 + \theta_3}) = 0 \]
+where we define $\theta_1 + \theta_2 + \theta_3$ to be the theta characteristic $\theta_1 \ot \theta_2 \ot \theta_3^{-1}$. This expression is symmetric under reordering justifying the notation. We say that $\{ \theta_1, \theta_2, \theta_3, \theta_4 \}$ is a \textit{syzygetic tetrad} if any three elements form a syzygetic triad and $\theta_1 \ot \theta_2 \ot \theta_3 \ot \theta_4 \cong \omega_C^{\ot 2}$.
+\end{defn} 
+\todo{what did Frobenius do}
+
+\subsection{Plane quartics}
+
+In the particular case of $g = 3$, there are $36$ even and $28$ odd theta characteristics. From now on we specialize to the case of nonhyperelliptic genus $3$ curves. The $28$ odd theta characteristics correspond exactly to the $28$ bitangents of the canonical embedding $C \embed \P^2$. Indeed, an odd theta characteristic is an effective divisor $D$ of degree $2$ such that $2D \sim K_C$ thus $2D \in |\ell|$ is in the linear series of lines. Since $C$ is irrational, $h^0(C, \cO_C(D)) \le \deg{D} - 1 = 1$ and hence there is a unique representation, $D = P + Q$ for points $P, Q \in C$. Then $2 P + 2 Q = C \cdot \ell$ for some line $\ell \subset \P^2$ meaning exactly that the line through $P, Q$ (resp.\ the tangent line through $P = Q$) is a bitangent (resp.\ hyperflex). We will often abuse notation by using $\ell$ to refer to a linear form on $\P^2$ defining the line $\ell$. Thus we will write $C \cdot \ell$ and $\div{\ell|_C}$ interchangeably. 
+
+\begin{lemma} \label{lem:syzygetic_lines}
+Let $\ell_1, \ell_2, \ell_3, \ell_4$ be bitangent lines of $C$ and let $\theta_1, \theta_2, \theta_3, \theta_4$ be their corresponding odd theta characteristics. Then the following are equivalent:
+\begin{enumerate}
+\item $\frac{1}{2} (\div{\ell_1|_C} - \div{\ell_2|_C}) \sim \frac{1}{2} (\div{\ell_3|_C} - \div{\ell_4|_C})$ are linearly equivalent $2$-torsion divisors on $C$
+\item the $8$ intersection points (counted with half multiplicity) of $\ell_1, \ell_2, \ell_3, \ell_4$ with $C$ lie on a conic
+\item $\{ \theta_1, \theta_2, \theta_3, \theta_4 \}$ form a syzygetic tetrad.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) is equivalent to the condition that
+\[ \frac{1}{2} (\div{\ell_1|_C} + \div{\ell_2|_C} + \div{\ell_3|_C} + \div{\ell_4|_C}) \sim \div{\ell_2|_C} + \div{\ell_3|_C} \in |2 H|  \]
+where $H$ is the hyperplane class on $C$. This exactly says that the $8$ intersection points lie in the complete linear series $|2H|$ but $H^0(\P^2, \cO(2)) \to H^0(C, \cO_C(2))$ is surjective because $H^1(\P^2, \cO(2-3)) = 0$. Thus the linear equivalence exactly says that the eight points lie on a conic giving $(1) \iff (2)$. Part of the definition of a syzygetic triad is that $\theta_1 \ot \theta_2^{\vee} \cong \theta_3 \ot \theta_4^{\vee}$ which is, by definition, (1). Thus it suffices to prove that $(1) \implies (3)$. Because we may reorder freely, it suffices to show that $\{ \theta_1, \theta_2, \theta_3 \}$ is a syzygetic system. However, $\theta_1 + \theta_2 + \theta_3 \cong \theta_4$ so it suffices to show
+\[ \Arf(q_{\theta_1}) + \Arf(q_{\theta_2}) + \Arf(q_{\theta_3}) + \Arf(q_{\theta_4}) = 0. \]
+Since these are all odd theta characteristics each Arf invariant equals $1$ and hence the sum is $0$ (mod $2$). 
+\end{proof}
+
+Every $2$-torsion class on $C$ is of the form $\frac{1}{2} (\div{\ell_1|_C} - \div{\ell_2|_C})$ for some pair of bitangent lines \todo{cite}. Steiner studied the combinatorics of the $28$ bitangents and showed that every $2$-torsion class can be represented by exactly $6$ pairs of lines; this collection of lines is called a \textit{Steiner complex} of bitangents.  
+
+\begin{defn}
+A \textit{Steiner complex} is a set $\cS = \{ \{ \ell_1, \ell_1' \}, \dots, \{ \ell_6, \ell_6' \} \}$ of unordered pairs of distinct bitangent lines such that any pair of pairs $\{ \ell_i, \ell_i' \}, \{ \ell_j, \ell_j' \}$ is \textit{syzygetic} in the sense of satisfying the equivalent conditions of Lemma~\ref{lem:syzygetic_lines}.
+\end{defn}
+
+The Steiner complexes are the sets of mutually syzygetic collections of pairs. Equivalently they are exactly the fibers of the map sending an unordered pair $\{ \ell, \ell'\}$ of distinct bitangents (i.e.\ odd theta characteristics) to the nonzero $2$-torsion class $\frac{1}{2} (\div{\ell |_C} - \div{\ell'|_C})$ (i.e. the difference $\theta_1 \ot \theta^{-1} \in J[2]$). There are $63$ Steiner complexes corresponding to the $63 = 2^6 - 1$ nonzero $2$-torsion classes on $C$. Since $6 \cdot 63 = { 28 \choose 2 }$ every pair of distinct bitangent lines appears in some Steiner complex. By definition, for any pair of pairs $\{ \ell_i, \ell_i' \}, \{ \ell_j, \ell_j' \}$ in a Steiner complex there exists a \textit{witness conic} $Q$ passing through the $8$ intersection points. Hence, the rational function in $K(C)$ 
+\[ f = \frac{(\ell_1 \ell_2 \ell_3 \ell_4) |_C}{Q^2|_C} \]
+has no poles and thus $f = a$ for some constant $a \in K$. This means $\ell_1 \ell_2 \ell_3 \ell_4 - a Q^2$ is zero in the coordinate ring
+\[ R(C) = K[u,v,w]/(F(u,v,w)) \]
+of $C$. By degree considerations, there is some scalar $\lambda \in K$ so that
+\[ \lambda F = \ell_1 \ell_2 \ell_3 \ell_4 - a Q^2. \]
+This gives a quadric decomposition of $F$, as needed to produce the Prym curve, of a particularly simple form. In the \textsc{Magma} script \cite[\texttt{steiner\_computations.m}]{church:github} we compute the $28$ bitangents, the $63$ Steiner complexes, and the $945$ witness conics for any pair of pairs in a Steiner complex. Similar computations have also been described and implemented by the authors of \cite{sturmfels:bitangent_computation}.
+\par 
+In \textsc{Magma}, we performed the full arithmetic and combinatorial analysis of the 28 bitangents for the following plane quartic curves defined over $\Q$
+\begin{align*}
+C_{\mathrm{twist}} : \quad & x^4 + y^4 + z^4 + 6(xy^3 + yz^3 + zx^3) - 3(x^2 y^2 + y^2 z^2 + z^2 x^2) + 3xyz(x+y+z) 
+\\
+C_{\mathrm{Fermat}} : \quad & x^4 + y^4 + z^4 
+\\
+C_{\mathrm{Edge}} : \quad & 25(x^4 + y^4 + z^4) - 34(x^2 y^2 + y^2 z^2 + x^2 z^2) 
+\end{align*}
+where $C_{\mathrm{Edge}}$ is the $S_4$-invariant \textit{Edge quartic} which corresponds to $\gamma = \pm 2$ in Edge's family of determinantal quartics \cite[p.19]{edge:1938}. This quartic is distinguished by the amazing property of having all $28$ bitangents defined over $\Q$ and hence its Jacobian has full rational $2$-torsion over $\Q$ \cite[p.2]{sturmfels:bitangent_computation}. For each curve and each $2$-torsion class $\alpha \in H^1_{\et}(X_{\ol{K}}, \FF_2)$ we find the associated genus $2$ curve computing the Prym of the cover $D_{\alpha} \to X_{\ol{K}}$. These data are recorded in \cite[\texttt{PRYM\_INVARIANTS.md}]{church:github} and \cite[\texttt{prym\_table.md}]{church:github}.
 
 \subsection{Symmetric genus $2$ curves}
 
-\subsection{$4$-torsion obstruction}
-\todo{not $X_{17}$ need a different curve}
-A remarkable coincidence that allows us to conclude $X_{17}$ has infinitely many primes of supersingular reduction occurs in the congruence classes satisfied by rational primes above which $E$ is supersingular. Recall that $E$ is associated to a weight $2$ newform $f \in S_2^{\text{new}}(112, \chi_f)$ in the sense that the abelian surface $A = \Res^{\Q(\sqrt{7})}_{\Q} E$ over $\Q$ satisfies $\rho_{A,\ell} \cong \rho_{f,\ell}$. The nebentypus character of $f$ is the quadratic character $\chi_f(\bullet) = \legendre{28}{\bullet}$.
-Furthermore, the coefficient field of $f$ is $K_f = \Q(\zeta_3)$ in which $2$ is inert. Therefore, since the $\Q(\zeta_3)$-multiplication implies that $E$ is isogenous to its Galois conjugate, we see that $E$ is supersingular at $\p \mid p$ iff $A$ is supersingular at $p$ iff $a_p(f) = 0$.
+Any genus $2$ curve $C$ has a unique $\mathfrak{g}^{1}_{2}$ defining a degree $2$ map $\pi : C \to \P^1$. This double cover is associated to an involution $\iota : C \to C$. Since $\iota$ is the unique involution with rational quotient, it must commute with any automorphism of $C$ giving a central element of $\Aut(C)$. We call the quotient $\RA(C) := \Aut(C) / \left< \iota \right>$ the \textit{reduced automorphism group} of $C$. We say a genus $2$ curve has \textit{extra automorphisms} if $\RA(C)$ is nontrivial. Igusa \cite{igusa_genus_2} classified all families of genus $2$ curves with extra automorphisms. In the language of Ibukiyama--Katsura--Oort \cite{Ibukiyama-Katsura-Oort} the following give a complete list of families of genus $2$ curves with extra automorphisms in characteristic zero:
+\begin{enumerate}
+\item[(1)] $C : \quad y^2 = x(x-1)(x-\lambda)(x-\mu)(x-\lambda(1-\lambda)^{-1}(1-\mu))$ with $\RA(C) \cong \Z/2$ generically
+\item[(2)] $C : \quad y^2 = x(x-1)(x-\lambda)(x-(\lambda-1) \lambda^{-1})(x - (1-\lambda)^{-1})$ with $\RA(C) = S_3$ generically
+\item[(3)] $C : \quad y^2 = x(x-1)(x+1)(x-\lambda)(x-\lambda^{-1})$ with $\RA(C) \cong (\Z/2)^2$ generically
+\item[(4)] $C : \quad y^2 = x(x-1)(x+1)(x-2)(x-1/2)$ with $\RA(C) \cong D_{6}$
+\item[(5)] $C : \quad y^2 =x(x^2-1)(x^2+1)$ with $\RA(C) \cong S_4$
+\item[(6)] $C : \quad y^2 = x(x-1)(x-1-\zeta)(x-1-\zeta-\zeta^2)(x-1-\zeta-\zeta^2-\zeta^3)$ with $\RA(C) \cong \Z/5$ where $\zeta$ is a primitive $5$-th root of unity.
+\end{enumerate} 
+
+The curves of classes (1)-(5) have Jacobians isogenous to a pair of elliptic curves $E_{\sigma} \times E_{\tau}$ defined as $E_\sigma = C / \left< \sigma \right>$ and $E_{\tau} = C / \left< \tau \right>$ where
+\[ \sigma, \tau : 
+\begin{cases}
+x \mapsto \lambda (x - \mu) (x - \lambda)^{-1}
+\\
+y \mapsto \pm [\lambda^3 (\lambda - \mu)^3]^{1/2} y (x - \lambda)^{-3} 
+\end{cases}  \]
+where $\sigma$ and $\tau$ correspond to the two square roots of $\lambda^3 (\lambda - \mu)^3$ and hence $\tau = \sigma \circ \iota$. Ibukiyama--Katsura--Oort compute Legendre equations \cite[Equation (1.13)]{Ibukiyama-Katsura-Oort} for these elliptic curves:
+\[ u^2 = v(v-1)(v - \rho) \quad \rho := (1 - \lambda)(\mu - 2 \lambda \pm 2 (\lambda^2 - \lambda \mu)^{1/2}) (\mu-1)^{-1} \]
+Recall the formula for the $j$-invariant of the Legendre family:
+\[ j = 2^8 \cdot \frac{(\rho^2 - \rho + 1)^3}{\rho^2 (1 - \rho)^2}. \]
+Thus we can compute the $j$-invariant of $E_{\sigma}$ and $E_{\tau}$. Notice that, as members of the Legendre family, $E_{\sigma}$ and $E_{\tau}$ have full rational $2$-torsion over $\Q(\rho)$. 
+\par 
+It is particularly nice to specialize the values of $\rho$ to the families (2) and (3) which will appear for the genus $2$ curves computed as Pryms. We tabulate these as follows:
+\begin{enumerate}
+\item[(2)] $\rho = (1-\lambda)(\lambda \mp (\lambda^2 - \lambda + 1)^{1/2})^2$
+\item[(3)] $\rho = -(\lambda \mp (\lambda^2 - 1)^{1/2})^2$.
+\end{enumerate}
+Generically, the elliptic curves $E_{\sigma}$ and $E_{\tau}$ in class (1) are not isogenous. However, they are isogenous in classes (2)-(5). In case (2) this is forced by the representation theory of $S_3$ since the group ring contains a copy of $M_2(\Q)$ which must act rationally on the Jacobian.
+For class (3), let 
+\[ u_{\pm} = \lambda \mp (\lambda^2 - 1)^{1/2} \]
+and notice that $u_{+} u_{-} = 1$. Therefore, the two curves 
+\[ E_{\pm} : \quad y^2 = x(x-1)(x + u_{\pm}^2) \]
+are isomorphic over $\Q(u_{\pm}^2, i)$ via the map
+\[ x \mapsto -u_{\pm}^2 x \quad y \mapsto i u_{\pm}^{3} y. \]
+Every genus $2$ curve representing a Prym of a highly symmetric quartic will have extra automorphisms. Indeed, for a $2$-torsion class $\alpha \in H^1_{\et}(C_{\ol{K}}, \FF_2)$ we consider the stabilizer $\Aut(C_{\ol{K}})_{\alpha}$ which acts on $C_{\ol{K}}$ in such a way that each automorphism lifts to $D_{\alpha, \ol{K}}$ giving an exact sequence
+\[ 0 \to \left< \iota \right> \to C_{\Aut(D_{\alpha, \ol{K}})}(\iota) \to \Aut(C_{\ol{K}})_{\alpha} \to 0 \]
+where $\iota$ is the deck transformation of $\pi : D_{\alpha, \ol{K}} \to C_{\ol{K}}$.
+Furthermore, $C_{\Aut(D_{\alpha, \ol{K}})}(\iota)$ acts on $\Prym(D_{\alpha}/C)$ geometrically and hence on $H_{\alpha}$. Since $\# H^1_{\et}(C_{\ol{K}}, \FF_2) = 64$, as long as $\Aut(C_{\ol{K}})$ is reasonably large, any element of $H^1_{\et}(C_{\ol{K}}, \FF_2)$ will have a nontrivial stabilizer leading to extra automorphisms of $H$. 
+
+\begin{lemma} \label{lem:stabilizer_prym_kernel}
+Let $\alpha \in H^1_{\et}(C_{\ol{K}}, \FF_2)$ be nonzero and let $H_{\alpha}$ be the genus $2$ curve such that
+\[ \Jac(H_{\alpha}) \cong \Prym(D_{\alpha}/C). \]
+Then the exact sequence above induces a homomorphism
+\[ \Aut(C_{\ol{K}})_{\alpha} \to \RA(H_{\alpha}) \]
+whose kernel has order dividing $4$. In particular, if $\# \Aut(C_{\ol{K}})_{\alpha} > 4$ then $H_{\alpha}$ has, geometrically, extra automorphisms.
+\end{lemma}
+
+\begin{proof}
+We first base change to $\ol{K}$. The action of $C_{\Aut(D_{\alpha})}(\iota)$ on $\Prym(D_{\alpha}/C)$ induces an action on $\Jac(H_{\alpha})$. Under this action, the deck involution $\iota$ acts by $-1$ on $\Prym(D_{\alpha}/C)$, which corresponds to the hyperelliptic involution on $H_{\alpha}$. Therefore, the exact sequence above descends to a well-defined homomorphism
+\[ \Aut(C)_{\alpha} \to \RA(H_{\alpha}). \]
+Let $K$ denote its kernel. Since
+\[ T_0^* \Prym(D_{\alpha}/C) \cong H^0(C, \omega_C \ot \alpha), \]
+the Torelli isomorphism $\Jac(H_{\alpha}) \cong \Prym(D_{\alpha}/C)$ identifies
+\[ H^0(H_{\alpha}, \omega_{H_{\alpha}}) \cong H^0(C, \omega_C \ot \alpha). \]
+Set $\L_{\alpha} := \omega_C \ot \alpha$. Since $\alpha$ is nontrivial of degree $0$, Riemann--Roch gives
+\[ h^0(C, \L_{\alpha}) = \deg{\L_{\alpha}} + 1 - g(C) = 4 + 1 - 3 = 2. \]
+Furthermore, $\L_{\alpha}$ is basepoint-free. Indeed, if $p \in C$ were a base point, then $h^0(C, \L_{\alpha}(-p)) = 2$ and Riemann--Roch would give $h^0(C, \alpha(p)) = 1$. Hence $\alpha \cong \cO_C(q-p)$ for some $q \in C$, so $\alpha^{\ot 2} \cong \cO_C$ implies $2q \sim 2p$, producing a $\mathfrak{g}^1_2$ on $C$, contradicting that $C$ is non-hyperelliptic.
+\par
+Thus the complete linear series $|\L_{\alpha}|$ defines a morphism
+\[ f_{\alpha} : C \to \P^1 \]
+of degree $\deg{\L_{\alpha}} = 4$. Any element of $K$ acts trivially on $\RA(H_{\alpha})$, hence trivially on the projective space
+\[ \P(H^0(H_{\alpha}, \omega_{H_{\alpha}})) = \P(H^0(C, \L_{\alpha})). \]
+Therefore, $f_{\alpha}$ is $K$-invariant and factors through the quotient $C \to C/K$. Since $K \subset \Aut(C)$ acts faithfully on $C$, the quotient map has degree $\# K$, so
+\[ 4 = \deg{f_{\alpha}} = \# K \cdot \deg{(C/K \to \P^1)}. \]
+Hence $\# K$ divides $4$, as claimed.
+\end{proof}
+
+
+We use the above lemma to ensure that the curves produced have extra automorphisms. The relevance of computing these genus $2$ curves in such detail comes from the isogeny decomposition into Pryms of \etale $2$-torsion covers. In the following, $C$ is an arbitrary smooth projective curve over $K$.
+
+\begin{lemma} \label{lemma:prym_decomposition}
+Let $X \to C$ be an \etale cover over $K$ defined by some subgroup $M \subset H^1_{\et}(C_{\ol{K}}, \FF_{2})$. Then the natural map
+\[ \Jac(X) \to \Jac(C) \times \prod_{\alpha \in M \sm 0} \Prym(D_{\alpha}/C) \]
+is an isogeny. 
+\end{lemma}
+
+\begin{proof}
+It suffices to prove that the map is an isomorphism on $H^1_{\et}(-, \Q_{\ell})$. The cover $X_{\ol{K}} \to C_{\ol{K}}$ is Galois with deck transformation group $M^{\vee}$. Furthermore, the map $\Jac(X_{\ol{K}}) \to \Jac(D_{\alpha, \ol{K}})$ induces $H^1_{\et}(X_{\ol{K}}, \Q_{\ell})^{\alpha^{\vee}} \subset H^1_{\et}(X_{\ol{K}}, \Q_{\ell})$ on cohomology where $\alpha^{\vee} \subset M^{\vee}$ is the kernel of the map $\varphi \mapsto \varphi(\alpha)$. Consider the intersection of two such subspaces,
+\[ H^1_{\et}(X_{\ol{K}}, \Q_{\ell})^{\alpha_1^{\vee}} \cap H^1_{\et}(X_{\ol{K}}, \Q_{\ell})^{\alpha_2^{\vee}} = H^1_{\et}(X_{\ol{K}}, \Q_{\ell})^{M^{\vee}} = H^1_{\et}(C_{\ol{K}}, \Q_{\ell}) \]
+because $\alpha_1^{\vee}$ and $\alpha_2^{\vee}$ generate all of $M^{\vee}$ if $\alpha_1 \neq \alpha_2$. This implies the map is injective on $H^1_{\et}(-, \Q_{\ell})$. Furthermore, Riemann-Roch gives
+\[ g(X) = (\# M) (g(C) - 1) + 1 \]
+and each Prym has dimension $g(C) - 1$ so the RHS has dimension
+\[ (\# M - 1) \cdot (g(C) - 1) + g(C) = (\# M) \cdot (g(C) - 1) + 1  = \dim{\Jac(X)} \]
+proving that the surjection must be an isogeny.
+\end{proof}
+
+\subsection{Results on the structure of Pryms}
+
+Here we record the automorphism groups, isogeny decomposition of the Jacobians, and the decomposition of $H^1_{\et}(-, \FF_2)$ as a module for the automorphism groups. These calculations were performed in the \textsc{Magma} script \cite[\texttt{aut\_j2\_modules.m}]{church:github}. We then go on to record the properties of interesting Prym varieties (in terms of their associated genus $2$ curve) associated to certain automorphism orbits of $2$-torsion classes. These latter computations are performed using the \textsc{Magma} script \cite[\texttt{steiner\_computations.m}]{church:github}. 
+
+\subsubsection{The twisted Klein quartic}
+
+$\Aut(C_{\mathrm{twist}, \ol{\Q}}) \cong \PSL_2(\FF_7)$ and $\Jac(C_{\mathrm{twist}})_{\ol{\Q}} \sim E_{\Q(\sqrt{-7})}^3$ where $E_{\Q(\sqrt{-7})}$ is an elliptic curve with CM by $\Q(\sqrt{-7})$. More canonically, we can choose the $\Q$-model $E_{\Q(\sqrt{-7})} = \Jac(X_0(49))$ so that the isogeny exists over $\Q$. As previously computed,
+\[ H^1_{\et}(C_{\mathrm{twist}, \ol{\Q}}, \FF_2) = M \oplus M^{\vee} \]
+where $M$ is an irreducible $3$-dimensional $\PSL_2(\FF_7)$-representation. Furthermore, as a set $H^1_{\et}(C_{\mathrm{twist}, \ol{\Q}}, \FF_2) \sm \{ 0 \}$ decomposes into 4 orbits. Each Prym is isogenous to the square of some elliptic curve. We record the minimal polynomials of the $j$-invariants (computed for the Legendre model as explained in the previous section) in the following table
+\begin{center} \label{table:Klein_orbits}
+\begin{tabular}{c|c|c|c}
+orbit \# & size & $\RA$ &  minimal polynomial of $j$
+\\
+\hline
+1 & 28 & $S_3$ & $j^2 + 13856 j - 26578688$
+\\
+2 & 21 & $(\Z/2)^2$ & $j^2 + 7184 j + 16777216$
+\\
+3,4 & 7 & $S_3$ & $\substack{j^4 - 103439 j^3 + 6670405329 j^2 + 31128229267744 j \\ + 148381159092130048}$
+\end{tabular}
+\end{center}
+where orbits $\# 3,4$ correspond to the nonzero elements of $M$ and $M^{\vee}$ respectively. The orbits $\#1, \#3,\#4$ produce Pryms whose genus two curves have $\RA \cong S_3$ while orbit $\#2$ produces $\RA \cong (\Z / 2)^2$. This explains why each Prym is isogenous to the square of an elliptic curve. Orbits $\# 3$ and $\# 4$ are exchanged under the Galois action of $\Q(\sqrt{-7})$ (in particular, the Pryms live over $\Q(\sqrt{-7})$ and are exchanged) so we record them once in the table. We label a choice of root as $j_1, j_2, j_{3,4}$ respectively. Notice that $\Q(j_1) = \Q(\sqrt{7})$ and $\Q(j_2) = \Q(\sqrt{-7})$ while $\Q(j_{3,4})$ is a degree $2$ extension of $\Q(\sqrt{-7})$ which is not Galois over $\Q$ (labeled as \cite{lmfdb:nf-4.0.1372.1} in the LMFDB). 
+\par 
+There is a very clear explanation of the orbit structure of $ H^1_{\et}(C_{\mathrm{twist}, \ol{\Q}}, \FF_2)$ using the isomorphism $\PSL_2(\FF_7) \cong \GL_3(\FF_2)$. The $3$-dimensional module $M$ becomes the standard representation of $\GL_3(\FF_2)$ whose nonzero elements are the points of the \textit{Fano plane} $\P^2(\FF_2)$. We identify the nonzero elements of $M^{\vee}$ with \textit{lines} in the Fano plane and the $\GL_3(\FF_2)$-invariant pairing $M \ot M^{\vee} \to \FF_2$ with the incidence pairing. Note that addition is determined by the ternary relation $\alpha_1 + \alpha_2 + \alpha_3 = 0$. For three points of the Fano plane this corresponds to being \textit{collinear}. For lines, this corresponds to being \textit{concurrent} meaning they all pass through the same point. In each case, there is a uniquely determined dual object (three collinear define a distinguished line; three concurrent lines define a distinguished point) whose kernel defines the $2$-dimensional $\FF_2$-subspace $\left< \alpha_1, \alpha_2 \right>$ whose nonzero points are $\alpha_1, \alpha_2, \alpha_3$. The orbits $\# 3$ and $\# 4$ are just the points and lines of the Fano plane respectively. Orbit $\# 2$ consists of \textit{flags} $(P, \ell)$ with $P \in \ell$ i.e.\ $\inner{\ell}{P} = 0$. Orbit $\# 1$ consists of \textit{anti-flags} $(P, \ell)$ with $P \notin \ell$ i.e.\ $\inner{\ell}{P} = 1$. This description will be used later to find collinear points in these orbits. 
+
+\subsubsection{The Fermat quartic}
+
+The Fermat quartic has automorphism group $\Aut(C_{\mathrm{Fermat}, \ol{\Q}}) \cong (\Z / 4)^2 \rtimes S_3$ given by permuting the variables and scaling the coordinates by $4$-th roots of unity. The quotient by this group presents $C_{\mathrm{Fermat}}$ as a Galois \Belyi curve for the triangle group $\Delta(2,3,8)$. The representation theory of its automorphism group forces $\Jac(C_{\mathrm{Fermat}})_{\ol{\Q}} \sim E_{\Q(\sqrt{-1})}^3$ where $E_{\Q(\sqrt{-1})}$ is an elliptic curve with CM by $\Q(\sqrt{-1})$. In fact, the Fermat quartic is the modular curve $X_{\mathrm{sp}}(8)$ and the map $X_{\mathrm{sp}}(8) \to X_{\mathrm{sp}}^+(8)$ (see \cite{lmfdb:mc-8.48.1.bv.1}) produces an isogeny with the $\Q$-model $E_{\Q(\sqrt{-1})} = \Jac(X_{\mathrm{sp}}^+(8))$ given by the elliptic curve with LMFDB label \cite{lmfdb:ec-32.a1}.
+The module structure of $H^1_{\et}(C_{\mathrm{Fermat}, \ol{\Q}}, \FF_2)$ is not semisimple. It has a composition series,
+\[ M_1 \subset M_3 \subset M_5 \subset M_6 \]
+where $\dim{M_i} = i$. The quotients are irreducible modules of dimensions $1,2,2,1$ over $\FF_2$ (in particular the $1$-dimensional subquotients are trivial modules) and the successive extensions are all non-split. As a set $H^1_{\et}(C_{\mathrm{Fermat}, \ol{\Q}}, \FF_2) \sm \{ 0 \}$ decomposes into 5 orbits:
+\begin{center} \label{table:Fermat_orbits}
+\begin{tabular}{c|c|c|c}
+orbit \# & size & $\RA$ & minimal polynomial of $j$
+\\
+\hline
+1 & 24 & $(\Z/2)$ & ----
+\\
+2,3 & 16 & $S_3$ & $\substack{j^4 + 73216 j^3 + 1533640704 j^2 + 6119514701824 j \\ - 15081210455785472}$
+\\
+4 & 6 & $(\Z / 2)^2$ & $j - 128$
+\\
+5 & 1 & $S_4$ & $j - 8000$
+\end{tabular}
+\end{center}
+where orbit $\#5$ corresponds to the nonzero element of $M_1$ and orbit $\# 4$ corresponds to the elements of $M_3 \sm M_1$. Then $M_5 \sm M_3$ corresponds to orbit $\#1$ and the remaining elements in $M_6 \sm M_5$ split into the remaining two orbits $\# 2,3$ exchanged by the Galois action on $\Q(i)$. Orbit $\# 1$ has its Prym decompose into two non-isogenous elliptic curves whose invariants we do not report here. The important orbits for us will be $\# 4,5$. Here $j = 128$ is non-CM and $j = 8000$ corresponds to CM by $\Q(\sqrt{-2})$. We label these elliptic curves as $E_{128}$ and $E_{\Q(\sqrt{-2})}$ respectively. 
+
+\subsubsection{The $S_4$ Edge quartic}
+
+The Edge quartic $C_{\mathrm{Edge}}$ has automorphism group $S_4$ and a (geometric) isogeny decomposition $\Jac(C_{\mathrm{Edge}}) \sim E_{15a1}^3$ related to modular curves since $E_{15a1} = \Jac(X_0(15))$ is the elliptic curve with LMFDB label \cite{lmfdb:ec-15.a5}. The module structure of $H^1_{\et}(C_{\mathrm{Edge}, \ol{\Q}}, \FF_2)$ is not semisimple. It is a sum of two indecomposable dual $3$-dimensional representations $M \oplus M^{\vee}$ where $M$ has a composition series $M_1 \subset M$ with quotients of dimension $1,2$. As a set, $H^1_{\et}(C_{\mathrm{Edge}, \ol{\Q}}, \FF_2) \sm \{ 0 \}$ decomposes into 10 orbits:
+\begin{center} \label{table:Edge_orbits}
+\begin{tabular}{c|c|c|c}
+orbit \# & size & $\RA$ & minimal polynomial of $j$
+\\
+\hline
+1 & 12 & $\Z /2$ & ---
+\\
+2 & 12 & $\Z /2$ & ---
+\\
+3 & 12 & $\Z /2$ & ---
+\\
+4 & 6 & $\Z /2$ & ---
+\\
+5 & 6 & $\Z /2$ & ---
+\\
+6 & 4 & $D_6$ & $j - 54000$
+\\
+7 & 4 & $S_3$ & $j^2 - (775180000/729)j + 40873252000000/6561$
+\\
+8 & 3 & $\Z /2$ & ---
+\\
+9 & 3 & $(\Z /2)^2$ & $j + 11664/625$
+\\
+10 & 1 & $S_3$ & $j^2 - (541157005431/15625) j + 25745806977673041/390625$
+\end{tabular}
+\end{center}
+
+\subsection{The $16$-torsion congruence for $X_{17, \mathrm{Fermat}}$} \label{sec:17_Fermat}
+
+Let $\alpha \in H^1_{\et}(C_{\mathrm{Fermat}, \ol{\Q}}, \FF_2)$ be an element of the $6$-orbit (label $\# 4$ in table~\ref{table:Fermat_orbits}). The corresponding $\Prym(D_{\alpha, \ol{\Q}} / C_{\mathrm{Fermat},\ol{\Q}})$ is only defined over $\Q(\sqrt{2})$ since the class $\alpha$ is only Galois-fixed over $\Q(\sqrt{2})$. The associated hyperelliptic curve $H$ has $\RA(H_{\ol{\Q}}) = (\Z/2)^2$ and its elliptic curve quotients both have $j = 128$. Furthermore, the Legendre parameter is $\rho = -i$ so the Legendre model has full rational $2$-torsion over $\Q(i)$. We may choose a $\Q$-model $E_{128} = \{y^2 = x^3 + x^2 + x + 1\}$ (since we are only interested in supersingularity mod $\FF_p$, a geometric property which at good primes is independent of the choice of model) which corresponds to LMFDB label \cite{lmfdb:ec-128.a2}. This $\Q$-model does have full $2$-torsion over $\Q(i)$. A remarkable coincidence forces the primes of supersingular reduction of $E$ to satisfy exactly the congruence conditions necessary for other CM elliptic curves attached to the Fermat to be simultaneously supersingular. These congruences arise from the $16$-torsion representation of $E_{128}$ as follows.
+
+\begin{theorem} \label{thm:Fermat_congruence}
+Suppose that $p \in \Z$ is a supersingular prime of $E_{128} / \Q$. Then $p \equiv -1 \mod 16$.
+\end{theorem}
+
+\begin{proof}
+Let $E$ denote $E_{128}$ for the purpose of the proof. The LMFDB tabulates the images of the $\ell$-adic Galois representations of $E$. These have full image $\GL_2(\Z_{\ell})$ except for $\ell = 2$ where the image of $\rho_{E, 2} : G_{\Q} \to \GL_2(\Z_2)$ has index $96$ with explicit generators presented in the database. In particular, the $16$-torsion representation,
+\[ \bar{\rho}_{E,16} : G_{\Q} \to \GL_2(\Z / 16\Z) \]
+has image $H \subset \GL_2(\Z / 16 \Z)$ generated by matrices:
+\[ 
+\begin{pmatrix}
+0 & - 1
+\\
+- 1 & 0
+\end{pmatrix}
+\quad 
+\begin{pmatrix}
+-3 & 6
+\\
+-6 & 1
+\end{pmatrix}
+\quad 
+\begin{pmatrix}
+1 & 4
+\\
+-6 & -3
+\end{pmatrix}
+\quad 
+\begin{pmatrix}
+1 & -4
+\\
+4 & 1
+\end{pmatrix}. \]
+By a direct calculation, the subgroup $H$ has the property that for all $\gamma \in H$ if $\tr{\gamma} = 0$ then $\det{\gamma} = -1$. In general, $\rho_{E,2}(\Frob_p)$ has characteristic polynomial
+\[ X^2 - a_p X + p \]
+If $p$ is a supersingular prime then $a_p = 0$ so $\rho_{E,2}(\Frob_p)$ has trace $0$ and determinant $p$. Therefore, reducing mod $16$, we see that $\bar{\rho}_{E,16}(\Frob_p)$ has trace $0$ and hence its determinant must satisfy
+\[ \det{\bar{\rho}_{E,16}(\Frob_p)} = p \equiv -1 \mod 16. \]
+\end{proof}
+
+This $2$-torsion phenomenon has the following consequence. Let $X_{17, \mathrm{Fermat}}$ be the genus $17$ curve obtained as the degree $8$ \etale cover $X_{17, \mathrm{Fermat}} \to C_{\mathrm{Fermat}}$ corresponding to the submodule $M_3 \subset H^1_{\et}(C_{\mathrm{Fermat}, \ol{\Q}}, \FF_2)$. Since $C_{\mathrm{Fermat}}$ has a rational point, the Brauer obstruction vanishes, and since $M_3$ is $G_{\Q}$-stable (being the unique $\Aut(C_{\mathrm{Fermat}, \ol{\Q}})$-invariant $3$-dimensional subspace), the cover $X_{17, \mathrm{Fermat}} \to C_{\mathrm{Fermat}}$ descends to $\Q$. Since $M_3$ is $\Aut(C_{\mathrm{Fermat}, \ol{\Q}})$-invariant, there is an exact sequence
+\[ 0 \to M_3 \to \Aut((X_{17, \mathrm{Fermat}})_{\ol{\Q}}) \to \Aut(C_{\mathrm{Fermat}, \ol{\Q}}) \to 0. \]
+Furthermore, since $X_{17, \mathrm{Fermat}} \to C_{\mathrm{Fermat}}$ is \etale, the action $\Aut((X_{17, \mathrm{Fermat}})_{\ol{\Q}}) \acts (X_{17, \mathrm{Fermat}})_{\ol{\Q}}$ implies that $X_{17, \mathrm{Fermat}}$ is uniformized by the triangle group $\Delta(2,3,8)$.
+
+\begin{cor}
+The genus $17$ curve $X_{17, \mathrm{Fermat}}$ has infinitely many primes of supersingular reduction.
+\end{cor}
+
+\begin{proof}
+By Lemma~\ref{lemma:prym_decomposition}, $\Jac(X_{17, \mathrm{Fermat}})_{\ol{\Q}}$ has an isogeny decomposition into $\Prym(D_{\alpha}/C_{\mathrm{Fermat}})_{\ol{\Q}}$ for $\alpha \in M_3$ and $\Jac(C_{\mathrm{Fermat}})_{\ol{\Q}} \sim E_{\Q(\sqrt{-1})}^3$. Furthermore, we know that for $\alpha \in M_1$ the unique nontrivial element, $\Prym(D_{\alpha}/C_{\mathrm{Fermat}})_{\ol{\Q}} \sim E_{\Q(\sqrt{-2})}^2$, and for $\alpha \in M_3 \sm M_1$ we have $\Prym(D_{\alpha}/C_{\mathrm{Fermat}})_{\ol{\Q}} \sim E_{128}^2$. Since $E_{128}$ is defined over $\Q$, Elkies' theorem applies to show that $E_{128}$ has infinitely many primes of supersingular reduction. Furthermore, by Theorem~\ref{thm:Fermat_congruence} each of these infinitely many supersingular primes satisfies $p \equiv -1 \mod 16$. Thus $p$ is inert in $\Q(i)$ and in $\Q(\sqrt{-2})$ since $p \equiv -1 \mod 8$ implies that
+\[ \legendre{-2}{p} = \legendre{2}{p} \cdot \legendre{-1}{p} = 1 \cdot (-1) = -1. \] 
+Hence $E_{\Q(\sqrt{-1})}$ and $E_{\Q(\sqrt{-2})}$ are both supersingular mod $p$ and therefore $\Jac(X_{17, \mathrm{Fermat}})$ is supersingular mod $p$.
+\end{proof}
+
+Since Elkies' theorem gives no control on the residue classes of the supersingular primes it produces, usually one cannot force the curve to have infinitely many primes of supersingular reduction in the correct arithmetic progressions to force some other CM curves to concurrently also have supersingular reduction.
+The amazing coincidence that occurs for $X_{17, \mathrm{Fermat}}$ is that the $16$-torsion representation forces the correct congruences to always hold. We will see a similar congruence coincidence for the Klein quartic but unfortunately not for the classes that form a subrepresentation of the automorphism group.
+
+
+\subsection{New counterexamples to the Shioda conjecture} \label{section:new_counterexamples}
+
+Let $C := (X_{17, \mathrm{Fermat}})_{\ol{\Q}}$ be the genus $17$ curve constructed in the previous section. Let $X \to (C \times C)/G$ be the product-quotient surface where $G \cong D_6$ via the unique embedding $D_6 \embed G_{768} := \Aut(C)$ up to conjugacy. Here $G_{768}$ is a non-split extension
+\[ 0 \to (\Z/2\Z)^3 \to G_{768} \to (\Z/4\Z)^2 \rtimes S_3 \to 0. \]
+In the GAP Small Groups library, this group is \texttt{SmallGroup(768, 1085341)}. It is easy to compute that $\pi_1(X) = 1$ directly. Using the method described in \S\ref{section:basket} of the previous chapter, $Y = (C \times C)/G$ has the following basket of singularities
+\[ \cB(Y) := \{ 64 \times A_1, 2 \times A_2, 2 \times \tfrac{1}{3} (1,1) \}. \]
+Plugging into Proposition~\ref{prop:chern_numerics} gives Chern numbers:
+\[ K_X^2 = 170 \quad \quad c_2(X) = 190 \]
+and using Corollary~\ref{cor:numerical_criterion}:
+\[ (K_X - E)^2 = 170 - 2 \cdot 64 - 2 \cdot 2 - 5 \cdot 2 = 28 \]
+is positive and hence $\omega_X(-E)$ is big. This surface has Hodge diamond:
+\begin{center}
+\begin{tabular}{ccccc}
+ &  & $1$ &  &  \\
+ & $0$ &  & $0$ &  \\
+$29$ &  & $130$ &  & $29$ \\
+ & $0$ &  & $0$ &  \\
+ &  & $1$ &  &  \\
+\end{tabular}    
+\end{center}
+and is of general type. We check these facts and the positivity of $(K_X - E)^2$ for all partial twists in the \textsc{Magma} script \cite[\texttt{examples/group768.m}]{church:github}. This gives a new counterexample to the Shioda conjecture at the infinitely many supersingular primes of $C$. The first few such primes are 
+\[ 31, 223, 383, 479, 2591, 5279, 8191, \dots. \]
+
+\subsection{The $4$-torsion obstruction for $X_{9, \mathrm{Klein}}$ (REVIEW)} \label{sec:Klein_supersingular_covers}
+
+
+The two Hurwitz curves $X_{17}$ of genus $17$ are constructed from the two submodules $M, M^{\vee}$ in the decomposition $H^1_{\et}(C_{\mathrm{twist},\ol{\Q}}, \FF_2) = M \oplus M^{\vee}$ into irreducible modules for $\Aut(C_{\mathrm{twist},\ol{\Q}}) \cong \PSL_2(\FF_7)$. Therefore, $\Jac(X_{17})$ has an isogeny decomposition into $\Jac(C_{\mathrm{twist}})$ and copies of $\Prym(D_{\alpha}/C_{\mathrm{twist}})$ for $\alpha \in H^1_{\et}(C_{\mathrm{twist},\ol{\Q}}, \FF_2)$ in orbit $\# 3$ or $\# 4$ by applying Lemma~\ref{lemma:prym_decomposition}. Unfortunately, since $j_{3,4}$ lives in a totally complex number field we don't have the techniques at our disposal to prove that $E_{j_{3,4}}$ has infinitely many primes of supersingular reduction. This curve does define a $\Q(\sqrt{-7})$-point of the modular curve $X^+_0(3) := X_0(3) / w_3$ due to the $3$-isogeny between its conjugates over $\Q(\sqrt{-7})$ but unfortunately this is an imaginary quadratic point so we cannot apply the results of \cite{jao_supersingular}.
+\par 
+However, orbit $\# 1$ corresponds to a Prym whose elliptic factors have real $j$-invariant so Elkies' theorem immediately applies. Moreover, it turns out there are three classes $\alpha_1, \alpha_2, \alpha_3 \in H^1_{\et}(C_{\mathrm{twist},\ol{\Q}}, \FF_2)$ lying in orbit $\#1$ that are \textit{collinear} in the sense that $\alpha_1 + \alpha_2 + \alpha_3 = 0$. Indeed, recall that we identified orbit $\# 1$ with anti-flags on the Fano plane. Thus $\alpha_i$ corresponds to a pair $(P_i, \ell_i)$ with $P_i \notin \ell_i$. The relation $\alpha_1 + \alpha_2 + \alpha_3 = 0$ says that $P_1, P_2, P_3$ are collinear and $\ell_1, \ell_2, \ell_3$ are concurrent. 
+
+
+\definecolor{lineA}{RGB}{0,100,180}    % blue
+\definecolor{lineB}{RGB}{180,30,30}    % red
+\definecolor{lineC}{RGB}{0,130,60}     % green
+
+\begin{figure}
+\centering
+\begin{tikzpicture}[
+    every node/.style={font=\small},
+    point/.style={circle, fill, inner sep=2pt},
+    antiflag point/.style={circle, fill=black, draw=black, inner sep=2.5pt},
+    Q point/.style={circle, fill=black, draw=black, inner sep=2.5pt},
+  ]
+
+  % Coordinates: equilateral triangle, centroid at origin
+  % Side length 4*sqrt(3), circumradius 4, nine-point radius 2
+  \coordinate (1) at (0, 4);              % top vertex = Q
+  \coordinate (2) at (-3.464, -2);        % bottom-left vertex
+  \coordinate (3) at (3.464, -2);         % bottom-right vertex
+  \coordinate (4) at (0, -2);             % midpoint of 2--3
+  \coordinate (5) at (1.732, 1);          % midpoint of 1--3
+  \coordinate (6) at (-1.732, 1);         % midpoint of 1--2
+  \coordinate (7) at (0, 0);              % center
+
+  % --- Other lines (not through Q), drawn first so they're behind ---
+  % {2,4,3}: bottom side
+  \draw[gray!60] (2) -- (3);
+  % {2,7,5}: median from 2
+  \draw[gray!60] (2) -- (5);
+  % {3,7,6}: median from 3
+  \draw[gray!60] (3) -- (6);
+
+  % --- Line m = {4,5,6}: nine-point circle = incircle (equilateral) ---
+  % Center = (0, 0), radius = 2; tangent to sides at midpoints
+  \draw[thick, black] (0, 0) circle[radius=2];
+
+  % --- Lines through Q = 1 (colored by anti-flag pairing) ---
+  % ell_1 = {1,6,2}: left side -- paired with point 5
+  \draw[thick, lineA] (1) -- (2);
+  % ell_2 = {1,5,3}: right side -- paired with point 4
+  \draw[thick, lineB] (1) -- (3);
+  % ell_3 = {1,7,4}: vertical median -- paired with point 6
+  \draw[thick, lineC] (1) -- (4);
+
+  % --- Points ---
+  % Q = point 1
+  \node[Q point, label={above:$1$}] at (1) {};
+
+  % Points on m: colored to match paired line
+  \node[circle, fill=lineB, inner sep=2.5pt,
+    label={below:$4$}] at (4) {};
+  \node[circle, fill=lineA, inner sep=2.5pt,
+    label={[anchor=west, xshift=2pt]right:$5$}] at (5) {};
+  \node[circle, fill=lineC, inner sep=2.5pt,
+    label={[anchor=east, xshift=-2pt]left:$6$}] at (6) {};
+
+  % Other points
+  \node[point, label={[gray!80]below left:$2$}] at (2) {};
+  \node[point, label={[gray!80]below right:$3$}] at (3) {};
+  \node[point, label={[gray!80]above right:$7$}] at (7) {};
+
+  % --- Line m label, inside the circle ---
+  \node[fill=white, inner sep=1pt, font=\normalsize] at (1.2, -1.6) {$m = \{4,5,6\}$};
+
+  % --- Anti-flag annotations ---
+  \node[lineB, anchor=north, font=\footnotesize] at (0, -2.7)
+    {$\bigl(4,\; \ell_2\!=\!\{1,5,3\}\bigr)$};
+
+  \node[lineA, anchor=west, font=\footnotesize] at (2.1, 1.6)
+    {$\bigl(5,\; \ell_1\!=\!\{1,6,2\}\bigr)$};
+
+  \node[lineC, anchor=east, font=\footnotesize] at (-2.1, 1.6)
+    {$\bigl(6,\; \ell_3\!=\!\{1,7,4\}\bigr)$};
+\end{tikzpicture}
+\caption{Collinear triple of anti-flags in $J[2] \cong M \oplus M^{\vee}$.
+    Three points collinear on the line $m = \{4,5,6\}$ meaning $P_4 + P_5 + P_6 = 0$ in $M$. Three lines concurrent through $P_1$ meaning $\ell_1 + \ell_2 + \ell_3 = 0$ in $M^{\vee}$.
+    Each point is colored to match its paired line ($P_i \notin \ell_i$):
+    \textcolor{lineB}{$4 \leftrightarrow \ell_2 = \{1,5,3\}$}\,,\quad
+    \textcolor{lineA}{$5 \leftrightarrow \ell_1 = \{1,6,2\}$}\,,\quad
+    \textcolor{lineC}{$6 \leftrightarrow \ell_3 = \{1,7,4\}$}.
+    }
+\end{figure}
+
+The practical consequence is that the $\FF_2$-vector space 
+\[ V := \left< \alpha_1, \alpha_2 \right> \subset H^1_{\et}(C_{\mathrm{twist},\ol{\Q}}, \FF_2) \]
+consists entirely of classes of orbit $\# 1$ or the trivial orbit. These classes are all defined by bitangent lines over the field $\Q(\sqrt{-7})$. Therefore, we may define $X_{9, \mathrm{Klein}} \to C_{\mathrm{twist}, \Q(\sqrt{-7})}$ to be the \etale cover defined by $V$ with deck transformation group $V^{\vee}$. Then Lemma~\ref{lemma:prym_decomposition} gives a decomposition
+\[ \Jac(X_{9, \mathrm{Klein}})_{\ol{\Q}} \sim \Jac(C_{\mathrm{twist}})_{\ol{\Q}} \times \prod_{\alpha \in V \sm 0} \Prym(D_{\alpha}/C_{\mathrm{twist}})_{\ol{\Q}} \sim E_{j_1}^{6} \times E_{\Q(\sqrt{-7})}^3. \]
+
+
+Another remarkable coincidence that allows us to conclude $X_{9, \mathrm{Klein}}$ has infinitely many primes of supersingular reduction occurs in the congruence classes satisfied by rational primes above which $E_{j_1}$ is supersingular. Let $E$ denote the particular $\Q(\sqrt{7})$-model with $j$-invariant $j_1$ labeled \cite{lmfdb:ecnf-2.2.28.1-16.1-a1} in the LMFDB. This curve $E$ is associated to the weight $2$ newform $f \in S_2^{\mathrm{new}}(112, \chi_f)$ recorded in the LMFDB as \cite{lmfdb:mf-112.2.f.b} in the sense that the abelian surface $A = \Res^{\Q(\sqrt{7})}_{\Q} E$ over $\Q$ satisfies $\rho_{A,\ell} \cong \rho_{f,\ell}$. The nebentypus character of $f$ is the quadratic character $\chi_f(\bullet) = \legendre{28}{\bullet}$.
+Furthermore, the coefficient field of $f$ is $K_f = \Q(\zeta_3)$ in which $2$ is inert. Therefore, since the $\Q(\zeta_3)$-multiplication implies that $E$ is isogenous to its Galois conjugate, we see that $E$ is supersingular at $\p \mid p$ iff $A$ is supersingular at $p$ iff\footnote{The equivalence is only for $p$ sufficiently large, see \cite[Proposition~5.2]{bayer_pilar:hasse-witt_modular_curves} and \cite[Lemma 4]{wang:distribution_supersingular_primes}. However the reverse implication $a_p(f) = 0$ implies $A$ is supersingular at $p$ holds for all primes of good reduction.} $a_p(f) = 0$.
 
 \begin{thm} \label{thm:numerical_coincidence}
 Let $p$ be an odd prime split in $\Q(\sqrt{-7})$. Then $a_p(f) \neq 0$.
 \end{thm}
 
-This congruence restriction on $p$ such that $a_p(f) = 0$ gives our main result.
+This congruence restriction on primes $p$ such that $a_p(f) = 0$ gives our main result.
 
 \begin{cor}
-$X_{17}$ has infinitely many primes of supersingular reduction.
+$X_{9, \mathrm{Klein}}$ has infinitely many primes of supersingular reduction.
 \end{cor}
 
 \begin{proof}
-Since $E / \Q(\sqrt{7})$ has real $j$-invariant, Elkies' theorem implies it has infinitely many primes of supersingular reduction i.e.\ there are infinitely many rational primes for which $a_p(f) = 0$. By the theorem, each such $p$ must be inert in $\Q(\sqrt{-7})$ and thus is automatically a prime of supersingular reduction of the elliptic curve $E_0 / \Q$ since $E_0$ has CM by $\Q(\sqrt{-7})$. Since $\Jac(X_{17}) \sim E^{14} \times E_0^3$ geometrically this implies that every prime lying over the infinitely many rational primes with $a_p(f) = 0$ gives supersingular reduction for $X_{17}$.
+Since $E_{j_1} / \Q(\sqrt{7})$ has real $j$-invariant, Elkies' theorem implies it has infinitely many primes of supersingular reduction i.e.\ there are infinitely many rational primes for which $a_p(f) = 0$. By the theorem, each such $p$ must be inert in $\Q(\sqrt{-7})$ and thus is automatically a prime of supersingular reduction of the elliptic curve $E_{\Q(\sqrt{-7})} / \Q$ since $E_{\Q(\sqrt{-7})}$ has CM by $\Q(\sqrt{-7})$. Since $\Jac(X_{9, \mathrm{Klein}})_{\ol{\Q}} \sim E_{j_1}^{6} \times E_{\Q(\sqrt{-7})}^3$ geometrically, this implies that every prime of good reduction lying over the infinitely many rational primes with $a_p(f) = 0$ gives supersingular reduction for $X_{9, \mathrm{Klein}}$.
 \end{proof}
 
 To prove the theorem, we consider the $4$-torsion Galois representation of $A$,
@@ -566,21 +1095,20 @@ To prove the theorem, we consider the $4$-torsion Galois representation of $A$,
     G_{\Q} \arrow[rr, bend left, "\bar{\rho}_{A,4}"] \arrow[r, "{\rho_{A,2}}"'] & \GSp_4(\Z_2) \arrow[r] & \GSp_4(\Z/4\Z) \arrow[r] & \GSp_4(\FF_2)
     \end{tikzcd}
 \end{center}
+We write $K = \Q(\sqrt{7})$ and $L = \Q(\sqrt{-7})$. The $4$-torsion representation of $A = \Res_{K/\Q} E$ which equals
+\[ \bar{\rho}_{A,4} = \Ind^{G_{\Q}}_{G_{K}} \bar{\rho}_{E,4} \]
+satisfies the identity:
+\[ \bar{\rho}_{A,4} |_{G_L} \cong \Ind^{G_{L}}_{G_{KL}} \left( \bar{\rho}_{E,4}|_{G_{KL}} \right). \]
+This follows from applying the Mackey restriction formula
+\[ \Res^G_K \Ind^G_H V \cong \bigoplus_{s \in K \backslash G / H} \Ind^{K}_{K \cap \sigma H \sigma^{-1}} \Res^{\sigma H \sigma^{-1}}_{K \cap \sigma H \sigma^{-1}} V^{\sigma} \] 
+and using $G_K \cdot G_L = G_{\Q}$ with $G_K$ and $G_L$ normal. We will see that $\bar{\rho}_{E,4}|_{G_{KL}}$ has exponent $2$ meaning its image consists of elements of order dividing $2$. In fact, we will need the stronger claim that $\bar{\rho}_{A,4}|_{G_L}$ has exponent $2$, a fact that does not follow from the structure of the induced representation. Indeed, it requires some additional non-trivial information about how $G_L$ interacts with $\bar{\rho}_{E,4}|_{G_{KL}}$.
 
 \begin{proof}[Proof of Theorem~\ref{thm:numerical_coincidence}]
 Recall that $\rho_{f, \ell}(\Frob_p)$ has characteristic polynomial
-\[ X^2 - a_p(f) X + p \, \chi_f(p) \]
+\[ T^2 - a_p(f) T + p \, \chi_f(p). \]
 Therefore, if $a_p(f) = 0$ then $\rho_{f,2}(\Frob_p^2)$ is the scalar matrix $-p \, \chi_f(p)$. In particular, it is also scalar under the isomorphism $\rho_{f,2} \cong \rho_{A,2}$ and hence on $4$-torsion we see that $\bar{\rho}_{A,4}(\Frob_p^2)$ is also the scalar matrix  $-p \, \chi_f(p) \mod 4$.
-
-We compute the number field $K_4$ trivializing the $4$-torsion $A[4]$ (as the splitting field of the $4$-division polynomial of $A$, computed in Magma). This is number field \cite[\href{https://www.lmfdb.org/NumberField/16.0.24759631762948096.2}{Number field 16.0.24759631762948096.2}]{lmfdb} in the LMFDB. There is a factorization,
-\begin{center}
-    \begin{tikzcd}
-    G_{\Q} \arrow[d, two heads] \arrow[r, "\bar{\rho}_{A,4}"] & \GSp_4(\Z/4\Z)
-    \\
-    \Gal(K_4/\Q) \arrow[ru]
-    \end{tikzcd}
-\end{center}
-$K_4$ is Galois over $\Q$ with Galois group $D_4 \times C_2$. There are two important quadratic subfields of $K_4$
+\par 
+We compute the number field $K_4 = K(E[4])$ trivializing the $4$-torsion $E[4]$ (computed in Magma from the splitting field of the $4$-division polynomial of $E$). The number field $K_4$ is Galois over $\Q$ with Galois group $D_4 \times C_2$ and is recorded as \cite{lmfdb:nf-16.0.24759631762948096.2} in the LMFDB. Some of this is easily explained from the structure of $E$. For example, $E$ and its Galois conjugate are $3$-isogenous so their $4$-torsion representations are isomorphic.  This implies that $G_{K_4} \subset G_{\Q}$ is normal i.e.\ $K_4 / \Q$ is Galois.  There are two important quadratic subfields of $K_4$
 \begin{center}
     \begin{tikzcd}
     & K_4 \arrow[rd, dash, "C_2^3"] \arrow[ld, dash, "D_4"'] \arrow[dd, dash, "D_4 \times C_2"']
@@ -590,18 +1118,40 @@ $K_4$ is Galois over $\Q$ with Galois group $D_4 \times C_2$. There are two impo
     & \Q
     \end{tikzcd}
 \end{center}
-where we have marked the extensions by their Galois groups. In fact, the only essential information is that $\Gal(K_4 / \Q(\sqrt{-7}))$ has exponent $2$ which follows from $A$ having full rational $2$-torsion over $\Q(\sqrt{-7})$ (\S\ref{sec:mod2_rep}). Indeed, from the diagram
+where we have marked the extensions by their Galois groups. In fact, the only essential information we need is that $\Gal(K_4 / L)$ has exponent $2$; a fact we will now justify directly. Recall that $E$, arising from a Legendre family, has full rational $2$-torsion over $\Q(\rho) = \Q(\sqrt{7}, i) = KL$. Then the diagram
 \begin{center}
 \begin{tikzcd}
-& G_{\Q(\sqrt{-7})} \arrow[r, hook] \arrow[d, dashed] & G_{\Q} \arrow[d, "\bar{\rho}_{A,4}"] \arrow[rd, "\bar{\rho}_{A,2}"]
+& G_{KL} \arrow[r, hook] \arrow[d, dashed] & G_{K} \arrow[d, "\bar{\rho}_{E,4}"] \arrow[rd, "\bar{\rho}_{E,2}"]
 \\
-0 \arrow[r] & (\Z / 2 \Z)^8 \arrow[r] & \GL_4(\Z/4\Z) \arrow[r] & \GL_4(\FF_2) \arrow[r] & 0
+0 \arrow[r] & (\Z / 2 \Z)^4 \arrow[r] & \GL_2(\Z/4\Z) \arrow[r] & \GL_2(\FF_2) \arrow[r] & 0
 \end{tikzcd}
 \end{center}
-we see that $\Gal(K_4 / \Q(\sqrt{-7})) \embed (\Z / 2 \Z)^8$ proving that it has exponent $2$.
-
-Now suppose that $p$ is split in $\Q(\sqrt{-7})$ this means $\Frob_p \in G_{\Q(\sqrt{-7})} \subset G_{\Q}$ identified with $\Frob_{\p}$ for either $\p \mid p$ in $\cO_{\Q(\sqrt{-7})}$ (these are conjugate in $G_{\Q}$ but not in $G_{\Q(\sqrt{-7})}$). However, $\Gal(K_4/\Q(\sqrt{-7}))$ has exponent $2$ and therefore $\Frob_p^2$ is trivial in $\Gal(K_4 / \Q)$. In particular $\bar{\rho}_{A,4}(\Frob_p^2) = I$ but we also showed that $\rho_{A,2}(\Frob_p^2)$ is the scalar matrix $-p \, \chi_f(p)$. Hence we conclude that
-\[ -p \, \chi_f(p) \equiv 1 \mod 4 \]
+proves that the representation $\bar{\rho}_{E, 4}|_{G_{KL}}$ has exponent $2$. We get an extension,
+\[ 1 \to \Gal(K_4 / KL) \to \Gal(K_4/\Q) \to \Gal(KL/\Q) \to 1 \]
+which is an extension of $C_2^2$ by $C_2^2$. This gives an action
+\[ \Gal(KL/\Q) \to \Aut(\Gal(K_4 / KL)) \cong \GL_2(\FF_2) \cong S_3 \]
+but since $\Gal(KL/\Q) \cong C_2^2$ this has a nontrivial kernel. The kernel corresponds to a quadratic subfield $S \subset KL$ so that $\Gal(K_4 / S) \cong C_2^3$. To show $S = L$, it suffices to exhibit order $4$ elements of $\Gal(K_4/K)$ and $\Gal(K_4/\Q(i))$ since those fields are the only other possibilities. We will do this by inspecting the Fourier coefficients of $f$.
+\par 
+Let $T = \rho_{A,2}(\Frob_3)$. The characteristic polynomial of $\rho_{f,2}(\Frob_3)$ over $K_f$ gives
+\[ T^2 - a_f(3) T + 3 \cdot \chi_f(3) = 0 \implies T^2 - 2 T + 3 = 0. \]
+Since this identity is conjugation invariant, it also holds for $\rho_{A,2}(\Frob_3)$ and thus must also be satisfied by $\bar{\rho}_{A,4}(\Frob_3)$ in $\GL_4(\Z/4\Z)$. Such elements of $\GL_4(\Z/4\Z)$ all have order $4$ so $\bar{\rho}_{A,4}(\Frob_3)$ has order $4$. Since $\Frob_3$ generates $\Gal(KL/K)$ we rule out $K$. We can similarly rule out $\Q(i)$.
+\par 
+Thus $H := \Gal(K_4/K) \cong D_4$ and $N := \Gal(K_4/KL)$ cannot be central in $H$ otherwise $H$ would be abelian. Since $\Gal(K_4/\Q)$ is a $2$-group, there is a central involution $z \in Z \sm H$ and let $c \in H \sm N$ be complex conjugation. These commuting involutions give a section of $\Gal(K_4/\Q) \to \Gal(KL/\Q)$. In particular, the extension
+\[ 0 \to \Gal(K_4/L) \to \Gal(K_4/\Q) \to \Gal(L/\Q) \to 0 \]
+is trivial so $\Gal(K_4/\Q) \cong C_2^3$.
+\par 
+There is a factorization,
+\begin{center}
+    \begin{tikzcd}
+    G_{\Q} \arrow[d, two heads] \arrow[r, "\bar{\rho}_{A,4}"] & \GSp_4(\Z/4\Z)
+    \\
+    \Gal(K_4/\Q) \arrow[ru]
+    \end{tikzcd}
+\end{center}
+where $A[4]$ is trivial over $K_4$ because $K_4 \supset K$ and $K_4$ is Galois over $\Q$ so $A[4](K_4) = E[4](K_4)^{\oplus 2} = (\Z/4\Z)^{\oplus 4}$ is full. Since $\Gal(K_4/L)$ has exponent $2$ so does $\bar{\rho}_{A,4}|_{G_L}$.
+\par 
+Now suppose that $p$ is split in $L = \Q(\sqrt{-7})$. This means $\Frob_p \in G_{L} \subset G_{\Q}$ identified with $\Frob_{\p}$ for either $\p \mid p$ in $\cO_{\Q(\sqrt{-7})}$ (these are conjugate in $G_{\Q}$ but not in $G_{L}$). However, $\Gal(K_4/L)$ has exponent $2$ and therefore $\Frob_p^2$ is trivial in $\Gal(K_4 / \Q)$. In particular $\bar{\rho}_{A,4}(\Frob_p^2) = I$ but we also showed that $\rho_{A,4}(\Frob_p^2)$ is the scalar matrix $-p \, \chi_f(p)$. Hence we conclude that
+\[ -p \, \chi_f(p) \equiv 1 \mod 4. \]
 However, $p$ is split in $\Q(\sqrt{-7})$ so $\legendre{-7}{p} = 1$ and thus
 \[ \chi_f(p) = \legendre{28}{p} = \legendre{4}{p} \legendre{-1}{p} \legendre{-7}{p} = \legendre{-1}{p} \]
 because $p$ is odd. Therefore,
@@ -610,8 +1160,18 @@ which is impossible.
 \end{proof}
 
 \begin{rmk}
-Warning: the $\Z_{2}$-lattice arising from the Tate module of $A$ does not agree with any lattice corresponding to an $\cO_{K_f, 2}$-integral structure of $\rho_{f,2}$. Indeed, otherwise $\bar{\rho}_{A,2}$ would factor through $\GL_2(\FF_4) \subset \GL_4(\FF_2)$ since $2$ is inert in $K_f = \Q(\zeta_3)$ but $A[2](\Q) = (\Z/2\Z)$ is not an $\FF_4$-vector space. This is witnessing the fact that $\zeta_3$ does not act on $A$, only some order inside $\Z[\zeta_3]$ does.
+Warning: the $\Z_{2}$-lattice arising from the Tate module of $A$ does not agree with any lattice corresponding to an $\cO_{K_f, 2}$-integral structure of $\rho_{f,2}$. Indeed, otherwise $\bar{\rho}_{A,2}$ would factor through $\GL_2(\FF_4) \subset \GL_4(\FF_2)$ since $2$ is inert in $K_f = \Q(\zeta_3)$ but $A[2](\Q) = (\Z/2\Z)$ is not an $\FF_4$-vector space. This is witnessing the fact that $\zeta_3$ does not act on $A$, only the order $\Z[\sqrt{-3}]$ inside $\Z[\zeta_3]$ does.
 \end{rmk}
+
+\section{Some interesting curves of genus $5$}
+
+In the previous sections, we constructed interesting curves of genus $17$ and $9$ with infinitely many primes of supersingular reduction using the Fermat and Klein quartics respectively. Here we consider curves constructed from covers of the Edge quartic. The Edge quartic has the intriguing property that all its $2$-torsion covers are defined over $\Q$ and thus it will be easier to apply results in the spirit of Elkies' theorem to conclude the infinitude of supersingular primes for the requisite elliptic curves. On the other hand, the Edge quartic has markedly less symmetry than the previous cases. This is manifest in having a non-CM Jacobian and far more different orbits to consider. Unfortunately, we are unable to prove that any of the genus $5$ covers of $C_{\mathrm{Edge}}$ have infinitely many primes of supersingular reduction. It remains to leave a breadcrumb trail that some traveler might stumble down again.
+
+\begin{conj}
+For each of the classes $\alpha \in H^1_{\et}(C_{\mathrm{Edge}, \ol{\Q}}, \FF_2)$ in orbits $\# 6,7,9,10$, the genus $5$ curve $D_{\alpha}$ (which is defined over $\Q$) has infinitely many primes of supersingular reduction.
+\end{conj}
+
+The most promising candidate is orbit $\# 6$ where $\Jac(D_{\alpha})_{\ol{\Q}} \sim E_{\Q(\sqrt{-3})}^2 \times  E_{15a1}^3$. This curve is supersingular at the primes $p$ of $E_{15a1}$ at which $p \equiv - 1 \mod 3$. Unfortunately, I do not see any way to rule out that all but finitely many of the supersingular primes of $E_{15a1}$ happen to be $1$ mod $3$. The other three orbits $\# 7,9,10$ are more questionable. Here the Jacobian splits as $\Jac(D_{\alpha})_{\ol{\Q}} \sim E^2 \times E_{15a1}^3$ where $E$ is non-CM. However, in all three cases $E$ has real $j$-invariant so we know it has infinitely many primes of supersingular reduction. The naive heuristic then shows that $\Jac(D_{\alpha})$ should also have infinitely many supersingular primes although they are very sparse growing like $\sim \log\log{x}$ for $p \le x$. So give it up, Sub-Subs! For by how much the more pains ye take to please the world, by so much the more shall ye for ever go thankless!
 
 \ifSubfilesClassLoaded{%
   \bibliographystyle{alpha}

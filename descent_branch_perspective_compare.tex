@@ -1,0 +1,81 @@
+\documentclass[tikz,border=6pt]{standalone}
+
+\usepackage{amsmath,amssymb}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc}
+
+\newcommand{\wt}{\widetilde}
+\newcommand{\F}{\mathcal F}
+
+\begin{document}
+
+\begin{tikzpicture}[
+  >=Latex,
+  branch/.style={-{Latex[length=2.0mm,width=1.4mm]}, line width=0.45pt},
+  compare/.style={densely dashed, -{Latex[length=1.8mm,width=1.2mm]}, line width=0.4pt},
+  lab/.style={font=\small, inner sep=1pt, fill=white}
+]
+
+% Front branch coordinates
+\coordinate (x0) at (0,0);
+\coordinate (s0) at (2.6,1.7);
+\coordinate (q0) at (5.2,0);
+\coordinate (x1) at (7.8,0);
+\coordinate (s1) at (10.4,1.7);
+\coordinate (q1) at (13.0,0);
+\coordinate (d)  at (14.9,0);
+
+\draw[branch] (s0) -- (x0);
+\draw[branch] (s0) -- (q0);
+\draw[branch] (x1) -- (q0);
+\draw[branch] (s1) -- (x1);
+\draw[branch] (s1) -- (q1);
+\draw[branch] (d) -- (q1);
+
+% Front branch labels
+\node[lab, anchor=north east] at ($(x0)+(-0.04,-0.14)$) {$X^{(0)}$};
+\node[lab, anchor=south] at ($(s0)+(0,0.14)$) {$S^{(0)}$};
+\node[lab, anchor=north east] at ($(q0)+(-0.04,-0.14)$) {$S^{(0)} / \F^{(0)}$};
+\node[lab, anchor=north west] at ($(x1)+(0.04,-0.14)$) {$X^{(1)}$};
+\node[lab, anchor=south] at ($(s1)+(0,0.14)$) {$S^{(1)}$};
+\node[lab, anchor=north east] at ($(q1)+(-0.04,-0.14)$) {$S^{(1)} / \F^{(1)}$};
+\node[lab, anchor=north west] at ($(d)+(0.04,-0.14)$) {$\cdots$};
+
+% Back branch coordinates and labels
+\begin{scope}[shift={(-0.9,2.15)}, scale=0.9]
+  \coordinate (tx0) at (0,0);
+  \coordinate (ts0) at (2.6,1.7);
+  \coordinate (tq0) at (5.2,0);
+  \coordinate (tx1) at (7.8,0);
+  \coordinate (ts1) at (10.4,1.7);
+  \coordinate (tq1) at (13.0,0);
+  \coordinate (td)  at (14.9,0);
+
+  \draw[branch] (ts0) -- (tx0);
+  \draw[branch] (ts0) -- (tq0);
+  \draw[branch] (tx1) -- (tq0);
+  \draw[branch] (ts1) -- (tx1);
+  \draw[branch] (ts1) -- (tq1);
+  \draw[branch] (td) -- (tq1);
+
+  \node[lab, anchor=south east] at ($(tx0)+(-0.04,0.14)$) {$\wt{X}^{(0)}$};
+  \node[lab, anchor=south] at ($(ts0)+(0,0.14)$) {$\wt{S}^{(0)}$};
+  \node[lab, anchor=south east] at ($(tq0)+(-0.04,0.14)$) {$\wt{S}^{(0)} / \wt{\F}^{(0)}$};
+  \node[lab, anchor=south west] at ($(tx1)+(0.04,0.14)$) {$\wt{X}^{(1)}$};
+  \node[lab, anchor=south] at ($(ts1)+(0,0.14)$) {$\wt{S}^{(1)}$};
+  \node[lab, anchor=south east] at ($(tq1)+(-0.04,0.14)$) {$\wt{S}^{(1)} / \wt{\F}^{(1)}$};
+  \node[lab, anchor=south west] at ($(td)+(0.04,0.14)$) {$\cdots$};
+\end{scope}
+
+% Comparison maps
+\draw[compare] (ts0) -- (s0);
+\draw[compare] (tx0) -- (x0);
+\draw[compare] (tq0) -- (q0);
+\draw[compare] (ts1) -- (s1);
+\draw[compare] (tx1) -- (x1);
+\draw[compare] (tq1) -- (q1);
+\draw[compare] (td) -- (d);
+
+\end{tikzpicture}
+
+\end{document}

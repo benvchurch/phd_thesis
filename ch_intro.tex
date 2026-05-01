@@ -1,12 +1,433 @@
 \documentclass[main.tex]{subfiles}
 \begin{document}
-\chapter{Introduction}
+\chapter{Introduction} \label{chapter:intro}
 
-% TODO: Write thesis introduction
+\section{Rationality Problems}
+
+One of the oldest and most fruitful circles of questions in algebraic geometry are rationality problems. These ask when the solutions to a system of polynomials can be solved in rational functions. In the modern language of birational geometry, this is equivalent to asking when a variety is birationally equivalent to $\P^n$. The fundamental idea of birational geometry is that the incredible rigidity of algebraic maps means that the equivalence relation defined by cutting and pasting subvarieties along algebraic maps preserves much of the complexity of the original variety. Precisely, two varieties are said to be \textit{birationally equivalent}, or \textit{birational}, if there are Zariski open subsets $U \subset X$ and $V \subset Y$ such that $U \cong V$. Many natural geometric constructions -- for example, the blowup along a subvariety -- preserve the birational equivalence. The Italian school of algebraic geometry richly developed the birational geometry of surfaces in the late 19th and early 20th centuries culminating in the Enriques--Kodaira classification of algebraic surfaces.
+\par 
+In dimension $\leq 2$, the situation for rationality is fairly well-understood. For example, an algebraic surface is rational if and only if it is the blow-up of $\P^2$, $\P^1 \times \P^1$, or a Hirzebruch surface. Furthermore, Castelnuovo's theorem gives a precise numerical criterion for when a surface is rational. However, the situation in dimension $\geq 3$ is already much more subtle and is an area of active research. 
+\par 
+In this thesis, we will consider weaker properties similar to rationality, for instance, \textit{unirationality} and \textit{uniruledness}, which are introduced in the subsequent sections. The main object of our study will be positive characteristic where these notions behave much more wildly than we are used to over the complex numbers. The main result is a new technique to prove that certain varieties over fields of positive characteristic are not uniruled and, \textit{a fortiori}, not unirational.
+
+\section{Unirationality: examples, obstructions and open problems}
+
+
+When varieties are provably irrational, there remain interesting gradations in their complexity. For example, we can ask if the variety is \textit{unirational} meaning its points are parametrized by rational functions. This property ensures that many solutions to the defining equations can be easily written down.  
+
+\begin{defn}
+Let $X$ be a variety over $k$. We say that $X$ is \textit{unirational} (over $k$) if there is a dominant rational map $\P^n_k \rat X$.
+\end{defn}
+
+Unirationality can be viewed as a weaker notion of a polynomial system being ``solvable'' by rational functions where we do not require the parametrization by rational functions to give a precise 1-to-1 description of the set of solutions. In the 19th century it was understood that the Riemann-Hurwitz formula shows that -- over the complex numbers -- only genus $0$ curves are unirational. From the function field perspective, L\"{u}roth generalized this result to curves over any field. In modern notation he proved.
+
+\begin{theorem}[L\"{u}roth, 1876]
+If $X/k$ is a curve over a field of any characteristic then $X$ is unirational iff $X$ is rational. If moreover $X$ is smooth and complete then $X \cong \P^1_k$.
+\end{theorem}
+
+L\"{u}roth asked if the higher-dimensional analog was true. In field-theoretic terms he asked if any finitely generated field extension $K / k$ so that $K$ is contained in a purely-transcendental extension $k(t_1, \dots, t_n)$ then must $K / k$ itself be purely transcendental. This question came to be known as the L\"{u}roth problem. In more modern language, his problem asks whether a unirational variety of dimension $n$ over $k$ is always rational. The complex surface case, when $k = \CC$ and $n = 2$ was also settled affirmatively in the 19th century by Castelnuovo.
+
+\begin{theorem}[Castelnuovo, 1896]
+Let $X / \CC$ be a smooth projective surface. Then the following are equivalent,
+\begin{enumerate}
+\item $X$ is unirational
+\item $X$ is rational
+\item $p_2(X) := \dim_{\CC} H^0(X, \omega_X^{\ot 2}) = 0$ and $b_1(X) := \dim_{\CC} H^1(X, \CC) = 0$.
+\end{enumerate}
+\end{theorem}
+
+Castelnuovo proved the equivalence by giving a purely numerical criterion -- statement (3) -- for rationality. He then showed that unirationality implies these numerical invariants vanish. The numerical invariants in question, the second \textit{pluri-genus} $p_2$ and the first \textit{Betti number}, fit into a more general framework of \textit{obstructions} to unirationality (over $\CC$) that apply in any dimension. 
+
+\begin{defn}
+The $m$-th \textit{pluri-genus} of $X$ is the dimension of the space of sections of $\omega_X^{\ot m}$,
+\[ p_m(X) := \dim_{k} H^0(X, \omega_X^{\ot m}). \]
+\end{defn}
+
+This is a birational invariant of smooth proper varieties. More generally, we can look at tensor forms i.e.\ sections of $(\Omega_X)^{\ot m}$ and these can be pulled back along any rational map $f : X \rat Y$ to obtain an obstruction to unirationality.
+
+\begin{prop} \label{prop:tensor_forms_obstruction}
+Let $k$ be of characteristic zero and $X$ a proper $k$-variety. Then if $\omega \in H^0(X, \Omega_X^{\ot m})$ is a nonzero form for $m > 0$ then $X$ is not unirational.
+\end{prop}
+
+\begin{proof}
+Indeed, if $f : \P^n \rat X$ is a unirational parametrization with $n = \dim{X}$ then $f$ is generically \etale. Therefore, on the locus $U \subset \P^n$ where $f$ is a morphism, $f^* \omega$ is not zero identically. Furthermore, since $X$ is proper, $f$ is defined away from codimension $\ge 2$ so $f^* \omega$ extends to a nonzero section of $H^0(\P^n, \Omega_{\P^n}^{\ot m})$. No such section exists.
+\end{proof}
+
+It turns out to be vital that $k$ has characteristic zero here as we will see in the subsequent section. The second invariant $b_1(X) := \dim_{\CC} H^1(X, \CC)$ also fits into a larger story. The more refined obstruction is the fundamental group $\pi_1^{\mathrm{top}}(X_{\CC})$ or, in positive characteristic, the \etale fundamental group $\pi_1^{\et}(X_{\bar{k}})$. 
+
+\begin{theorem}[Serre (1959) \cite{serre:unirational_fundamental_group}, Ekedahl (1983) \cite{ekedahl:unirational_fundamental_group}] \label{thm:unirational_fundamental_group}
+Let $X$ be a unirational smooth projective variety over an algebraically closed field $k$.
+\begin{enumerate}
+\item if $k$ has characteristic zero then $\pi_1^{\et}(X) = 1$ and $\pi_1^{\mathrm{top}}(X_{\CC}) = 1$ for any $k \embed \CC$ 
+\item if $k$ has characteristic $p > 0$ then $\pi_1^{\et}(X)$ is a finite group of order coprime to $p$.
+\end{enumerate}
+\end{theorem}
+
+In the subsequent section, we will see examples (see Example~\ref{example:godeaux}) showing that the second statement is actually sharp. Therefore, both the conditions $p_2(X) = 0$ and $b_1(X) = 0$ fit into a larger story of \textit{obstructions} to unirationality over $\CC$. What turns out to be special to dimension $2$ is that the vanishing of these obstructions $p_2 = 0$ and $b_1 = 0$ exactly characterizes rationality. Indeed, in dimension $3$, a slew of unirational but non-rational examples
+were discovered in the year 1971 (some appearing in 1972). These examples are: any smooth cubic $3$-fold by the work of Clemens and Griffiths \cite{CG72}, certain quartic $3$-folds by the work of Iskovskikh and Manin \cite{IM71}, and certain Brauer--Severi varieties over rational surfaces by work of Artin and Mumford \cite{AM72}. As illustrated by the complexity and variety of the cited works, proving that a variety is not unirational is often quite subtle. For example, even in characteristic zero there is no known example of a rationally-connected variety that we can prove to be non-unirational. 
+
+
+\section{The Landscape in Positive Characteristic and Shioda's Conjecture}
+
+One of the most striking aspects of geometry in positive characteristic is that a variety of general type may be unirational. Indeed, the pullback argument in the proof of Proposition~\ref{prop:tensor_forms_obstruction} fails completely in positive characteristic because of the existence of inseparable maps for which $f^*$ is identically zero. If the map $f : \P^n \rat X$ were separable then $f^*$ would be injective just like in characteristic zero so the argument would go through. However, Zariski constructed examples of surfaces over $\FF_p$ with an inseparable unirational parametrization but no separable one due to the existence of pluri-forms. 
+
+\begin{example}[Zariski] \cite[\S8]{zariski:surface_examples}
+Consider a surface $X / \FF_p$ defined as a desingularization of some compactification of the affine surface
+\[ \{ z^p = f(x,y) \} \subset \A^3_{\FF_p} \]
+for some $f \in \FF_p[x,y]$. If we choose $f$ generically of sufficiently large degree, $X$ will be of general type. However, notice that if we adjoin $p^{\text{th}}$-roots $s,t$ of $x$ and $y$ then the equation becomes
+\[ z^p = f(s^p, t^p) = f(s,t)^p \]
+therefore $k(X) \subset k(s,t)$ given by $z = f(s,t)$ and $x = s^p$ and $y = t^p$. This shows that $X$ is always unirational via the inseparable map $\A^2 \rat X$ given by 
+\[ x \mapsto s^p, \quad y \mapsto t^p, \quad z \mapsto f(s,t). \]
+\end{example}
+
+This demonstrates that unirationality in positive characteristic is a phenomenon that persists even for quite ``complex'' varieties from the perspective of the usual classification of surfaces. This shows there are even fewer tools available to us in positive characteristic to prove that varieties are not unirational. The main goal of this thesis is to develop some new methods to accomplish this. The main ideas of this work are in conversation with two remarkable results from 1977: Shioda's classification of unirational Kummer surfaces and Bogomolov's boundedness theorem for curves on general type surfaces with $c_1^2 > c_2$. We will develop obstructions inspired by the techniques of the latter work and use them to answer questions asked in the former.
+
+
+\subsection{Shioda's Examples}
+
+Zariski's surfaces are cooked up precisely to be unirational in the specific characteristic $p$ which is baked into the form of the equation. However, Shioda found even more remarkable examples of smooth projective general type surfaces over $\Spec{\Z}$ which nonetheless have unirational reduction at infinitely many primes $p$. Shioda showed the following by an inspired computation.
+
+\begin{theorem}[Shioda (1974), Shioda-Katsura (1979)] \cite{shioda:fermat_1974, shioda-katsura:fermat_1979}
+Let $F_m$ be the degree $m$ Fermat surface over $\FF_p$ (for $p > 2$, an odd prime) given by the equation
+\[ \{ X^m + Y^m + Z^m + W^m = 0 \} \subset \P^3_{\FF_p} \]
+in characteristic $p$. The following are equivalent,
+\begin{enumerate}
+\item $F_m$ is unirational over $\ol{\FF_p}$
+\item $-1 \in \left< p \right>$ inside $(\Z / m \Z)^{\times}$ i.e.\ $p^\nu \equiv -1 \mod m$ for some $\nu$
+\item $H^2_{\et}(F_m, \Q_{\ell})$ is spanned by algebraic cycles.
+\end{enumerate}
+\end{theorem}
+
+This congruence condition is satisfied for all primes in certain arithmetic progressions and hence $F_m$ is unirational at a set of primes of positive natural density by Dirichlet's theorem. In fact, as we change the degree $m$, the density can be arbitrarily close to $1$. The second and third conditions are a manifestation of the Tate conjecture. Recall that the cycle map in \etale cohomology
+\[ \gamma : Z^i(X) \to H^{2i}_{\et}(X_{\bar{k}}, \Q_{\ell}(k)) \]
+lands inside the $\Q_{\ell}$-subspace $H^{2k}_{\et}(X_{\bar{k}}, \Q_{\ell}(i))^{\Gal(\bar{k}/k)}$ of Galois invariants. For $k = \FF_q$, this is the subspace where $\Frob_q$ acts via $q^i \cdot \id$ (due to the presence of the Tate twist). The Tate conjecture predicts equality between this subspace and the $\Q_{\ell}$-span of $\im{\gamma}$ i.e.\ the subspace spanned by algebraic cycles. For a variety defined over $k = \FF_q$, the Tate conjecture thus predicts that $H^{2i}_{\et}(X_{\bar{k}}, \Q_{\ell}(i))$ is spanned by algebraic cycles (defined over $\bar{k}$) if and only if $\Frob_q^n$ acts by $(q^n)^i \cdot \id$ for some $n$ or equivalently if all the eigenvalues of $\Frob_q$ on $H^{2i}_{\et}(X_{\bar{k}}, \Q_{\ell}(i))$ are of the form $\zeta \cdot q^i$ for $\zeta$ a root of unity. In analogy with the case of elliptic curves, we call this property of a Galois representation \textit{supersingularity} at $p$. For Galois representations of geometric origin, this property is computationally accessible by point counting and the Weil conjectures.
+\par 
+Shioda proved that $F_m$ is supersingular at $p$, i.e.\ the eigenvalues of $\Frob_p$ on $H^2_{\et}(F_m, \Q_{\ell})$ are of the form $\zeta \cdot p$ for $\zeta$ a root of unity, if and only if $p^\nu \equiv -1 \mod m$ for some $\nu$. The proof appeals to Weil's 1949 work -- in which his eponymous conjectures were first introduced -- that develops point counting formulae in terms of Jacobi and Gauss sums \cite{weil:counting_1949}. Furthermore, whenever this supersingularity condition holds, Shioda used an ingenious change of variables to write down an explicit unirational inseparable parametrization of $F_m$.
+\par 
+To prove the reverse implication, Shioda needed an obstruction; this comes from the Galois-structure of \etale cohomology discussed above.
+
+\begin{defn}
+We say a surface $X$ is \textit{Shioda-supersingular} if $H^2_{\et}(X_{\bar{k}}, \Q_{\ell})$ is spanned by algebraic cycles (possibly defined over $\bar{k}$).
+\end{defn}
+
+
+\begin{lemma}
+If a variety $X$ over $k$ is unirational, it is (Shioda) supersingular. 
+\end{lemma}
+
+\begin{proof}
+The rational map $f : \P^2 \rat X$ can be resolved by blowing up $\P^2$ at finitely many points (possibly defined over $k'/k$) to obtain a morphism $\wt{f} : \Bl \P^2 \to X$. This dominant morphism induces a Galois-equivariant injection
+\[ H^2_{\et}(X_{\bar{k}}, \Q_{\ell}) \embed H^2_{\et}(\P^2, \Q_{\ell}) \]
+Over $k'$, the Galois-module $H^2_{\et}(\P^2, \Q_{\ell})$ is spanned by algebraic cycles corresponding to the hyperplane and exceptional divisors. Pushing forward generators for the image, $H^2_{\et}(X_{\bar{k}}, \Q_{\ell})$ is also generated by algebraic cycles over $k'$ and, \textit{a fortiori} $X$ is supersingular.
+\end{proof}
+
+Therefore, Shioda concluded that if $p^{\nu} \not\equiv -1 \mod m$ for any $\nu$ then $F_m$ is not unirational over $\ol{\FF_p}$. In 1977, Shioda observed a similar phenomenon for Kummer surfaces.
+
+\begin{theorem}[Shioda, 1977] \cite{shioda:unirational}
+Let $A$ be an abelian surface over a field $k$ of characteristic $> 2$. Then the following are equivalent:
+\begin{enumerate}
+\item $\Km(A)$ is unirational
+\item $\Km(A)$ is (Shioda) supersingular
+\item $A$ is Shioda supersingular 
+\item $A$ is a supersingular abelian surface (isogenous to $E^2$ for $E$ a supersingular elliptic curve).
+\end{enumerate}
+\end{theorem}
+
+He also worked out some examples with Delsarte surfaces. Based on these examples, he conjectured:
+
+\noindent
+\textbf{Conjecture (Shioda, 1977).} \emph{Let $X$ be a smooth projective surface over an algebraically closed field $k$ of characteristic $p$ with $\pi_1^{\et}(X) = 1$. Then $X$ is unirational if and only if it is Shioda supersingular.}
+
+\begin{rmk}
+In Theorem~\ref{thm:unirational_fundamental_group}, we saw that unirationality in positive characteristic implies a \textit{finite} fundamental group rather than a trivial one as is the case in characteristic zero. Therefore, one might ask why Shioda formulated his conjecture only in the simply-connected case. This is because Shioda was aware of counterexamples if the simply-connectedness assumption is relaxed to $\pi_1^{\et}(X)$ finite of order coprime to $p$. Indeed, in that case $X$ is unirational if and only if its universal cover $\wt{X} \to X$ is unirational but $\wt{X}$ may have additional classes in $H^2$ not spanned by algebraic cycles. However, such examples are not particularly convincing; one should, in this case, consider the conjecture for $\wt{X}$ not for $X$.  
+\end{rmk}
+
+For an explicit example, Shioda used the Godeaux surface constructed as a free $\mu_5$ quotient of the Fermat $X_5$ of degree $5$ which is supersingular in all characteristics but unirational if and only if $X_5$ is i.e.\ when $p^v \equiv - 1 \mod 5$ for some $v$. 
+
+\begin{example} \label{example:godeaux}
+Let $G = \mu_5$ act on $F_5$ by $\lambda \cdot [X : Y : Z : W] = [X : \lambda Y : \lambda^2 Z : \lambda^3 W]$. This action is free and hence $X = F_5 / G$ is a smooth projective surface with $\pi_1^{\et}(X_{\ol{\FF}_p}) = \Z / 5 \Z$ called the Godeaux surface. Shioda's result shows that this surface is unirational for infinitely many primes $p \neq 5$. Hence the positive characteristic part of Theorem~\ref{thm:unirational_fundamental_group} is sharp.
+\end{example}
+
+
+\begin{rmk} 
+One reason, known to Shioda, to doubt the validity of this conjecture is the failure of a particular characteristic zero analog. The divisibility properties of the $\Frob$-eigenvalues is analogous to properties of the Hodge structure. In particular, we think of $\Frob$-eigenvalues on $H^2$ not divisible by $p$ as analogous to classes in $H^{2,0} \oplus H^{0,2}$. Therefore, supersingularity should correspond to having a trivial Hodge structure $H^2 = H^{1,1}$ so that $H^2$ is spanned by algebraic cycles.
+\par 
+Severi asked if complex surfaces $X$ with $\pi_1^{\mathrm{top}}(X) = 1$ and $H^2(X, \CC) = H^{1,1}$ must be unirational (hence rational). This is false. There are counterexamples due to Dolgachev of elliptic surfaces \cite{dolgachev:surface_example_russian_1966} (cf. \cite{dolgachev:surface_example} in English). There are further examples due to Barlow \cite{barlow:surface_example} of a general type simply-connected surface with $K_X^2 = 1$ and Hodge diamond
+\begin{center}
+\begin{tabular}{ccccc}
+ &  & $1$ &  &  \\
+ & $0$ &  & $0$ &  \\
+$0$ &  & $9$ &  & $0$ \\
+ & $0$ &  & $0$ &  \\
+ &  & $1$ &  &  \\
+\end{tabular}    
+\end{center}
+However, the existence of inseparable unirational parametrization in positive characteristic makes this analogy less convincing. It is a very interesting question to ask if the reduction of a Barlow surface satisfies Shioda's conjecture. I suspect not. 
+\end{rmk}
+
+The first goal of this thesis is to exhibit a counterexample to Shioda's conjecture. In fact, we will do more: we will show examples that are not covered by genus $0$ or genus $1$ curves. A variety covered by rational curves is called \textit{uniruled}. Precisely, $X$ is uniruled if there is a dominant rational map $f : W \times \P^1 \rat X$ such that $f$ does not factor through $W \times \P^1 \to W$. In Chapter~\ref{chapter:obstructions} we will prove the following theorem by exhibiting such a surface $X$ contradicting the Shioda conjecture.
+
+\begin{theorem} \label{thm:main} \todo{citation}
+There exists a smooth projective surface over $\ol{\FF_p}$ with the following properties:
+\begin{enumerate}
+\item $H^2_{\et}(X, \Q_{\ell})$ is spanned by algebraic cycles
+\item $\pi_1^{\et}(X) = 1$
+\item $X$ is not unirational, in fact $X$ is not uniruled or covered by genus $1$ curves. 
+\end{enumerate}
+\end{theorem}
+
+In cases where standard obstructions to rationality fail, a sequence of intricate invariants have been employed to detect (non)rationality with tremendous success since the 1970s (cf.\ \cite{IM71, AM72,CG72, Kol95, Voi15, Tot16, HPT19, Sch19}). The same cannot be said of unirationality. For example, proving the non-unirationality for any single rationally-connected variety remains a major open problem as did the unirationality problem for many surfaces in positive characteristic. In the absence of now standard techniques developed up to the 1960s (\etale $\pi_1$, \etale cohomology, tensor forms in characteristic zero), to the author's knowledge, this is the first new demonstration that a variety is \textbf{not} unirational or even uniruled.
+
+\section{Unirationality of Moduli Spaces}
+
+Another motivation to go beyond the obstructions arising from \etale cohomology is to prove the non-uniruledness of moduli spaces in characteristic $p$. In characteristic $0$, pluri-forms have a long and storied history establishing non-uniruledness of moduli spaces such as $M_{g,n}$ but are insufficient to make any headway in positive characteristic because of the issues we have seen regarding inseparable maps.
+\par 
+The (non)-unirationality of moduli spaces is particularly interesting because the abstract birational geometry has implications for the behavior of the generic objects parametrized in the universal family. A moduli space is unirational exactly when the generic object it parametrizes can be ``written down'' by an explicit algebraic recipe. Explicitly, this means there is a versal family over a rational variety whose generic point gives the generic object written down in terms of ``free parameters'', the transcendental coordinates $t_1, \dots, t_n$ on the fraction field $k(t_1, \dots, t_n)$.
+
+\begin{example}
+Every genus $2$ curve is hyperelliptic meaning there is a degree $2$ map $C \to \P^1$ ramified over exactly $6$ branch points in $\P^1$. This means it can be written in the form 
+\[ y^2 = x(x-1)(x-\lambda_1)(x-\lambda_2)(x-\lambda_3) \] 
+choosing coordinates on $\P^1$ so that the branch points occur at $0,1,\infty,\lambda_1,\lambda_2,\lambda_3$. Since the parameters $\lambda_1, \lambda_2, \lambda_3$ are freely varying in an open set of $\A^3$, this shows that $M_2$ is $3$-dimensional and unirational. 
+\end{example}
+
+For small values of $g$, the moduli space of curves $M_g$ is known to be unirational. However, a celebrated result of Harris and Mumford proves that the moduli space of curves of genus $g$ is of general type for $g > 23$. In characteristic zero, this implies that $M_{g}$ is not unirational or even uniruled. More generally, the following result shows that only finitely many $M_{g,n}$ are uniruled.  
+
+\begin{theorem}[Harris--Mumford (1982) and many others] \cite{harris-mumford:kodaira_dimension_Mg_I, harris-mumford:kodaira_dimension_Mg_II, logan:kodaira_dimension_marked_points, farkas-jensen-payne:nonabelian_BN_divisor, farkas-jensen-payne:kodaria_dimension_M22_M23,   Ruben:kodaira_2025}
+$\kappa(M_{g,n}) \ge 0$ for $g > 22$ or $n > 15$. Hence, in these cases, $M_{g,n_{\CC}}$ is not uniruled. 
+\end{theorem}
+
+A particularly nice case is $g = 1$ and $n \ge 11$ where the cusp form $\Delta$ proves $\kappa(M_{1,n}) \ge 0$. Sawin used more delicate arguments using the Galois representation on \etale cohomology as an obstruction to prove certain cases of the non-uniruledness of $M_{1,n}$ in positive characteristic.
+
+\begin{theorem}[Sawin, 2019] \cite{sawin:M1n_not_uniruled}
+$(M_{1,n})_{\ol{\FF}_p}$ is not uniruled as long as $n \ge p \ge 11$.
+\end{theorem}
+
+Even in this case, for fixed $n$, we do not know if $M_{1,n}$ is unirational or uniruled in all but finitely many characteristics. To my knowledge, we know next to nothing about the uniruledness or unirationality of $M_{g,n}$ for $g > 1$ in positive characteristic. 
+\par 
+The difficulty of using techniques based on \etale cohomology to prove uniform obstruction results over different primes partially inspired the investigation of the non-cohomological obstructions we consider in this thesis. Our techniques do not yet apply to the moduli spaces of curves $M_{g,n}$. However, we are able to apply them to Hilbert modular varieties to obtain uniform obstruction results.
+
+\begin{theorem} \todo{CITE}
+Let $Y_0^F(N)$ be the Hilbert modular variety at level $\Gamma_0(N)$ associated to a totally real field $F$. Then if either $N$ or the discriminant of $F$ is sufficiently large, the reduction $Y_0^F(N)_{\ol{\FF}_p}$ mod $p$ is not uniruled or covered by genus $1$ curves for all primes $p$ not dividing $N$.
+\end{theorem}
+
+In particular, the obstruction applies to all but finitely many characteristics simultaneously. 
+
+\section{Hyperbolicity}
+
+Many of the techniques in this thesis were motivated by methods used to study hyperbolicity of complex manifolds. Our investigations go beyond rationality questions to problems more directly connected to hyperbolicity. Here we review some of the history, definitions, and main conjectures of this area.
+
+\subsection{The Kobayashi Pseudodistance}
+
+In complex analysis, hyperbolic spaces such as bounded symmetric domains often carry a canonical \textit{Bergman metric} characterized by the remarkable property that every biholomorphism is an isometry. For example, the complex hyperbolic space $\HH^n_{\CC}$ which is the unit ball $\BB^n \subset \CC^n$ equipped with a certain metric of constant negative holomorphic bisectional curvature satisfies this property. The miracle is that the complex structure determines a metric, unique up to all holomorphic reparametrizations, whose metric geometry encodes the complex geometry. For positively curved spaces such as $\P^n$ there can be no such biholomorphism invariant metric. This is because maps like the homothety $z \mapsto \lambda z$ on $\P^1$ are fundamentally non-area preserving conformal transformations. More precisely, the biholomorphism group $\PGL_{n+1}$ of $\P^n$ is noncompact and has nontrivial stabilizers of a point and its tangent space; hence it cannot be contained in any group of isometries.
+\par 
+However, motivated by the Schwarz lemma (1869) and its generalization by Ahlfors (1938), Kobayashi discovered there is always a canonical \textit{pseudo-metric} determined only by the complex structure which is invariant under all biholomorphisms. Here let $\DD \subset \CC$ be the unit disk and $\rho$ the Poincar\'{e} metric on $\DD$.
+
+\begin{defn}
+Let $X$ be a complex manifold. The \textit{Kobayashi pseudo-distance} is the pseudometric defined as follows:
+\[ d_X(p,q) = \inf_\alpha \ell(\alpha) \]
+where $\alpha$ is a chain of holomorphic disks $f_i : \DD \to X$ and points $p = p_0, p_1, \dots, p_k = q$ of $X$ and pairs $a_1, b_1, \dots, a_k, b_k \in \DD$ such that,
+\[ f_i(a_i) = p_{i-1} \quad f_i(b_i) = p_i \]
+and the length $\ell(\alpha)$ of the chain is defined as,
+\[ \ell(\alpha) := \rho(a_1, b_1) + \cdots + \rho(a_k, b_k). \]
+\end{defn}
+
+\begin{example}
+Let $X = \CC$ then $d_X = 0$. Indeed, by choosing larger and larger discs containing $p,q$ their pullback to the unit disk is then closer and closer to the origin and hence has vanishing Poincar\'{e} distance.
+\end{example}
+
+\begin{example}
+Recall the Schwarz--Pick lemma says that any holomorphic map $f : \DD \to \DD$ is a contraction for the Poincar\'{e} metric. Therefore, $d_{\DD} = \rho$.
+\end{example}
+
+\begin{defn}
+We say that a complex manifold $X$ is \textit{(Kobayashi)-hyperbolic} if $d_X$ is an honest metric meaning if $d_X(x,y) = 0$ then $x = y$. 
+\end{defn}
+
+The Kobayashi pseudodistance is not only intrinsic to $X$ and hence preserved by all biholomorphic reparametrizations, it is actually length non-increasing (i.e.\ \textit{short}) for all holomorphic maps.
+
+\begin{lemma}
+Let $f : X \to Y$ be holomorphic. Then $d_Y(f(x), f(y)) \le d_X(x,y)$
+\end{lemma}
+
+\begin{proof}
+Indeed, choosing any chain of disks $g_i : \DD \to X$ computing $d_X(x,y)$ we see that $f \circ g_i$ is a chain of disks connecting $f(x)$ and $f(y)$ of the same length. Therefore,
+\[ d_Y(f(x), f(y)) = \inf_{\alpha} \ell(\alpha) \le d_X(x, y) \]
+\end{proof}
+
+\begin{cor}
+If $f : \CC \to X$ is an entire curve then for $x, y \in f(\CC)$ we have $d_X(x,y) = 0$ meaning if $f$ is nonconstant then $d_X$ is degenerate along the image of $f$.
+\end{cor}
+
+\begin{proof}
+Indeed, let $z_1, z_2 \in \CC$ map to $x,y$ respectively. Then,
+\[ d_X(x,y) \le d_{\CC}(z_1, z_2) = 0 \]
+\end{proof}
+
+Brody provided a converse to this result. 
+
+\begin{theorem}[Brody]
+Let $X$ be a compact complex manifold. If $d_X$ is degenerate then there exists a nonconstant entire curve $f : \CC \to X$. 
+\end{theorem}
+
+\begin{defn}
+A complex manifold is \textit{Brody-hyperbolic} if there is no nonconstant entire map $f : \CC \to X$.
+\end{defn}
+
+In particular, if $X$ is Brody hyperbolic then $X$ does not contain any rational or elliptic curves. We will return to this observation in Demailly's notion of \textit{algebraically hyperbolic}. Therefore, as a consequence of Brody's theorem we obtain the following equivalence.
+
+\begin{theorem}[Brody]
+Let $X$ be a compact complex manifold. Then $X$ is Kobayashi hyperbolic if and only if it is Brody hyperbolic.
+\end{theorem}
+
+Therefore, we will call compact manifolds with this property just ``hyperbolic'' or ``analytically hyperbolic'' for emphasis. In the noncompact case, these two notions do differ \cite{barth:domains_hyperbolicity}. 
+
+\subsection{Algebraic Hyperbolicity}
+
+The importance of Brody's reinterpretation of hyperbolicity for compact manifolds is that it resembles a form that more closely touches algebraic geometry. This connection is made concrete by another redefinition due to Demailly which is conjecturally equivalent to hyperbolicity for smooth projective varieties.
+
+\begin{defn}
+Let $X$ be a projective variety and $H$ an ample divisor. We say $X$ is \textit{algebraically hyperbolic} if there exists $\epsilon > 0$ such that for every complete integral curve $C \subset X$ we have,
+\[ 2 g(C) - 2 \ge \epsilon \deg_H{C} \]
+where $g(C)$ is the geometric genus of $C$.
+\end{defn}
+
+Demailly proved that algebraic hyperbolicity is at least a weaker notion than analytic hyperbolicity in the projective setting.
+
+\begin{theorem}[Demailly]
+Let $X$ be a smooth projective variety. Then
+\[ X \text{ is analytically hyperbolic} \implies X \text{ is algebraically hyperbolic}. \]
+\end{theorem}
+
+Moreover, he conjectured the converse to hold as well.
+
+\begin{conj}[Demailly]
+Let $X$ be a smooth projective variety. Then
+\[ X \text{ is analytically hyperbolic} \implies X \text{ is algebraically hyperbolic}. \] 
+\end{conj}
+
+Algebraic hyperbolicity, being amenable to attack via techniques in algebraic geometry, is often easier to study. For example, the famous conjecture of Kobayashi predicting the hyperbolicity of general hypersurfaces remains open.
+
+\begin{conj}[Kobayashi]
+Let $X \subset \P^{n+1}$ be a very general hypersurface of degree $d \ge 2n + 1$. Then $X$ is hyperbolic.
+\end{conj}
+
+After a considerable effort by many authors, the conjecture is now known for $d \ge d_n$ where $d_n \sim n^4$ \cite{kirwan:nonRedGIT_hyperbolicity}. However, its algebraic variant is known almost completely \cite{voisin:clemens_rational_curves, coskun_riedl_hyperbolicity_quintic_surface, yeong:hyperbolicity_hypersurfaces} by much more elementary means.  
+
+\subsection{Green--Griffiths--Lang conjecture}
+
+It is expected that general type varieties are \textit{close} to being hyperbolic in the following precise sense. We say that a projective variety $X$ is \textit{algebraically quasi-hyperbolic} if the images of all genus $0$ and genus $1$ curves lie in a proper Zariski closed subset $Z \subsetneq X$. In characteristic zero, this is the algebraic analog of a weakening of Brody hyperbolicity: we say that $X$ is \textit{quasi-hyperbolic} if the images of all nonconstant entire curves $f : \CC \to X$ lie in a proper Zariski closed subset. The Green--Griffiths--Lang conjecture predicts this is always true for varieties of general type.
+
+\begin{conj}[Green--Griffiths--Lang]
+Let $X / \CC$ be a smooth projective variety of general type. Then $X$ is quasi-hyperbolic i.e.\ there is a proper Zariski closed subset $Z \subsetneq X$ containing the images of all nonconstant entire curves $f : \CC \to X$.
+\end{conj}
+
+The minimum such $Z$ is often called the \textit{exceptional set} of $X$. The remarkable feature of this conjecture is that we expect every entire curve to be \textit{algebraically degenerate} meaning it satisfies a polynomial relation (i.e.\ it lives in $Z$). Moreover, we expect that these relations can be chosen independently of the map! 
+
+The Green--Griffiths--Lang conjecture is highly resonant with another wide open problem: the Bombieri--Lang conjecture predicting some control on the locus of rational points on general type varieties.
+
+\begin{conj}[Bombieri--Lang]
+Let $X / K$ be a smooth projective variety over a number field $K$. Assume $X$ is general type. Then there is a proper Zariski closed subset $Z \subsetneq X$ such that for each finite extension $K' / K$ the set of $K'$-points outside $Z$ is finite.   
+\end{conj}
+
+An even more ambitious claim is that we should be able to take $Z$ in the Bombieri-Lang conjecture to be the exceptional set of $X_{\CC}$. This conjecture would imply a deep connection between the hyperbolic geometry of $X$ and its distribution of rational points. To the author, no enduring mystery in mathematics is more compelling than understanding the nature of this connection. Unfortunately, we will have nothing to say about it in this thesis. 
+\par 
+The strategy developed by Bogomolov, Green, Griffiths, Demailly and many others towards the Green--Griffiths--Lang conjecture is to produce algebraic differential equations that entire curves must satisfy. We can think of a first-order differential equation as a closed subspace of the tangent bundle of $X$. If we could produce enough differential equations so that the intersection of these loci inside the tangent bundle (or appropriate higher-order jet spaces) does not dominate $X$ then we win.
+
+Unfortunately, in many cases of interest known to be hyperbolic, this strategy fails because there are provably not enough algebraic differential equations to cut out a proper subvariety of $X$. For example, this occurs for products of hyperbolic curves and most Hilbert modular surfaces \cite{diverio_rousseau:exceptional_set_neq_GGL}. These are exactly the types of objects we need to study in this thesis, so a more sophisticated approach is needed. 
+
+\subsection{Bogomolov's Boundedness Theorem} \label{section:bogomolov_strategy}
+
+The first real progress towards the Green--Griffiths--Lang conjecture is Bogomolov's celebrated boundedness theorem for complex surfaces of general type satisfying $c_1^2 > c_2$. Bogomolov's remarkable proof also provides a route around the roadblock mentioned above.
+
+\begin{theorem}[Bogomolov, 1977] \cite{bogomolov:families_curves}
+Let $X$ be a smooth projective surface with $s_2(X) = c_1(X)^2 - c_2(X) > 0$. Then the curves on $X$ with fixed genus form a bounded family. In particular, $X$ has finitely many genus $0$ and genus $1$ curves i.e. it is algebraically quasi-hyperbolic.
+\end{theorem}
+
+This was later improved by McQuillan to also constrain non-algebraic entire curves $f : \CC \to X$ and thus prove the full Green--Griffiths--Lang conjecture.
+
+\begin{theorem}[McQuillan, 1998] \cite{mcquillan:diophantine_approximation}
+If $X$ is a smooth projective surface of general type with $s_2(X) = c_1(X)^2 - c_2(X) > 0$ then $X$ satisfies the Green--Griffiths--Lang conjecture. More precisely, there is a proper Zariski closed subset $Z \subsetneq X$ such that every entire curve $f : \CC \to X$ has image contained in $Z$. Consequently, if $X$ has \textit{no} genus $0$ or genus $1$ curves, then $X$ is hyperbolic.
+\end{theorem}
+
+Bogomolov is able to sidestep the issues discussed above -- that the algebraic differential equations on $X$ may have a base locus dominating $X$ -- by showing that this base locus carries a natural foliation to which any rational curve must be tangent. He uses the condition $c_1^2 > c_2$ to ensure that $X$ carries a symmetric differential form $\omega \in H^0(X, \Sym^{m}{\Omega_X})$ for some $m > 0$. A key input to this proof is a vanishing theorem for the cohomology of $\Sym^{m}{\Omega_X}$ which follows from Bogomolov's study of the stability of the cotangent bundle of a general type surface. From there, the existence of symmetric forms follows from a Hirzebruch-Riemann-Roch calculation. 
+\par 
+Now, since $\P^1$ carries no symmetric differential forms, for any map $f : \P^1 \to X$ we must have $f^* \omega = 0$. We can think of this as a nonlinear first-order differential equation satisfied by the map $f$. Bogomolov uses the following covering construction to turn this nonlinear differential equation into a linear one i.e.\ into a foliation that $f$ is tangent to. 
+\par
+Let us recall Bogomolov's construction in detail. Let $X$ be a smooth projective surface. For any generically immersive map $f : C \to X$ from a smooth projective curve to $X$, there is a unique ``holonomic'' lift $t_f : C \to \P_X(\Omega_X)$ defined by the map of bundles
+\[ f^* : f^* \Omega_X \onto \im{f^*} \subset \omega_C \]
+where $\im{f^*}$ is torsion-free of rank $1$ and hence a line bundle. This defines $t_f$ in such a way that $t_f^* \cO_{\P}(1) = \im{f^*}$. At the points $t \in C$ where $f$ is an immersion, the map $t_f$ is defined by $s \mapsto (f(s), \d{f}_s(\partial_s))$, viewing $\P := \P(\Omega_X)$ as the projectivization of the physical tangent bundle. Since $C$ is a smooth projective curve and $\P_X(\Omega_X)$ is proper, the extension over the points where $f$ is not an immersion is unique. 
+\par 
+Now let $\omega \in H^0(X, \Sym^{m}{\Omega_X})$ be a nonzero symmetric form. We can view
+\[ \omega \in H^0(X, \Sym^{m}{\Omega_X}) = H^0(\P, \cO_{\P}(m)) \]
+as a section of the line bundle $\cO_{\P}(m)$ hence its vanishing locus on $\P$ is a divisor $Z$. This represents the locus $(x, v) \in \P$ where $\omega_x(v) = 0$. Recall that for any map $f : \P^1 \to X$ we must have $f^* \omega = 0$. By definition, this means $t_f : \P^1 \to X$ factors through $Z$. Similarly, for an elliptic curve $C$ and a map $f : C \to X$, either $f^* \omega$ is zero identically or is zero nowhere. Hence, if $V(\omega) = \{x \in X \mid \omega_x = 0\}$ contains a big divisor then at most finitely many curves may not meet $V(\omega)$. Except for a finite number of exceptions, for each elliptic curve, $f^* \omega$ is therefore zero. 
+\par 
+Since $\dim{X} = 2$, the divisor $Z$ is a union of surfaces. Let $S \to Z$ be a resolution of singularities of a component of $Z$ dominating $X$. Except for finitely many rational or elliptic curves -- namely those which equal the image in $X$ of a component of $Z$ or which do not meet $V(\omega)$ -- all rational or elliptic curves on $X$ lift to a map $\wt{f} : C \to S$. Let $g : S \to X$ be the induced morphism. The quotient map $\pi^* \Omega_X \onto \cO_{\P}(1)$ defines a foliation on each component of $Z$. 
+
+\begin{defn}
+The \textit{induced holonomic foliation} on $S$ is defined as follows. Consider the pushout diagram,
+\begin{center}
+    \begin{tikzcd}
+        g^* \Omega_X \arrow[r, two heads] \arrow[d, hook] & \iota^* \cO_{\P}(1) \arrow[d, hook]
+        \\
+        \Omega_{S} \arrow[r, two heads] & \pushout \cQ 
+    \end{tikzcd}
+\end{center}
+where $\iota : S \to \P$ is the obvious map. Since $\Omega_{S} \onto \cQ$ is surjective, its dual $\F \embed \T_{S}$, with $\F = \cQ^{\vee}$, is a saturated reflexive subsheaf of generic rank $1$. Therefore, $[\F, \F] \subset \F$ because $\F$ has rank $1$ so it defines a foliation.  
+\end{defn}
+
+\begin{lemma} \label{lemma:holonomic_leaf}
+Let $f : C \to X$ be a map from a smooth proper curve $C$ such that $f^* \omega = 0$. Then the lift $\wt{f} : C \to S$ is a leaf of $\F$.    
+\end{lemma}
+
+\begin{proof}
+The lifted map $t_f : C \to \P$ is induced by the factorization 
+\[ f^* \Omega_X \to t_f^* \cO_{\P}(1) \to \omega_C \]
+using that $t_f$ factors through $S$, the following diagram shows that $\wt{f}^* \Omega_{S} \to \omega_C$ factors through $\wt{f}^* \Omega_{S} \onto \wt{f}^* \cQ$,
+\begin{center}
+    \begin{tikzcd}
+    \wt{f}^* g^* \Omega_X \arrow[r] \arrow[d] & \wt{f}^* \iota^* \cO_{\P}(1) \arrow[d] \arrow[rdd, bend left]
+    \\
+    \wt{f}^* \Omega_{S} \arrow[r] \arrow[rrd, bend right] & \wt{f}^* \cQ \arrow[rd, dashed]
+    \\
+    & & \omega_C
+    \end{tikzcd}
+\end{center}
+\end{proof}
+
+From here, Bogomolov concludes by showing that each foliation can have at most finitely many rational leaves. This requires analytic input (e.g.\ a theorem of Jouanolou \cite{jouanolou:solutions_to_pfaff_equations}) that fails in positive characteristic. In the subsequent Chapters, we will replace this step with a detailed study of the successive inseparable quotients by these induced foliations. This study culminates in a new criterion for algebraic quasi-hyperbolicity in positive characteristic.
+\par 
+Bogomolov's method requires the existence of a symmetric differential form (which is where the condition $c_1^2 > c_2$ is required). Subsequently, many authors sought to generalize Bogomolov's arguments, replacing the symmetric form with a section of a higher jet bundle, leading to, for example, the proof of Kobayashi's conjecture for hypersurfaces of very large degree. Likewise, in chapter~\ref{chapter:jets}, we will sketch methods employing higher jets as unirationality obstructions in positive characteristic.
+
+\subsection{Positive Characteristic}
+
+The situation regarding hyperbolicity is rather different in positive characteristic. The analog of the Green--Griffiths--Lang conjecture fails spectacularly. In fact, we have already seen it fails maximally since a general type variety may be uniruled even unirational! Likewise, in chapter~\todo{chapter:obstructions} \S~\todo{sec:quasi-hyperbolicity} we will construct examples of smooth projective surfaces of general type in positive characteristic that are provably not covered by genus $0$ or genus $1$ curves yet are nevertheless not algebraically quasi-hyperbolic. Explicitly, such a surface contains an infinite set of genus $0$ or genus $1$ curves that are ``discrete'' in the sense that none move in families and whose degrees grow without bound. In the same section, we will give a new criterion for algebraic quasi-hyperbolicity in positive characteristic. Then we use this criterion to show that analogous constructions to the above lead to surfaces that \textit{are} algebraically quasi-hyperbolic showing the subtlety of this property in positive characteristic. 
+\par 
+The techniques we develop to control the images of genus $0$ and $1$ curves in positive characteristic parallel, and are largely inspired by, the techniques mentioned above employing algebraic differential equations towards the Green--Griffiths--Lang conjecture or complex hyperbolicity. The Green--Griffiths strategy of building enough algebraic differential equations on $X$ to force any genus $\le 1$ curve to be algebraically degenerate works just as well in positive characteristic using Hasse-Schmidt derivations \cite{cadorel_generalized_jets}. However, techniques based on foliations to push beyond the Green--Griffiths locus, such as in Bogomolov's argument, encounter major new difficulties in characteristic $p>0$.
+\par 
+The main difficulty is that solutions to differential equations behave quite differently in positive characteristic, losing much of their rigidity. In particular, there is no uniqueness theorem for solutions to ODEs with prescribed boundary conditions due to the basic fact that both $1$ and $x^p$ satisfy $f'(x) = 0$ in characteristic $p$. However, the solutions to differential equations are parametrized by subvarieties of a certain inseparable quotient (see chapter~\ref{chapter:foliations} Lemma~\ref{lem:tangent_leaf_pullback}). This weak description of the solutions is enough to jump-start our technique. Specifically, we try to force the curves on the inseparable quotient to themselves satisfy additional algebraic differential equations. If we can ensure this happens \textit{ad infinitum} then we reach a contradiction by infinite descent (or equivalently by the fact that an algebraic map has finite degree). Another way to view our technique is to build a mechanism to force higher and higher derivatives of the map to be degenerate. A toy model for what happens is as follows: if $f$ is a polynomial whose divided derivatives $\frac{1}{n!} \frac{\d^n}{\d x^n} f = 0$ all vanish, then $f$ is a constant. Of course, this trivially holds equally well in positive characteristic. In the main applications of this text to the Shioda conjecture and Hilbert modular varieties, we achieve this control over the higher order derivatives of a map $f : C \to X$ in a fairly roundabout way using the inseparable quotients. A more direct method to force arbitrarily high derivatives of a map $f : C \to X$ to vanish is to find algebraic differential equations of arbitrarily high order that $f$ must satisfy in such a way as to impose nondegenerate conditions on the higher (divided) derivatives $f^{(n)}$. A version using higher-order differential equations arising from jet bundles is explored in chapter~\ref{chapter:jets}.
+\par 
+It is worth mentioning that Bogomolov's theorem gives control not only over genus $0$ and genus $1$ curves but also over families of curves of fixed genus. We have focused on the perspective of obstructing uniruledness (or obstructions to covering by genus $1$ curves) because the analogous boundedness results usually fail in positive characteristic due to the existence of partial Frobenii. For example, if $X = C \times C$ is a self-product of a curve $C$ over $\FF_p$, then the sequence of graphs $\Gamma_n \subset C \times C$ of the $n$-th iterated Frobenius $F^n : C \to C$ will not be bounded. Indeed, they are all curves isomorphic to $C$ but with degree growing without bound. These curves are exactly the pullback by the partial Frobenius $\id \times F : C \to C$ iterated $n$-times to the diagonal $\Delta \subset C \times C$. However, in the cases of interest in this thesis, we will be able to show that such constructions are the \textit{only} source of failure of boundedness. Precisely, we will show that every family of curves of fixed genus $g$ is pulled back via a finite sequence of partial Frobenii from a bounded family of curves (cf. chapter~\ref{chapter:hilbert} \S\ref{section:boundedness_of_families_of_curves}).
+
+\section{Outline of Chapters}
+
+We now give an overview of the organization of the remaining chapters.
+
+\begin{enumerate}
+\item Chapter~\ref{chapter:foliations} develops the basic positive-characteristic theory of foliations used throughout the thesis. In particular, it reviews relative Frobenius, $p$-curvature, $p$-closed foliations, and Ekedahl's inseparable quotient construction in the form needed for later descent arguments.
+\item Chapter~\ref{chapter:obstructions} introduces the first infinite-descent argument for product-quotient surfaces. Using diagonal symmetric differentials and the foliations they induce, it proves boundedness results for rational and elliptic curves in positive characteristic and constructs counterexamples to Shioda's conjecture from suitable product-quotient surfaces.
+\item The chapter \textit{Supersingular Reduction of Hurwitz Curves} supplies the arithmetic input needed to prove supersingular reduction for the preceding constructions in infinitely many characteristics. It studies supersingular reduction for Hurwitz curves of genera $3$, $7$, and $14$, as well as related genus $17$ curves, with special attention to the first Hurwitz triplet and auxiliary covers built from the Klein and Fermat quartics.
+\item The chapter \textit{Foliated Descent in General} abstracts the mechanism underlying the previous arguments into a more flexible descent algorithm. The main results are a general degree bound verifying an infinite descent contradiction when the requisite construction can be repeated indefinitely.
+\item Chapter~\ref{chapter:hilbert} applies this framework to Hilbert modular varieties. After reviewing their moduli interpretations, integral models, special fibers, Hasse invariants, and tautological foliations, it proves non-uniruledness results for reductions mod $p$ of Hilbert modular varieties of large level or discriminant. When the obstruction applies, it will yield non-unirationality results for all but finitely many characteristics (depending on the level).
+\item Chapter~\ref{chapter:jets} sketches a higher-order version of the obstruction theory using jet bundles. The goal is to replace first-order differential equations by higher-order conditions that survive larger inseparable degree, and thereby indicate a possible route beyond the foliation-based arguments developed earlier.
+\end{enumerate}
+
+
+\textbf{Conventions.} A \textit{variety} is a geometrically integral separated scheme of finite type over a field $k$. Unfortunately, this terminological choice means that Hilbert modular varieties -- being often disconnected -- are \textit{not} varieties. When we say that a variety $X$ is \textit{covered} by rational curves, elliptic curves, or curves of genus $g$, we mean there is a family of smooth proper curves $\cC \to T$ of genus $g$ along with a dominant map $f : \cC \to X$ not contracting the fibers. A resolution of surface singularities $\pi : \tilde{S} \to S$ is \textit{minimal} if there is no $(-1)$-curve (possibly defined over $\bar{k}$) contracted by $\pi$. When we say a surface $X$ is \textit{minimal}, we mean it is smooth projective and contains no $(-1)$-curve (possibly defined over $\bar{k}$). When $X$ is smooth projective of nonnegative Kodaira dimension, minimality is equivalent to the condition that $K_X$ is nef. In characteristic $p > 0$, we write $X^{(p^e)}$ for the $e$-fold Frobenius twist of $X$ and $F_X^e : X \to X^{(p^e)}$ for the relative Frobenius. When we say that a variety is \textit{simply-connected}, we mean geometrically simply-connected for the \etale fundamental group. The group $D_{n}$ is the dihedral group with $2n$ elements. For example, $D_{6}$ is the symmetries of the regular hexagon.
 
 \ifSubfilesClassLoaded{%
   \bibliographystyle{alpha}
   \bibliography{refs}
 }{}
+
 
 \end{document}

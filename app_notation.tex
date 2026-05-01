@@ -1,0 +1,90 @@
+\documentclass[main.tex]{subfiles}
+\begin{document}
+
+\chapter{Notation} \label{appendix:notation}
+
+This appendix records the notation used most frequently throughout the thesis. It is not exhaustive, but it collects the symbols that recur most often without comment.
+
+\subsubsection*{General algebraic geometry}
+\begin{itemize}
+\item $k$ a base field, $\bar{k}$ a fixed algebraic closure, and $\ol{\Q}$ an algebraic closure of $\Q$
+\item $\FF_q$ the finite field with $q$ elements
+\item $\Omega_X$ and $\T_X$ the cotangent and tangent sheaves of a variety $X$
+\item $\omega_X$ the canonical line bundle of a smooth variety $X$
+\item $\Sym^m \Omega_X$ the sheaf of symmetric differentials of degree $m$
+\item $\P_X(\E)$ the projectivization of a vector bundle or coherent sheaf $\E$ on $X$
+\item $\Jac(C)$ the Jacobian of a smooth projective curve $C$
+\item $\Prym(D/C)$ the Prym variety of an \etale double cover $D \to C$
+\item $\pi_1^{\et}(X)$ the \etale fundamental group of $X$
+\end{itemize}
+
+\subsubsection*{Foliations and positive characteristic}
+\begin{itemize}
+\item $\Frob_X : X \to X$ the absolute Frobenius of a scheme in characteristic $p$
+\item $X^{(p^e/S)}$ the $e$-fold Frobenius twist of $X$ relative to a characteristic $p > 0$ base scheme $S$
+\item $X^{(p^e)}$ the $e$-fold Frobenius twist relative to $k$ of a variety $X/k$ over a field of characteristic $p > 0$
+\item $F_X^e : X \to X^{(p^e)}$ the $e$-fold relative Frobenius; for $e=1$ we write $F_X$
+\item $\F \subset \T_X$ a foliation on a normal variety $X$
+\item $\Sing(\F)$ the singular locus of a foliation where $\F \subset \T_X$ is not a sub-bundle
+\item $f^+ \F$ the pullback foliation along a morphism $f : X \to Y$
+\item $\psi_{\F,p} : \Frob^* \F \to \T_X / \F$ the $p$-curvature of an involutive subsheaf $\F$
+\item $X/\F$ the Ekedahl quotient of a smooth variety by a $p$-closed foliation
+\item $\cN_{\F}$ the normal sheaf of a foliation (the reflexive hull of $\T_X / \F$)
+\item $\tan\{\F_i\}$ the tangential divisor of a collection of foliations in general position
+\end{itemize}
+
+
+\subsubsection*{Hurwitz curves and related notation}
+\begin{itemize}
+\item $\Delta(a,b,c)$ the triangle group with signature $(a,b,c)$
+\item $K_+ := \Q(\zeta_7)^+ = \Q(\cos(2\pi/7))$
+\item $\cQ_{\Hur}$ the Hurwitz order in the quaternion algebra used to realize certain Hurwitz curves as Shimura curves
+\item $\X^{\Hur}(\aa)$ the Shimura curve attached to the Hurwitz order at level $\aa$
+\end{itemize}
+
+\subsubsection*{Hilbert modular varieties}
+\begin{itemize}
+\item $F$ a totally real number field of degree $d := [F:\Q]$ with ring of integers $\cO_F$
+\item $\Sigma := \Hom(F,\RR)$ the set of real embeddings of $F$; we write $\alpha_{\sigma} := \sigma(\alpha)$
+\item $D := \disc_{F/\Q}$ the absolute discriminant and $\dd := \dd_{F/\Q}$ the different ideal
+\item $\Cl^+(F)$ the narrow class group of $F$
+\item $\cc$ a fractional ideal of $F$ serving as the polarization module
+\item $\A_F^{\infty}$ (resp.\ $\A^{\infty}$) the finite adeles of $F$ (resp.\ $\Q$)
+\item $\frH \subset \CC$ the upper half-plane and $\frH^\pm := \CC \sm \RR$
+\item $\SS := \Res_{\CC/\RR} \mathbb{G}_{m,\CC}$ the Deligne torus
+\item $G^{\Hilb} := \Res_{F/\Q} \GL_{2,F}$ the Hilbert modular group
+\item $G^{\PEL}$ the PEL variant of the Hilbert modular group with modified center
+\item $X^{\Hilb}$ and $X^{\PEL}$ the corresponding conjugacy classes, both identified with $(\frH^\pm)^{\Sigma}$
+\item $X^+ = \frH^{\Sigma}$ a connected component of the symmetric domain
+\item $\Sh_K(G,X)$ the Shimura variety attached to a Shimura datum $(G,X)$ at level $K$
+\item $U(N) := \ker(\GL_2(\widehat{\cO}_F) \to \GL_2(\cO_F/N))$ the principal level-$N$ subgroup
+\item $Y^{\cc}(N)$ the Hilbert modular scheme parametrizing $\cc$-polarized HBAVs with full level-$N$ structure
+\item $Y^{\cc}_{00}(N)$ the variant with $\Gamma_{00}(N)$-level structure
+\item $Z^{\cc}(N)$ the auxiliary scheme parametrizing $\cO_F$-linear isomorphisms $\cc \ot (\Z/N\Z) \iso \dd^{-1} \ot \mu_N$
+\item $G_{U,N}$ the finite quotient acting on $Y^{\cc}(N)$ and $Y_U := \coprod_{\cc \in \Cl^+(F)} Y^{\cc}(N)/G_{U,N}$ the resulting Hilbert modular variety
+\item $p$ a rational prime unramified in $F$ and coprime to the level
+\item $p\cO_F = \p_1 \cdots \p_r$ with inertia degrees $f_i := f(\p_i/p)$
+\item $\kappa := \FF_{p^f}$ where $f := \mathrm{lcm}\{f_1,\dots,f_r\}$, and $W(\kappa)$ its Witt ring
+\item $\phi$ the Frobenius of $W(\kappa)$
+\item $\BB := \Hom(F, W(\kappa)[1/p]) = \bigsqcup_{\p \mid p} \BB_{\p}$ the set of $p$-adic embeddings; $\phi$ acts by $\sigma \mapsto \phi \circ \sigma$
+\item for $I \subset \Spec(\cO_F/p)$ we write $\p_I := \prod_{\p \in I} \p$ and $\BB_I := \bigcup_{\p \in I} \BB_{\p}$
+\item $\cM$ a Hilbert modular scheme carrying a universal HBAV $\pi : \cA \to \cM$; $M := \cM \times_{W(\kappa)} \kappa$ its special fiber
+\item $\cM_0^{\cc}(\p_I)$ the Iwahori $\Gamma_0(\p_I)$-level moduli space; $M_0^{\cc}(\p_I)$ its special fiber
+\item $M^{\ord}$ the ordinary locus, and $M_0^{\cc}(\p_I)^{\mathrm{m}}$, $M_0^{\cc}(\p_I)^{\et}$ the multiplicative and \etale components of the Iwahori special fiber
+\item $\ul{\omega} := \pi_* \Omega^1_{\cA/\cM}$ the Hodge bundle, $\ul{\Lie} := \Lie(\cA/\cM) \cong \ul{\omega}^{\vee}$, and $\omega_{\sigma}$ the $\sigma$-isotypic summand of $\ul{\omega}$
+\item $\ul{\cc}$ the equivariant sheaf $\cc \ot \cO_{\cM}$ and $\delta_{\sigma}$ the $\sigma$-isotypic part of $\ul{\cc\dd}^{-1}$
+\item $\KS : \T_{\cM} \iso \ul{\Lie}^{\ot 2} \ot \ul{\dd\cc}$ the Kodaira--Spencer isomorphism
+\item $X_U^{\tor}$ a toroidal compactification of $Y_U$ with reduced boundary divisor $E$
+\item $\F_{\sigma} \cong \omega_{\sigma}^{-2} \ot \delta_{\sigma}$ the rank-$1$ tautological foliation indexed by $\sigma \in \BB$
+\item $\F_{\Theta} := \bigoplus_{\sigma \in \Theta} \F_{\sigma}$ for $\Theta \subset \BB$; lower indices are used for the rank-$1$ tautological summands and their direct sums
+\item $\F^{\sigma} := \F_{\BB \sm \{\sigma\}}$ the complementary corank-$1$ foliation; more generally, upper indices indicate complementary foliations obtained by omitting the indicated lower-index summands
+\item $h_{\sigma}$ the partial Hasse invariant
+\end{itemize}
+
+
+\ifSubfilesClassLoaded{%
+  \bibliographystyle{alpha}
+  \bibliography{refs}
+}{}
+
+\end{document}

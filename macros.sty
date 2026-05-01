@@ -4,9 +4,10 @@
 \usepackage{amsmath,amsfonts,amsthm,amssymb,mathrsfs}
 \usepackage{mathtools}
 \usepackage{calligra}
-\usepackage{tikz-cd,adjustbox}
+\usepackage{tikz-cd,adjustbox,calc}
 \usepackage{spverbatim,comment}
 \usepackage{colonequals}
+
 
 % From General_Includes.tex -- used in Hyperbolicity and Bogomolov chapters
 \newcommand{\chref}[2]{\href{#1}{\color{blue}{\underline{#2}}}}
@@ -50,6 +51,22 @@
 \newtheorem{construction}[theorem]{Construction}
 \newtheorem{setup}[theorem]{Set-up}
 
+% New align environment for math
+
+\usepackage{enumitem}
+\usepackage{eqparbox}
+
+\newcounter{mathenum}
+\newenvironment{mathenum}
+ {\begin{enumerate}\stepcounter{mathenum}}
+ {\end{enumerate}}
+\newcommand{\mathenumitem}[4]{%
+  \item
+  \eqmakebox[@@\themathenum @A@][l]{#1}%
+  \eqmakebox[@@\themathenum @B@][c]{${}#2{}$}%
+  \eqmakebox[@@\themathenum @C@][l]{#3}%
+  \quad#4%
+}
 % AG Commands
 
 \DeclareMathOperator{\coker}{\mathrm{coker}}
@@ -57,6 +74,7 @@
 \renewcommand{\d}{\mathrm{d}}
 \DeclareMathOperator{\rank}{\mathrm{rank}}
 \DeclareMathOperator{\lcm}{\mathrm{lcm}}
+\DeclareMathOperator{\trdeg}{\mathrm{trdeg}}
 
 \usepackage{bbm}
 \newcommand{\acts}{\; \rotatebox[origin=c]{-90}{$\circlearrowright$} \;}
@@ -69,9 +87,15 @@
 \newcommand{\inner}[2]{\left< #1, #2 \right>}
 \newcommand{\sm}{\setminus}
 \newcommand{\smooth}{\mathrm{sm}}
+\renewcommand{\emptyset}{\varnothing}
 
 \DeclareMathOperator{\Tr}{\mathrm{Tr}}
 \DeclareMathOperator{\tr}{\mathrm{tr}}
+\DeclareMathOperator{\Br}{\mathrm{Br}}
+\DeclareMathOperator{\Arf}{\mathrm{Arf}}
+\DeclareMathOperator{\RA}{\mathrm{RA}}
+\DeclareMathOperator{\Sp}{\mathrm{Sp}}
+\DeclareMathOperator{\Ind}{\mathrm{Ind}}
 
 \newcommand{\Bs}{\mathrm{Bs}}
 \newcommand{\rad}{\mathrm{rad}}
@@ -87,6 +111,7 @@
 \newcommand{\T}{\mathcal{T}}
 \newcommand{\F}{\mathcal{F}}
 \DeclareMathOperator{\Frob}{\mathrm{Frob}}
+\DeclareMathOperator{\Fr}{\mathrm{Fr}}
 
 \newcommand{\m}{\mathfrak{m}}
 \newcommand{\p}{\mathfrak{p}}
@@ -102,6 +127,7 @@
 \newcommand{\NN}{\mathbb{N}}
 
 \newcommand{\BB}{\mathbb{B}}
+\newcommand{\DD}{\mathbb{D}}
 \newcommand{\LL}{\mathbb{L}}
 \newcommand{\TT}{\mathbb{T}}
 \renewcommand{\SS}{\mathbb{S}}
@@ -172,13 +198,15 @@
 
 % Operators used across chapters (moved from chapter files)
 \DeclareMathOperator{\Jac}{\mathrm{Jac}}
+\DeclareMathOperator{\Km}{\mathrm{Km}}
 \DeclareMathOperator{\Nm}{\mathrm{Nm}}
-\DeclareMathOperator{\Cl}{\mathrm{Cl}}
+\DeclareMathOperator{\Cl}{\mathcal{C}\!{\ell}}
 \DeclareMathOperator{\Ann}{\mathrm{Ann}}
 \DeclareMathOperator{\Cone}{\mathrm{Cone}}
 \DeclareMathOperator{\Tors}{\mathrm{Tors}}
 \DeclareMathOperator{\Prym}{\mathrm{Prym}}
 \DeclareMathOperator{\ad}{\mathrm{ad}}
+\DeclareMathOperator{\red}{\mathrm{red}}
 \DeclareMathOperator{\Ad}{\mathrm{Ad}}
 \DeclareMathOperator{\rk}{\mathrm{rk}}
 \DeclareMathOperator{\lct}{\mathrm{lct}}
@@ -213,8 +241,18 @@
 \newcommand{\cC}{\mathcal{C}}
 \newcommand{\frP}{\mathfrak{P}}
 \newcommand{\X}{\mathcal{X}}
+\makeatletter
+\@ifpackageloaded{xcolor}{}{\RequirePackage{xcolor}}
+\@ifpackageloaded{cancel}{}{\RequirePackage{cancel}}
+\@ifpackageloaded{ulem}{}{\RequirePackage[normalem]{ulem}}
+\makeatother
 \newcommand{\TODO}{{\color{red} TODO}}
 \providecommand{\todo}[1]{\textcolor{red}{Todo: #1}}
+\newif\ifcodexedits
+\codexeditstrue
+\newcommand{\revadd}[1]{\ifcodexedits{\color{blue}#1}\else#1\fi}
+\newcommand{\revdel}[1]{\ifcodexedits\ifmmode{\color{red}\cancel{#1}}\else{\color{red}\sout{#1}}\fi\fi}
+\newcommand{\revnote}[1]{\ifcodexedits{\color{red}\textbf{[CODEX: #1]}}\fi}
 \newcommand{\Ben}[1]{\textcolor{red}{Ben: #1}}
 \newcommand{\legendre}[2]{\left(\frac{#1}{#2}\right)}
 
@@ -242,6 +280,7 @@
 % From ch_hilbert -- Hilbert modular varieties and Shimura variety notation
 \newcommand{\Sh}{\mathrm{Sh}}         % Shimura variety
 \renewcommand{\aa}{\mathfrak{a}}      % fractional ideal (fraktur a)
+\newcommand{\bb}{\mathbb{b}}     	  % fractional ideal (fraktur b)
 \newcommand{\cc}{\mathfrak{c}}        % conductor ideal (fraktur c)
 \newcommand{\dd}{\mathfrak{d}}        % different ideal (fraktur d)
 \newcommand{\disc}{\mathrm{disc}}     % discriminant of a number field
@@ -251,8 +290,7 @@
 \newcommand{\KS}{\mathrm{KS}}        % Kodaira-Spencer map
 \newcommand{\der}{\mathrm{der}}       % derived (subscript, e.g. derived group)
 \newcommand{\tor}{\mathrm{tor}}       % torsion (subscript, e.g. torsion subgroup)
-\newcommand{\dR}{\mathrm{dR}}         % de Rham (as in de Rham cohomology)
-\newcommand{\bb}{\mathrm{bb}}         % Baily-Borel (compactification)
+\newcommand{\dR}{\mathrm{dR}}         % de Rham (as in de Rham cohomology)   
 \newcommand{\cG}{\mathcal{G}}         % calligraphic G (group scheme)
 \newcommand{\PEL}{\mathrm{PEL}}       % PEL type (Shimura varieties)
 
@@ -289,6 +327,7 @@
 \newcommand{\et}{\mathrm{\acute{e}t}}
 \newcommand{\etale}{\'{e}tale\xspace}
 \newcommand{\cech}{\v{C}ech\xspace}
+\newcommand{\genus}{\mathrm{genus}}
 
 \newcommand{\Mustata}{Musta\c{t}\u{a}\xspace}
 \newcommand{\Kahler}{K\"{a}hler\xspace}
