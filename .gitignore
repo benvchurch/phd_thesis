@@ -1,4 +1,5 @@
-re*.aux
+# LaTeX aux/build files
+*.aux
 *.log
 *.lot
 *.lof
@@ -6,5 +7,15 @@ re*.aux
 *.toc
 *.blg
 *.bbl
-main.pdf
+*.fdb_latexmk
+*.fls
+*.synctex.gz
+*.dvi
+
+# Generated thesis PDFs (except for main thesis PDF)
+ch_*.pdf
+preface_*.pdf
+app_*.pdf
+
+# Local reference material not for repo
 Aaron/

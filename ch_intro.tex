@@ -19,13 +19,13 @@ When varieties are provably irrational, there remain interesting gradations in t
 Let $X$ be a variety over $k$. We say that $X$ is \textit{unirational} (over $k$) if there is a dominant rational map $\P^n_k \rat X$.
 \end{defn}
 
-Unirationality can be viewed as a weaker notion of a polynomial system being ``solvable'' by rational functions where we do not require the parametrization by rational functions to give a precise 1-to-1 description of the set of solutions. In the 19th century it was understood that the Riemann-Hurwitz formula shows that -- over the complex numbers -- only genus $0$ curves are unirational. From the function field perspective, L\"{u}roth generalized this result to curves over any field. In modern notation he proved.
+Unirationality can be viewed as a weaker notion of a polynomial system being ``solvable'' by rational functions where we do not require the parametrization by rational functions to give a precise 1-to-1 description of the set of solutions. In the 19th century it was understood that the Riemann-Hurwitz formula shows that -- over the complex numbers -- only genus $0$ curves are unirational. From the function field perspective, L\"{u}roth generalized this result to curves over any field. In modern notation he proved:
 
 \begin{theorem}[L\"{u}roth, 1876]
 If $X/k$ is a curve over a field of any characteristic then $X$ is unirational iff $X$ is rational. If moreover $X$ is smooth and complete then $X \cong \P^1_k$.
 \end{theorem}
 
-L\"{u}roth asked if the higher-dimensional analog was true. In field-theoretic terms he asked if any finitely generated field extension $K / k$ so that $K$ is contained in a purely-transcendental extension $k(t_1, \dots, t_n)$ then must $K / k$ itself be purely transcendental. This question came to be known as the L\"{u}roth problem. In more modern language, his problem asks whether a unirational variety of dimension $n$ over $k$ is always rational. The complex surface case, when $k = \CC$ and $n = 2$ was also settled affirmatively in the 19th century by Castelnuovo.
+L\"{u}roth asked if the higher-dimensional analog was true. In field-theoretic terms he asked if any finitely generated field extension $K / k$ so that $K$ is contained in a purely-transcendental extension $k(t_1, \dots, t_n)$ then must $K / k$ itself be purely transcendental. This question came to be known as the L\"{u}roth problem. In more modern language, his problem asks whether a unirational variety of dimension $n$ over $k$ is always rational. The complex surface case, when $k = \CC$ and $n = 2$, was also settled affirmatively in the 19th century by Castelnuovo.
 
 \begin{theorem}[Castelnuovo, 1896]
 Let $X / \CC$ be a smooth projective surface. Then the following are equivalent,
@@ -142,7 +142,7 @@ He also worked out some examples with Delsarte surfaces. Based on these examples
 In Theorem~\ref{thm:unirational_fundamental_group}, we saw that unirationality in positive characteristic implies a \textit{finite} fundamental group rather than a trivial one as is the case in characteristic zero. Therefore, one might ask why Shioda formulated his conjecture only in the simply-connected case. This is because Shioda was aware of counterexamples if the simply-connectedness assumption is relaxed to $\pi_1^{\et}(X)$ finite of order coprime to $p$. Indeed, in that case $X$ is unirational if and only if its universal cover $\wt{X} \to X$ is unirational but $\wt{X}$ may have additional classes in $H^2$ not spanned by algebraic cycles. However, such examples are not particularly convincing; one should, in this case, consider the conjecture for $\wt{X}$ not for $X$.  
 \end{rmk}
 
-For an explicit example, Shioda used the Godeaux surface constructed as a free $\mu_5$ quotient of the Fermat $X_5$ of degree $5$ which is supersingular in all characteristics but unirational if and only if $X_5$ is i.e.\ when $p^v \equiv - 1 \mod 5$ for some $v$. 
+For an explicit example, Shioda used the Godeaux surface constructed as a free $\mu_5$ quotient of the Fermat $X_5$ of degree $5$ which is supersingular in all characteristics but unirational if and only if $X_5$ is i.e.\ when $p^\nu \equiv - 1 \mod 5$ for some $\nu$. 
 
 \begin{example} \label{example:godeaux}
 Let $G = \mu_5$ act on $F_5$ by $\lambda \cdot [X : Y : Z : W] = [X : \lambda Y : \lambda^2 Z : \lambda^3 W]$. This action is free and hence $X = F_5 / G$ is a smooth projective surface with $\pi_1^{\et}(X_{\ol{\FF}_p}) = \Z / 5 \Z$ called the Godeaux surface. Shioda's result shows that this surface is unirational for infinitely many primes $p \neq 5$. Hence the positive characteristic part of Theorem~\ref{thm:unirational_fundamental_group} is sharp.
@@ -167,7 +167,7 @@ However, the existence of inseparable unirational parametrization in positive ch
 
 The first goal of this thesis is to exhibit a counterexample to Shioda's conjecture. In fact, we will do more: we will show examples that are not covered by genus $0$ or genus $1$ curves. A variety covered by rational curves is called \textit{uniruled}. Precisely, $X$ is uniruled if there is a dominant rational map $f : W \times \P^1 \rat X$ such that $f$ does not factor through $W \times \P^1 \to W$. In Chapter~\ref{chapter:obstructions} we will prove the following theorem by exhibiting such a surface $X$ contradicting the Shioda conjecture.
 
-\begin{theorem} \label{thm:main} \todo{citation}
+\begin{theorem} \label{chapter_intro:thm:main} (cf. chapter~\ref{chapter:obstructions} Theorem~\ref{intro:thm:example})
 There exists a smooth projective surface over $\ol{\FF_p}$ with the following properties:
 \begin{enumerate}
 \item $H^2_{\et}(X, \Q_{\ell})$ is spanned by algebraic cycles
@@ -206,7 +206,7 @@ Even in this case, for fixed $n$, we do not know if $M_{1,n}$ is unirational or 
 \par 
 The difficulty of using techniques based on \etale cohomology to prove uniform obstruction results over different primes partially inspired the investigation of the non-cohomological obstructions we consider in this thesis. Our techniques do not yet apply to the moduli spaces of curves $M_{g,n}$. However, we are able to apply them to Hilbert modular varieties to obtain uniform obstruction results.
 
-\begin{theorem} \todo{CITE}
+\begin{theorem} (cf. chapter~\ref{chapter:hilbert} Theorem~\ref{thm:main_hilbert_non-uniruled})
 Let $Y_0^F(N)$ be the Hilbert modular variety at level $\Gamma_0(N)$ associated to a totally real field $F$. Then if either $N$ or the discriminant of $F$ is sufficiently large, the reduction $Y_0^F(N)_{\ol{\FF}_p}$ mod $p$ is not uniruled or covered by genus $1$ curves for all primes $p$ not dividing $N$.
 \end{theorem}
 
@@ -302,7 +302,7 @@ Moreover, he conjectured the converse to hold as well.
 
 \begin{conj}[Demailly]
 Let $X$ be a smooth projective variety. Then
-\[ X \text{ is analytically hyperbolic} \implies X \text{ is algebraically hyperbolic}. \] 
+\[ X \text{ is algebraically hyperbolic} \implies X \text{ is analytically hyperbolic}. \]
 \end{conj}
 
 Algebraic hyperbolicity, being amenable to attack via techniques in algebraic geometry, is often easier to study. For example, the famous conjecture of Kobayashi predicting the hyperbolicity of general hypersurfaces remains open.
@@ -400,7 +400,7 @@ Bogomolov's method requires the existence of a symmetric differential form (whic
 
 \subsection{Positive Characteristic}
 
-The situation regarding hyperbolicity is rather different in positive characteristic. The analog of the Green--Griffiths--Lang conjecture fails spectacularly. In fact, we have already seen it fails maximally since a general type variety may be uniruled even unirational! Likewise, in chapter~\todo{chapter:obstructions} \S~\todo{sec:quasi-hyperbolicity} we will construct examples of smooth projective surfaces of general type in positive characteristic that are provably not covered by genus $0$ or genus $1$ curves yet are nevertheless not algebraically quasi-hyperbolic. Explicitly, such a surface contains an infinite set of genus $0$ or genus $1$ curves that are ``discrete'' in the sense that none move in families and whose degrees grow without bound. In the same section, we will give a new criterion for algebraic quasi-hyperbolicity in positive characteristic. Then we use this criterion to show that analogous constructions to the above lead to surfaces that \textit{are} algebraically quasi-hyperbolic showing the subtlety of this property in positive characteristic. 
+The situation regarding hyperbolicity is rather different in positive characteristic. The analog of the Green--Griffiths--Lang conjecture fails spectacularly. In fact, we have already seen it fails maximally since a general type variety may be uniruled even unirational! Likewise, in chapter~\ref{chapter:obstructions} \S\ref{sec:quasi-hyperbolicity} we will construct examples of smooth projective surfaces of general type in positive characteristic that are provably not covered by genus $0$ or genus $1$ curves yet are nevertheless not algebraically quasi-hyperbolic. Explicitly, such a surface contains an infinite set of genus $0$ or genus $1$ curves that are ``discrete'' in the sense that none move in families and whose degrees grow without bound. In the same section, we will give a new criterion for algebraic quasi-hyperbolicity in positive characteristic. Then we use this criterion to show that analogous constructions to the above lead to surfaces that \textit{are} algebraically quasi-hyperbolic showing the subtlety of this property in positive characteristic. 
 \par 
 The techniques we develop to control the images of genus $0$ and $1$ curves in positive characteristic parallel, and are largely inspired by, the techniques mentioned above employing algebraic differential equations towards the Green--Griffiths--Lang conjecture or complex hyperbolicity. The Green--Griffiths strategy of building enough algebraic differential equations on $X$ to force any genus $\le 1$ curve to be algebraically degenerate works just as well in positive characteristic using Hasse-Schmidt derivations \cite{cadorel_generalized_jets}. However, techniques based on foliations to push beyond the Green--Griffiths locus, such as in Bogomolov's argument, encounter major new difficulties in characteristic $p>0$.
 \par 

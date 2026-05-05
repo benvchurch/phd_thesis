@@ -116,7 +116,7 @@ Now we describe the strategy to prove that $X$ is not unirational assuming $(\as
 T
 \end{tikzcd}
 \end{center}
-by curves of genus $0$ or $1$. As before we may assume that $f$ is generically immersive on fibers. Let $S_1, \dots, S_r \to \P$ denote resolutions of the components of $\Zhor$. Since $f$ dominates $X$ it lifts to one of $S_1, \dots, S_r$ and the lift consists of curves tangent to the foliation $\F_i$ on $S_i$. If its $p$-curvature $\psi_{p,\F_i}$ is nonzero, then the image of $\wt{f}$ lies inside $V(\psi_{p, \F_i}) \subset S_i$ which does not dominate $X$. Therefore, $f$ must lift to a component $S_i$ on which $\psi_{p, \F_i} = 0$ hence we may form the quotient. By Lemma \todo{CITE} the family $\wt{f} : \cC \to S_i$ is generically pulled back from a family of curves on $S_i / \F_i$ in the sense that there exists a diagram
+by curves of genus $0$ or $1$. As before we may assume that $f$ is generically immersive on fibers. Let $S_1, \dots, S_r \to \P$ denote resolutions of the components of $\Zhor$. Since $f$ dominates $X$ it lifts to one of $S_1, \dots, S_r$ and the lift consists of curves tangent to the foliation $\F_i$ on $S_i$. If its $p$-curvature $\psi_{p,\F_i}$ is nonzero, then the image of $\wt{f}$ lies inside $V(\psi_{p, \F_i}) \subset S_i$ which does not dominate $X$. Therefore, $f$ must lift to a component $S_i$ on which $\psi_{p, \F_i} = 0$ hence we may form the quotient. By Lemma~\ref{lem:tangent_leaf_pullback} the family $\wt{f} : \cC \to S_i$ is generically pulled back from a family of curves on $S_i / \F_i$ in the sense that there exists a diagram
 \begin{center}
 \begin{tikzcd}
 \cC \arrow[d, "\wt{f}"'] \arrow[r, "F_{\cC/T}"] & \cC^{(p/T)} \arrow[d, "\wt{f}'"]
@@ -426,7 +426,7 @@ Therefore,
 % REVIEW: The first equality below should use adjunction: $\omega_{Z_i} = \omega_{\P}(Z_i)|_{Z_i}$, so $\deg \wt{f}_t^* \omega_{Z_i} = \deg \wt{f}_t^* \omega_{\P} + \deg \wt{f}_t^* \cO_{\P}(Z_i)$. Check that the second term is correct.
 \deg{\wt{f}_t^* \omega_{Z_i}} & = \deg{\wt{f}_t^* \omega_{\P}} + \deg{\wt{f}_t^* \cO_{\P}(Z_i)}
 \\
-& = \deg{\wt{f}_t^* \omega_{\P}} + \frac{1}{m_i} \left[ m \deg{\wt{f}_t^* \cO_{\P}(1)} - \sum_{j \neq i} m_j \deg{\wt{f}_t^* \cO_{\P}(Z_j)} \right] .
+& = \deg{\wt{f}_t^* \omega_{\P}} + \frac{1}{m_i} \left[ m \deg{\wt{f}_t^* \cO_{\P}(1)} - \sum_{j \neq i} m_j \deg{\wt{f}_t^* \cO_{\P}(Z_j)} \right].
 \end{align*}
 Furthermore, for a generic element $t \in T$ the curve $\wt{f}_t : \cC_t \to Z_i$ is not contained in $Z_j$ for $j \neq i$. This is because $f : \cC \to X$ is dominant and otherwise its image would be contained in the image of $Z_i \cap Z_j$ which is $1$-dimensional. Therefore $\deg{\wt{f}_t^* \cO_{\P}(Z_j)} \ge 0$ for $j \neq i$. Although this inequality is correct for all components $Z_j$ of $Z$, it will be useful to separate the contributions from $\Zcont$ and $\Zhor$. Indeed, $\Zcont = \pi^* [V(\omega)]^{\div}$ where $[V(\omega)]^{\div}$ is the divisorial part of the vanishing locus $V(\omega) \subset X$ of the symmetric form defining $Z$. 
 \par 

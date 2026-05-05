@@ -595,7 +595,7 @@ We can compute the decomposition into irreducible $\Q$-reps of $G_{1344} \acts H
 Each idempotent projects onto a $2$-dimensional subspace leading to an isogeny decomposition $\Jac(X_{17}) \sim E^{14} \times E_{\Q(\sqrt{-7})}^3$ where $E_{\Q(\sqrt{-7})} = \Jac(X_0(49))$ is an elliptic curve with CM by $\Q(\sqrt{-7})$. Then we can identify the $E_{\Q(\sqrt{-7})}^3$ factor with $\Jac(X_3)$ and the $E^{14}$ factor with $\Prym(X_{17}/X_3)$. Note this decomposition occurs only geometrically (at least over a field where the full group of automorphisms is defined).
 To compute $E$ up to isogeny, we take an intermediate quotient $X_{17} \to C_5 \to X_3$ with $C_5$ a curve of genus $5$. Then $\Prym(C_5/X_3)$ is an abelian surface which is isogenous to $E^2$ since it maps to $\Prym(X_{17}/X_3)$. Since we have equations for $X_3$ we will be able to leverage explicit results on degree $2$ unramified coverings to compute equations for a curve $C_2$ such that $\Jac(C_2) \cong \Prym(C_5/X_3)$ and thus determine $E$.
 \par 
-First, we choose $C_5$ by quotienting by one of the $7 = 2^3 - 1$ hyperplanes of $\FF_2^3 \subset G_{1344}$ making up the kernel $\ker(\Aut(X_{17}) \to \Aut(X_3)) = \Aut(X_{17}/X_3)$. These are not $\Aut(X_3)$-invariant (since the representation is irreducible) so $C_5$ is not itself a Hurwitz curve. In fact, all $7$ choices of $C_5$ are permuted by $G_{1344}$. Furthermore, $\Prym(C_5/X_3) \to \Prym(X_{17}/X_3)$ span $\Prym(X_{17}/X_3)$ as we take different choices of $C_5$ by Lemma~\ref{lemma:prym_decomposition}. Unfortunately, we will not be able to prove that $X_{17}$ has infinitely many primes of supersingular reduction (see \S\ref{sec:Klein_supersingular_covers}) but we will be able to show that similarly constructed curve $X_{17, \mathrm{Fermat}}$ uniformized by the triangle group $\Delta(2,3,8)$ does (see \S\ref{sec:17_Fermat}).
+First, we choose $C_5$ by quotienting by one of the $7 = 2^3 - 1$ hyperplanes of $\FF_2^3 \subset G_{1344}$ making up the kernel $\ker(\Aut(X_{17}) \to \Aut(X_3)) = \Aut(X_{17}/X_3)$. These are not $\Aut(X_3)$-invariant (since the representation is irreducible) so $C_5$ is not itself a Hurwitz curve. In fact, all $7$ choices of $C_5$ are permuted by $G_{1344}$. Furthermore, $\Prym(C_5/X_3) \to \Prym(X_{17}/X_3)$ span $\Prym(X_{17}/X_3)$ as we take different choices of $C_5$ by Lemma~\ref{lemma:prym_decomposition}. Unfortunately, we will not be able to prove that $X_{17}$ has infinitely many primes of supersingular reduction (see \S\ref{sec:Klein_supersingular_covers}) but we will be able to show that a similarly constructed curve $X_{17, \mathrm{Fermat}}$ uniformized by the triangle group $\Delta(2,3,8)$ does (see \S\ref{sec:17_Fermat}).
 
 \section{Prym varieties of degree $2$ covers of genus $3$ curves}
 
@@ -635,7 +635,7 @@ since on $D$ the divisors $\tfrac{1}{2} \div{Q_1|_C}$ and $\tfrac{1}{2} \div{Q_3
 
 \subsection{Setup for the arithmetic aspects of Prym varieties}
 
-Now the question becomes, if we define a \etale cover of degree $2$ via a cohomology class $\alpha \in H^1_{\et}(\ol{C}, \FF_2)$ where $\ol{C}$ is the base change to the algebraic closure $\ol{K}$, how do we compute the equations for $H$. First, we should recall that even if $\alpha$ is $G_K$-invariant, we saw in the previous section there is an obstruction to $\alpha$ corresponding to a cover defined over $K$. This obstruction comes from the 5-term sequence for the Leray/Hochschild-Serre spectral sequence,
+Now the question becomes, if we define a \etale cover of degree $2$ via a cohomology class $\alpha \in H^1_{\et}(\ol{C}, \FF_2)$ where $\ol{C}$ is the base change to the algebraic closure $\ol{K}$, how do we compute the equations for $H$? First, we should recall that even if $\alpha$ is $G_K$-invariant, we saw in the previous section that there is an obstruction to $\alpha$ corresponding to a cover defined over $K$. This obstruction comes from the 5-term sequence for the Leray/Hochschild-Serre spectral sequence,
 \[ E^{p,q}_2 = H^p(G_K, H^q_{\et}(\ol{C}, \FF_2)) \implies H^{p+q}_{\et}(C, \FF_2) \]
 computing absolute \etale cohomology. The 5-term sequence has the form
 \[ 0 \to H^1(G_K, \FF_2) \to H^1_{\et}(C, \FF_2) \to H^1_{\et}(\ol{C}, \FF_2)^{G_K} \to H^2(G_K, \FF_2) \to H^2_{\et}(C, \FF_2) \]
@@ -680,7 +680,8 @@ We say that a system of three theta characteristics $\theta_1, \theta_2, \theta_
 \[ \Arf(q_{\theta_1}) + \Arf(q_{\theta_2}) + \Arf(q_{\theta_3}) + \Arf(q_{\theta_1 + \theta_2 + \theta_3}) = 0 \]
 where we define $\theta_1 + \theta_2 + \theta_3$ to be the theta characteristic $\theta_1 \ot \theta_2 \ot \theta_3^{-1}$. This expression is symmetric under reordering justifying the notation. We say that $\{ \theta_1, \theta_2, \theta_3, \theta_4 \}$ is a \textit{syzygetic tetrad} if any three elements form a syzygetic triad and $\theta_1 \ot \theta_2 \ot \theta_3 \ot \theta_4 \cong \omega_C^{\ot 2}$.
 \end{defn} 
-\todo{what did Frobenius do}
+
+Frobenius clarified the relationship between \textit{period characteristics} ($2$-torsion points on the Jacobian) and \textit{theta characteristics} (discrete parameters of theta functions that correspond to square roots of the canonical bundle) with respect to modularity properties of theta functions. In modern language, the theta characteristics form an affine space and transform naturally in a ``non-linear'' way so that their associated quadratic form transforms equivariantly. Thus, theta characteristics do not form a natural binary additive structure, rather they have the trinary addition $\theta_1 + \theta_2 + \theta_3$ and syzygetic relations. 
 
 \subsection{Plane quartics}
 
@@ -689,9 +690,9 @@ In the particular case of $g = 3$, there are $36$ even and $28$ odd theta charac
 \begin{lemma} \label{lem:syzygetic_lines}
 Let $\ell_1, \ell_2, \ell_3, \ell_4$ be bitangent lines of $C$ and let $\theta_1, \theta_2, \theta_3, \theta_4$ be their corresponding odd theta characteristics. Then the following are equivalent:
 \begin{enumerate}
-\item $\frac{1}{2} (\div{\ell_1|_C} - \div{\ell_2|_C}) \sim \frac{1}{2} (\div{\ell_3|_C} - \div{\ell_4|_C})$ are linearly equivalent $2$-torsion divisors on $C$
-\item the $8$ intersection points (counted with half multiplicity) of $\ell_1, \ell_2, \ell_3, \ell_4$ with $C$ lie on a conic
-\item $\{ \theta_1, \theta_2, \theta_3, \theta_4 \}$ form a syzygetic tetrad.
+\item[(1)] $\frac{1}{2} (\div{\ell_1|_C} - \div{\ell_2|_C}) \sim \frac{1}{2} (\div{\ell_3|_C} - \div{\ell_4|_C})$ are linearly equivalent $2$-torsion divisors on $C$
+\item[(2)] the $8$ intersection points (counted with half multiplicity) of $\ell_1, \ell_2, \ell_3, \ell_4$ with $C$ lie on a conic
+\item[(3)] $\{ \theta_1, \theta_2, \theta_3, \theta_4 \}$ form a syzygetic tetrad.
 \end{enumerate}
 \end{lemma}
 
@@ -703,7 +704,7 @@ where $H$ is the hyperplane class on $C$. This exactly says that the $8$ interse
 Since these are all odd theta characteristics each Arf invariant equals $1$ and hence the sum is $0$ (mod $2$). 
 \end{proof}
 
-Every $2$-torsion class on $C$ is of the form $\frac{1}{2} (\div{\ell_1|_C} - \div{\ell_2|_C})$ for some pair of bitangent lines \todo{cite}. Steiner studied the combinatorics of the $28$ bitangents and showed that every $2$-torsion class can be represented by exactly $6$ pairs of lines; this collection of lines is called a \textit{Steiner complex} of bitangents.  
+Every $2$-torsion class on $C$ is of the form $\frac{1}{2} (\div{\ell_1|_C} - \div{\ell_2|_C})$ for some pair of bitangent lines \cite[Proposition~5.4.7]{dolgachev:classical_algebraic_geometry}. Steiner studied the combinatorics of the $28$ bitangents and showed that every $2$-torsion class can be represented by exactly $6$ pairs of lines; this collection of lines is called a \textit{Steiner complex} of bitangents.  
 
 \begin{defn}
 A \textit{Steiner complex} is a set $\cS = \{ \{ \ell_1, \ell_1' \}, \dots, \{ \ell_6, \ell_6' \} \}$ of unordered pairs of distinct bitangent lines such that any pair of pairs $\{ \ell_i, \ell_i' \}, \{ \ell_j, \ell_j' \}$ is \textit{syzygetic} in the sense of satisfying the equivalent conditions of Lemma~\ref{lem:syzygetic_lines}.

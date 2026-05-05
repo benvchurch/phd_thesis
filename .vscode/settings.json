@@ -1,0 +1,21 @@
+{
+  "files.exclude": {
+    "**/*.aux": true,
+    "**/*.bbl": true,
+    "**/*.blg": true,
+    "**/*.fdb_latexmk": true,
+    "**/*.fls": true,
+    "**/*.dvi": true,
+    "**/*.toc": true,
+    "**/*.lof": true,
+    "**/*.lot": true,
+    "**/*.log": true,
+    "**/*.out": true,
+    "**/*.synctex.gz": true,
+    "**/*.pdf": true,
+    "**/chapter.aux": true,
+    "**/test.*": true
+  },
+  "editor.minimap.enabled": false,
+  "editor.wordWrap": "on"
+}

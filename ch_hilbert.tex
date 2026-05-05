@@ -48,7 +48,7 @@ c & d
 \end{defn}
 
 \begin{rmk}
-The form of the factor of automorphy $j(\gamma, \tau) = (c \tau + d) \cdot (\det{\gamma_{\sigma}})^{-1/2}$ can be remembered from the case of scalar matrices $\gamma = \lambda \id$ for $\lambda \in \cO_F^{\times}$. In this case, $\gamma$ acts trivially on $\frH^{\sigma}$ so we must have that $f(\gamma \cdot \ul{\tau}) = f(\ul{\tau})$ and indeed $j(\gamma, \tau) = c \cdot (c^2)^{-1/2} = 1$. Furthermore, $\d{\tau_{\sigma}}$ transforms as
+The form of the factor of automorphy $j(\gamma, \tau) = (c \tau + d) \cdot (\det{\gamma_{\sigma}})^{-1/2}$ can be remembered from the case of scalar matrices $\gamma = \lambda \id$ for $\lambda \in \cO_F^{\times}$. In this case, $\gamma$ acts trivially on $\frH^{\Sigma}$ so we must have that $f(\gamma \cdot \ul{\tau}) = f(\ul{\tau})$ and indeed $j(\gamma, \tau) = c \cdot (c^2)^{-1/2} = 1$. Furthermore, $\d{\tau_{\sigma}}$ transforms as
 \[ \d(\gamma_{\sigma} \cdot \tau_{\sigma}) = \frac{a (c \tau + d) - c(a \tau + d)}{(c \tau + d)^2} \cdot \d{\tau} = \frac{\det{\gamma}}{(c \tau + d)^2} \cdot \d{\tau} = j(\tau, \gamma)^{-2} \d{\tau}. \]
 Therefore, if $f$ is a Hilbert modular form of weight $(2, \dots, 2)$ for $\Gamma$ then $f \d{\tau_1} \wedge \cdots \wedge \d{\tau_d}$ is invariant under $\Gamma$. 
 \end{rmk}
@@ -568,7 +568,6 @@ Now we reduce mod $p$ and consider the foliations $\F_{\Theta}$ on the special f
 \[ \psi_{\F_{\Theta}, p} : \Frob^*_M \F_{\Theta} \to \cT_{M} / \F_{\Theta} \iso \F_{\Theta^{c}}. \]
 It turns out these obstructions to $p$-closedness are related to the \textit{partial Hasse invariants} of a HBAV viewed as functions on $M$. 
 
-% REVIEW: Added definitions of modular forms, ordinary locus, and Hasse invariants with citations to Goren's lectures. Removed three \todo markers.
 \todo{FIX THIS}
 {\color{red}
 For the definition and basic properties of Hilbert modular forms in the arithmetic setting, see \cite[\S2]{goren:lectures_HMV}. The \textit{ordinary locus} $M^{\ord} \subset M$ is the open subscheme where the $p$-rank of the universal abelian variety is maximal. The partial Hasse invariants $h_{\sigma}$ for $\sigma \in \BB$ are sections of certain automorphic line bundles on $M$ whose simultaneous nonvanishing defines $M^{\ord}$; see \cite[\S2.3]{goren:lectures_HMV}. Precisely, $h_\sigma$ is a Hilbert modular form of weight $p \left[ \phi^{-1} \circ \sigma \right] - \left[ \sigma \right]$.  
@@ -748,9 +747,7 @@ A $\Gamma(N)$-\textit{admissible polyhedral cone decomposition} is a collection 
 \end{enumerate}
 \end{defn}
 
-A $\Gamma(N)$-admissible polyhedral cone decomposition always exists. In fact, we can choose it such that each cone complex $\Sigma^c := \{ \sigma_{\alpha}^c \}_{\alpha \in I_c}$ is $(\cO_F^{\times})^{+} \times \GL_2(\widehat{\cO_F})$-invariant and each cone is \textit{smooth} meaning it is spanned by a subset of a $\Z$-basis of $M^{\vee}$. Such a choice will lead to a smooth compactification so that 
-\todo{citations:
-the natural action on $Y^{\cc}(N)$ extends (see \cite[Ch.\,III]{AMRT:smooth_compactifications} and \cite[\S3.5]{chai:arithmetic_compactifications}).}
+A $\Gamma(N)$-admissible polyhedral cone decomposition always exists. In fact, we can choose the cone decomposition $\Sigma$ to be invariant under the action of $G_{U,N}$ by taking a common smooth refinement of the $G_{U,N}$-orbit of any $\Gamma(N)$-admissible polyhedral cone decomposition (\cite[Lemme 4.2(i)]{rapoport:compactifications} for refinements, \cite[Corollaire~7.5]{dimitrov:compactification_hilbert} for smoothness) (cf.\ \cite[p.9]{yang:geometric_serre}). Such a choice will lead to a smooth compactification so that the natural action on $Y^{\cc}(N)$ extends to $\ol{Y^{\cc}(N)}^{\Sigma}$.
 \par 
 A $\Gamma(N)$-admissible polyhedral cone decomposition will define, at each cusp, a toric variety $S_N(\Sigma_c)$ which is the union of affine toric varieties $\Spec{\Z[\frac{1}{N} M \cap (\sigma_{\alpha}^c)^{\vee}]}$. The toric variety $S_N(\Sigma^c)$ carries a $U_N^2$-action by the invariance of the cone complexes. The main result is that there is a relative toroidal compactification locally modeled on these toric varieties which extends the universal family as a semi-abelian scheme.
 
@@ -770,14 +767,9 @@ into line bundles on $\cM$. The Kodaira-Spencer isomorphism of \S\ref{sec:tautol
 \begin{equation} \label{eq:extended_kodaira_spencer}
 \KS^{\vee} : \ul{\omega}^{\ot 2} \ot (\ul{\cc})^{-1} \iso \Omega_{\ol{\cM}/\ZZ}(\log{E})
 \end{equation}
-induced by the logarithmic Gauss-Manin connection on relative de Rham cohomology of $\cA^{\tor} \to \ol{\cM}$. 
-
-
-A choice of a  $(\cO_F^{\times})^{+} \times \GL_2(\widehat{\cO_F})$-invariant $\Gamma(N)$-admissible polyhedral cone decomposition $\Sigma$ then defines a compactification of $Y_U$ via
+induced by the logarithmic Gauss-Manin connection on relative de Rham cohomology of $\cA^{\tor} \to \ol{\cM}$. A choice of a $G_{U,N}$-invariant $\Gamma(N)$-admissible polyhedral cone decomposition $\Sigma$ then defines a compactification of $Y_U$ via
 \[ j : Y_U = \coprod_{\cc \in \Cl^+(F)} Y^{\cc}(N) / G_{U,N} \embed \coprod_{\cc \in \Cl^+(F)} \ol{Y^{\cc}(N)}^{\Sigma} / G_{U,N} \]
-which we denote by $\ol{Y_U}^{\Sigma}$ or $X_U^{\tor}$ to suppress the dependence on $\Sigma$.
-\todo{
-This quotient is smooth: for sufficiently small $U$ (i.e.\ $N \ge 3$), the group $G_{U,N}$ acts freely on $\ol{Y^{\cc}(N)}^{\Sigma}$ by the Diamond Lemma \cite[Lemma~2.4.1]{diamond_shurman:first_course}, and the cone decomposition $\Sigma$ was chosen to be $G_{U,N}$-invariant, so the quotient inherits smoothness.}
+which we denote by $\ol{Y_U}^{\Sigma}$ or $X_U^{\tor}$ to suppress the dependence on $\Sigma$. This quotient is smooth and projective for sufficiently small $U$ (e.g.\ for $U$ neaf) see \cite[p.9]{yang:geometric_serre}.
 
 
 \section{Existence of Symmetric Forms} \label{sec:existence_of_symmetric_forms_hilbert}
